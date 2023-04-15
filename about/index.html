@@ -22,15 +22,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ancao96.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":"alse","async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Focus on sharing knowledge about ecology, remote sensing, and personal daily life.">
+    <meta name="description" content="&lt;!--copied from markdown --&gt; &lt;blockquote&gt;&lt;p&gt;好好学习&lt;br&gt; 天天向上&lt;&#x2F;p&gt;&lt;&#x2F;blockquote&gt;  &lt;p&gt;我是&lt;strong&gt;SCY(酸菜鱼)&lt;&#x2F;strong&gt;搞生态的研究牲&lt;&#x2F;p&gt;  &lt;p&gt;闲暇时间爱好">
 <meta property="og:type" content="website">
 <meta property="og:title" content="about">
 <meta property="og:url" content="https://ancao96.github.io/about/index.html">
 <meta property="og:site_name" content="SCY BLOG">
-<meta property="og:description" content="Focus on sharing knowledge about ecology, remote sensing, and personal daily life.">
+<meta property="og:description" content="&lt;!--copied from markdown --&gt; &lt;blockquote&gt;&lt;p&gt;好好学习&lt;br&gt; 天天向上&lt;&#x2F;p&gt;&lt;&#x2F;blockquote&gt;  &lt;p&gt;我是&lt;strong&gt;SCY(酸菜鱼)&lt;&#x2F;strong&gt;搞生态的研究牲&lt;&#x2F;p&gt;  &lt;p&gt;闲暇时间爱好">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-14T12:19:46.000Z">
-<meta property="article:modified_time" content="2023-04-14T12:19:46.750Z">
+<meta property="article:modified_time" content="2023-04-15T02:50:39.698Z">
 <meta property="article:author" content="SCY">
 <meta property="article:tag" content="Ecosystem Service,Remote Sensing,R,Python,GEE,Photograph">
 <meta name="twitter:card" content="summary">
@@ -216,7 +216,107 @@
       
       
       <div class="post-body">
-          
+          <!-- Language Selector -->
+<!-- <select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
+    <option value="0" selected> 中文 Chinese </option>
+    <option value="1"> 英文 English </option>
+</select> -->
+
+<!-- Chinese Version -->
+<div class="zh post-container">
+
+<pre><code>&lt;!--copied from markdown --&gt;
+&lt;blockquote&gt;&lt;p&gt;好好学习&lt;br&gt;
+天天向上&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;我是&lt;strong&gt;SCY(酸菜鱼)&lt;/strong&gt;搞生态的研究牲&lt;/p&gt;
+
+&lt;p&gt;闲暇时间爱好摄影~&lt;/p&gt;
+
+&lt;p&gt;利用 &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt; 与 &lt;a href=&quot;http://jekyll.com.cn/&quot;&gt;Jekyll&lt;/a&gt; 搭建的个人博客。我在GitHub主页&lt;a href=&quot;https://github.com/AnCao96&quot;&gt;👉GitHub·SCY&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h5&gt;Talks&lt;/h5&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;https://github.com&quot;&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;http://jekyll.com.cn/&quot;&gt;jekyll&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;https://analytics.google.com/analytics&quot;&gt;Google Analytics&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+</div>
+
+<!-- English Version -->
+<!-- <div class="en post-container">
+    <blockquote><p>Yet another iOS Developer. <br>
+    Yet another Life-long Student.</p></blockquote>
+
+    <p>Hi, I am <strong>Baiying Qiu</strong>，you can call me <strong>BY</strong>. I am an iOS software engineer and currently working in Xiamen</p>
+
+    <p>This is my personal blog, through making Github Pages and Jekyll.My GitHub  👉 <a target="_blank" rel="noopener" href="http://github.com/qiubaiying">Github·BY</a>.</p>
+    
+    <p>I am a sports enthusiast, I like fitness, running and boxing.</p>
+
+    <h5>Talks</h5>
+
+    <ul>
+    <li><a target="_blank" rel="noopener" href="https://github.com">GitHub</a></li>
+    <li><a target="_blank" rel="noopener" href="http://jekyll.com.cn/">jekyll</a></li>
+    <li><a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages</a></li>
+    <li><a href="https://AnCao96.github.io">SCY</a></li>
+    </ul>
+</div> -->
+
+<!-- Handle Language Change -->
+<script type="text/javascript">
+    // get nodes
+    var $zh = document.querySelector(".zh");
+    var $en = document.querySelector(".en");
+    var $select = document.querySelector("select");
+
+    // bind hashchange event
+    window.addEventListener('hashchange', _render);
+
+    // handle render
+    function _render(){
+        var _hash = window.location.hash;
+        // en
+        if(_hash == "#en"){
+            $select.selectedIndex = 1;
+            $en.style.display = "block";
+            $zh.style.display = "none";
+        // zh by default
+        }else{
+            // not trigger onChange, otherwise cause a loop call.
+            $select.selectedIndex = 0;
+            $zh.style.display = "block";
+            $en.style.display = "none";
+        }
+    }
+
+    // handle select change
+    function onLanChange(index){
+        if(index == 0){
+            window.location.hash = "#zh"
+        }else{
+            window.location.hash = "#en"
+        }
+    }
+
+    // init
+    _render();
+</script>
+
+
+<!-- Gitalk 评论 start  -->
+
+<!-- Gitalk end -->
+
+ <!-- disqus 评论框 start  -->
+
+
+
       </div>
       
       
