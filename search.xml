@@ -202,6 +202,7 @@
 <h2 id="生物物理系数表"><a href="#生物物理系数表" class="headerlink" title="生物物理系数表"></a>生物物理系数表</h2><p>除上述数据以外，模型还需要植被覆盖因子(usle_c)和水土保持措施因子(usle_p)组成生物物理系数表。植被覆盖因子是指植被覆盖度对土壤保持的作用。植被覆盖因子 C 值的范围为 [0,1]，其中 1 值代表裸地（无植被或作物措施）的C值，反之地面收到良好的植被措施保护的C值接近为 0。利用蔡崇法等（2000）在三峡进行的土壤侵蚀研究得出的 C 值分段计算公式进行计算，公式如下：</p>
 <p><img data-src="/images/iShot_2023-04-17_10.22.31.png"></p>
 <p>式中：C代表植被覆盖因子值；a 代表植被覆盖度。 植被覆盖度 a 值的获取是根据研究区影像图的植被光谱特征计算 NDVI，从而经过计算得到植被覆盖度。<strong>水土保持措施因子</strong>指由于采取了某些物理、化学等措施而减少了土壤潜在侵蚀量的因子，用P来表示，P 的取值与植被覆盖因子 C 的取值范围相同，都为[0,1]，采取了非常好的水土保持措施时P值为 0，反之未采取水土保持措施时P值为1 。</p>
+<p>$$<br>\begin{aligned} K_{\mathrm{n}}&#x3D;&amp;\left{0.2+0.3 \exp \left[-0.0256 S_{\mathrm{n}}\left(1-F_{\mathrm{n}} &#x2F; 100\right)\right]\right} \times\left[\frac{F_{\mathrm{n}}}{N_{\mathrm{n}}+F_{\mathrm{n}}}\right]^{0.3} \ &amp; \times\left{1-0.25 \frac{T_{\mathrm{n}}}{T_{\mathrm{n}}+\exp \left(3.72-2.95 T_{\mathrm{n}}\right)}\right} \ &amp; \times\left{1-0.7 \frac{E_{\mathrm{n}}}{E_{\mathrm{n}}+\exp \left(-5.51+22.9 E_{\mathrm{n}}\right)}\right} \times 0.1317 \end{aligned}<br>$$</p>
 ]]></content>
       <categories>
         <category>生态系统服务</category>
