@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
+    <title>土壤保持计算</title>
     <url>/2023/04/17/2023-04-17-%E5%9C%9F%E5%A3%A4%E4%BF%9D%E6%8C%81/</url>
     <content><![CDATA[<h1 id="土壤保持模块"><a href="#土壤保持模块" class="headerlink" title="土壤保持模块"></a>土壤保持模块</h1><p>SDR 模块（Sediment Delivery Ratio model），又被称作泥沙输移比模块，该模块运行基于通用土壤流失方程式 （USLE）计算，并且在计算中加入了栅格上游对泥沙和沉积物的拦截，对原本的 USLE 进行了修正与改进，使栅格单元的土壤保持量计算更为准确。模块根据计算所得的每个栅格单元的潜在土壤侵蚀量（RKLS）和实际土壤侵蚀量（USLE）对土壤保持功能进行评估。</p>
 <span id="more"></span>
@@ -42,9 +42,16 @@
 <p>$$<br>\left{\begin{array}{lll}C&#x3D;1, &amp; &amp; a&#x3D;0 \ C&#x3D;0.6508-0.34361 \times \lg a, &amp; &amp; 0&lt;a&lt;75 % \ C&#x3D;0, &amp; &amp; a \geq 75 %\end{array}\right.<br>$$</p>
 <p>式中：C 代表植被覆盖因子值；a 代表植被覆盖度。 植被覆盖度 a 值的获取是根据研究区影像图的植被光谱特征计算 NDVI，从而经过计算得到植被覆盖度。<strong>水土保持措施因子</strong>指由于采取了某些物理、化学等措施而减少了土壤潜在侵蚀量的因子，用P来表示，P 的取值与植被覆盖因子 C 的取值范围相同，都为[0,1]，采取了非常好的水土保持措施时P值为 0，反之未采取水土保持措施时 P 值为1 。</p>
 ]]></content>
+      <categories>
+        <category>生态系统服务</category>
+      </categories>
+      <tags>
+        <tag>土壤保持</tag>
+        <tag>生态系统服务</tag>
+      </tags>
   </entry>
   <entry>
-    <title>InVEST 模型</title>
+    <title>产水量计算</title>
     <url>/2023/04/10/2023-04-10-InVEST-%E4%BA%A7%E6%B0%B4%E9%87%8F/</url>
     <content><![CDATA[<h1 id="产水量模型"><a href="#产水量模型" class="headerlink" title="产水量模型"></a>产水量模型</h1><p>InVEST模型的产水量：水库水电生产模块，不仅评估了景观中各次一级流域对产水的相对贡献量，而且有助于研究土地利用格局变化如何影响年地表产水量和水电生产。</p>
 <p>模拟景观格局变化和水文过程的关系是个科学难题。用来模拟这些关系及其相关 过程的复杂模型（如WEAP水资源评估和规划系统模型）要求较高的数据和资源资料，并且要求大量专业知识。为满足更多学科背景需求，使用易获取的数据，InVEST模型绘制和模拟用于景观水电生产的年平均产水量，而不是直接评估土地利用&#x2F;覆被变化导致的水电减产，因为这一过程在逐日和逐月的时间尺度上主要由流入水量变化决定。 因此，InVEST模型计算了景观中各子流域对产水的相对贡献量及其对应的水电产量。 水库经济使用年限内的水电生产净现值也可以通过年收益还原法计算。</p>
@@ -200,8 +207,8 @@
         <category>生态系统服务</category>
       </categories>
       <tags>
-        <tag>产水量</tag>
         <tag>生态系统服务</tag>
+        <tag>产水量</tag>
       </tags>
   </entry>
 </search>
