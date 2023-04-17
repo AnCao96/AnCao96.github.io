@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <meta name="google-site-verification" content="EoyudjZ3H22WYHR9rnkC2Ps4l5InVc_PVVKYa0EdzPc">
+  <meta name="baidu-site-verification" content="codeva-INgh7AfWeU">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ancao96.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":"alse","async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="土壤保持模块SDR 模块（Sediment Delivery Ratio model），又被称作泥沙输移比模块，该模块运行基于通用土壤流失方程式 （USLE）计算，并且在计算中加入了栅格上游对泥沙和沉积物的拦截，对原本的 USLE 进行了修正与改进，使栅格单元的土壤保持量计算更为准确。模块根据计算所得的每个栅格单元的潜在土壤侵蚀量（RKLS）和实际土壤侵蚀量（USLE）对土壤保持功能进行评估。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SCY BLOG">
+<meta property="og:url" content="https://ancao96.github.io/2023/04/17/2023-04-17-%E5%9C%9F%E5%A3%A4%E4%BF%9D%E6%8C%81/index.html">
+<meta property="og:site_name" content="SCY BLOG">
+<meta property="og:description" content="土壤保持模块SDR 模块（Sediment Delivery Ratio model），又被称作泥沙输移比模块，该模块运行基于通用土壤流失方程式 （USLE）计算，并且在计算中加入了栅格上游对泥沙和沉积物的拦截，对原本的 USLE 进行了修正与改进，使栅格单元的土壤保持量计算更为准确。模块根据计算所得的每个栅格单元的潜在土壤侵蚀量（RKLS）和实际土壤侵蚀量（USLE）对土壤保持功能进行评估。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-17T01:04:22.254Z">
+<meta property="article:modified_time" content="2023-04-17T01:08:20.609Z">
+<meta property="article:author" content="SCY">
+<meta property="article:tag" content="Ecosystem Service,Remote Sensing,R,Python,GEE,Photograph">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ancao96.github.io/2023/04/17/2023-04-17-%E5%9C%9F%E5%A3%A4%E4%BF%9D%E6%8C%81/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ancao96.github.io/2023/04/17/2023-04-17-%E5%9C%9F%E5%A3%A4%E4%BF%9D%E6%8C%81/","path":"2023/04/17/2023-04-17-土壤保持/","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | SCY BLOG</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?a03c759501c047a254662cd38526cdc1"></script>
+
+
+
+
+
+
+<link rel="dns-prefetch" href="waline-server-scy.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SCY BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">SCY's Space</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%9F%E5%A3%A4%E4%BF%9D%E6%8C%81%E6%A8%A1%E5%9D%97"><span class="nav-number">1.</span> <span class="nav-text">土壤保持模块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">工作原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9C%80%E6%B1%82"><span class="nav-number">3.</span> <span class="nav-text">数据需求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%9F%E5%9C%B0%E5%88%A9%E7%94%A8%E4%B8%8E%E8%A6%86%E7%9B%96%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%EF%BC%88Land-use-x2F-Land-cover%EF%BC%89-amp-x20"><span class="nav-number">3.1.</span> <span class="nav-text">土地利用与覆盖类型数据（Land-use&#x2F;Land-cover）&amp;#x20;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%8D%E9%9B%A8%E4%BE%B5%E8%9A%80%E5%8A%9B%E6%95%B0%E6%8D%AE%EF%BC%88Rainfall-Erosivity-Index%EF%BC%89-amp-x20"><span class="nav-number">3.2.</span> <span class="nav-text">降雨侵蚀力数据（Rainfall Erosivity Index）&amp;#x20;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%9F%E5%A3%A4%E5%8F%AF%E8%9A%80%E6%80%A7%E6%95%B0%E6%8D%AE%EF%BC%88Soil-Erodibility%EF%BC%89-amp-x20"><span class="nav-number">3.3.</span> <span class="nav-text">土壤可蚀性数据（Soil Erodibility）&amp;#x20;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DEM-%E4%B8%8E%E5%9D%A1%E5%BA%A6%E5%9D%A1%E9%95%BF%E5%9B%A0%E5%AD%90%E6%95%B0%E6%8D%AE"><span class="nav-number">3.4.</span> <span class="nav-text">DEM 与坡度坡长因子数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E7%89%A9%E7%89%A9%E7%90%86%E7%B3%BB%E6%95%B0%E8%A1%A8"><span class="nav-number">3.5.</span> <span class="nav-text">生物物理系数表</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="SCY"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">SCY</p>
+  <div class="site-description" itemprop="description">Focus on sharing knowledge about ecology, remote sensing, and personal daily life.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AnCao96" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AnCao96" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ancao.cugb@gmail.com" title="E-Mail → mailto:ancao.cugb@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/acscy" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;acscy" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://acscy.top/" title="https:&#x2F;&#x2F;acscy.top" rel="noopener" target="_blank">ChatGPT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.pptx.cn/ppt-muban" title="https:&#x2F;&#x2F;www.pptx.cn&#x2F;ppt-muban" rel="noopener" target="_blank">PPT世界</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.officeplus.cn/PPT/template/" title="https:&#x2F;&#x2F;www.officeplus.cn&#x2F;PPT&#x2F;template&#x2F;" rel="noopener" target="_blank">Microsoft PPT模板</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.51pptmoban.com/ppt/" title="https:&#x2F;&#x2F;www.51pptmoban.com&#x2F;ppt&#x2F;" rel="noopener" target="_blank">51PPT模板</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://www.tretars.com/ppt-templates" title="http:&#x2F;&#x2F;www.tretars.com&#x2F;ppt-templates" rel="noopener" target="_blank">比格PPT</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ancao96.github.io/2023/04/17/2023-04-17-%E5%9C%9F%E5%A3%A4%E4%BF%9D%E6%8C%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="SCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SCY BLOG">
+      <meta itemprop="description" content="Focus on sharing knowledge about ecology, remote sensing, and personal daily life.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | SCY BLOG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-04-17 09:04:22 / 修改时间：09:08:20" itemprop="dateCreated datePublished" datetime="2023-04-17T09:04:22+08:00">2023-04-17</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2023/04/17/2023-04-17-%E5%9C%9F%E5%A3%A4%E4%BF%9D%E6%8C%81/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2023/04/17/2023-04-17-%E5%9C%9F%E5%A3%A4%E4%BF%9D%E6%8C%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="土壤保持模块"><a href="#土壤保持模块" class="headerlink" title="土壤保持模块"></a>土壤保持模块</h1><p>SDR 模块（Sediment Delivery Ratio model），又被称作泥沙输移比模块，该模块运行基于通用土壤流失方程式 （USLE）计算，并且在计算中加入了栅格上游对泥沙和沉积物的拦截，对原本的 USLE 进行了修正与改进，使栅格单元的土壤保持量计算更为准确。模块根据计算所得的每个栅格单元的潜在土壤侵蚀量（RKLS）和实际土壤侵蚀量（USLE）对土壤保持功能进行评估。</p>
+<span id="more"></span>
+
+<h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><p>土壤潜在侵蚀量的计算公式如下：</p>
+<p>$$<br>RKLS_{\mathrm{n}}&#x3D;R_{\mathrm{n}} \times K_{\mathrm{n}} \times L_{\mathrm{n}} \times S_{\mathrm{n}}<br>$$</p>
+<p>实际土壤侵蚀量的计算公式如下：</p>
+<p>$$<br>USLE_{\mathrm{n}}&#x3D;R_{\mathrm{n}} \times K_{\mathrm{n}} \times L_{\mathrm{n}} \times S_{\mathrm{n}} \times C_{\mathrm{n}} \times P_{\mathrm{n}}<br>$$</p>
+<p>式中：$RKLS_n$为栅格 $n$上的土壤潜在侵蚀量(t); $USLE_n$为土壤实际侵蚀量(t);  $R_n$为降雨侵蚀力; $ K_n  $为土壤可蚀性; $ L_n  $为坡长因子,$S_n$ 为坡度因子; $C_n$为植被覆盖因子; $P_n$为水土保持措施因子。</p>
+<p>土壤保持量由每个栅格上因植被措施和水土保持措施而(1)<strong>减少的土壤侵蚀量</strong>和(2)<strong>拦截的上游拦截泥沙和沉积物之和</strong>表示，其中因植被措施和水土保持措施而(1)减少的土壤侵蚀量用潜在土壤侵蚀量减去实际土壤侵蚀量计算；上游(2)拦截的泥沙和沉积物由来沙量与泥沙截留率的乘积计算，土壤保持量计算的表达式如下：</p>
+<p>$$<br>S E D R E T_{\mathrm{n}}&#x3D;R K L S_{\mathrm{n}}-U S L E_{\mathrm{n}}+ sed_{-} e_{\mathrm{n}}<br>$$</p>
+<p>式中：$ SEDRET_n  $为栅格 n 上的土壤保持量(t); （${RKLS_n} - {USLE_n}$）为栅格 n 因植被措施和水土保持措施而产生的土壤保留量(t); $sed_{-}{e_n}$ 为研究区上游拦截的泥沙和沉积物量(t)。</p>
+<h1 id="数据需求"><a href="#数据需求" class="headerlink" title="数据需求"></a>数据需求</h1><h2 id="土地利用与覆盖类型数据（Land-use-x2F-Land-cover）-amp-x20"><a href="#土地利用与覆盖类型数据（Land-use-x2F-Land-cover）-amp-x20" class="headerlink" title="土地利用与覆盖类型数据（Land-use&#x2F;Land-cover）&amp;#x20;"></a>土地利用与覆盖类型数据（Land-use&#x2F;Land-cover）&amp;#x20;</h2><p>利用已有数据</p>
+<h2 id="降雨侵蚀力数据（Rainfall-Erosivity-Index）-amp-x20"><a href="#降雨侵蚀力数据（Rainfall-Erosivity-Index）-amp-x20" class="headerlink" title="降雨侵蚀力数据（Rainfall Erosivity Index）&amp;#x20;"></a>降雨侵蚀力数据（Rainfall Erosivity Index）&amp;#x20;</h2><p>降雨侵蚀力是指降雨引起土壤侵蚀的潜在能力，是导致土壤流失或土壤侵蚀的主要因素之一，主要由降雨强度和降雨量决定，用 <code>R</code>表示。计算降雨侵蚀力的方法有很多，按时间尺度来分可分为年降雨尺度公式、月降雨尺度公式、日降雨尺度公式、 次降雨尺度公式，采用 <strong>Wischmeier</strong>（1978）提出的月尺度公式进行计算，计算公式如下:</p>
+<p>$$<br>R_{\mathrm{n}}&#x3D;\sum_{i&#x3D;1}^{12}\left[1.735 \times 10^{\left(1.5 \times \log \left(\frac{q_{\mathrm{n}}^{2}}{Q_{n}}-0.8188\right)\right)}\right]<br>$$</p>
+<p>式中：$ R_n  $为降雨侵蚀力的单位是$  100ft·t·in(ac·h&#x2F;a) $，运算结果需乘系数17.02 将单位换算为$  MJ·mm&#x2F;(hm^2·h·a) $；$Q_n$区域年均降雨量$(mm)$，$q_n$ 为区域月均降水量（$mm$）。</p>
+<p><em>数据获取：</em></p>
+<ol>
+<li>根据降雨量栅格自己计算，详见<a target="_blank" rel="noopener" href="https://www.wolai.com/bJeYvng2aTvMVBxG52AeF5" title="ArcGIS计算土壤侵蚀模数（二）降雨侵蚀力因子R计算 - 知乎">ArcGIS计算土壤侵蚀模数（二）降雨侵蚀力因子R计算 - 知乎</a><br>详细的视频教程见 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1P3411e7hM/?spm_id_from=333.999.0.0&vd_source=bc23d8f319ea4517a3c9ddd51079ff3d" title="https://www.bilibili.com/video/BV1P3411e7hM/?spm_id_from=333.999.0.0&amp;vd_source=bc23d8f319ea4517a3c9ddd51079ff3d">https://www.bilibili.com/video/BV1P3411e7hM/?spm_id_from&#x3D;333.999.0.0&amp;vd_source&#x3D;bc23d8f319ea4517a3c9ddd51079ff3d</a></li>
+<li>北师大CLImate Change Impact Assessment (CLICIA)课题组提供数据：Spatial distribution of rainfall erosion over Chinese mainland areas <strong>1991-2020-R-factor</strong>  单位：$  MJ·mm&#x2F;(hm^2·h·a) $<a target="_blank" rel="noopener" href="http://clicia.bnu.edu.cn/data/erosivity.html" title="http://clicia.bnu.edu.cn/data/erosivity.html">http://clicia.bnu.edu.cn/data/erosivity.html</a></li>
+</ol>
+<h2 id="土壤可蚀性数据（Soil-Erodibility）-amp-x20"><a href="#土壤可蚀性数据（Soil-Erodibility）-amp-x20" class="headerlink" title="土壤可蚀性数据（Soil Erodibility）&amp;#x20;"></a>土壤可蚀性数据（Soil Erodibility）&amp;#x20;</h2><p>土壤可蚀性是土壤自身原本属性，指土壤对侵蚀的敏感性，它<em><strong>是土壤对侵蚀抵抗力的倒数</strong></em>，主要由土壤质地和土壤有机质决定，用<code>K</code>表示。运用 EPIC 模型的公式通过对研究区土壤中砂粒、粉粒、粘粒以及有机碳的测量结果进行计算， 计算公式如下：</p>
+<p>$$<br>\begin{aligned} K_{\mathrm{n}}&#x3D;&amp;\left{0.2+0.3 \exp \left[-0.0256 S_{\mathrm{n}}\left(1-F_{\mathrm{n}} &#x2F; 100\right)\right]\right} \times\left[F_{\mathrm{n}} &#x2F;\left(N_{\mathrm{n}}+F_{\mathrm{n}}\right)\right]^{0.3} \ &amp; \times\left{1-0.25 T_{\mathrm{n}} &#x2F;\left[T_{\mathrm{n}}+\exp \left(3.72-2.95 T_{\mathrm{n}}\right)\right]\right} \ &amp; \times\left{1-0.7 E_{\mathrm{n}} &#x2F;\left[E_{\mathrm{n}}+\exp \left(-5.51+22.9 E_{\mathrm{n}}\right)\right]\right} \times 0.1317 \end{aligned}<br>$$</p>
+<p>$$<br>E_{\mathrm{n}}&#x3D;1-S_{\mathrm{n}} &#x2F; 100<br>$$</p>
+<p>式中: $ K_n  $是已经进行换算的国际制单位的土壤可蚀性($t·hm^2·h·hm^{-2}·MJ^{-1}·mm^{-1}$)， $S_n$、$F_n$、$N_n$分别为砂粒、粉粒以及粘粒的含量(%), $ T_n  $表示有机碳含量(%)。</p>
+<p><em>数据获取：</em></p>
+<ol>
+<li>国家地球系统科学数据中心黄土高原中心<a target="_blank" rel="noopener" href="http://www.geodata.cn/" title="http://www.geodata.cn">http://www.geodata.cn</a> 可以申请下载</li>
+<li>采用如上共识计算：利用中国1：100万土壤数据库（百度☁️）计算。详见视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Q3411L7Y7/?spm_id_from=333.999.0.0&vd_source=bc23d8f319ea4517a3c9ddd51079ff3d" title="https://www.bilibili.com/video/BV1Q3411L7Y7/?spm_id_from=333.999.0.0&amp;vd_source=bc23d8f319ea4517a3c9ddd51079ff3d">https://www.bilibili.com/video/BV1Q3411L7Y7/?spm_id_from&#x3D;333.999.0.0&amp;vd_source&#x3D;bc23d8f319ea4517a3c9ddd51079ff3d</a> （<em><strong>计算时有错误，务必注意！！</strong></em>）</li>
+</ol>
+<h2 id="DEM-与坡度坡长因子数据"><a href="#DEM-与坡度坡长因子数据" class="headerlink" title="DEM 与坡度坡长因子数据"></a>DEM 与坡度坡长因子数据</h2><p>InVEST模型会根据 DEM 在模型后台自动生成坡度坡长结果，模型中坡度坡长因子的计算使用二维地表计算方法进行计算，计算公式如下：</p>
+<p>$$<br>L_{\mathrm{n}} \times S_{\mathrm{n}}&#x3D;S_{\mathrm{n}} \times \frac{\left(A+D^{2}\right)^{\mathrm{m}+1}-A^{\mathrm{m}+1}}{D^{\mathrm{m}+2} \times x_{\mathrm{n}}^{\mathrm{m}} \times 22.13^{\mathrm{m}}}<br>$$</p>
+<p>式中：$ S_n  $表示栅格单元坡度因子，为关于坡度值的函数，当坡度$θ$&lt;9%，$S&#x3D;10.8·sin(θ)+0.03$；当$θ$≥9%，$S&#x3D;16.8·sin(θ)-0.50$；A 表示栅格径流入口以上产沙区域面积($m^2$)；$ D  $表示栅格尺寸(m)；$x_n &#x3D; |sin(αn)| + |cos(αn)|$，$αn$ 表示栅格单元 n 的输沙方向；m 表示$ RUSLE  $长度指数因子。</p>
+<p>$$<br>\left{\begin{array}{ll}\theta \leq 1 %, &amp; \mathrm{<del>m}&#x3D;0.2 \ 1 %&lt;\theta \leq 3.5 %, &amp; \mathrm{</del>m}&#x3D;0.3 \ 3.5 %&lt;\theta \leq 5 %, &amp; \mathrm{<del>m}&#x3D;0.4 \ 5 %&lt;\theta \leq 9 %, &amp; \mathrm{</del>m}&#x3D;0.5 \ \theta&gt;9 %, &amp; \mathrm{~m}&#x3D;\beta &#x2F;(1+\beta)\end{array}\right.<br>$$</p>
+<p>式中：$ β  $的计算公式为$β&#x3D; sin θ&#x2F;[0.0986·(3 sin θ·0.8+0.56)]$。</p>
+<p><em>数据获取：</em> 计算地形起伏度来代替。<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1eF411E7LN/?spm_id_from=333.999.0.0&vd_source=bc23d8f319ea4517a3c9ddd51079ff3d" title="https://www.bilibili.com/video/BV1eF411E7LN/?spm_id_from=333.999.0.0&amp;vd_source=bc23d8f319ea4517a3c9ddd51079ff3d">https://www.bilibili.com/video/BV1eF411E7LN/?spm_id_from&#x3D;333.999.0.0&amp;vd_source&#x3D;bc23d8f319ea4517a3c9ddd51079ff3d</a></p>
+<h2 id="生物物理系数表"><a href="#生物物理系数表" class="headerlink" title="生物物理系数表"></a>生物物理系数表</h2><p>&amp;#x20;除上述数据以外，模型还需要植被覆盖因子(usle_c)和水土保持措施因子(usle_p)组成生物物理系数表。植被覆盖因子是指植被覆盖度对土壤保持的作用。植被覆盖因子 C 值的范围为 [0,1]，其中 1 值代表裸地（无植被或作物措施）的C值，反之地面收到良好的植被措施保护的C值接近为 0。利用蔡崇法等（2000）在三峡进行的土壤侵蚀研究得出的 C 值分段计算公式进行计算，公式如下：</p>
+<p>$$<br>\left{\begin{array}{lll}C&#x3D;1, &amp; &amp; a&#x3D;0 \ C&#x3D;0.6508-0.34361 \times \lg a, &amp; &amp; 0&lt;a&lt;75 % \ C&#x3D;0, &amp; &amp; a \geq 75 %\end{array}\right.<br>$$</p>
+<p>式中：C 代表植被覆盖因子值；a 代表植被覆盖度。 植被覆盖度 a 值的获取是根据研究区影像图的植被光谱特征计算 NDVI，从而经过计算得到植被覆盖度。<strong>水土保持措施因子</strong>指由于采取了某些物理、化学等措施而减少了土壤潜在侵蚀量的因子，用P来表示，P 的取值与植被覆盖因子 C 的取值范围相同，都为[0,1]，采取了非常好的水土保持措施时P值为 0，反之未采取水土保持措施时 P 值为1 。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="SCY 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="SCY 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/04/10/2023-04-10-InVEST-%E4%BA%A7%E6%B0%B4%E9%87%8F/" rel="prev" title="InVEST 模型">
+                  <i class="fa fa-chevron-left"></i> InVEST 模型
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">SCY</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://ancao96.github.io/2023/04/17/2023-04-17-%E5%9C%9F%E5%A3%A4%E4%BF%9D%E6%8C%81/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"waline-server-scy.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2023/04/17/2023-04-17-%E5%9C%9F%E5%A3%A4%E4%BF%9D%E6%8C%81/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
