@@ -1782,6 +1782,19 @@ pre code {
 .use-motion .comments {
   visibility: hidden;
 }
+.use-motion .post-block {
+  visibility: hidden;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding: 25px;
+  border-radius: 20px 20px 20px 20px;
+  -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
+  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
+}
+.use-motion .pagination,
+.use-motion .comments {
+  visibility: hidden;
+}
 .use-motion .post-header {
   visibility: hidden;
 }
