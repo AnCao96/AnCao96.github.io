@@ -221,7 +221,7 @@ body {
   background: var(--body-bg-color);
   box-sizing: border-box;
   color: var(--text-color);
-  font-family: LatoEleyang Spring朝时体, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: 'Eleyang Spring朝时体(Regular)', sans-serif;
   font-size: 0.8em;
   line-height: 2;
   min-height: 100%;
@@ -242,7 +242,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: LatoEleyang Spring朝时体, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: 'Eleyang Spring朝时体(Regular)', sans-serif;
   font-weight: bold;
   line-height: 1.5;
   margin: 30px 0 15px;
@@ -494,7 +494,7 @@ pre figcaption a:hover {
 }
 pre,
 code {
-  font-family: consolas, Menlo, monospace, 'PingFang SC', 'Microsoft YaHei';
+  font-family: consolas, Menlo, monospace, 'Eleyang Spring朝时体(Regular)';
 }
 code {
   border-radius: 3px;
@@ -1128,7 +1128,7 @@ pre code {
   color: var(--brand-hover-color);
 }
 .site-title {
-  font-family: LatoEleyang Spring朝时体, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: 'Eleyang Spring朝时体(Regular)', sans-serif;
   font-size: 1.375em;
   font-weight: normal;
   line-height: 1.5;
@@ -1616,6 +1616,12 @@ pre code {
   display: inline-block;
   margin: 0 5px;
 }
+.busuanzi-count #busuanzi_container_site_uv {
+  display: none;
+}
+.busuanzi-count #busuanzi_container_site_pv {
+  display: none;
+}
 @keyframes icon-animate {
   0%, 100% {
     transform: scale(1);
@@ -1819,7 +1825,7 @@ pre code {
   width: 4px;
 }
 .post-body {
-  font-family: LatoEleyang Spring朝时体, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: 'Eleyang Spring朝时体(Regular)', sans-serif;
   overflow-wrap: break-word;
 }
 @media (min-width: 1200px) {
@@ -2005,7 +2011,7 @@ pre code {
 }
 .posts-expand .post-meta-container {
   color: #999;
-  font-family: LatoEleyang Spring朝时体, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: 'Eleyang Spring朝时体(Regular)', sans-serif;
   font-size: 0.75em;
   margin-top: 3px;
 }
@@ -2036,6 +2042,9 @@ pre code {
 .post-meta-break {
   flex-basis: 100%;
   height: 0;
+}
+#busuanzi_container_page_pv {
+  display: none;
 }
 .post-nav {
   border-top: 1px solid #eee;
@@ -2871,12 +2880,17 @@ header.header {
     padding: 10px 12px;
   }
 }
+.headband {
+  display: none;
+}
+/* 背景图片设置 */
 body {
   background-image: url("/images/background.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% 100%;
   opacity: 0.85;
+/* 可选 */
 }
 @media (max-width: 767px) {
   body {
