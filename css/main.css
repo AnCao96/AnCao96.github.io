@@ -2862,14 +2862,21 @@ header.header {
     padding: 10px 12px;
   }
 }
+.headband {
+  display: none;
+}
+/* 背景图片设置 */
 body {
-  background: url("images/background1.jpg");
+  background-image: url("https://w.wallhaven.cc/full/yx/wallhaven-yx28wl.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: 50% 50%;
-  background-size: cover;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
-  -moz-background-size: cover;
-  -ms-background-size: cover;
+  background-size: 100% 100%;
+  opacity: 0.9;
+/* 可选 */
+}
+@media (max-width: 767px) {
+  body {
+    background-image: url("https://ziyuan.lruihao.cn/images/bg_cell.png");
+    background-size: cover;
+  }
 }
