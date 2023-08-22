@@ -222,7 +222,7 @@ body {
   box-sizing: border-box;
   color: var(--text-color);
   font-family: 'Eleyang Spring朝时体(Regular)', sans-serif;
-  font-size: 0.8em;
+  font-size: 1em;
   line-height: 2;
   min-height: 100%;
   position: relative;
