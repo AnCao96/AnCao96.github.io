@@ -2874,21 +2874,3 @@ header.header {
     padding: 10px 12px;
   }
 }
-.headband {
-  display: none;
-}
-/* 背景图片设置 */
-body {
-  background-image: url("/images/background.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 100% 100%;
-  opacity: 0.85;
-/* 可选 */
-}
-@media (max-width: 767px) {
-  body {
-    background-image: url("https://ziyuan.lruihao.cn/images/bg_cell.png");
-    background-size: cover;
-  }
-}
