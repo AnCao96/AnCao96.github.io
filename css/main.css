@@ -2867,11 +2867,11 @@ header.header {
 }
 /* 背景图片设置 */
 body {
-  background-image: url("https://w.wallhaven.cc/full/yx/wallhaven-yx28wl.jpg");
+  background-image: url("https://w.wallhaven.cc/full/2y/wallhaven-2yo38m.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% 100%;
-  opacity: 0.9;
+  opacity: 0.8;
 /* 可选 */
 }
 @media (max-width: 767px) {
