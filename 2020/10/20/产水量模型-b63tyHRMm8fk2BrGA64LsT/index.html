@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.20/fancybox/fancybox.css" integrity="sha256-RvRHGSuWAxZpXKV9lLDt2e+rZ+btzn48Wp4ueS3NZKs=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ancao96.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"ZQDKLA2K5M","indexName":"ZQDKLA2K5M","hits":{"per_page":10}},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true,"path":"search.xml","field":"post","content":true,"format":"html"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="产水量模型 InVEST模型的产水量：水库水电生产模块，不仅评估了景观中各次一级流域对产水的相对贡献量，而且有助于研究土地利用格局变化如何影响年地表产水量和水电生产。 模拟景观格局变化和水文过程的关系是个科学难题。用来模拟这些关系及其相关 过程的复杂模型（如WEAP水资源评估和规划系统模型）要求较高的数据和资源资料，并且要求大量专业知识。为满足更多学科背景需求，使用易获取的数据，InVEST模型绘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="产水量计算">
+<meta property="og:url" content="https://ancao96.github.io/2020/10/20/%E4%BA%A7%E6%B0%B4%E9%87%8F%E6%A8%A1%E5%9E%8B-b63tyHRMm8fk2BrGA64LsT/index.html">
+<meta property="og:site_name" content="SCY SPACS">
+<meta property="og:description" content="产水量模型 InVEST模型的产水量：水库水电生产模块，不仅评估了景观中各次一级流域对产水的相对贡献量，而且有助于研究土地利用格局变化如何影响年地表产水量和水电生产。 模拟景观格局变化和水文过程的关系是个科学难题。用来模拟这些关系及其相关 过程的复杂模型（如WEAP水资源评估和规划系统模型）要求较高的数据和资源资料，并且要求大量专业知识。为满足更多学科背景需求，使用易获取的数据，InVEST模型绘">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-20T12:45:20.000Z">
+<meta property="article:modified_time" content="2023-08-22T12:14:01.475Z">
+<meta property="article:author" content="SCY">
+<meta property="article:tag" content="Ecosystem service">
+<meta property="article:tag" content="Annual Water Yield">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ancao96.github.io/2020/10/20/%E4%BA%A7%E6%B0%B4%E9%87%8F%E6%A8%A1%E5%9E%8B-b63tyHRMm8fk2BrGA64LsT/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ancao96.github.io/2020/10/20/%E4%BA%A7%E6%B0%B4%E9%87%8F%E6%A8%A1%E5%9E%8B-b63tyHRMm8fk2BrGA64LsT/","path":"2020/10/20/产水量模型-b63tyHRMm8fk2BrGA64LsT/","title":"产水量计算"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>产水量计算 | SCY SPACS</title>
+    
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="https://waline-server-nxpj3ksyo-scy.vercel.app">
+    <noscript>
+      <link rel="stylesheet" href="/css/noscript.css">
+    </noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.0.0/style.css" />
+    <style>
+      body,div.post-body,h1,h2,h3,h4 {
+        font-family: "LXGW WenKai LITE", sans-serif;
+        font-size: 108%;
+      }
+    </style>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+    <div class="headband"></div>
+    <main class="main">
+      <div class="column">
+        <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SCY SPACS</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">1</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+          
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%A7%E6%B0%B4%E9%87%8F%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">产水量模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">工作原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9C%80%E6%B1%82"><span class="nav-number">3.</span> <span class="nav-text">数据需求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%9F%E5%A3%A4%E7%9A%84%E6%9C%80%E5%A4%A7%E6%A0%B9%E7%B3%BB%E5%9F%8B%E8%97%8F%E6%B7%B1%E5%BA%A6%E5%BF%85%E9%9C%80"><span class="nav-number">3.1.</span> <span class="nav-text">土壤的最大根系埋藏深度（必需）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B4%E9%99%8D%E6%B0%B4%E9%87%8F%E5%BF%85%E9%9C%80"><span class="nav-number">3.2.</span> <span class="nav-text">年降水量（必需）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A4%8D%E7%89%A9%E5%8F%AF%E5%88%A9%E7%94%A8%E6%B0%B4%E9%87%8F%E5%BF%85%E9%9C%80"><span class="nav-number">3.3.</span> <span class="nav-text">植物可利用水量（必需）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B4%E5%B9%B3%E5%9D%87%E6%BD%9C%E5%9C%A8%E8%92%B8%E6%95%A3%E5%8F%91%E5%BF%85%E9%9C%80"><span class="nav-number">3.4.</span> <span class="nav-text">年平均潜在蒸散发（必需）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%9F%E5%9C%B0%E5%88%A9%E7%94%A8%E8%A6%86%E8%A2%AB%E5%BF%85%E9%9C%80"><span class="nav-number">3.5.</span> <span class="nav-text">土地利用&#x2F;覆被（必需）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E5%9F%9F%E5%BF%85%E9%9C%80"><span class="nav-number">3.6.</span> <span class="nav-text">流域（必需）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A1%E4%B8%80%E7%BA%A7%E5%B0%8F%E6%B5%81%E5%9F%9F%E5%BF%85%E9%9C%80"><span class="nav-number">3.7.</span> <span class="nav-text">次一级小流域（必需）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E7%89%A9%E7%89%A9%E7%90%86%E7%B3%BB%E6%95%B0%E8%A1%A8%E5%BF%85%E9%9C%80"><span class="nav-number">3.8.</span> <span class="nav-text">生物物理系数表（必需）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A3%E8%8A%82%E5%B8%B8%E6%95%B0z%E5%BF%85%E9%9C%80"><span class="nav-number">3.9.</span> <span class="nav-text">季节常数Z（必需）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%B0%B4%E9%9C%80%E6%B1%82%E8%A1%A8%E5%BF%85%E9%9C%80"><span class="nav-number">3.10.</span> <span class="nav-text">用水需求表（必需）：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="nav-number">4.</span> <span class="nav-text">结果分析</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="SCY"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">SCY</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AnCao96" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AnCao96" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ancao.cugb@gmail.com" title="E-Mail → mailto:ancao.cugb@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+      </div>
+      <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+    
+    
+
+    <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+        <link itemprop="mainEntityOfPage" href="https://ancao96.github.io/2020/10/20/%E4%BA%A7%E6%B0%B4%E9%87%8F%E6%A8%A1%E5%9E%8B-b63tyHRMm8fk2BrGA64LsT/">
+
+        <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <meta itemprop="image" content="/images/avatar.gif">
+            <meta itemprop="name" content="SCY">
+        </span>
+
+        <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop="name" content="SCY SPACS">
+            <meta itemprop="description" content="">
+        </span>
+
+        <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+            <meta itemprop="name" content="产水量计算 | SCY SPACS">
+            <meta itemprop="description" content="">
+        </span>
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">
+                产水量计算
+            </h1>
+
+            <div class="post-meta-container">
+                <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-20 20:45:20" itemprop="dateCreated datePublished" datetime="2020-10-20T20:45:20+08:00">2020-10-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-08-22 20:14:01" itemprop="dateModified" datetime="2023-08-22T20:14:01+08:00">2023-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Ecosystem-service/" itemprop="url" rel="index"><span itemprop="name">Ecosystem service</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Ecosystem-service/Annual-Water-Yield/" itemprop="url" rel="index"><span itemprop="name">Annual Water Yield</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2020/10/20/%E4%BA%A7%E6%B0%B4%E9%87%8F%E6%A8%A1%E5%9E%8B-b63tyHRMm8fk2BrGA64LsT/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2020/10/20/%E4%BA%A7%E6%B0%B4%E9%87%8F%E6%A8%A1%E5%9E%8B-b63tyHRMm8fk2BrGA64LsT/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>21 分钟</span>
+    </span>
+</div>
+
+            </div>
+        </header>
+
+        
+        
+        
+        <div class="post-body" itemprop="articleBody"><h1 id="产水量模型">产水量模型</h1>
+<p>InVEST模型的产水量：水库水电生产模块，不仅评估了景观中各次一级流域对产水的相对贡献量，而且有助于研究土地利用格局变化如何影响年地表产水量和水电生产。</p>
+<p>模拟景观格局变化和水文过程的关系是个科学难题。用来模拟这些关系及其相关
+过程的复杂模型（如WEAP水资源评估和规划系统模型）要求较高的数据和资源资料，并且要求大量专业知识。为满足更多学科背景需求，使用易获取的数据，InVEST模型绘制和模拟用于景观水电生产的年平均产水量，而不是直接评估土地利用/覆被变化导致的水电减产，因为这一过程在逐日和逐月的时间尺度上主要由流入水量变化决定。
+因此，InVEST模型计算了景观中各子流域对产水的相对贡献量及其对应的水电产量。
+水库经济使用年限内的水电生产净现值也可以通过年收益还原法计算。
+<span id="more"></span></p>
+<ul>
+<li><p><a href="#工作原理">工作原理</a></p></li>
+<li><p><a href="#数据需求">数据需求</a></p>
+<ul>
+<li><a
+href="#土壤的最大根系埋藏深度必需">土壤的最大根系埋藏深度（必需）：</a></li>
+<li><a href="#年降水量必需">年降水量（必需）：</a></li>
+<li><a href="#植物可利用水量必需">植物可利用水量（必需）：</a></li>
+<li><a href="#年平均潜在蒸散发必需">年平均潜在蒸散发（必需）：</a></li>
+<li><a href="#土地利用覆被必需">土地利用/覆被（必需）：</a></li>
+<li><a href="#流域必需">流域（必需）：</a></li>
+<li><a href="#次一级小流域必需">次一级小流域（必需）：</a></li>
+<li><a href="#生物物理系数表必需">生物物理系数表（必需）：</a></li>
+<li><a href="#季节常数Z必需">季节常数Z（必需）：</a></li>
+<li><a href="#用水需求表必需">用水需求表（必需）：</a></li>
+</ul></li>
+<li><p><a href="#结果分析">结果分析</a></p></li>
+</ul>
+<h1 id="工作原理"><em>工作原理</em></h1>
+<p>模型运行基于栅格地图。模型估算了研究区各次一级流域对水电生产贡献水量及其经济价值。模块包括三个组件，按顺序运行。</p>
+<ol type="1">
+<li>模型估算了每栅格单元降水量减去实际蒸散发后的水量即水源供给量。
+模型不做地表水、地下水、基流的区分，而是假设每个栅格单元的产水通过上述途径汇集到信息点。然后，模型计算出次一级流域产水量的总量和平均值。栅格计算有助于确定决定流域产汇流空间异质性的关键因素，如土壤类型，降水量，植被类型等。
+但是，这组模型的基础理论基于次一级流域到流域尺度，对次一级流域过程的模型解释是可信的，因此产水量的总量和/或平均值结果也应当维持在次一级流域水平上。模型仅为校准和模型检验提供输出结果的栅格数据。这些栅格数据图件不能用于水文过程的解释说明，或作为任何类型的决策信息源。</li>
+<li>模型计算了用于水电生产的水源供给量，即将水源供给总量减去除水电生产以外的其他用水量。</li>
+<li>模型计算了到达水库水流的发电量及其水库有效使用年期内的经济价值。</li>
+</ol>
+<p><strong><em>NOTE</em></strong>: Water Yield
+模块运行的前提条件是假设栅格单元的产水量都是通过地表径流或
+者地下径流的方式汇集到流域出口，在这个前提条件下计算每个栅格单元的产水量,
+即降水量减去植被蒸腾与地表蒸散。</p>
+<p><strong><em>产水量评估模型</em></strong></p>
+<p>产水量评估模块基于Budyko水热耦合平衡假设（1974）和年平均降水量数据。首先，确定研究区每个栅格单元<span
+class="math inline">\(x\)</span>的年产水量<span
+class="math inline">\(Y(x)\)</span>，公式如下：</p>
+<p><span class="math display">\[
+Y(x)=\left(1-\frac{A E T(x)}{P(x)}\right) \cdot P(x)
+\]</span></p>
+<p><span class="math inline">\(AET(x)\)</span>表示栅格单元<span
+class="math inline">\(x\)</span>的年实际蒸散量、<span
+class="math inline">\(P(x)\)</span>表示栅格单元<span
+class="math inline">\(x\)</span>的年降水量。</p>
+<p>水量平衡公式中，土地利用/覆被类型的植被蒸散发<span
+class="math inline">\(\frac{A E
+T(x)}{P(x)}\)</span>计算，采用Fu和Zhang等提出的Budyko水热耦合平衡假设公式：</p>
+<p><span class="math display">\[
+\frac{A E T(x)}{P(x)}=1+\frac{P E T(x)}{P(x)}-\left[1+\left(\frac{P E
+T(x)}{P(x)}\right)^{\omega}\right]^{1 / \omega}
+\]</span></p>
+<p><span
+class="math inline">\(PET(x)\)</span><strong>表示潜在蒸散量</strong>、<span
+class="math inline">\(ω(x)\)</span>表示自然气候-土壤性质的非物理参数。
+潜在蒸散量<span class="math inline">\(PET(x)\)</span>定义为：</p>
+<p><span class="math display">\[
+{PET}(x)=K_{c}\left(\ell_{x}\right) \cdot E T_{0}(x)
+\]</span></p>
+<p>式中，<span class="math inline">\(ET_0(x)\)</span>表示栅格单元<span
+class="math inline">\(x\)</span>的参考作物蒸散，<span
+class="math inline">\(K_c(\ell_x)\)</span>表示栅格单元<span
+class="math inline">\(x\)</span>中特定土地利用/覆被类型的植物（植被）蒸散系数。<span
+class="math inline">\(ET_0(x)\)</span>通过参考作物蒸散量反映当地气候条件，例如苜蓿的蒸散量反映其草地生境气候。<span
+class="math inline">\(K_c(\ell_x)\)</span>很大程度上取决于栅格单元<span
+class="math inline">\(x\)</span>中土地利用/覆被的植被性质。在土地利用/覆被图中，<span
+class="math inline">\(K_c\)</span>用于将<span
+class="math inline">\(ET_0(x)\)</span>修正为栅格单元中特定作物或植被类型蒸散量。</p>
+<p><span class="math inline">\(ω(x)\)</span>是一个经验参数，通常用<span
+class="math inline">\(\frac{A W C \times
+N}{P}\)</span>线性函数表示，式中<span
+class="math inline">\(N\)</span>表示每年的降水事件数，<span
+class="math inline">\(AWC\)</span>表示植物可利用水含量。虽然基于全球数据的$
+ω(x) $公式亟待进一步研究，
+InVEST模型采用Donohue等人提出的公式表达，定义为：</p>
+<p><span class="math display">\[
+\]</span></p>
+<ul>
+<li><span
+class="math inline">\(AWC(x)\)</span>表示土壤有效含水量（mm），由土壤质地和土壤有效深度决定，用来确定土壤为植物生长储存和提供的总水量。由植物利用水分含量<span
+class="math inline">\((PAWC)\)</span>，
+以及土壤的最大根系埋藏深度和植物根系深度的最小值决定：</li>
+</ul>
+<p><span class="math display">\[
+A W C(x)=\operatorname{Min}( Re st.layer.depth, root.depth ) \cdot PAWC
+\]</span></p>
+<p>土壤的最大根系埋藏深度是指由于环境的物理和化学特征不同，植物根系在土壤中能够延伸的最大深度（也叫土壤深度）。植物根系深度通常指特定植物类型的根系生物量为95%的土层深度。<span
+class="math inline">\(PAWC\)</span>表示植物利用水分含量，即田间持水量和萎蔫点之间的差值。</p>
+<ul>
+<li><span
+class="math inline">\(Z\)</span>为经验常数，又称<code>季节常数</code>，能够代表区域降水分布及其他水文地质特征。<span
+class="math inline">\(Z\)</span>与<span
+class="math inline">\(N\)</span>正相关，<span
+class="math inline">\(N\)</span>是每年降水发生次数。1.25为<span
+class="math inline">\(ω(x)\)</span>基数，即裸地（根系深度为0）的植被年需水量和年降水量比值。<span
+class="math inline">\(ω(x)\)</span>上限为5。</li>
+</ul>
+<p>其他土地利用/覆被类型（开放水域，城市，湿地）的实际蒸散发通过参考作物蒸散<span
+class="math inline">\(ET_0(x)\)</span>直接计算，由降水量决定其最大值：</p>
+<p><span class="math display">\[
+A E T(x)=\operatorname{Min}\left(K_{c}\left(\ell_{x}\right) \cdot E
+T_{0}(x), P(x)\right)
+\]</span></p>
+<p><span class="math inline">\(ET_0(x)\)</span>表示参考作物蒸散，而<span
+class="math inline">\(K_c(\ell_x)\)</span>表示特定土地利用/覆被类型蒸腾作用的影响因子。</p>
+<h1 id="数据需求"><strong><em>数据需求</em></strong></h1>
+<p>模型使用的数据需求列表如下，关于数据来源和预处理的详细信息见附录。所有数据输入前，应先定义栅格数据投影，栅格单位为米（m）。</p>
+<h2
+id="土壤的最大根系埋藏深度必需">土壤的最大根系埋藏深度（必需）：</h2>
+<p>每个栅格对应一个土壤的最大根系埋藏深度平均值的GIS栅格数据集。土壤的最大根系埋藏深度是指由于环境的物理和化学特征不同，植物根系在土壤中能够延伸的最大深度，单位毫米（mm）。根系限制层深度可从一些土壤图中获得。如果无法获得根系限制层深度或按土壤类型划分的可扎根深度，可使用土壤深度作为替代。如果有几个土壤层是详细的，那么限制根系层的深度就是非限制性土壤层的深度之和。</p>
+<p><em>命名：</em>用户自定义，但若为ESRI
+GRID格式，文件名不能有空格并且少于13个字，
+若为TIF或IMG格式，命名可能更长。</p>
+<p><em>格式：</em> GIS标准栅格文件（如：ESRI
+GRID，TIF或IMG），每个栅格对应一个土壤的最大根系埋藏深度平均值，单位毫米（mm）。</p>
+<p><em>数据获得：</em></p>
+<ol type="1">
+<li><a target="_blank" rel="noopener" href="http://globalchange.bnu.edu.cn/research/cdtb.jsp"
+title="http://globalchange.bnu.edu.cn/research/cdtb.jsp">http://globalchange.bnu.edu.cn/research/cdtb.jsp</a>
+（单位为m，需转化为mm，已下载处理，上传百度☁️） 原文 <a
+target="_blank" rel="noopener" href="https://doi.org/10.1038/s41597-019-0345-6"
+title="https://doi.org/10.1038/s41597-019-0345-6">https://doi.org/10.1038/s41597-019-0345-6</a></li>
+<li>SoilGrids250m 2017-03 - Depth to bedrock (R horizon)
+（单位为cm，需转化为mm）<a
+target="_blank" rel="noopener" href="https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/bfb01655-db81-4571-b6eb-3caae86c037a"
+title="https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/bfb01655-db81-4571-b6eb-3caae86c037a">https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/bfb01655-db81-4571-b6eb-3caae86c037a</a></li>
+</ol>
+<h2 id="年降水量必需">年降水量（必需）：</h2>
+<p>每个栅格对应一个非空值的<strong>年平均降水量</strong>的GIS栅格数据集，单位毫米（mm）。</p>
+<p><em>命名</em>：用户自定义，但若为ESRI
+GRID格式，文件名不能有空格并且少于13个字，
+若为TIF或IMG格式，命名可能更长。</p>
+<p><em>格式</em>：GIS标准栅格文件（如：ESRI
+GRID，TIF或IMG），每个栅格对应一个年平 均降水量。</p>
+<p><em>数据获得</em>：</p>
+<ol type="1">
+<li>利用<a target="_blank" rel="noopener" href="https://www.wolai.com/pLvSQy6dLBrwJX9ATDTiy4"
+title="日值（v3）数据">日值（v3）数据</a>进行差值。</li>
+<li>国家地球系统科学数据中心：中国1km分辨率年降水量数据（2001-2020年）已下载直接使用，单位为0.1mm
+<a
+target="_blank" rel="noopener" href="http://www.geodata.cn/data/datadetails.html?dataguid=113786088533256&amp;docid=3549"
+title="http://www.geodata.cn/data/datadetails.html?dataguid=113786088533256&amp;docid=3549">http://www.geodata.cn/data/datadetails.html?dataguid=113786088533256&amp;docid=3549</a></li>
+<li>WorldClim (v 2.1) 数据范围：1970-2000，月值，最大精度：30s ，单位:mm
+<a target="_blank" rel="noopener" href="https://www.worldclim.org/data/worldclim21.html"
+title="https://www.worldclim.org/data/worldclim21.html">https://www.worldclim.org/data/worldclim21.html</a></li>
+<li>GEE （"UCSB-CHG/CHIRPS/DAILY")数据集，完整教程见<a
+target="_blank" rel="noopener" href="https://www.wolai.com/mQ6iivaJ3BAPg21kq2uXsE"
+title="编程分享-利用GEE得到研究区年、月、日降水量数据">编程分享-利用GEE得到研究区年、月、日降水量数据</a></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="variable constant_">ROI</span> = ee.<span class="title class_">FeatureCollection</span>(<span class="string">&quot;users/rice20220411/AH&quot;</span>);</span><br><span class="line"><span class="title class_">Map</span>.<span class="title function_">addLayer</span>(<span class="variable constant_">ROI</span>,&#123;&#125;,<span class="string">&#x27;ROI&#x27;</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">2015</span>;i&lt;=<span class="number">2021</span>;i++)&#123;</span><br><span class="line"><span class="keyword">var</span> CHIRPS_Daily = ee.<span class="title class_">ImageCollection</span>(<span class="string">&quot;UCSB-CHG/CHIRPS/DAILY&quot;</span>)</span><br><span class="line">.<span class="title function_">filterDate</span>(i+<span class="string">&#x27;-01-01&#x27;</span>, i+<span class="string">&#x27;-12-31&#x27;</span>)</span><br><span class="line"> .<span class="title function_">select</span>(<span class="string">&#x27;precipitation&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> CHIRPS_Year_mean = CHIRPS_Daily.<span class="title function_">mean</span>().<span class="title function_">clip</span>(<span class="variable constant_">ROI</span>)</span><br><span class="line"><span class="keyword">var</span> precipitationVis = &#123;</span><br><span class="line">  <span class="attr">min</span>: <span class="number">1.0</span>,</span><br><span class="line">  <span class="attr">max</span>: <span class="number">17.0</span>,</span><br><span class="line">  <span class="attr">palette</span>: [<span class="string">&#x27;001137&#x27;</span>, <span class="string">&#x27;0aab1e&#x27;</span>, <span class="string">&#x27;e7eb05&#x27;</span>, <span class="string">&#x27;ff4a2d&#x27;</span>, <span class="string">&#x27;e90000&#x27;</span>],</span><br><span class="line">&#125;;</span><br><span class="line"><span class="title function_">print</span>(CHIRPS_Year_mean)</span><br><span class="line"><span class="title class_">Map</span>.<span class="title function_">addLayer</span>(CHIRPS_Year_mean, precipitationVis, i+<span class="string">&#x27;_CHIRPS_Year_mean&#x27;</span>);</span><br><span class="line"><span class="comment">// Map.addLayer(CHIRPS_Daily.first().clip(ROI), precipitationVis, &#x27;CHIRPS_Year_mean_first&#x27;);</span></span><br><span class="line"><span class="title class_">Export</span>.<span class="property">image</span>.<span class="title function_">toDrive</span>(&#123;</span><br><span class="line">      <span class="attr">image</span>: CHIRPS_Year_mean,</span><br><span class="line">      <span class="attr">description</span>: i+<span class="string">&#x27;year_mean&#x27;</span>,</span><br><span class="line">      <span class="attr">region</span>: <span class="variable constant_">ROI</span>,</span><br><span class="line">      <span class="attr">maxPixels</span>: <span class="number">1e13</span>,</span><br><span class="line">      <span class="attr">folder</span>: <span class="string">&#x27;CHIRPS&#x27;</span></span><br><span class="line">    &#125;) </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h2 id="植物可利用水量必需">植物可利用水量（必需）：</h2>
+<p>每个栅格对应一个植物可利用水的GIS栅格数据集。
+植物可利用水（PAWC）是指土壤土层中为植物生长提供的水量所占比例。PAWC是[0,1]的小数。</p>
+<p><em>命名</em>：用户自定义，但若为ESRI
+GRID格式，文件名不能有空格并且少于13个字，
+若为TIF或IMG格式，命名可能更长。 </p>
+<p><em>格式</em>：GIS标准栅格文件（如：ESRI
+GRID，TIF或IMG），每个栅格对应一个植物可利用水含量百分比。</p>
+<p><em>数据获得</em>：（下载好处理好后传百度☁️）</p>
+<p>SoilGrids250m 2017-03 - “Derived available soil water capacity
+(volumetric fraction) until wilting point” (<a
+target="_blank" rel="noopener" href="https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/e33e75c0-d9ab-46b5-a915-cb344345099c"
+title="https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/e33e75c0-d9ab-46b5-a915-cb344345099c">https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/e33e75c0-d9ab-46b5-a915-cb344345099c</a>)
+SoilGrids 2.0版目前不提供AWC。SoilGrids
+2017提供7个土壤深度区间的AWC层。所有7个深度区间都需要下载，然后合并成一个单一的图层，以便在模型中使用。</p>
+<p>栅格值以整数百分比的形式给出（如25，表示AWC值为25%）。
+（标准）深度区间的平均值，如0-5厘米或0-30厘米，可以通过使用数字积分，如梯形规则，对深度区间内的预测值进行加权平均来得出：</p>
+<p><span class="math display">\[
+\left(\frac{1}{(b-a)}\right)\left(\frac{1}{2}\right)
+\sum_{k=1}^{N-1}\left(x_{k+1}-x_{k}\right)\left(f\left(x_{k}\right)+f\left(x_{k+1}\right)\right)
+\]</span></p>
+<p>其中，<span class="math inline">\(N\)</span>是深度数，<span
+class="math inline">\(x_k\)</span>是第<span
+class="math inline">\(k\)</span>个深度，<span
+class="math inline">\(f(x_k)\)</span>是目标变量（即土壤属性）在深度<span
+class="math inline">\(x_k\)</span>的值。</p>
+<p>操作步骤：</p>
+<ol type="1">
+<li>从ISRIC网站上下载所有可用的深度区间。深度区间为0cm-200cm。注意，每个栅格的大小为1.5GB。</li>
+<li>使用 GIS
+缓冲区工具，在你要建模的流域/感兴趣的区域周围创建一个缓冲区。由于SoilGrids数据的分辨率为250米，因此缓冲区的宽度为250或500米。这样做是为了确保土壤数据完全覆盖你正在建模的流域，边界周围没有漏洞。</li>
+<li>使用缓冲流域，将所有原始的ISRIC AWC
+栅格数据剪辑到你感兴趣的区域。在ArcGIS中，这可以通过空间分析工具<code>掩模提取</code>来完成。在这个例子中，我们将把剪下的图层称为AWC_sl1_clip.tif、AWC_sl2_clip.tif
+... AWC_sl7_clip.tif。</li>
+<li>使用GIS栅格计算器工具来计算合并后的AWC层。将其代入上面的方程，我们可以得到：
+<span class="math display">\[(1/(200-0)) \* (1/2) \* ( ((5-0) \*
+(AWC\_sl1\_clip.tif + AWC\_sl2\_clip.tif)) + ((15-5) \*
+(AWC\_sl2\_clip.tif + AWC\_sl3\_clip.tif)) + ((30-15) \*
+(AWC\_sl3\_clip.tif + AWC\_sl4\_clip.tif)) + ((60-30) \*
+(AWC\_sl4\_clip.tif + AWC\_sl5\_clip.tif)) + ((100-60) \*
+(AWC\_sl5\_clip.tif + AWC\_sl6\_clip.tif)) + ((200-100) \* (
+AWC\_sl6\_clip.tif + AWC\_sl7\_clip.tif)) )\]</span>
+将此公式输入光栅计算器，根据需要调整文件名。</li>
+<li>得到的栅格应该包含0-100范围内的数值，代表整数百分比。该模型<strong>要求AWC以分数</strong>的形式给出，因此将步骤4中计算的<strong>栅格除以100</strong>。</li>
+<li>重新投影AWC分数层，使其具有与其他模型输入相同的投影坐标系统。这个栅格现在可以用作模型的可用水含量输入。</li>
+</ol>
+<h2 id="年平均潜在蒸散发必需">年平均潜在蒸散发（必需）：</h2>
+<p>
+每个栅格对应一个<strong>年平均潜在蒸散发</strong>的GIS栅格数据集。潜在蒸散发是指水分充足的情况下，通过土壤蒸发和植物（如苜蓿或其他草类等健康植被）蒸散作用可能散逸的水量，单位毫米（mm）。</p>
+<p><em>命名</em>：用户自定义，但若为ESRI
+GRID格式，文件名不能有空格并且少于13个字，若为TIF或IMG格式，命名可能更长。
+</p>
+<p><em>格式</em>：GIS标准栅格文件（如：ESRI
+GRID，TIF或IMG），每个栅格对应一个年平均潜在蒸散发。</p>
+<p><em>数据获得</em>：</p>
+<ul>
+<li>FA0工具计算，详见<a
+target="_blank" rel="noopener" href="https://www.wolai.com/sWbxWLVBydbK2t5aT584Fa"
+title="使用EToCalculator 计算潜在蒸散发详细教程">使用EToCalculator
+计算潜在蒸散发详细教程</a><a
+target="_blank" rel="noopener" href="https://blog.sciencenet.cn/blog-3459054-1308734.html"
+title="https://blog.sciencenet.cn/blog-3459054-1308734.html">https://blog.sciencenet.cn/blog-3459054-1308734.html</a></li>
+<li>Global Aridity Index and Potential Evapotranspiration (ET0) Climate
+Database v2 (Penman Monteith Evapotranspiration
+equation，30弧秒，1970-2000，暂时未使用，有待验证。) <a
+target="_blank" rel="noopener" href="https://figshare.com/articles/dataset/Global_Aridity_Index_and_Potential_Evapotranspiration_ET0_Climate_Database_v2/7504448/3"
+title="https://figshare.com/articles/dataset/Global_Aridity_Index_and_Potential_Evapotranspiration_ET0_Climate_Database_v2/7504448/3">https://figshare.com/articles/dataset/Global_Aridity_Index_and_Potential_Evapotranspiration_ET0_Climate_Database_v2/7504448/3</a></li>
+<li>大部分研究采用，Modified-Hargreaves 法对潜在蒸散量进行计算。
+式中：<span
+class="math inline">\(ET_0\)</span>代表栅格单元上的潜在蒸散量（mm）；<span
+class="math inline">\(RA\)</span>为太阳大气顶层辐射 （<span
+class="math inline">\(MJ·m^{-2}·d^{-1}\)</span>）；<span
+class="math inline">\(T_a\)</span>为不同小流域的日最高温均值和日最低温均值的平均值（°C）；
+<span
+class="math inline">\(T_d\)</span>为小流域上的日最高温均值和日最低温均值的差值（°C）；<span
+class="math inline">\(P\)</span>为小流域的降雨量 （mm）。</li>
+</ul>
+<p><span class="math display">\[
+ET_{0}=0.0013 \times 0.408 \times R A
+\times\left(T_{\mathrm{a}}+17\right) \times\left(T_{\mathrm{d}}-0.0123
+P\right)^{0.76}
+\]</span></p>
+<ul>
+<li>GEE获取 (Penman-Monteith法)（代码传GEE和GitHub）
+已经下载全国区域的2000-2020年数据压缩上传百度云 </li>
+</ul>
+<p> 原文链接 <a target="_blank" rel="noopener" href="https://doi.org/10.1016/j.rse.2018.12.031"
+title="https://doi.org/10.1016/j.rse.2018.12.031">https://doi.org/10.1016/j.rse.2018.12.031</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//完美运行，输入坐标即可，获取每年的平均值。</span></span><br><span class="line"><span class="comment">//加入矢量边界之后直接运行var </span></span><br><span class="line"><span class="keyword">var</span> <span class="variable constant_">ROI</span> = table.<span class="title function_">geometry</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//Map.addLayer(ROI,&#123;&#125;,&#x27;ROI&#x27;);</span></span><br><span class="line"><span class="keyword">var</span> imgcol_PMLV2_v016_8d = ee.<span class="title class_">ImageCollection</span>(<span class="string">&#x27;projects/pml_evapotranspiration/PML/OUTPUT/PML_V2_8day_v016&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> imgcol_PMLV2_v016_8d = ee.<span class="title class_">ImageCollection</span>(imgcol_PMLV2_v016_8d.<span class="title function_">toList</span>(<span class="number">2000</span>));</span><br><span class="line"><span class="title function_">print</span>(imgcol_PMLV2_v016_8d);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> pkg_export = <span class="built_in">require</span>(<span class="string">&#x27;users/kongdd/pkgs:pkg_export.js&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&quot;drive&quot;</span>,</span><br><span class="line">    <span class="attr">range</span>: [<span class="number">110</span>,<span class="number">34</span>,<span class="number">114</span>,<span class="number">40</span>],<span class="comment">//ROI, // [73, 25, 105, 40], </span></span><br><span class="line">    <span class="attr">cellsize</span>: <span class="number">1</span>/<span class="number">240</span>,</span><br><span class="line">    <span class="comment">// crsTransform : [463.312716528, 0, -20015109.354, 0, -463.312716527, 10007554.677], // prj.crsTransform;</span></span><br><span class="line">    <span class="comment">// scale        : 463.3127165275, // prj.scale</span></span><br><span class="line">    <span class="attr">crs</span>: <span class="string">&#x27;EPSG:4326&#x27;</span>, <span class="comment">// &#x27;SR-ORG:6974&#x27;, // EPSG:4326</span></span><br><span class="line">    <span class="attr">folder</span>: <span class="string">&#x27;ET0&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> imgcol_years = <span class="title function_">aggregateToYearly</span>(imgcol_PMLV2_v016_8d, <span class="number">2010</span>, <span class="number">2019</span>, <span class="number">0.01</span>);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">aggregateToYearly</span>(<span class="params">imgcol, year_begin, year_end, scale_factor</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> bands = [<span class="string">&#x27;ET_pot&#x27;</span>]; <span class="comment">//,&#x27;qc&#x27;</span></span><br><span class="line">    <span class="keyword">var</span> years = ee.<span class="property">List</span>.<span class="title function_">sequence</span>(year_begin, year_end);</span><br><span class="line">    <span class="keyword">var</span> imgcol_years = years.<span class="title function_">map</span>(<span class="keyword">function</span>(<span class="params">year</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> date_begin = ee.<span class="property">Date</span>.<span class="title function_">fromYMD</span>(year,<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">var</span> date_end   = ee.<span class="property">Date</span>.<span class="title function_">fromYMD</span>(year,<span class="number">12</span>,<span class="number">31</span>);</span><br><span class="line">        <span class="keyword">var</span> ydays = date_begin.<span class="title function_">advance</span>(<span class="number">1</span>, <span class="string">&#x27;year&#x27;</span>).<span class="title function_">difference</span>(date_begin, <span class="string">&#x27;day&#x27;</span>);</span><br><span class="line">        <span class="keyword">var</span> imgcol_year = imgcol.<span class="title function_">filterDate</span>(date_begin, date_end);</span><br><span class="line">        <span class="keyword">var</span> scale = ydays.<span class="title function_">multiply</span>(scale_factor);</span><br><span class="line">        <span class="keyword">return</span> imgcol_year.<span class="title function_">select</span>(bands)</span><br><span class="line">            <span class="comment">//.multiply(scale_factor).</span></span><br><span class="line">            .<span class="title function_">mean</span>()</span><br><span class="line">            .<span class="title function_">multiply</span>(scale)</span><br><span class="line">            .<span class="title function_">toFloat</span>()</span><br><span class="line">            .<span class="title function_">set</span>(<span class="string">&#x27;system:time_start&#x27;</span>, date_begin.<span class="title function_">millis</span>())</span><br><span class="line">            .<span class="title function_">set</span>(<span class="string">&#x27;system:id&#x27;</span>, date_begin.<span class="title function_">format</span>());</span><br><span class="line">    &#125;);</span><br><span class="line">    imgcol_years = ee.<span class="title class_">ImageCollection</span>(imgcol_years);</span><br><span class="line">    <span class="comment">// pkg_export.ExportImg(img_year, task, range, cellsize, type, folder_yearly, crs, crsTransform);</span></span><br><span class="line">    <span class="keyword">return</span> imgcol_years;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> imgcol_years = imgcol_years.<span class="title function_">filterBounds</span>(<span class="variable constant_">ROI</span>);</span><br><span class="line"><span class="title function_">print</span>(imgcol_years);</span><br><span class="line"><span class="comment">//var batch = require(&#x27;users/fitoprincipe/geetools:batch&#x27;);</span></span><br><span class="line"><span class="comment">//batch.Download.ImageCollection.toDrive(imgcol_years,&quot;ETO&quot;, &#123;</span></span><br><span class="line"><span class="comment">//scale: 1/240&#125;)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pkg_export.<span class="title class_">ExportImgCol</span>(imgcol_years.<span class="title function_">limit</span>(<span class="number">10</span>), <span class="string">&#x27;ET0&#x27;</span>, options);</span><br></pre></td></tr></table></figure>
+<p>GEE批量导出方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> runButtons = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#task-pane&#x27;</span>).<span class="property">shadowRoot</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;.run-button&quot;</span>)</span><br><span class="line">     runButtons.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">e</span>) &#123;e.<span class="title function_">click</span>()&#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">runTaskList</span>()</span><br><span class="line"><span class="built_in">setTimeout</span>( </span><br><span class="line">    <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">       <span class="keyword">var</span> taskDialog = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;ee-image-config-dialog&quot;</span>) <span class="comment">//table的话-image-改成-table-</span></span><br><span class="line">        taskDialog.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">e</span>) &#123;e.<span class="property">shadowRoot</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;ee-dialog&quot;</span>).<span class="property">shadowRoot</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;paper-dialog&quot;</span>).<span class="title function_">querySelector</span>(<span class="string">&quot;.ok-button&quot;</span>).<span class="title function_">click</span>()&#125;)</span><br><span class="line"> &#125;,<span class="number">5</span> * <span class="number">1000</span> );  </span><br></pre></td></tr></table></figure>
+<h2 id="土地利用覆被必需">土地利用/覆被（必需）：</h2>
+<p>每个栅格对应一个土地利用类型的GIS栅格数据集。
+土地利用类型代码定义为<strong>整数</strong>。 </p>
+<p><em>命名：</em>用户自定义，但若为ESRI
+GRID格式，文件名不能有空格并且少于13个字，
+若为TIF或IMG格式，命名可能更长。 </p>
+<p><em>格式：</em>GIS标准栅格文件（如：ESRI
+GRID，TIF或IMG），每个栅格对应一个土地利用类型代码（如：1表示森林，3表示草地，等）。地类代码必须与生物物理系数表中的地类代码一致。</p>
+<p><em>数据获取得：</em></p>
+<ol type="1">
+<li>Land cover classification gridded maps from 1992 to present derived
+from satellite observations <a
+target="_blank" rel="noopener" href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/satellite-land-cover?tab=overview"
+title="https://cds.climate.copernicus.eu/cdsapp#!/dataset/satellite-land-cover?tab=overview">https://cds.climate.copernicus.eu/cdsapp#!/dataset/satellite-land-cover?tab=overview</a></li>
+<li>ESA全球10米<a target="_blank" rel="noopener" href="https://esa-worldcover.org/en"
+title="https://esa-worldcover.org/en">https://esa-worldcover.org/en</a></li>
+<li>GLOBELAND30 包含2000，2010，2020三期数据。<a
+target="_blank" rel="noopener" href="http://www.globallandcover.com/defaults.html?src=/Scripts/map/defaults/download.html&amp;head=download&amp;type=data"
+title="http://www.globallandcover.com/defaults.html?src=/Scripts/map/defaults/download.html&amp;head=download&amp;type=data">http://www.globallandcover.com/defaults.html?src=/Scripts/map/defaults/download.html&amp;head=download&amp;type=data</a>
+<code>note:</code>汾河流域在图幅N49_35,山西省全域需要图幅N49_30,N49_35,N49_40,N50_35,N50_40</li>
+<li>Sentinel-2 Land Use/ Land Cover Downloader
+2017-2021年数据，10米分辨率。 <a
+target="_blank" rel="noopener" href="https://www.arcgis.com/apps/instant/media/index.html?appid=fc92d38533d440078f17678ebc20e8e2"
+title="https://www.arcgis.com/apps/instant/media/index.html?appid=fc92d38533d440078f17678ebc20e8e2">https://www.arcgis.com/apps/instant/media/index.html?appid=fc92d38533d440078f17678ebc20e8e2</a>
+</li>
+<li>1990-2021全国30米数据（每年更新） <a
+target="_blank" rel="noopener" href="https://zenodo.org/record/5816591#.YzQUF-xBwbk"
+title="https://zenodo.org/record/5816591#.YzQUF-xBwbk">https://zenodo.org/record/5816591#.YzQUF-xBwbk</a></li>
+</ol>
+<h2 id="流域必需">流域（必需）：</h2>
+<p>用多边形表示流域的图形文件（shapefile）。即与研究区水电生产研究相关的所有小流域图层。
+</p>
+<p><em>命名：</em> 用户定义，但文件名不能有空格 </p>
+<p><em>格式： </em>图形文件（.shp） </p>
+<p><em>属性表横列：</em>每一行表示一个小流域</p>
+<p><em>属性表纵列：</em>必须包含定义为整数的“ws_id”字段，每个小流域赋予唯一数值。</p>
+<h2 id="次一级小流域必需">次一级小流域（必需）：</h2>
+<p>流域图层中选定区域中用多图形文件（shapefile）。生成次一级小流域的工具和方法，详见
+“DEM数据处理”章节。</p>
+<p><em>格式：</em>图形文件（.shp） </p>
+<p><em>属性表横列：</em>每一行表示一个次一级小流域</p>
+<p><em>属性表纵列：</em>必须包含定义为整数的“subws_id”字段，每个次一级小流域赋予唯一数值。</p>
+<h2 id="生物物理系数表必需">生物物理系数表（必需）：</h2>
+<p>土地利用/覆被（LULC）类型表，包括用于该工具使用的生物物理系数数据。注意事项：这些数据主要针对每种土地利用类型属性而非栅格图栅格单元属性。</p>
+<p><em>命名：</em>文件名由字母、数字和下划线组成，不能有空格。</p>
+<p><em>格式：</em>ArcGIS模型的*.dbf或*.mdb格式，独立运行模块要求一个*.csv文件。</p>
+<p><em>属性表横列：</em>每一行表示一个土地利用类型 。</p>
+<p><em>属性表纵列：</em>每一列包含每种土地利用类型的不同属性，属性命名如下：</p>
+<p>Lucode（土地利用类型代码）：每种土地利用类型地类代码（如：1表示森林，
+3表示草地，等），必须与上述土地利用类型栅格图保持一致。</p>
+<p>LULC_desc：土地利用类型的描述性命名（可选填）。</p>
+<p> LULC_veg：包括使用的实际蒸散发AET计算公式。植被覆盖地类
+（不包括湿地）赋值为1，其他土地利用类型（包括湿地、城市用地、水体）赋值为0。</p>
+<p>root_depth：植被覆盖地类的最大根系深度，单位毫米（mm），取整数。植物根系深度通常指特定植物类型的根系生物量为95%的土层深度。对不适用一般
+Budyko干燥指数（即应使用公式2计算实际蒸散发AET）的土地利用类型而言，
+不需要根系深度数据，设为N/A。</p>
+<p>Kc
+：每种土地利用类型的植物蒸散系数，通过将植物生理学特性与苜蓿相比较，将苜蓿的参考作物蒸散修正为特定土地利用类型的潜在蒸散量。因此土地利用类型的植物蒸散系数取值为[0，1.5]的小数（在某些非常潮湿的热带区域，水分充足）。</p>
+<h2 id="季节常数z必需">季节常数Z（必需）：</h2>
+<p>是根据季节性降水分布定义的从1 到30排序浮动值。 </p>
+<h2 id="用水需求表必需">用水需求表（必需）：</h2>
+<p>土地利用类型表，表示不同土地利用类型的消耗性用水量。消耗性用水量是指提供植物和作物生长，被人类和畜牧消耗，或其他应从
+流域水量平衡中扣除的水量。</p>
+<p><em>命名：</em>文件名由字母、数字和下划线组成，不能有空格。 </p>
+<p><em>格式：</em>ArcGIS模型的*.dbf或*.mdb格式，独立运行模块要求一个*.csv文件
+属性表横列：每一行表示一个土地利用类型，并且必须包含土地利用栅格图中所
+有土地覆被属性值。 </p>
+<p><em>属性表纵列：</em>每一列包含每种土地利用类型的不同用水需求属性，属性命名如下：</p>
+<p>lucode（土地利用类型代码）：每种土地利用类型地类代码（如：1表示森林，
+3表示草地，等），必须与上述土地利用类型栅格图保持一致。 </p>
+<p>demand：每种土地利用类型的预测平均消耗性用水量。土地利用类型图中的用水量用立方米/年/栅格单元表示。注意事项：由于区域越大，相同土地覆被类型消耗的水量可能，因此用水量的栅格计算方法十分重要。</p>
+<h1 id="结果分析">结果分析</h1>
+<p>output_pixel（分数）：模型估算每个栅格单元降水量的实际蒸散发占比（实际蒸发量/降水量）。这是栅格单元的实际蒸散发占降水量的平均值。</p>
+<p>output_pixel（mm）：模型估算栅格单元实际蒸散发。</p>
+<p>output_pixel（mm）：模型估算栅格单元产水量。</p>
+<ul>
+<li>output_results_wyield.shp 和
+output_results_wyield.csv：包含模型估算次一级流域生物物理学参数值的shapefile文件和表格，属性包括：
+<ul>
+<li>precip_mn（mm）：次一级流域栅格单元的平均降水量。</li>
+<li>PET_mn（mm）：次一级流域栅格单元的平均潜在蒸散发。</li>
+<li>AET_mn（mm）：次一级流域栅格单元的平均实际蒸散发。</li>
+<li>wyield_mn（mm）：次一级流域栅格单元的平均产水量。</li>
+<li>num_pixel：次一级流域栅格单元的数量。</li>
+<li>wyield_vol（$ m^3 $）：次一级流域产水量体积。</li>
+<li>wyield_ha（$ m^3 $）：次一级流域每公顷产水量体积。</li>
+</ul></li>
+<li>output_results_wyield.shp 和 output_results_wyield.csv ：
+包含模型估算每个小流域生物物理学参数值的shapefile文件和表格：
+运行产水量评估模块时，输出结果的生物物理学参数如下：
+<ul>
+<li>precip_mn（mm）：每个小流域栅格单元的平均降水量。</li>
+<li>PET_mn（mm）：每个小流域栅格单元的平均潜在蒸散发。</li>
+<li>AET_mn（mm）：每个小流域栅格单元的平均实际蒸散发。</li>
+<li>wyield_mn（mm）：每个小流域栅格单元的平均产水量。</li>
+<li>num_pixel：每个小流域栅格单元的数量。</li>
+<li>wyield_vol（$ m^3 $）：每个小流域内产水量体积。</li>
+<li>wyield_ha（$ m^3 $）：每个小流域每公顷产水量体积。 </li>
+</ul></li>
+</ul>
+<p><strong><code>Note:</code></strong>
+<strong>产水量（wyield_vol）</strong>字段数据是模型估算研究区流域的每一个次一级流域的年平均<em>产汇流</em>水量。字段数值可以用于确定对全年产水量贡献最大的次一级流域。</p>
+<p><a target="_blank" rel="noopener" href="https://www.wolai.com/pLvSQy6dLBrwJX9ATDTiy4"
+title="日值（v3）数据">日值（v3）数据</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.wolai.com/sWbxWLVBydbK2t5aT584Fa"
+title="使用EToCalculator 计算潜在蒸散发详细教程">使用EToCalculator
+计算潜在蒸散发详细教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.wolai.com/mQ6iivaJ3BAPg21kq2uXsE"
+title="编程分享-利用GEE得到研究区年、月、日降水量数据">编程分享-利用GEE得到研究区年、月、日降水量数据</a></p>
+
+        </div>
+
+        
+        
+        
+
+        <div>
+            
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------<i class="fa fa-paw"></i>已经到底啦<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+
+            
+        </div>
+
+        <footer class="post-footer">
+            <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="SCY 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="SCY 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+            <div class="post-tags">
+                <a href="/tags/Ecosystem-service/" rel="tag"><i class="fa fa-tag"></i> Ecosystem service</a>
+                <a href="/tags/Annual-Water-Yield/" rel="tag"><i class="fa fa-tag"></i> Annual Water Yield</a>
+            </div>
+
+            
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+        </footer>
+    </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">6k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">21 分钟</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+</div>
+
+<!-- 删除 “由 Hexo & NexT.Gemini 强力驱动” -->
+<!-- -->
+
+      </div>
+    </footer>
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.20/fancybox/fancybox.umd.js" integrity="sha256-q8XkJ6dj5VwSvzI8+nATCHHQG+Xv/dAZBCgqmu93zOY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.19.1/algoliasearch-lite.umd.js" integrity="sha256-qzlNbRtZWHoUV5I2mI2t9QR7oYXlS9oNctX+0pECXI0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/instantsearch.js/4.56.8/instantsearch.production.min.js" integrity="sha256-xUys6KCuRGBxFaRaYZlWulRUjY48XFv6/Q2s0mb1dmc=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":null}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.3.0/mermaid.min.js","integrity":"sha256-9y71g5Lz/KLsHjB8uXwnkuWDtAMDSzD/HdIbqhJfTAI="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.3.0/wavedrom.min.js","integrity":"sha256-IRMDzTC+wK5stMucZ/XSXkeS5VNtxZ+/Bm8Mcqfoxdo="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.3.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+    
+  <script data-pjax async src="/js/busuanzi.js"></script>
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://ancao96.github.io/2020/10/20/%E4%BA%A7%E6%B0%B4%E9%87%8F%E6%A8%A1%E5%9E%8B-b63tyHRMm8fk2BrGA64LsT/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://waline-server-nxpj3ksyo-scy.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀~","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","eemoji":["https://unpkg.com/@waline/emojis@1.1.0/tw-emoji","//unpkg.com/@waline/emojis@1.1.0/bilibili","//unpkg.com/@waline/emojis@1.1.0/alus","https://unpkg.com/@waline/emojis@1.1.0/weibo"],"el":"#waline","comment":true,"path":"/2020/10/20/%E4%BA%A7%E6%B0%B4%E9%87%8F%E6%A8%A1%E5%9E%8B-b63tyHRMm8fk2BrGA64LsT/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+    <link rel="stylesheet" href="/dist/APlayer.min.css">
+    <div id="aplayer"></div>
+    <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+    <script type="text/javascript" src="/dist/music.js"></script>
+    
+  </body>
+</html>

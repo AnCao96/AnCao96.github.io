@@ -1129,7 +1129,7 @@ pre code {
   color: var(--brand-hover-color);
 }
 .site-title {
-  font-family: Palatino, 'Eleyang Spring朝时体(Regular)', sans-serif;
+  font-family: 'Eleyang Spring朝时体(Regular)', sans-serif;
   font-size: 1.375em;
   font-weight: normal;
   line-height: 1.5;
