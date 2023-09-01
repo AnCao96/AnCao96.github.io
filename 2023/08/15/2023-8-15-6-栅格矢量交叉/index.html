@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.20/fancybox/fancybox.css" integrity="sha256-RvRHGSuWAxZpXKV9lLDt2e+rZ+btzn48Wp4ueS3NZKs=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ancao96.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"ZQDKLA2K5M","indexName":"ZQDKLA2K5M","hits":{"per_page":10}},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true,"path":"search.xml","field":"post","content":true,"format":"html"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前提条件 {.unnumbered}  本章要求下列包：  123library(sf)library(terra)library(dplyr)  引言 \index{raster-vector interactions} 本章专注于栅格和矢量地理数据模型之间的相互作用，这些在章节 @ref(spatial-class)中介绍。包括四个主要技术：使用矢量对象进行栅格裁剪和遮罩（章节@ref(ra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(6)栅格矢量交叉">
+<meta property="og:url" content="https://ancao96.github.io/2023/08/15/2023-8-15-6-%E6%A0%85%E6%A0%BC%E7%9F%A2%E9%87%8F%E4%BA%A4%E5%8F%89/index.html">
+<meta property="og:site_name" content="SCY SPACS">
+<meta property="og:description" content="前提条件 {.unnumbered}  本章要求下列包：  123library(sf)library(terra)library(dplyr)  引言 \index{raster-vector interactions} 本章专注于栅格和矢量地理数据模型之间的相互作用，这些在章节 @ref(spatial-class)中介绍。包括四个主要技术：使用矢量对象进行栅格裁剪和遮罩（章节@ref(ra">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ancao96.github.io/2023/08/15/2023-8-15-6-%E6%A0%85%E6%A0%BC%E7%9F%A2%E9%87%8F%E4%BA%A4%E5%8F%89/06-raster-vector_files/figure-html/cropmask-1.png">
+<meta property="og:image" content="https://ancao96.github.io/2023/08/15/2023-8-15-6-%E6%A0%85%E6%A0%BC%E7%9F%A2%E9%87%8F%E4%BA%A4%E5%8F%89/06-raster-vector_files/figure-html/pointextr-1.png">
+<meta property="og:image" content="https://ancao96.github.io/2023/08/15/2023-8-15-6-%E6%A0%85%E6%A0%BC%E7%9F%A2%E9%87%8F%E4%BA%A4%E5%8F%89/06-raster-vector_files/figure-html/lineextr-1.png">
+<meta property="og:image" content="https://ancao96.github.io/2023/08/15/2023-8-15-6-%E6%A0%85%E6%A0%BC%E7%9F%A2%E9%87%8F%E4%BA%A4%E5%8F%89/06-raster-vector_files/figure-html/polyextr-1.png">
+<meta property="article:published_time" content="2023-08-15T10:29:20.000Z">
+<meta property="article:modified_time" content="2023-09-01T08:00:06.763Z">
+<meta property="article:author" content="SCY">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="Geocomputaion">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ancao96.github.io/2023/08/15/2023-8-15-6-%E6%A0%85%E6%A0%BC%E7%9F%A2%E9%87%8F%E4%BA%A4%E5%8F%89/06-raster-vector_files/figure-html/cropmask-1.png">
+
+
+<link rel="canonical" href="https://ancao96.github.io/2023/08/15/2023-8-15-6-%E6%A0%85%E6%A0%BC%E7%9F%A2%E9%87%8F%E4%BA%A4%E5%8F%89/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ancao96.github.io/2023/08/15/2023-8-15-6-%E6%A0%85%E6%A0%BC%E7%9F%A2%E9%87%8F%E4%BA%A4%E5%8F%89/","path":"2023/08/15/2023-8-15-6-栅格矢量交叉/","title":"(6)栅格矢量交叉"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>(6)栅格矢量交叉 | SCY SPACS</title>
+    
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="https://waline-server-nxpj3ksyo-scy.vercel.app">
+    <noscript>
+      <link rel="stylesheet" href="/css/noscript.css">
+    </noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.0.0/style.css" />
+    <style>
+      body,div.post-body,h1,h2,h3,h4 {
+        font-family: "LXGW WenKai LITE", sans-serif;
+        font-size: 108%;
+      }
+    </style>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+    <div class="headband"></div>
+    <main class="main">
+      <div class="column">
+        <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SCY SPACS</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">11</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+          
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6-unnumbered"><span class="nav-number">1.</span> <span class="nav-text"> 前提条件 {.unnumbered}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text"> 引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%85%E6%A0%BC%E8%A3%81%E5%89%AA"><span class="nav-number">3.</span> <span class="nav-text"> 栅格裁剪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%85%E6%A0%BC%E6%8F%90%E5%8F%96"><span class="nav-number">4.</span> <span class="nav-text"> 栅格提取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%85%E6%A0%BC%E5%8C%96"><span class="nav-number">5.</span> <span class="nav-text"> 栅格化</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="SCY"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">SCY</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AnCao96" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AnCao96" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ancao.cugb@gmail.com" title="E-Mail → mailto:ancao.cugb@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+      </div>
+      <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+    
+    
+
+    <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+        <link itemprop="mainEntityOfPage" href="https://ancao96.github.io/2023/08/15/2023-8-15-6-%E6%A0%85%E6%A0%BC%E7%9F%A2%E9%87%8F%E4%BA%A4%E5%8F%89/">
+
+        <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <meta itemprop="image" content="/images/avatar.gif">
+            <meta itemprop="name" content="SCY">
+        </span>
+
+        <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop="name" content="SCY SPACS">
+            <meta itemprop="description" content="">
+        </span>
+
+        <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+            <meta itemprop="name" content="(6)栅格矢量交叉 | SCY SPACS">
+            <meta itemprop="description" content="">
+        </span>
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">
+                (6)栅格矢量交叉
+            </h1>
+
+            <div class="post-meta-container">
+                <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-08-15 18:29:20" itemprop="dateCreated datePublished" datetime="2023-08-15T18:29:20+08:00">2023-08-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-01 16:00:06" itemprop="dateModified" datetime="2023-09-01T16:00:06+08:00">2023-09-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R/Geocomputaion/" itemprop="url" rel="index"><span itemprop="name">Geocomputaion</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2023/08/15/2023-8-15-6-%E6%A0%85%E6%A0%BC%E7%9F%A2%E9%87%8F%E4%BA%A4%E5%8F%89/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2023/08/15/2023-8-15-6-%E6%A0%85%E6%A0%BC%E7%9F%A2%E9%87%8F%E4%BA%A4%E5%8F%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>18 分钟</span>
+    </span>
+</div>
+
+            </div>
+        </header>
+
+        
+        
+        
+        <div class="post-body" itemprop="articleBody"><h2 id="前提条件-unnumbered"><a class="markdownIt-Anchor" href="#前提条件-unnumbered"></a> 前提条件 {.unnumbered}</h2>
+<ul>
+<li>本章要求下列包：</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>sf<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>terra<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>dplyr<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h2 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h2>
+<p>\index{raster-vector interactions} 本章专注于栅格和矢量地理数据模型之间的相互作用，这些在章节 @ref(spatial-class)中介绍。包括四个主要技术：使用矢量对象进行栅格裁剪和遮罩（章节@ref(raster-cropping)）；使用不同类型的矢量数据提取栅格值（章节@ref(raster-extraction)）；以及栅格与矢量之间的转换（章节@ref(rasterization)和@ref(spatial-vectorization)）。以上概念使用前几章中使用的数据进行演示，以了解其潜在的现实应用。</p>
+<h2 id="栅格裁剪"><a class="markdownIt-Anchor" href="#栅格裁剪"></a> 栅格裁剪</h2>
+<p>\index{raster cropping}许多地理数据项目涉及从许多不同来源整合数据，例如遥感图像（栅格）和行政边界（矢量）。通常，输入栅格数据集的范围大于感兴趣的区域。在这种情况下，栅格<strong>裁剪</strong>和<strong>掩膜</strong>对于统一输入数据的空间范围非常有用。这两个操作减少了对象的内存使用和后续分析步骤的相关计算资源，而且是创建涉及栅格数据地图之前必要的预处理步骤。</p>
+<p>我们将使用两个对象来说明栅格裁剪：</p>
+<ul>
+<li>一个代表犹他州西南部海拔高度（海平面以上米数）的<code>SpatRaster</code>对象<code>srtm</code></li>
+<li>一个代表锡安国家公园的矢量（<code>sf</code>）对象 <code>zion</code></li>
+</ul>
+<p>目标对象和裁剪对象必须具有相同的投影。因此，下面的代码块不仅从<strong>spDataLarge</strong>包中读取了章节@ref(spatial-class) 中安装的数据集，还对<code>zion</code>进行了“重投影”（这个主题在章节 @ref(reproj-geo-data) 中介绍）。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">srtm <span class="operator">=</span> rast<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;raster/srtm.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">zion <span class="operator">=</span> read_sf<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;vector/zion.gpkg&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">zion <span class="operator">=</span> st_transform<span class="punctuation">(</span>zion<span class="punctuation">,</span> crs<span class="punctuation">(</span>srtm<span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>我们使用<strong>terra</strong>包的<code>crop()</code>函数来裁剪<code>srtm</code>栅格。该函数根据传递给其第二个参数的对象的范围减小传递给其第一个参数的对象的矩形范围。下面的命令演示了这个功能，生成了图@ref(fig:cropmask)(B)：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srtm_cropped <span class="operator">=</span> crop<span class="punctuation">(</span>srtm<span class="punctuation">,</span> zion<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>\index{raster masking} 与<code>crop()</code>相关的是<strong>terra</strong>函数<code>mask()</code>，它将传递给第二个参数的对象范围之外的值设置为<code>NA</code>。因此，以下命令会掩膜锡安国家公园边界以外的每一个单元格（图 @ref(fig:cropmask)©）：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srtm_masked <span class="operator">=</span> mask<span class="punctuation">(</span>srtm<span class="punctuation">,</span> zion<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>重要的是，在大多数情况下，我们想要同时使用<code>crop()</code>和<code>mask()</code> 这两个函数。这组函数的组合将(a)将栅格的范围限制在我们感兴趣的区域内，然后 (b) 将该区域外的所有值替换为NA。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">srtm_cropped <span class="operator">=</span> crop<span class="punctuation">(</span>srtm<span class="punctuation">,</span> zion<span class="punctuation">)</span></span><br><span class="line">srtm_final <span class="operator">=</span> mask<span class="punctuation">(</span>srtm_cropped<span class="punctuation">,</span> zion<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>更改<code>mask()</code>的设置会产生不同的结果。设置<code>inverse = TRUE</code>将会屏蔽公园范围<em>内</em>的所有内容（详见<code>?mask</code>）（见图 @ref(fig:cropmask)(D)），而设置 <code>updatevalue = 0</code> 将会将国家公园外的所有像素设置为0。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srtm_inv_masked <span class="operator">=</span> mask<span class="punctuation">(</span>srtm<span class="punctuation">,</span> zion<span class="punctuation">,</span> inverse <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#&gt; The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,</span><br><span class="line">#&gt; which was just loaded, will retire in October 2023.</span><br><span class="line">#&gt; Please refer to R-spatial evolution reports for details, especially</span><br><span class="line">#&gt; https://r-spatial.org/r/2023/05/15/evolution4.html.</span><br><span class="line">#&gt; It may be desirable to make the sf package available;</span><br><span class="line">#&gt; package maintainers should consider adding sf to Suggests:.</span><br><span class="line">#&gt; The sp package is now running under evolution status 2</span><br><span class="line">#&gt;      (status 2 uses the sf package in place of rgdal)</span><br></pre></td></tr></table></figure>
+<div class="figure" style="text-align: center">
+<img data-src="06-raster-vector_files/figure-html/cropmask-1.png" alt="Illustration of raster cropping and raster masking." width="100%" />
+<p class="caption">(\#fig:cropmask)Illustration of raster cropping and raster masking.</p>
+</div>
+<h2 id="栅格提取"><a class="markdownIt-Anchor" href="#栅格提取"></a> 栅格提取</h2>
+<p>\index{raster extraction}  栅格提取是识别并返回基于（通常是矢量）地理“选择器”对象在特定位置的“目标”栅格关联的值的过程。结果取决于所使用的选择器的类型（点、线或多边形）以及传递给<code>terra::extract()</code>函数的参数。栅格提取的反向过程 — 基于矢量对象分配栅格单元格值 — 是<em>栅格化</em>，详见 @ref(rasterization) 部分。</p>
+<p>\index{raster extraction!points}  基本示例是在特定<strong>点</strong>处提取栅格单元格的值。为此，我们将使用 <code>zion_points</code>，其中包含锡安国家公园内的30个位置样本（见图 @ref(fig:pointextr)）。以下命令从<code>srtm</code>中提取高程值，并创建一个包含点的ID（每个矢量的一行一个值）和每个点的相关<code>srtm</code>值的数据框。现在，我们可以使用<code>cbind()</code>函数将结果对象添加到我们的<code>zion_points</code>数据集中：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data<span class="punctuation">(</span><span class="string">&quot;zion_points&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span></span><br><span class="line">elevation <span class="operator">=</span> terra<span class="operator">::</span>extract<span class="punctuation">(</span>srtm<span class="punctuation">,</span> zion_points<span class="punctuation">)</span></span><br><span class="line">zion_points <span class="operator">=</span> cbind<span class="punctuation">(</span>zion_points<span class="punctuation">,</span> elevation<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<div class="figure" style="text-align: center">
+<img data-src="06-raster-vector_files/figure-html/pointextr-1.png" alt="Locations of points used for raster extraction." width="100%" />
+<p class="caption">(\#fig:pointextr)Locations of points used for raster extraction.</p>
+</div>
+<p>\index{raster extraction!lines}  栅格提取也适用于<strong>线</strong>选择器。提取线所接触的每个栅格单元格的一个值。然而，线提取方法不推荐用于沿截面获取值，因为很难获得每一对提取的栅格值之间的正确距离。</p>
+<p>在这种情况下，更好的方法是将线分割成许多点，然后为这些点提取值。为了演示这一点，下面的代码创建了 <code>zion_transect</code>，一条从锡安国家公园的西北部到东南部的直线，如图 @ref(fig:lineextr)(A)所示（有关矢量数据模型的回顾，请参见 @ref(vector-data) 部分）：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">zion_transect <span class="operator">=</span> cbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="operator">-</span><span class="number">113.2</span><span class="punctuation">,</span> <span class="operator">-</span><span class="number">112.9</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">37.45</span><span class="punctuation">,</span> <span class="number">37.2</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  st_linestring<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  st_sfc<span class="punctuation">(</span>crs <span class="operator">=</span> crs<span class="punctuation">(</span>srtm<span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  st_sf<span class="punctuation">(</span>geometry <span class="operator">=</span> _<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>规划徒步旅行时，从线性选择器中提取高度的实用性可见一斑。下面演示的方法提供了路线的“海拔剖面图”（线不需要是直的），这对于估计由于长时间攀爬而需要的时间非常有用。</p>
+<p>第一步是为每个截面添加唯一的 <code>id</code>。接下来，我们可以使用 <code>st_segmentize()</code>函数在我们的线（或线）上用提供的密度（<code>dfMaxLength</code>）添加点，并使用 <code>st_cast()</code> 将它们转换为点。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zion_transect<span class="operator">$</span>id <span class="operator">=</span> <span class="number">1</span><span class="operator">:</span>nrow<span class="punctuation">(</span>zion_transect<span class="punctuation">)</span></span><br><span class="line">zion_transect <span class="operator">=</span> st_segmentize<span class="punctuation">(</span>zion_transect<span class="punctuation">,</span> dfMaxLength <span class="operator">=</span> <span class="number">250</span><span class="punctuation">)</span></span><br><span class="line">zion_transect <span class="operator">=</span> st_cast<span class="punctuation">(</span>zion_transect<span class="punctuation">,</span> <span class="string">&quot;POINT&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>现在，我们有了一大组点，我们想要推导出我们的截面中第一个点与后续各点之间的距离。在这种情况下，我们只有一个截面，但原则上，代码应该适用于任何数量的截面：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zion_transect <span class="operator">=</span> zion_transect <span class="operator">|&gt;</span> </span><br><span class="line">  group_by<span class="punctuation">(</span>id<span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  mutate<span class="punctuation">(</span>dist <span class="operator">=</span> st_distance<span class="punctuation">(</span>geometry<span class="punctuation">)</span><span class="punctuation">[</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span><span class="punctuation">)</span> </span><br></pre></td></tr></table></figure>
+<p>最后，我们可以提取截面中每个点的高程值，并将此信息与我们的主要对象结合起来。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zion_elev <span class="operator">=</span> terra<span class="operator">::</span>extract<span class="punctuation">(</span>srtm<span class="punctuation">,</span> zion_transect<span class="punctuation">)</span></span><br><span class="line">zion_transect <span class="operator">=</span> cbind<span class="punctuation">(</span>zion_transect<span class="punctuation">,</span> zion_elev<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>所得到的<code>zion_transect</code>可以用来创建高程剖面图，如图@ref(fig:lineextr)(B)所示。</p>
+<div class="figure" style="text-align: center">
+<img data-src="06-raster-vector_files/figure-html/lineextr-1.png" alt="Location of a line used for raster extraction (left) and the elevation along this line (right)." width="100%" />
+<p class="caption">(\#fig:lineextr)Location of a line used for raster extraction (left) and the elevation along this line (right).</p>
+</div>
+<p>\index{raster extraction!polygons}栅格提取的最后一种地理矢量对象是<strong>多边形</strong>。与线条一样，多边形每个多边形倾向于返回许多栅格值。以下命令演示了这一点，其结果是一个数据框，列名为<code>ID</code>（多边形的行号）和<code>srtm</code>（相关的海拔值）：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zion_srtm_values <span class="operator">=</span> terra<span class="operator">::</span>extract<span class="punctuation">(</span>x <span class="operator">=</span> srtm<span class="punctuation">,</span> y <span class="operator">=</span> zion<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>这样的结果可以用来生成每个多边形的栅格值的汇总统计信息，例如用来描述单个区域或比较多个区域。下面的代码展示了这一点，它创建了对象<code>zion_srtm_df</code>，包含锡安国家公园内的海拔值的汇总统计信息（见图@ref(fig:polyextr)(A)）：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">group_by<span class="punctuation">(</span>zion_srtm_values<span class="punctuation">,</span> ID<span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  summarize<span class="punctuation">(</span>across<span class="punctuation">(</span>srtm<span class="punctuation">,</span> <span class="built_in">list</span><span class="punctuation">(</span><span class="built_in">min</span> <span class="operator">=</span> <span class="built_in">min</span><span class="punctuation">,</span> mean <span class="operator">=</span> mean<span class="punctuation">,</span> <span class="built_in">max</span> <span class="operator">=</span> <span class="built_in">max</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; # A tibble: 1 × 4</span></span><br><span class="line"><span class="comment">#&gt;      ID srtm_min srtm_mean srtm_max</span></span><br><span class="line"><span class="comment">#&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;</span></span><br><span class="line"><span class="comment">#&gt; 1     1     1122     1818.     2661</span></span><br></pre></td></tr></table></figure>
+<p>前述代码段使用了 <strong>dplyr</strong>\index{dplyr (package)} 来提供每个多边形ID的单元格值的汇总统计信息，如第@ref(attr)章所述。结果提供了有用的总结，例如公园内的最大高度约为海拔2661米（也可以用这种方式计算其他汇总统计信息，如标准差）。因为示例中只有一个多边形，所以返回了一个单行的数据框；然而，当使用多个选择多边形时，该方法同样适用。</p>
+<p>相似的方法适用于在多边形内计数分类栅格值的出现次数。这通过一个土地覆盖数据集（<code>nlcd</code>）在图 @ref(fig:polyextr)(B) 中进行说明，并在下面的代码中演示：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">nlcd <span class="operator">=</span> rast<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;raster/nlcd.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">zion2 <span class="operator">=</span> st_transform<span class="punctuation">(</span>zion<span class="punctuation">,</span> st_crs<span class="punctuation">(</span>nlcd<span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">zion_nlcd <span class="operator">=</span> terra<span class="operator">::</span>extract<span class="punctuation">(</span>nlcd<span class="punctuation">,</span> zion2<span class="punctuation">)</span></span><br><span class="line">zion_nlcd <span class="operator">|&gt;</span> </span><br><span class="line">  group_by<span class="punctuation">(</span>ID<span class="punctuation">,</span> levels<span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  count<span class="punctuation">(</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; # A tibble: 7 × 3</span></span><br><span class="line"><span class="comment">#&gt; # Groups:   ID, levels [7]</span></span><br><span class="line"><span class="comment">#&gt;      ID levels         n</span></span><br><span class="line"><span class="comment">#&gt;   &lt;dbl&gt; &lt;fct&gt;      &lt;int&gt;</span></span><br><span class="line"><span class="comment">#&gt; 1     1 Developed   4205</span></span><br><span class="line"><span class="comment">#&gt; 2     1 Barren     98285</span></span><br><span class="line"><span class="comment">#&gt; 3     1 Forest    298299</span></span><br><span class="line"><span class="comment">#&gt; 4     1 Shrubland 203701</span></span><br><span class="line"><span class="comment">#&gt; # ℹ 3 more rows</span></span><br></pre></td></tr></table></figure>
+<div class="figure" style="text-align: center">
+<img data-src="06-raster-vector_files/figure-html/polyextr-1.png" alt="Area used for continuous (left) and categorical (right) raster extraction." width="100%" />
+<p class="caption">(\#fig:polyextr)Area used for continuous (left) and categorical (right) raster extraction.</p>
+</div>
+<p>\index{raster extraction!exact fractions} 尽管 <strong>terra</strong> 包提供了在多边形内快速提取栅格值的功能，<code>extract()</code>在处理大型多边形数据集时仍可能成为瓶颈。<strong>exactextractr</strong>包通过<code>exact_extract()</code>函数提供了一个<a target="_blank" rel="noopener" href="https://github.com/geocompx/geocompr/issues/813">明显更快的替代方案</a>用于提取像素值。<code>exact_extract()</code>函数还默认计算了每个栅格单元被多边形重叠的部分，这更为精确（有关详细信息，请参见下面的注释）。</p>
+<p>\BeginKnitrBlock{rmdnote}<div class="rmdnote">多边形通常具有不规则的形状，因此，多边形可能只与栅格的某些部分重叠。<br />
+为了获得更详细的结果，<code>terra::extract()</code> 函数有一个叫做 <code>exact</code> 的参数。<br />
+通过设置 <code>exact = TRUE</code>，我们在输出的数据框中多得到一列<code>fraction</code>，代表每个单元格被多边形覆盖的部分。<br />
+这可以用于计算例如连续栅格的加权平均值或者分类栅格的更精确覆盖率。<br />
+默认情况下，它的值为 <code>FALSE</code>，因为这个操作需要更多的计算。<br />
+<code>exactextractr::exact_extract()</code> 函数始终计算多边形在每个单元格中的覆盖部分。</div>\EndKnitrBlock{rmdnote}</p>
+<h2 id="栅格化"><a class="markdownIt-Anchor" href="#栅格化"></a> 栅格化</h2>
+
+        </div>
+
+        
+        
+        
+
+        <div>
+            
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------<i class="fa fa-paw"></i>已经到底啦<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+
+            
+        </div>
+
+        <footer class="post-footer">
+            <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="SCY 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="SCY 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+            <div class="post-tags">
+                <a href="/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
+                <a href="/tags/Geocomputaion/" rel="tag"><i class="fa fa-tag"></i> Geocomputaion</a>
+            </div>
+
+            
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+            <div class="post-nav">
+                <div class="post-nav-item">
+                    <a href="/2023/08/14/2023-8-14-5-%E5%87%A0%E4%BD%95%E6%93%8D%E4%BD%9C/" rel="prev" title="(5)几何操作">
+                        <i class="fa fa-angle-left"></i> (5)几何操作
+                    </a>
+                </div>
+                <div class="post-nav-item">
+                    <a href="/2023/08/17/2023-8-17-8-%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AEIO/" rel="next" title="(8)地理数据 I/O">
+                        (8)地理数据 I/O <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">117k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:04</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+</div>
+
+<!-- 删除 “由 Hexo & NexT.Gemini 强力驱动” -->
+<!-- -->
+
+      </div>
+    </footer>
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.20/fancybox/fancybox.umd.js" integrity="sha256-q8XkJ6dj5VwSvzI8+nATCHHQG+Xv/dAZBCgqmu93zOY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.19.1/algoliasearch-lite.umd.js" integrity="sha256-qzlNbRtZWHoUV5I2mI2t9QR7oYXlS9oNctX+0pECXI0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/instantsearch.js/4.56.8/instantsearch.production.min.js" integrity="sha256-xUys6KCuRGBxFaRaYZlWulRUjY48XFv6/Q2s0mb1dmc=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":null}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.3.0/mermaid.min.js","integrity":"sha256-9y71g5Lz/KLsHjB8uXwnkuWDtAMDSzD/HdIbqhJfTAI="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.3.0/wavedrom.min.js","integrity":"sha256-IRMDzTC+wK5stMucZ/XSXkeS5VNtxZ+/Bm8Mcqfoxdo="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.3.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+    
+  <script data-pjax async src="/js/busuanzi.js"></script>
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://ancao96.github.io/2023/08/15/2023-8-15-6-%E6%A0%85%E6%A0%BC%E7%9F%A2%E9%87%8F%E4%BA%A4%E5%8F%89/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://waline-server-nxpj3ksyo-scy.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀~","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","eemoji":["https://unpkg.com/@waline/emojis@1.1.0/tw-emoji","//unpkg.com/@waline/emojis@1.1.0/bilibili","//unpkg.com/@waline/emojis@1.1.0/alus","https://unpkg.com/@waline/emojis@1.1.0/weibo"],"el":"#waline","comment":true,"path":"/2023/08/15/2023-8-15-6-%E6%A0%85%E6%A0%BC%E7%9F%A2%E9%87%8F%E4%BA%A4%E5%8F%89/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+    <link rel="stylesheet" href="/dist/APlayer.min.css">
+    <div id="aplayer"></div>
+    <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+    <script type="text/javascript" src="/dist/music.js"></script>
+    
+  </body>
+</html>

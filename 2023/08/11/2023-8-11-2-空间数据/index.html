@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.20/fancybox/fancybox.css" integrity="sha256-RvRHGSuWAxZpXKV9lLDt2e+rZ+btzn48Wp4ueS3NZKs=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ancao96.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"ZQDKLA2K5M","indexName":"ZQDKLA2K5M","hits":{"per_page":10}},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true,"path":"search.xml","field":"post","content":true,"format":"html"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本章将简要介绍两种基本的地理数据模型\index{data models}:矢量和栅格。 我们将介绍每种数据模型背后的理论以及它们在哪些学科中占主导地位,然后演示它们在R中的实现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(2)R中的地理数据">
+<meta property="og:url" content="https://ancao96.github.io/2023/08/11/2023-8-11-2-%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE/index.html">
+<meta property="og:site_name" content="SCY SPACS">
+<meta property="og:description" content="本章将简要介绍两种基本的地理数据模型\index{data models}:矢量和栅格。 我们将介绍每种数据模型背后的理论以及它们在哪些学科中占主导地位,然后演示它们在R中的实现。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-11T10:29:20.000Z">
+<meta property="article:modified_time" content="2023-09-01T06:29:02.976Z">
+<meta property="article:author" content="SCY">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="Geocomputaion">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ancao96.github.io/2023/08/11/2023-8-11-2-%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ancao96.github.io/2023/08/11/2023-8-11-2-%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE/","path":"2023/08/11/2023-8-11-2-空间数据/","title":"(2)R中的地理数据"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>(2)R中的地理数据 | SCY SPACS</title>
+    
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="https://waline-server-nxpj3ksyo-scy.vercel.app">
+    <noscript>
+      <link rel="stylesheet" href="/css/noscript.css">
+    </noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.0.0/style.css" />
+    <style>
+      body,div.post-body,h1,h2,h3,h4 {
+        font-family: "LXGW WenKai LITE", sans-serif;
+        font-size: 108%;
+      }
+    </style>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+    <div class="headband"></div>
+    <main class="main">
+      <div class="column">
+        <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SCY SPACS</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">11</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+          
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6-"><span class="nav-number">1.</span> <span class="nav-text"> 前提条件 {-}</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text"> 引言</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="SCY"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">SCY</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AnCao96" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AnCao96" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ancao.cugb@gmail.com" title="E-Mail → mailto:ancao.cugb@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+      </div>
+      <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+    
+    
+
+    <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+        <link itemprop="mainEntityOfPage" href="https://ancao96.github.io/2023/08/11/2023-8-11-2-%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE/">
+
+        <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <meta itemprop="image" content="/images/avatar.gif">
+            <meta itemprop="name" content="SCY">
+        </span>
+
+        <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop="name" content="SCY SPACS">
+            <meta itemprop="description" content="">
+        </span>
+
+        <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+            <meta itemprop="name" content="(2)R中的地理数据 | SCY SPACS">
+            <meta itemprop="description" content="">
+        </span>
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">
+                (2)R中的地理数据
+            </h1>
+
+            <div class="post-meta-container">
+                <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-08-11 18:29:20" itemprop="dateCreated datePublished" datetime="2023-08-11T18:29:20+08:00">2023-08-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-01 14:29:02" itemprop="dateModified" datetime="2023-09-01T14:29:02+08:00">2023-09-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R/Geocomputaion/" itemprop="url" rel="index"><span itemprop="name">Geocomputaion</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2023/08/11/2023-8-11-2-%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2023/08/11/2023-8-11-2-%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>17k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1:01</span>
+    </span>
+</div>
+
+            </div>
+        </header>
+
+        
+        
+        
+        <div class="post-body" itemprop="articleBody"><p>本章将简要介绍两种基本的地理数据模型\index{data models}:矢量和栅格。<br />
+我们将介绍每种数据模型背后的理论以及它们在哪些学科中占主导地位,然后演示它们在R中的实现。</p>
+<span id="more"></span>
+<h1 id="前提条件-"><a class="markdownIt-Anchor" href="#前提条件-"></a> 前提条件 {-}</h1>
+<!--rl-->
+<p>这是本书的第一章实践内容,因此它带有一些软件需求。</p>
+<!-- toDo: rl-->
+<!-- should we be that specific regarding the r version?-->
+<p>您需要能够访问安装了最新版本R的计算机(R<a target="_blank" rel="noopener" href="https://stat.ethz.ch/pipermail/r-announce/2022/000683.html">4.2.0</a> 或更高版本)。<br />
+我们建议不仅阅读文本内容,也<em>运行每章的代码</em>,以建立您的地理计算技能。</p>
+<p>为了跟踪您的学习过程,值得在计算机上新建一个文件夹来保存您的R脚本、输出和其他在学习《用R进行地理计算》过程中产生的东西。<br />
+您也可以<a target="_blank" rel="noopener" href="https://github.com/geocompx/geocompr/archive/refs/heads/main.zip">下载</a>或<a target="_blank" rel="noopener" href="https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository">克隆</a>本书背后的<a target="_blank" rel="noopener" href="https://github.com/geocompx/geocompr">源代码</a>以支持您的学习。<br />
+我们强烈建议在编写/运行/测试R代码时安装集成开发环境(IDE),如<a target="_blank" rel="noopener" href="https://posit.co/download/rstudio-desktop/#download">RStudio</a>(针对大多数人推荐)或<a target="_blank" rel="noopener" href="https://github.com/REditorSupport/vscode-R">VS Code</a>。<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+<p>如果您是R的新手,我们建议您在深入学习《用R进行地理计算》代码之前,首先学习一些R入门资源,比如Garrett Grolemund的<a target="_blank" rel="noopener" href="https://rstudio-education.github.io/hopr/starting.html">《用R学习编程》</a>或Claudia Engel的<a target="_blank" rel="noopener" href="https://cengel.github.io/R-intro/">《R入门》</a> 。<br />
+组织好您的工作(例如使用RStudio项目),并给脚本起合理的名称,如<code>chapter-02-notes.R</code>,以记录您在学习过程中的代码。\index{R!pre-requisites}</p>
+<p>安装好环境后,是时候运行一些代码了!<br />
+除非您已经安装了这些包,否则第一件事是使用以下命令安装本章需要的基础R包:<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">install.packages<span class="punctuation">(</span><span class="string">&quot;sf&quot;</span><span class="punctuation">)</span></span><br><span class="line">install.packages<span class="punctuation">(</span><span class="string">&quot;terra&quot;</span><span class="punctuation">)</span></span><br><span class="line">install.packages<span class="punctuation">(</span><span class="string">&quot;spData&quot;</span><span class="punctuation">)</span></span><br><span class="line">install.packages<span class="punctuation">(</span><span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">,</span> repos <span class="operator">=</span> <span class="string">&quot;https://nowosad.r-universe.dev&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>\index{R!installation}<br />
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">我们建议按照<a target="_blank" rel="noopener" href="https://cran.r-project.org/">CRAN</a>上的R安装说明进行操作。<br />
+如果您使用Mac或Linux,上述安装<strong>sf</strong>的命令第一次可能不会起作用。<br />
+这些操作系统 (OSs) 都有一些“系统需求”,在该包的<a target="_blank" rel="noopener" href="https://github.com/r-spatial/sf">README</a>中有描述。<br />
+网上可以找到其他特定操作系统的安装说明,包括<a target="_blank" rel="noopener" href="https://rtask.thinkr.fr/installation-of-r-4-2-on-ubuntu-22-04-lts-and-tips-for-spatial-packages/">rtask.thinkr.fr</a>网站上的文章<em>在Ubuntu 22.04.1 LTS上安装R 4.2及空间包提示</em>。</div>\EndKnitrBlock{rmdnote}</p>
+<p>复现本书第1部分内容所需的包可以通过以下命令安装:<code>remotes::install_github(&quot;geocompx/geocompkg&quot;)</code>。<br />
+这个命令使用<strong>remotes</strong>包中的<code>install_packages()</code>函数来安装托管在GitHub代码托管、版本控制和协作平台上的源代码。<br />
+以下命令将安装复现整本书所需的<strong>所有</strong>依赖项(警告:这可能需要几分钟):<br />
+<code>remotes::install_github(&quot;geocompx/geocompkg&quot;, dependencies = TRUE)</code><br />
+本章中提出的代码所需的包可以通过<code>library()</code>函数“加载”(技术上是附加)如下:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>sf<span class="punctuation">)</span>          <span class="comment"># classes and functions for vector data</span></span><br><span class="line"><span class="comment">#&gt; Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</span></span><br></pre></td></tr></table></figure>
+<p><code>library(sf)</code>的输出将报告该包正在使用的关键地理库(如GEOS)的版本,如第@ref(intro-sf)节所述。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>terra<span class="punctuation">)</span>      <span class="comment"># classes and functions for raster data</span></span><br></pre></td></tr></table></figure>
+<p>我们安装的其他R包包含了书中将使用的数据:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>spData<span class="punctuation">)</span>        <span class="comment"># load geographic data</span></span><br><span class="line"><span class="comment">#&gt; The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,</span></span><br><span class="line"><span class="comment">#&gt; which was just loaded, will retire in October 2023.</span></span><br><span class="line"><span class="comment">#&gt; Please refer to R-spatial evolution reports for details, especially</span></span><br><span class="line"><span class="comment">#&gt; https://r-spatial.org/r/2023/05/15/evolution4.html.</span></span><br><span class="line"><span class="comment">#&gt; It may be desirable to make the sf package available;</span></span><br><span class="line"><span class="comment">#&gt; package maintainers should consider adding sf to Suggests:.</span></span><br><span class="line"><span class="comment">#&gt; The sp package is now running under evolution status 2</span></span><br><span class="line"><span class="comment">#&gt;      (status 2 uses the sf package in place of rgdal)</span></span><br><span class="line">library<span class="punctuation">(</span>spDataLarge<span class="punctuation">)</span>   <span class="comment"># load larger geographic data</span></span><br></pre></td></tr></table></figure>
+<h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
+<hr class="footnotes-sep" />
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><br />
+我们建议使用<a target="_blank" rel="noopener" href="https://r4ds.had.co.nz/workflow-projects.html">RStudio项目</a>、<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/editor/workspaces">VS Code工作区</a>或类似系统来管理项目。<br />
+通过RStudio中的R控制台,可以使用<strong>rstudioapi</strong>包快速完成此操作。<br />
+例如,使用以下命令在主目录中打开一个名为“geocompr-learning”的新项目:<code>rstudioapi::openProject(&quot;~/geocompr-learning&quot;)</code>。<br />
+ <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p><br />
+<strong>spDataLarge</strong> 不存在于CRAN上,意味着必须通过<em>r-universe</em>或以下命令安装:<code>remotes::install_github(&quot;Nowosad/spDataLarge&quot;)</code>。 <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+        </div>
+
+        
+        
+        
+
+        <div>
+            
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------<i class="fa fa-paw"></i>已经到底啦<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+
+            
+        </div>
+
+        <footer class="post-footer">
+            <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="SCY 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="SCY 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+            <div class="post-tags">
+                <a href="/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
+                <a href="/tags/Geocomputaion/" rel="tag"><i class="fa fa-tag"></i> Geocomputaion</a>
+            </div>
+
+            
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+            <div class="post-nav">
+                <div class="post-nav-item">
+                    <a href="/2023/08/10/2023-8-10-1-%E4%BB%8B%E7%BB%8D/" rel="prev" title="(1)介绍">
+                        <i class="fa fa-angle-left"></i> (1)介绍
+                    </a>
+                </div>
+                <div class="post-nav-item">
+                    <a href="/2023/08/12/2023-8-12-3-%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C/" rel="next" title="(3)属性操作">
+                        (3)属性操作 <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">117k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:04</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+</div>
+
+<!-- 删除 “由 Hexo & NexT.Gemini 强力驱动” -->
+<!-- -->
+
+      </div>
+    </footer>
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.20/fancybox/fancybox.umd.js" integrity="sha256-q8XkJ6dj5VwSvzI8+nATCHHQG+Xv/dAZBCgqmu93zOY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.19.1/algoliasearch-lite.umd.js" integrity="sha256-qzlNbRtZWHoUV5I2mI2t9QR7oYXlS9oNctX+0pECXI0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/instantsearch.js/4.56.8/instantsearch.production.min.js" integrity="sha256-xUys6KCuRGBxFaRaYZlWulRUjY48XFv6/Q2s0mb1dmc=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":null}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.3.0/mermaid.min.js","integrity":"sha256-9y71g5Lz/KLsHjB8uXwnkuWDtAMDSzD/HdIbqhJfTAI="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.3.0/wavedrom.min.js","integrity":"sha256-IRMDzTC+wK5stMucZ/XSXkeS5VNtxZ+/Bm8Mcqfoxdo="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.3.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+    
+  <script data-pjax async src="/js/busuanzi.js"></script>
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://ancao96.github.io/2023/08/11/2023-8-11-2-%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://waline-server-nxpj3ksyo-scy.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀~","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","eemoji":["https://unpkg.com/@waline/emojis@1.1.0/tw-emoji","//unpkg.com/@waline/emojis@1.1.0/bilibili","//unpkg.com/@waline/emojis@1.1.0/alus","https://unpkg.com/@waline/emojis@1.1.0/weibo"],"el":"#waline","comment":true,"path":"/2023/08/11/2023-8-11-2-%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+    <link rel="stylesheet" href="/dist/APlayer.min.css">
+    <div id="aplayer"></div>
+    <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+    <script type="text/javascript" src="/dist/music.js"></script>
+    
+  </body>
+</html>
