@@ -21,19 +21,34 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ancao96.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"ZQDKLA2K5M","indexName":"ZQDKLA2K5M","hits":{"per_page":10}},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true,"path":"search.xml","field":"post","content":true,"format":"html"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="本章将简要介绍两种基本的地理数据模型\index{data models}:矢量和栅格。 我们将介绍每种数据模型背后的理论以及它们在哪些学科中占主导地位,然后演示它们在R中的实现。">
+    <meta name="description" content="本章将简要介绍两种基本的地理数据模型:矢量和栅格。我们将介绍每种数据模型背后的理论以及它们在哪些学科中占主导地位,然后演示它们在R中的实现。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="(2)R中的地理数据">
 <meta property="og:url" content="https://ancao96.github.io/2023/08/11/2023-8-11-2-%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE/index.html">
-<meta property="og:site_name" content="SCY SPACS">
-<meta property="og:description" content="本章将简要介绍两种基本的地理数据模型\index{data models}:矢量和栅格。 我们将介绍每种数据模型背后的理论以及它们在哪些学科中占主导地位,然后演示它们在R中的实现。">
+<meta property="og:site_name" content="SCY SPACE">
+<meta property="og:description" content="本章将简要介绍两种基本的地理数据模型:矢量和栅格。我们将介绍每种数据模型背后的理论以及它们在哪些学科中占主导地位,然后演示它们在R中的实现。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-11T10:29:20.000Z">
-<meta property="article:modified_time" content="2023-09-01T06:29:02.976Z">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012154114.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012200006.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012229579.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012235874.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012237207.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012239755.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012244405.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012247519.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012249418.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012249187.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012251893.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309020020296.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309020024034.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309020025749.png">
+<meta property="article:published_time" content="2023-08-11T04:37:20.000Z">
+<meta property="article:modified_time" content="2023-09-05T03:44:48.120Z">
 <meta property="article:author" content="SCY">
 <meta property="article:tag" content="R">
 <meta property="article:tag" content="Geocomputaion">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012154114.png">
 
 
 <link rel="canonical" href="https://ancao96.github.io/2023/08/11/2023-8-11-2-%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE/">
@@ -43,7 +58,7 @@
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ancao96.github.io/2023/08/11/2023-8-11-2-%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE/","path":"2023/08/11/2023-8-11-2-空间数据/","title":"(2)R中的地理数据"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>(2)R中的地理数据 | SCY SPACS</title>
+<title>(2)R中的地理数据 | SCY SPACE</title>
     
 
 
@@ -81,7 +96,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title">SCY SPACS</p>
+      <p class="site-title">SCY SPACE</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -96,7 +111,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">11</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -143,7 +158,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6-"><span class="nav-number">1.</span> <span class="nav-text"> 前提条件 {-}</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text"> 引言</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%A2%E9%87%8F%E6%95%B0%E6%8D%AE"><span class="nav-number">2.</span> <span class="nav-text">矢量数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%89%B9%E5%BE%81%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.1.</span> <span class="nav-text">简单特征介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E7%AE%80%E5%8D%95%E7%89%B9%E5%BE%81"><span class="nav-number">2.2.</span> <span class="nav-text">为什么是简单特征?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%9F%BA%E7%A1%80%E7%9F%A2%E9%87%8F%E5%9C%B0%E5%9B%BE"><span class="nav-number">2.3.</span> <span class="nav-text">绘制基础矢量地图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%A0%E4%BD%95%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.4.</span> <span class="nav-text">几何类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sf%E7%B1%BB"><span class="nav-number">2.5.</span> <span class="nav-text">sf类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%89%B9%E5%BE%81%E5%87%A0%E4%BD%95-sfg"><span class="nav-number">2.6.</span> <span class="nav-text">简单特征几何 (sfg)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%89%B9%E5%BE%81%E5%88%97-sfc"><span class="nav-number">2.7.</span> <span class="nav-text">简单特征列 (sfc)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sfheaders%E5%8C%85"><span class="nav-number">2.8.</span> <span class="nav-text">sfheaders包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#s2%E7%90%83%E9%9D%A2%E5%87%A0%E4%BD%95%E8%BF%90%E7%AE%97"><span class="nav-number">2.8.1.</span> <span class="nav-text">S2球面几何运算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%85%E6%A0%BC%E6%95%B0%E6%8D%AE"><span class="nav-number">3.</span> <span class="nav-text">栅格数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%A0%85%E6%A0%BC%E6%95%B0%E6%8D%AE%E7%9A%84r%E5%8C%85"><span class="nav-number">3.1.</span> <span class="nav-text">处理栅格数据的R包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#terra%E5%8C%85%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.2.</span> <span class="nav-text">terra包介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%9F%BA%E7%A1%80%E6%A0%85%E6%A0%BC%E5%9C%B0%E5%9B%BE"><span class="nav-number">3.3.</span> <span class="nav-text">绘制基础栅格地图</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -158,7 +173,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -213,12 +228,12 @@
         </span>
 
         <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-            <meta itemprop="name" content="SCY SPACS">
+            <meta itemprop="name" content="SCY SPACE">
             <meta itemprop="description" content="">
         </span>
 
         <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-            <meta itemprop="name" content="(2)R中的地理数据 | SCY SPACS">
+            <meta itemprop="name" content="(2)R中的地理数据 | SCY SPACE">
             <meta itemprop="description" content="">
         </span>
         <header class="post-header">
@@ -234,14 +249,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2023-08-11 18:29:20" itemprop="dateCreated datePublished" datetime="2023-08-11T18:29:20+08:00">2023-08-11</time>
+      <time title="创建时间：2023-08-11 12:37:20" itemprop="dateCreated datePublished" datetime="2023-08-11T12:37:20+08:00">2023-08-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-01 14:29:02" itemprop="dateModified" datetime="2023-09-01T14:29:02+08:00">2023-09-01</time>
+      <time title="修改时间：2023-09-05 11:44:48" itemprop="dateModified" datetime="2023-09-05T11:44:48+08:00">2023-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -285,14 +300,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>17k</span>
+      <span>16k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1:01</span>
+      <span>57 分钟</span>
     </span>
 </div>
 
@@ -302,54 +317,464 @@
         
         
         
-        <div class="post-body" itemprop="articleBody"><p>本章将简要介绍两种基本的地理数据模型\index{data models}:矢量和栅格。<br />
-我们将介绍每种数据模型背后的理论以及它们在哪些学科中占主导地位,然后演示它们在R中的实现。</p>
-<span id="more"></span>
-<h1 id="前提条件-"><a class="markdownIt-Anchor" href="#前提条件-"></a> 前提条件 {-}</h1>
-<!--rl-->
+        <div class="post-body" itemprop="articleBody"><p>本章将简要介绍两种基本的地理数据模型:矢量和栅格。我们将介绍每种数据模型背后的理论以及它们在哪些学科中占主导地位,然后演示它们在R中的实现。
+<span id="more"></span> # 前提条件 <!--rl--></p>
 <p>这是本书的第一章实践内容,因此它带有一些软件需求。</p>
 <!-- toDo: rl-->
 <!-- should we be that specific regarding the r version?-->
-<p>您需要能够访问安装了最新版本R的计算机(R<a target="_blank" rel="noopener" href="https://stat.ethz.ch/pipermail/r-announce/2022/000683.html">4.2.0</a> 或更高版本)。<br />
-我们建议不仅阅读文本内容,也<em>运行每章的代码</em>,以建立您的地理计算技能。</p>
-<p>为了跟踪您的学习过程,值得在计算机上新建一个文件夹来保存您的R脚本、输出和其他在学习《用R进行地理计算》过程中产生的东西。<br />
-您也可以<a target="_blank" rel="noopener" href="https://github.com/geocompx/geocompr/archive/refs/heads/main.zip">下载</a>或<a target="_blank" rel="noopener" href="https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository">克隆</a>本书背后的<a target="_blank" rel="noopener" href="https://github.com/geocompx/geocompr">源代码</a>以支持您的学习。<br />
-我们强烈建议在编写/运行/测试R代码时安装集成开发环境(IDE),如<a target="_blank" rel="noopener" href="https://posit.co/download/rstudio-desktop/#download">RStudio</a>(针对大多数人推荐)或<a target="_blank" rel="noopener" href="https://github.com/REditorSupport/vscode-R">VS Code</a>。<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
-<p>如果您是R的新手,我们建议您在深入学习《用R进行地理计算》代码之前,首先学习一些R入门资源,比如Garrett Grolemund的<a target="_blank" rel="noopener" href="https://rstudio-education.github.io/hopr/starting.html">《用R学习编程》</a>或Claudia Engel的<a target="_blank" rel="noopener" href="https://cengel.github.io/R-intro/">《R入门》</a> 。<br />
-组织好您的工作(例如使用RStudio项目),并给脚本起合理的名称,如<code>chapter-02-notes.R</code>,以记录您在学习过程中的代码。\index{R!pre-requisites}</p>
-<p>安装好环境后,是时候运行一些代码了!<br />
-除非您已经安装了这些包,否则第一件事是使用以下命令安装本章需要的基础R包:<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></p>
+<p>您需要能够访问安装了最新版本R的计算机(R<a
+target="_blank" rel="noopener" href="https://stat.ethz.ch/pipermail/r-announce/2022/000683.html">4.2.0</a>
+或更高版本)。我们建议不仅阅读文本内容,也<em>运行每章的代码</em>,以建立您的地理计算技能。</p>
+<p>为了跟踪您的学习过程,值得在计算机上新建一个文件夹来保存您的R脚本、输出和其他在学习《用R进行地理计算》过程中产生的东西。您也可以<a
+target="_blank" rel="noopener" href="https://github.com/geocompx/geocompr/archive/refs/heads/main.zip">下载</a>或<a
+target="_blank" rel="noopener" href="https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository">克隆</a>本书背后的<a
+target="_blank" rel="noopener" href="https://github.com/geocompx/geocompr">源代码</a>以支持您的学习。我们强烈建议在编写/运行/测试R代码时安装集成开发环境(IDE),如<a
+target="_blank" rel="noopener" href="https://posit.co/download/rstudio-desktop/#download">RStudio</a>(针对大多数人推荐)或<a
+target="_blank" rel="noopener" href="https://github.com/REditorSupport/vscode-R">VS Code</a>。<a
+href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a></p>
+<p>如果您是R的新手,我们建议您在深入学习《用R进行地理计算》代码之前,首先学习一些R入门资源,比如Garrett
+Grolemund的<a
+target="_blank" rel="noopener" href="https://rstudio-education.github.io/hopr/starting.html">《用R学习编程》</a>或Claudia
+Engel的<a target="_blank" rel="noopener" href="https://cengel.github.io/R-intro/">《R入门》</a>
+。组织好您的工作(例如使用RStudio项目),并给脚本起合理的名称,如<code>chapter-02-notes.R</code>,以记录您在学习过程中的代码。</p>
+<p>安装好环境后,是时候运行一些代码了!除非您已经安装了这些包,否则第一件事是使用以下命令安装本章需要的基础R包:<a
+href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">install.packages<span class="punctuation">(</span><span class="string">&quot;sf&quot;</span><span class="punctuation">)</span></span><br><span class="line">install.packages<span class="punctuation">(</span><span class="string">&quot;terra&quot;</span><span class="punctuation">)</span></span><br><span class="line">install.packages<span class="punctuation">(</span><span class="string">&quot;spData&quot;</span><span class="punctuation">)</span></span><br><span class="line">install.packages<span class="punctuation">(</span><span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">,</span> repos <span class="operator">=</span> <span class="string">&quot;https://nowosad.r-universe.dev&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>\index{R!installation}<br />
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">我们建议按照<a target="_blank" rel="noopener" href="https://cran.r-project.org/">CRAN</a>上的R安装说明进行操作。<br />
-如果您使用Mac或Linux,上述安装<strong>sf</strong>的命令第一次可能不会起作用。<br />
-这些操作系统 (OSs) 都有一些“系统需求”,在该包的<a target="_blank" rel="noopener" href="https://github.com/r-spatial/sf">README</a>中有描述。<br />
-网上可以找到其他特定操作系统的安装说明,包括<a target="_blank" rel="noopener" href="https://rtask.thinkr.fr/installation-of-r-4-2-on-ubuntu-22-04-lts-and-tips-for-spatial-packages/">rtask.thinkr.fr</a>网站上的文章<em>在Ubuntu 22.04.1 LTS上安装R 4.2及空间包提示</em>。</div>\EndKnitrBlock{rmdnote}</p>
-<p>复现本书第1部分内容所需的包可以通过以下命令安装:<code>remotes::install_github(&quot;geocompx/geocompkg&quot;)</code>。<br />
-这个命令使用<strong>remotes</strong>包中的<code>install_packages()</code>函数来安装托管在GitHub代码托管、版本控制和协作平台上的源代码。<br />
-以下命令将安装复现整本书所需的<strong>所有</strong>依赖项(警告:这可能需要几分钟):<br />
-<code>remotes::install_github(&quot;geocompx/geocompkg&quot;, dependencies = TRUE)</code><br />
-本章中提出的代码所需的包可以通过<code>library()</code>函数“加载”(技术上是附加)如下:</p>
+<blockquote>
+<p>📌我们建议按照<a
+target="_blank" rel="noopener" href="https://cran.r-project.org/">CRAN</a>上的R安装说明进行操作。
+如果您使用Mac或Linux,上述安装<strong>sf</strong>的命令第一次可能不会起作用。
+这些操作系统 (OSs) 都有一些“系统需求”,在该包的<a
+target="_blank" rel="noopener" href="https://github.com/r-spatial/sf">README</a>中有描述。
+网上可以找到其他特定操作系统的安装说明,包括<a
+target="_blank" rel="noopener" href="https://rtask.thinkr.fr/installation-of-r-4-2-on-ubuntu-22-04-lts-and-tips-for-spatial-packages/">rtask.thinkr.fr</a>网站上的文章<em>在Ubuntu
+22.04.1 LTS上安装R 4.2及空间包提示</em>。</p>
+</blockquote>
+<p>复现本书第1部分内容所需的包可以通过以下命令安装:<code>remotes::install_github("geocompx/geocompkg")</code>。这个命令使用<strong>remotes</strong>包中的<code>install_packages()</code>函数来安装托管在GitHub代码托管、版本控制和协作平台上的源代码。以下命令将安装复现整本书所需的<strong>所有</strong>依赖项(警告:这可能需要几分钟):<code>remotes::install_github("geocompx/geocompkg", dependencies = TRUE)</code>本章中提出的代码所需的包可以通过<code>library()</code>函数“加载”(技术上是附加)如下:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>sf<span class="punctuation">)</span>          <span class="comment"># classes and functions for vector data</span></span><br><span class="line"><span class="comment">#&gt; Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</span></span><br></pre></td></tr></table></figure>
 <p><code>library(sf)</code>的输出将报告该包正在使用的关键地理库(如GEOS)的版本,如第@ref(intro-sf)节所述。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>terra<span class="punctuation">)</span>      <span class="comment"># classes and functions for raster data</span></span><br></pre></td></tr></table></figure>
 <p>我们安装的其他R包包含了书中将使用的数据:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>spData<span class="punctuation">)</span>        <span class="comment"># load geographic data</span></span><br><span class="line"><span class="comment">#&gt; The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,</span></span><br><span class="line"><span class="comment">#&gt; which was just loaded, will retire in October 2023.</span></span><br><span class="line"><span class="comment">#&gt; Please refer to R-spatial evolution reports for details, especially</span></span><br><span class="line"><span class="comment">#&gt; https://r-spatial.org/r/2023/05/15/evolution4.html.</span></span><br><span class="line"><span class="comment">#&gt; It may be desirable to make the sf package available;</span></span><br><span class="line"><span class="comment">#&gt; package maintainers should consider adding sf to Suggests:.</span></span><br><span class="line"><span class="comment">#&gt; The sp package is now running under evolution status 2</span></span><br><span class="line"><span class="comment">#&gt;      (status 2 uses the sf package in place of rgdal)</span></span><br><span class="line">library<span class="punctuation">(</span>spDataLarge<span class="punctuation">)</span>   <span class="comment"># load larger geographic data</span></span><br></pre></td></tr></table></figure>
-<h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
-<hr class="footnotes-sep" />
-<section class="footnotes">
-<ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p><br />
-我们建议使用<a target="_blank" rel="noopener" href="https://r4ds.had.co.nz/workflow-projects.html">RStudio项目</a>、<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/editor/workspaces">VS Code工作区</a>或类似系统来管理项目。<br />
-通过RStudio中的R控制台,可以使用<strong>rstudioapi</strong>包快速完成此操作。<br />
-例如,使用以下命令在主目录中打开一个名为“geocompr-learning”的新项目:<code>rstudioapi::openProject(&quot;~/geocompr-learning&quot;)</code>。<br />
- <a href="#fnref1" class="footnote-backref">↩︎</a></p>
-</li>
-<li id="fn2" class="footnote-item"><p><br />
-<strong>spDataLarge</strong> 不存在于CRAN上,意味着必须通过<em>r-universe</em>或以下命令安装:<code>remotes::install_github(&quot;Nowosad/spDataLarge&quot;)</code>。 <a href="#fnref2" class="footnote-backref">↩︎</a></p>
-</li>
+<h1 id="引言">引言</h1>
+<p>本章将简要介绍两种基本的地理数据模型:矢量和栅格。我们将介绍每种数据模型背后的理论以及它们在哪些学科中占主导地位,然后演示它们在R中的实现。</p>
+<p><em>矢量数据模型</em>使用点、线和多边形来表示世界。这些要素具有明确定义的边界,这意味着矢量数据集通常具有很高的精度(但不一定是准确性,我们将在<em>单位</em>节中看到)。<em>栅格数据模型</em>将表面划分为大小恒定的单元格。栅格数据集是
+web
+地图中使用的背景图像的基础,自航空摄影和卫星遥感设备起源以来,它一直是地理数据的重要来源。栅格将空间特定特征聚合到给定分辨率,这意味着它们在空间上是一致的并且可扩展的(许多全球栅格数据集都是可用的)。</p>
+<p>使用哪种模型呢?答案可能取决于您的应用领域:</p>
+<ul>
+<li>矢量数据在社会科学中占主导地位,因为人类定居点往往有明确的边界</li>
+<li>栅格在许多环境科学中占主导地位,因为它们依赖遥感数据</li>
+</ul>
+<p>在一些领域中两者有很大的重叠,矢量和栅格数据集可以一起使用:例如,生态学家和人口统计学家通常同时使用矢量和栅格数据。此外,可以在两种形式之间进行转换。无论您的工作更多地使用矢量数据集还是栅格数据集,在使用它们之前理解其基本数据模型都是值得的,这将在后续章节中讨论。本书使用
+<strong>sf</strong> 和 <strong>terra</strong>
+包分别处理矢量数据和栅格数据集。</p>
+<h1 id="矢量数据">矢量数据</h1>
+<blockquote>
+<p>📌在本书中使用“矢量”一词时要注意它有两层含义: 地理矢量数据和 R
+中的<code>vector</code>类(注意<code>等宽字体</code>字体)。
+前者是一个数据模型,后者是一个R类,就像 <code>data.frame</code> 和
+<code>matrix</code>。
+但两者之间还是有联系的:地理矢量数据模型的核心空间坐标可以用R中的<code>vector</code>对象来表示。
+所以在阅读时要注意上下文,区分这两层含义。一般来说,没有特别说明时,“矢量”指的都是地理矢量数据模型。</p>
+</blockquote>
+<p>地理矢量数据模型基于坐标参考系统(CRS)内的点。点可以代表独立的要素(例如公交车站的位置),也可以链接在一起形成更复杂的几何形状,如线和多边形。大多数点几何只包含两个维度(三维坐标参考系统包含额外的<span
+class="math inline">\(z\)</span>值,通常代表海拔高度)。</p>
+<p>在这种系统中,例如伦敦可以用坐标<code>c(-0.1, 51.5)</code>表示。这意味着它相对于原点向东-0.1度,向北51.5度。在这种情况下,原点位于地理坐标系(“经纬度”)中的0度经线(本初子午线)和0度纬线(赤道)上。在投影坐标系中,同一点也可以用“东向/北向”值为<code>c(530000,180000)</code>来概括表示,在<a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Ordnance_Survey_National_Grid">英国国家网格</a>中,这意味着伦敦位于CRS<span
+class="math inline">\(原点\)</span>以<em>东</em>530公里,以<em>北</em>180公里。这可以从视觉上进行验证:与表示伦敦的点略微相隔超过5个“框”——由宽度为100公里的灰色网格线划定的正方形区域——从原点。</p>
+<p>英国国家网格原点位于西南半岛以外的海域,以确保英国内陆的大多数位置都具有正的东向和北向值。<a
+href="#fn3" class="footnote-ref" id="fnref3"
+role="doc-noteref"><sup>3</sup></a>关于坐标参考系统的更多内容,将在后面章节详细描述,但就本节而言,知道这些坐标原理就足够了。
+<img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012154114.png"
+alt="Illustration of vector (point) data in which location of London (the red X) is represented with reference to an origin (the blue circle). The left plot represents a geographic CRS with an origin at 0° longitude and latitude. The right plot represents a projected CRS with an origin located in the sea west of the South West Peninsula." />
+矢量（点）数据的示例，其中伦敦的位置（红色X）相对于一个原点（蓝色圆圈）进行了表示。左图代表了一个地理坐标参照系统（CRS），其原点位于0°经度和纬度。右图代表了一个投影坐标参照系统（CRS），其原点位于西南半岛西海域。</p>
+<p><strong>sf</strong>为地理矢量数据提供了类,并为地理计算的重要底层库提供了一致的命令行接口:</p>
+<ul>
+<li><p><a
+target="_blank" rel="noopener" href="https://gdal.org/">GDAL</a>,用于读写和操作各种地理数据格式。</p></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://proj.org/">PROJ</a>,一个强大的坐标系统转换库。</p></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://libgeos.org/">GEOS</a>,一个平面几何引擎,用于计算缓冲区和投影坐标系数据的质心等操作。</p></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://s2geometry.io/">S2</a>,由Google开发的用C++编写的球面几何引擎,通过<a
+target="_blank" rel="noopener" href="https://r-spatial.github.io/s2/"><strong>s2</strong></a>包。
+<!-- - [liblwgeom](https://github.com/postgis/postgis/tree/master/liblwgeom), a geometry engine used by PostGIS, via the [**lwgeom**](https://r-spatial.github.io/lwgeom/) package --></p></li>
+</ul>
+<p>这些接口的信息会在<strong>sf</strong>包首次加载时打印出来:在本章开头<code>library(sf)</code>命令下方出现的消息告诉我们连接的GEOS、GDAL和PROJ库的版本(这在不同计算机和时间上有所不同),以及是否开启了S2接口。当今我们认为理所应当,但是只有与不同地理库的紧密集成,才使R中的可重现地理计算成为可能。</p>
+<p><strong>sf</strong>的一个漂亮功能是您可以更改在未投影数据上使用的默认几何引擎:使用<code>sf::sf_use_s2(FALSE)</code>命令可以“关闭”S2,这意味着所有几何操作(包括未投影数据上的几何操作)将默认使用平面几何引擎GEOS，平面几何基于二维空间。平面几何引擎(如GEOS)假设“平面”(投影)坐标,而球面几何引擎(如S2)假设未投影(经纬度)坐标。</p>
+<p>本节将介绍<strong>sf</strong>类,为后续章节做准备。</p>
+<h2 id="简单特征介绍">简单特征介绍</h2>
+<p>Simple Features 是一个由开放地理空间联盟（OGC）开发和认可的<a
+target="_blank" rel="noopener" href="http://portal.opengeospatial.org/files/?artifact_id=25355">开放标准</a>，这是一个非营利组织，我们将在后续章节中再次讨论其活动。Simple
+Features 是一个分层数据模型，代表了各种几何类型。规范支持的 18
+种几何类型中，只有 7 种在大多数地理研究中被使用； 这些核心几何类型得到了
+R 包 <strong>sf</strong> <span class="citation"
+data-cites="pebesma_simple_2018">[@pebesma_simple_2018]</span>的完全支持。<a
+href="#fn4" class="footnote-ref" id="fnref4"
+role="doc-noteref"><sup>4</sup></a></p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012200006.png"
+alt="Simple feature types fully supported by sf." /> Simple feature
+types fully supported by sf.</p>
+<p><strong>sf</strong>可以表示所有常见的矢量几何类型（栅格数据类别不受<strong>sf</strong>支持）：点、线、多边形及其各自的'multi'版本（将同一类型的特征组合成单一特征）。<strong>sf</strong>
+还支持几何集合，可以在单一对象中包含多种几何类型。<strong>sf</strong>
+提供了以前在三个包中提供的相同（甚至更多）功能—— <strong>sp</strong>
+用于数据类别 <span class="citation"
+data-cites="R-sp">[@R-sp]</span>，<strong>rgdal</strong>用于通过接口到GDAL和PROJ进行数据读写<span
+class="citation"
+data-cites="R-rgdal">[@R-rgdal]</span>，以及<strong>rgeos</strong>用于通过接口到GEOS进行空间操作<span
+class="citation" data-cites="R-rgeos">[@R-rgeos]</span>。</p>
+<p>为了重申第一章的信息，地理R包有着与低级库接口的悠久历史，而<strong>sf</strong>通过统一的接口延续了这一传统，该接口适用于GEOS的近期版本进行几何操作，GDAL库用于读取和写入地理数据文件，以及PROJ库用于表示和转换投影坐标参考系统。</p>
+<!-- **s2** functions have replaced **lwgeom** ones (Bivand 2021). -->
+<!-- and **lwgeom**, **sf** also has an inter to PostGIS's [`liblwgeom`](https://github.com/postgis/postgis/tree/master/liblwgeom) library  -->
+<p>通过对 Google's 球面几何库 <a
+target="_blank" rel="noopener" href="https://s2geometry.io/"><code>s2</code></a>的R接口，<strong>sf</strong>还能快速且准确地进行“在非平面几何上的测量和操作”<span
+class="citation"
+data-cites="bivand_progress_2021">[@bivand_progress_2021]</span>。自从
+1.0.0 版的<strong>sf</strong>在<a
+target="_blank" rel="noopener" href="https://cran.r-project.org/src/contrib/Archive/sf/">2021年6月</a>发布以来，<strong>s2</strong>的功能现在默认用于具有地理（经度/纬度）坐标系统的几何体，这是<strong>sf</strong>的一个独特特性，与仅支持用于几何操作的GEOS的空间库不同，例如Python包<a
+href="geopandas/geopandas/issues/2098">GeoPandas</a>。我们将在后续章节中讨论<strong>s2</strong>。</p>
+<!-- Todo: link to them, e.g. (RL 2021-11) -->
+<!-- See sections \@ref(s2) and \@ref(buffers) for further details. -->
+<p><strong>sf</strong>能够将多个强大的地理计算库整合到一个框架中，这是一个值得注意的成就，它降低了使用高性能库进行可重复地理数据分析的“准入门槛”。<strong>sf</strong>的功能在其网站<a
+target="_blank" rel="noopener" href="https://r-spatial.github.io/sf/index.html">r-spatial.github.io/sf/</a>
+上有详细的文档，包含7篇专题文章。这些可以按如下方式离线查看：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vignette<span class="punctuation">(</span>package <span class="operator">=</span> <span class="string">&quot;sf&quot;</span><span class="punctuation">)</span> <span class="comment"># see which vignettes are available</span></span><br><span class="line">vignette<span class="punctuation">(</span><span class="string">&quot;sf1&quot;</span><span class="punctuation">)</span>          <span class="comment"># an introduction to the package</span></span><br></pre></td></tr></table></figure>
+<p>正如第一篇专题文章解释的，R中的简单特征对象存储在数据框中，地理数据占据一个特殊的列，通常命名为'geom'或'geometry'。我们将使用本章开始时加载的<strong>spData</strong>提供的<code>world</code>数据集，来展示什么是<code>sf</code>对象以及它们是如何工作的。<code>world</code>是一个'<code>sf</code>数据框'，包含空间和属性列，这些列的名称由函数<code>names()</code>返回（在本例中，最后一列包含地理信息）：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">class</span><span class="punctuation">(</span>world<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;sf&quot;         &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span><br><span class="line"><span class="built_in">names</span><span class="punctuation">(</span>world<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt;  [1] &quot;iso_a2&quot;    &quot;name_long&quot; &quot;continent&quot; &quot;region_un&quot; &quot;subregion&quot; &quot;type&quot;     </span></span><br><span class="line"><span class="comment">#&gt;  [7] &quot;area_km2&quot;  &quot;pop&quot;       &quot;lifeExp&quot;   &quot;gdpPercap&quot; &quot;geom&quot;</span></span><br></pre></td></tr></table></figure>
+<p>这个<code>geom</code>列中的内容赋予了<code>sf</code>对象它们的空间能力：<code>world$geom</code>是一个'<a
+target="_blank" rel="noopener" href="https://adv-r.hadley.nz/vectors-chap.html#list-columns">list
+column</a>'，其中包含了国家多边形的所有坐标。<code>sf</code>对象可以通过函数<code>plot()</code>快速绘制。尽管<code>plot()</code>是R默认安装（基础
+R）的一部分，它是一个 <a
+target="_blank" rel="noopener" href="https://adv-r.hadley.nz/s3.html#s3-methods"><em>generic</em></a>
+函数，可被其他包扩展。<strong>sf</strong>包含非导出的（大多数时间对用户隐藏的）<code>plot.sf()</code>函数，这是在以下命令中幕后调用的，该命令创建了下图。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot<span class="punctuation">(</span>world<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012229579.png" />
+A spatial plot of the world using the sf package, with a facet for each
+attribute.</p>
+<p>注意，与大多数GIS程序默认为地理对象创建单一地图不同，对<code>sf</code>对象进行<code>plot()</code>操作会导致数据集中每个变量都有一个地图。这种行为在探索不同变量的空间分布方面可能很有用，并将在后面章节进一步讨论。</p>
+<p>更广泛地说，将地理对象视为具有空间能力的常规数据框有很多优点，特别是如果您已经习惯于使用数据框。例如，常用的<code>summary()</code>函数提供了<code>world</code>对象内变量的有用概览。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">summary<span class="punctuation">(</span>world<span class="punctuation">[</span><span class="string">&quot;lifeExp&quot;</span><span class="punctuation">]</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt;     lifeExp                geom    </span></span><br><span class="line"><span class="comment">#&gt;  Min.   :50.6   MULTIPOLYGON :177  </span></span><br><span class="line"><span class="comment">#&gt;  1st Qu.:65.0   epsg:4326    :  0  </span></span><br><span class="line"><span class="comment">#&gt;  Median :72.9   +proj=long...:  0  </span></span><br><span class="line"><span class="comment">#&gt;  Mean   :70.9                      </span></span><br><span class="line"><span class="comment">#&gt;  3rd Qu.:76.8                      </span></span><br><span class="line"><span class="comment">#&gt;  Max.   :83.6                      </span></span><br><span class="line"><span class="comment">#&gt;  NA&#x27;s   :10</span></span><br></pre></td></tr></table></figure>
+<p>尽管我们只为<code>summary()</code>命令选择了一个变量，它还输出了关于几何的报告。这演示了<strong>sf</strong>对象的几何列的“粘性”行为，意味着除非用户故意移除它们，否则几何体将被保留，正如我们将在后面部分看到的。
+该结果提供了<code>world</code>中包含的非空间和空间数据的快速总结：所有国家的平均预期寿命为71岁（范围从不到51岁到超过83岁，中位数为73岁）。</p>
+<blockquote>
+<p>📌上面摘要输出中的<code>MULTIPOLYGON</code>一词指的是<code>world</code>对象中特征（国家）的几何类型。对于像印度尼西亚和希腊这样有岛屿的国家，这种表示是必要的。其他几何类型在
+@ref(geometry) 部分有描述。</p>
+</blockquote>
+<p>这个简单特征对象的基础行为和内容值得更深入地了解，这可以视为一个“<strong>s</strong>patial
+data <strong>f</strong>rame（空间数据框）”。</p>
+<p><code>sf</code>对象很容易进行子集操作：下面的代码展示了如何返回一个仅包含<code>world</code>对象的前两行和前三列的对象。输出显示了与常规<code>data.frame</code>相比有两个主要差异：包含额外的地理元数据（<code>Geometry type</code>、<code>Dimension</code>、<code>Bounding box</code>以及以<code>Geodetic CRS</code>开始的线上的坐标参考系统信息），以及存在一个名为<code>geom</code>的'几何列'。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">world_mini <span class="operator">=</span> world<span class="punctuation">[</span><span class="number">1</span><span class="operator">:</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">1</span><span class="operator">:</span><span class="number">3</span><span class="punctuation">]</span></span><br><span class="line">world_mini</span><br><span class="line"><span class="comment">#&gt; Simple feature collection with 2 features and 3 fields</span></span><br><span class="line"><span class="comment">#&gt; Geometry type: MULTIPOLYGON</span></span><br><span class="line"><span class="comment">#&gt; Dimension:     XY</span></span><br><span class="line"><span class="comment">#&gt; Bounding box:  xmin: -180 ymin: -18.3 xmax: 180 ymax: -0.95</span></span><br><span class="line"><span class="comment">#&gt; Geodetic CRS:  WGS 84</span></span><br><span class="line"><span class="comment">#&gt; # A tibble: 2 × 4</span></span><br><span class="line"><span class="comment">#&gt;   iso_a2 name_long continent                                                geom</span></span><br><span class="line"><span class="comment">#&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;                                      &lt;MULTIPOLYGON [°]&gt;</span></span><br><span class="line"><span class="comment">#&gt; 1 FJ     Fiji      Oceania   (((-180 -16.6, -180 -16.5, -180 -16, -180 -16.1, -…</span></span><br><span class="line"><span class="comment">#&gt; 2 TZ     Tanzania  Africa    (((33.9 -0.95, 31.9 -1.03, 30.8 -1.01, 30.4 -1.13,…</span></span><br></pre></td></tr></table></figure>
+<p>所有这些可能看起来相当复杂，尤其是对于一个“简单”的类系统！然而，用这种方式组织事物并使用<strong>sf</strong>处理矢量地理数据集是有充分理由的。</p>
+<p>在描述 <strong>sf</strong> 包支持的每一种几何类型之前，有必要先了解
+<code>sf</code>
+对象的基础组成元素。<em>sf</em>节展示了简单特征对象是数据框，具有特殊的几何列。这些空间列通常被称为
+<code>geom</code> 或 <code>geometry</code>：<code>world$geom</code>
+是指上文中描述的 <code>world</code> 对象中的空间元素。这些几何列是
+<code>sfc</code> 类的“列表列”（见节@ref(sfc)）。反过来，<code>sfc</code>
+对象由一个或多个 <code>sfg</code>
+类的对象组成：我们在<em>简单特征几何</em>中描述的简单特征几何。</p>
+<p>要理解简单特征的空间组件是如何工作的，了解简单特征几何体是至关重要的。因此，在继续描述如何用基于<code>sfg</code>和<code>sfc</code>对象的<code>sf</code>对象在R中表示这些几何体之前，我们将在节@ref(geometry)中介绍当前支持的每一种简单特征几何类型。</p>
+<blockquote>
+<p>📌前面的代码块使用 <code>=</code> 在命令
+<code>world_mini = world[1:2, 1:3]</code> 中创建了一个名为
+<code>world_mini</code> 的新对象。 这被称为赋值。
+实现相同结果的等价命令是 <code>world_mini &lt;- world[1:2, 1:3]</code>。
+尽管“箭头赋值”更为常用，我们使用“等号赋值”，因为它打字稍微快一些，而且由于与常用语言如
+Python 和 JavaScript 的兼容性，更容易教授。
+使用哪一个主要是个人偏好的问题，只要你保持一致（像
+<strong>styler</strong> 这样的包可以用来改变风格）。</p>
+</blockquote>
+<h2 id="为什么是简单特征">为什么是简单特征?</h2>
+<p>简单特征（Simple features）是一种得到广泛支持的数据模型，它是包括
+QGIS 和 PostGIS 在内的许多 GIS
+应用程序中的数据结构基础。这一模型的一个主要优点是，使用这种数据模型确保了你的工作可以在其他设置中进行交叉转移，例如从空间数据库导入和导出。</p>
+<p>从R的角度来看，一个更具体的问题是“为什么要使用<strong>sf</strong>包，而<strong>sp</strong>包已经经过了反复测试”？有很多原因（与简单特征模型的优点有关）：</p>
+<ul>
+<li>快速地读取和写入数据</li>
+<li>提升了绘图性能</li>
+<li><strong>sf</strong> 对象在大多数操作中可以被视为数据框</li>
+<li><strong>sf</strong> 函数名相对一致和直观（所有函数名都以
+<code>st_</code> 开头）</li>
+<li><strong>sf</strong> 函数可以与 <code>|&gt;</code>
+操作符结合使用，并且与 <a target="_blank" rel="noopener" href="http://tidyverse.org/">tidyverse</a> 的
+R 包集合非常兼容。</li>
+</ul>
+<p><strong>sf</strong> 对 <strong>tidyverse</strong> 包的支持通过
+<code>read_sf()</code>
+函数体现，这是一个在后面章节中详细介绍的用于导入地理矢量数据的函数。与返回存储在基础
+R <code>data.frame</code> 中的属性的函数 <code>st_read()</code>
+不同（该函数发出详细的消息，在下面的代码块中未显示），<code>read_sf()</code>
+会无声地返回数据作为一个 <strong>tidyverse</strong>
+<code>tibble</code>。下面展示了这一点：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">world_dfr <span class="operator">=</span> st_read<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;shapes/world.shp&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spData&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Reading layer `world&#x27; from data source </span></span><br><span class="line"><span class="comment">#&gt;   `/Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/spData/shapes/world.shp&#x27; </span></span><br><span class="line"><span class="comment">#&gt;   using driver `ESRI Shapefile&#x27;</span></span><br><span class="line"><span class="comment">#&gt; Simple feature collection with 177 features and 10 fields</span></span><br><span class="line"><span class="comment">#&gt; Geometry type: MULTIPOLYGON</span></span><br><span class="line"><span class="comment">#&gt; Dimension:     XY</span></span><br><span class="line"><span class="comment">#&gt; Bounding box:  xmin: -180 ymin: -89.9 xmax: 180 ymax: 83.6</span></span><br><span class="line"><span class="comment">#&gt; Geodetic CRS:  WGS 84</span></span><br><span class="line">world_tbl <span class="operator">=</span> read_sf<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;shapes/world.shp&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spData&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line"><span class="built_in">class</span><span class="punctuation">(</span>world_dfr<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;sf&quot;         &quot;data.frame&quot;</span></span><br><span class="line"><span class="built_in">class</span><span class="punctuation">(</span>world_tbl<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;sf&quot;         &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span><br></pre></td></tr></table></figure>
+<p>该章节展示了如何使用<strong>tidyverse</strong>函数操作<code>sf</code>对象，<strong>sf</strong>现在是R中进行空间矢量数据分析的首选包。<strong>spatstat</strong>是一个提供众多空间统计函数的软件包生态系统，而<strong>terra</strong>也有矢量地理数据类，但它们在处理矢量数据方面都没有达到与<strong>sf</strong>相同的普及程度。许多受欢迎的包都基于<strong>sf</strong>构建，正如在上一章节中所示，其在每天的下载次数方面的流行程度正在上升。从传统包<strong>rgeos</strong>和<strong>rgdal</strong>迁移到已建立的包和工作流程需要时间<span
+class="citation"
+data-cites="bivand_progress_2021">[@bivand_progress_2021]</span>，但当它们被加载时，打印出的信息指出它们“将在2023年底之前被退役”赋予了这个过程一种紧迫感。这意味着任何仍在使用这些包的人都应该“<strong>尽早转向使用
+GDAL 和 PROJ 的 sf/stars/terra
+函数</strong>”。换句话说，<strong>sf</strong>是对未来有保证的，而<strong>sp</strong>则不是。对于依赖传统类系统的工作流程，可以按照如下方式将<code>sf</code>对象从<strong>sp</strong>包的<code>Spatial</code>类中转换和转换为：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>sp<span class="punctuation">)</span></span><br><span class="line">world_sp <span class="operator">=</span> as<span class="punctuation">(</span>world<span class="punctuation">,</span> <span class="string">&quot;Spatial&quot;</span><span class="punctuation">)</span> <span class="comment"># from an sf object to sp</span></span><br><span class="line"><span class="comment"># sp functions ...</span></span><br><span class="line">world_sf <span class="operator">=</span> st_as_sf<span class="punctuation">(</span>world_sp<span class="punctuation">)</span>           <span class="comment"># from sp to sf</span></span><br></pre></td></tr></table></figure>
+<h2 id="绘制基础矢量地图">绘制基础矢量地图</h2>
+<p>在<strong>sf</strong>中，使用<code>plot()</code>创建基础地图。默认情况下，这会创建一个多面板图，每个对象的变量各对应一个子图，如图@ref(fig:sfplot)的左侧面板所示。如果要绘制的对象只有一个变量，将生成一个带有连续颜色的图例或“键”（见右侧面板）。颜色也可以通过<code>col =</code>来设置，尽管这样做不会创建一个连续的调色板或图例。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plot<span class="punctuation">(</span>world<span class="punctuation">[</span><span class="number">3</span><span class="operator">:</span><span class="number">6</span><span class="punctuation">]</span><span class="punctuation">)</span></span><br><span class="line">plot<span class="punctuation">(</span>world<span class="punctuation">[</span><span class="string">&quot;pop&quot;</span><span class="punctuation">]</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012235874.png" />
+Plotting with sf, with multiple variables (left) and a single variable
+(right).</p>
+<p>通过设置<code>add = TRUE</code>，图层会被添加到现有的图像上。<a
+href="#fn5" class="footnote-ref" id="fnref5"
+role="doc-noteref"><sup>5</sup></a>为了演示这一点，并提供关于属性和空间操作（涉及属性和空间数据操作）内容的洞见，以下代码块过滤出亚洲的国家，并将它们合并为一个单一的特征：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">world_asia <span class="operator">=</span> world<span class="punctuation">[</span>world<span class="operator">$</span>continent <span class="operator">==</span> <span class="string">&quot;Asia&quot;</span><span class="punctuation">,</span> <span class="punctuation">]</span></span><br><span class="line">asia <span class="operator">=</span> st_union<span class="punctuation">(</span>world_asia<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>现在我们可以在世界地图上绘制亚洲大陆。请注意，第一个图只能有一个面板，这样<code>add = TRUE</code>才能起作用。如果第一个图有一个图例，必须使用<code>reset = FALSE</code>：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plot<span class="punctuation">(</span>world<span class="punctuation">[</span><span class="string">&quot;pop&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span> reset <span class="operator">=</span> <span class="literal">FALSE</span><span class="punctuation">)</span></span><br><span class="line">plot<span class="punctuation">(</span>asia<span class="punctuation">,</span> add <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">,</span> col <span class="operator">=</span> <span class="string">&quot;red&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012237207.png" />
+A plot of Asia added as a layer on top of countries worldwide.</p>
+<p>通过这种方式添加图层可以用于验证图层之间的地理对应关系：<code>plot()</code>函数执行速度快，需要的代码行数少，但不会创建具有广泛选项的交互式地图。对于更高级的地图制作，我们推荐使用专用的可视化包，如
+<strong>tmap</strong>。</p>
+<p>有多种方式可以通过<strong>sf</strong>的<code>plot()</code>方法修改地图。因为<strong>sf</strong>扩展了基础R绘图方法，<code>plot()</code>的参数（如<code>main =</code>，用于指定地图的标题）也适用于<code>sf</code>对象（参见<code>?graphics::plot</code>和<code>?par</code>）。<a
+href="#fn6" class="footnote-ref" id="fnref6"
+role="doc-noteref"><sup>6</sup></a></p>
+<p>下图通过在世界地图上叠加圆圈来展示这种灵活性，这些圆圈的直径（由<code>cex =</code>设置）代表各国的人口。
+这个图的未投影版本可以用以下命令创建（参见本章末尾的练习和脚本<a
+target="_blank" rel="noopener" href="https://github.com/geocompx/geocompr/blob/main/code/02-contpop.R"><code>02-contplot.R</code></a>，以复现图：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plot<span class="punctuation">(</span>world<span class="punctuation">[</span><span class="string">&quot;continent&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span> reset <span class="operator">=</span> <span class="literal">FALSE</span><span class="punctuation">)</span></span><br><span class="line">cex <span class="operator">=</span> <span class="built_in">sqrt</span><span class="punctuation">(</span>world<span class="operator">$</span>pop<span class="punctuation">)</span> <span class="operator">/</span> <span class="number">10000</span></span><br><span class="line">world_cents <span class="operator">=</span> st_centroid<span class="punctuation">(</span>world<span class="punctuation">,</span> of_largest <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br><span class="line">plot<span class="punctuation">(</span>st_geometry<span class="punctuation">(</span>world_cents<span class="punctuation">)</span><span class="punctuation">,</span> add <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">,</span> cex <span class="operator">=</span> cex<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012239755.png" />
+Country continents (represented by fill color) and 2015 populations
+(represented by circles, with area proportional to population).</p>
+<p>上面的代码使用了函数<code>st_centroid()</code>来将一种几何类型（多边形）转换为另一种（点）（参见第@ref(geometry-operations)章），其美学效果通过<code>cex</code>参数进行变化。</p>
+<p><strong>sf</strong>的绘图方法也有针对地理数据的特定参数。例如，<code>expandBB</code>可以用于在上下文中绘制一个<code>sf</code>对象。它接受一个长度为四的数值向量，相对于零在以下顺序扩展绘图的边界框：底部、左侧、顶部、右侧。这用于在下面的代码块中绘制印度及其庞大的亚洲邻国的上下文，特别强调了东边的中国，该代码块生成了图（有关在绘图中添加文本的练习见下文）：<a
+href="#fn7" class="footnote-ref" id="fnref7"
+role="doc-noteref"><sup>7</sup></a></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">india <span class="operator">=</span> world<span class="punctuation">[</span>world<span class="operator">$</span>name_long <span class="operator">==</span> <span class="string">&quot;India&quot;</span><span class="punctuation">,</span> <span class="punctuation">]</span></span><br><span class="line">plot<span class="punctuation">(</span>st_geometry<span class="punctuation">(</span>india<span class="punctuation">)</span><span class="punctuation">,</span> expandBB <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">0.2</span><span class="punctuation">,</span> <span class="number">0.1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span><span class="punctuation">,</span> col <span class="operator">=</span> <span class="string">&quot;gray&quot;</span><span class="punctuation">,</span> lwd <span class="operator">=</span> <span class="number">3</span><span class="punctuation">)</span></span><br><span class="line">plot<span class="punctuation">(</span>st_geometry<span class="punctuation">(</span>world_asia<span class="punctuation">)</span><span class="punctuation">,</span> add <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012244405.png" />India
+in context, demonstrating the expandBB argument.</p>
+<p>注意在绘图代码中使用<code>lwd</code>来强调印度。了解用于表示各种几何类型的其他可视化技术，这是下一节的主题。</p>
+<h2 id="几何类型">几何类型</h2>
+<p>几何体是简单特征（Simple
+Features）的基础构建块。在R中的简单特征可以采用由<strong>sf</strong>包支持的18种几何类型之一。在本章中，我们将重点介绍七种最常用的类型：<code>POINT</code>、<code>LINESTRING</code>、<code>POLYGON</code>、<code>MULTIPOINT</code>、<code>MULTILINESTRING</code>、<code>MULTIPOLYGON</code>
+和 <code>GEOMETRYCOLLECTION</code>。在<a
+target="_blank" rel="noopener" href="http://postgis.net/docs/using_postgis_dbmanagement.html">PostGIS手册</a>中找到可能的特征类型的完整列表。</p>
+<p>通常，Well-Known Binary（WKB）或Well-Known
+Text（WKT）是简单特征几何体的标准编码。WKB表示通常是计算机容易读取的十六进制字符串。这就是为什么GIS和空间数据库使用WKB来传输和存储几何对象。另一方面，WKT是简单特征的人类可读文本标记描述。两种格式都是可交换的，如果我们展示其中一个，我们自然会选择WKT表示。</p>
+<p>每种几何类型的基础是点。点只是2D、3D或4D空间中的一个坐标（有关更多信息，请参见<code>vignette("sf1")</code>）：</p>
+<ul>
+<li><code>POINT (5 2)</code></li>
+</ul>
+<p>线串是一系列点与直线相连的序列。</p>
+<ul>
+<li><code>LINESTRING (1 5, 4 4, 4 1, 2 2, 3 2)</code></li>
+</ul>
+<p>多边形是形成一个封闭、不相交环的点序列。封闭意味着多边形的第一个点和最后一个点具有相同的坐标。根据定义，一个多边形有一个外部边界（外环）并且可以有零个或多个内部边界（内环），也称为孔。例如，带有一个孔的多边形将是<code>POLYGON ((1 5, 2 2, 4 1, 4 4, 1 5), (2 4, 3 4, 3 3, 2 3, 2 4))</code>]</p>
+<ul>
+<li>没有孔的多边形：<code>POLYGON ((1 5, 2 2, 4 1, 4 4, 1 5))</code></li>
+</ul>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012247519.png" />
+Illustration of point, linestring and polygon geometries.</p>
+<p>到目前为止，我们创建的几何体每个特征只包含一个几何实体。<strong>sf</strong>也允许在单一特征内存在单一类型的多个几何体，即每种几何类型的“多”版本：</p>
+<ul>
+<li>多点：<code>MULTIPOINT (5 2, 1 3, 3 4, 3 2)</code></li>
+<li>多线串：<code>MULTILINESTRING ((1 5, 4 4, 4 1, 2 2, 3 2), (1 2, 2 4))</code></li>
+<li>多多边形：<code>MULTIPOLYGON (((1 5, 2 2, 4 1, 4 4, 1 5), (0 2, 1 2, 1 3, 0 3, 0 2)))</code></li>
+</ul>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012249418.png" />
+Illustration of multi* geometries.</p>
+<p>最后，几何集合可以包含任何组合的几何体，包括（多）点和线串：</p>
+<ul>
+<li>几何集合：<code>GEOMETRYCOLLECTION (MULTIPOINT (5 2, 1 3, 3 4, 3 2), LINESTRING (1 5, 4 4, 4 1, 2 2, 3 2))</code></li>
+</ul>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012249187.png" />
+Illustration of a geometry collection.</p>
+<h2 id="sf类">sf类</h2>
+<p>简单特征由两个主要部分组成：几何体和非地理属性。下图展示了如何创建一个sf对象——几何体来自一个<code>sfc</code>对象，而属性则取自<code>data.frame</code>或<code>tibble</code>。要了解更多关于从零开始构建sf几何体的信息，请阅读以下章节<em>简单特征几何</em>和<em>简单几何列</em>。</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309012251893.png" />
+Building blocks of sf objects.</p>
+<p>非地理属性代表特征的名称或其他属性，如测量值、组别和其他事项。为了说明属性，我们将表示2017年6月21日在伦敦的25°C温度。这个例子包含一个几何体（坐标），以及三个具有三个不同类别（地点名称、温度和日期）的属性。<a
+href="#fn8" class="footnote-ref" id="fnref8"
+role="doc-noteref"><sup>8</sup></a><code>sf</code>类的对象通过将属性（<code>data.frame</code>）与简单特征几何列（<code>sfc</code>）组合来表示这样的数据。它们是通过下面所示的<code>st_sf()</code>创建的，该函数创建了上面描述的伦敦示例：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">lnd_point <span class="operator">=</span> st_point<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">0.1</span><span class="punctuation">,</span> <span class="number">51.5</span><span class="punctuation">)</span><span class="punctuation">)</span>                 <span class="comment"># sfg object</span></span><br><span class="line">lnd_geom <span class="operator">=</span> st_sfc<span class="punctuation">(</span>lnd_point<span class="punctuation">,</span> crs <span class="operator">=</span> <span class="string">&quot;EPSG:4326&quot;</span><span class="punctuation">)</span>    <span class="comment"># sfc object</span></span><br><span class="line">lnd_attrib <span class="operator">=</span> data.frame<span class="punctuation">(</span>                           <span class="comment"># data.frame object</span></span><br><span class="line">  name <span class="operator">=</span> <span class="string">&quot;London&quot;</span><span class="punctuation">,</span></span><br><span class="line">  temperature <span class="operator">=</span> <span class="number">25</span><span class="punctuation">,</span></span><br><span class="line">  date <span class="operator">=</span> as.Date<span class="punctuation">(</span><span class="string">&quot;2017-06-21&quot;</span><span class="punctuation">)</span></span><br><span class="line">  <span class="punctuation">)</span></span><br><span class="line">lnd_sf <span class="operator">=</span> st_sf<span class="punctuation">(</span>lnd_attrib<span class="punctuation">,</span> geometry <span class="operator">=</span> lnd_geom<span class="punctuation">)</span>    <span class="comment"># sf object</span></span><br></pre></td></tr></table></figure>
+<p>发生了什么？首先，坐标被用来创建简单特征几何体（<code>sfg</code>）。其次，几何体被转换成一个带有坐标参考系统（CRS）的简单特征几何列（<code>sfc</code>）。第三，属性被存储在一个<code>data.frame</code>中，该<code>data.frame</code>与<code>st_sf()</code>一起与<code>sfc</code>对象组合。这导致了一个<code>sf</code>对象，如下面所示（省略了部分输出）：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lnd_sf</span><br><span class="line"><span class="comment">#&gt; Simple feature collection with 1 features and 3 fields</span></span><br><span class="line"><span class="comment">#&gt; ...</span></span><br><span class="line"><span class="comment">#&gt;     name temperature       date         geometry</span></span><br><span class="line"><span class="comment">#&gt; 1 London          25 2017-06-21 POINT (0.1 51.5)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">class</span><span class="punctuation">(</span>lnd_sf<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;sf&quot;         &quot;data.frame&quot;</span></span><br></pre></td></tr></table></figure>
+<p>结果显示<code>sf</code>对象实际上有两个类别，<code>sf</code>和<code>data.frame</code>。简单特征实际上就是数据框（方形表格），但是具有存储在通常称为<code>geometry</code>的列表列中的空间属性。这种二元性是简单特征概念的核心：大多数时候，<code>sf</code>可以被视为并且表现得像一个<code>data.frame</code>。简单特征本质上是带有空间扩展的数据框。</p>
+<h2 id="简单特征几何-sfg">简单特征几何 (sfg)</h2>
+<p><code>sfg</code>类在R中代表不同的简单特征几何类型：点、线串、多边形（以及它们的“多”等效项，如多点）或几何集合。</p>
+<p>通常，您不需要进行繁琐的任务来自己创建几何体，因为您可以简单地导入一个已经存在的空间文件。然而，如果需要，有一组函数可以从零开始创建简单特征几何对象（<code>sfg</code>）。这些函数的名称简单且一致，因为它们都以<code>st_</code>前缀开头，并以几何类型的小写字母名称结尾：</p>
+<ul>
+<li>一个点：<code>st_point()</code></li>
+<li>一个线串：<code>st_linestring()</code></li>
+<li>一个多边形：<code>st_polygon()</code></li>
+<li>一个多点：<code>st_multipoint()</code></li>
+<li>一个多线串：<code>st_multilinestring()</code></li>
+<li>一个多多边形：<code>st_multipolygon()</code></li>
+<li>一个几何集合：<code>st_geometrycollection()</code></li>
+</ul>
+<p><code>sfg</code>对象可以从三种基础的R数据类型创建：</p>
+<ol type="1">
+<li>数值向量：一个单一点</li>
+<li>矩阵：一组点，其中每一行代表一个点、一个多点或线串</li>
+<li>列表：一组对象的集合，如矩阵、多线串或几何集合</li>
 </ol>
-</section>
+<p>函数<code>st_point()</code>从数值向量创建单一点：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">st_point<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">5</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">)</span>                 <span class="comment"># XY point</span></span><br><span class="line"><span class="comment">#&gt; POINT (5 2)</span></span><br><span class="line">st_point<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">5</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">)</span><span class="punctuation">)</span>              <span class="comment"># XYZ point</span></span><br><span class="line"><span class="comment">#&gt; POINT Z (5 2 3)</span></span><br><span class="line">st_point<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">5</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">dim</span> <span class="operator">=</span> <span class="string">&quot;XYM&quot;</span><span class="punctuation">)</span> <span class="comment"># XYM point</span></span><br><span class="line"><span class="comment">#&gt; POINT M (5 2 1)</span></span><br><span class="line">st_point<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">5</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span><span class="punctuation">)</span>           <span class="comment"># XYZM point</span></span><br><span class="line"><span class="comment">#&gt; POINT ZM (5 2 3 1)</span></span><br></pre></td></tr></table></figure>
+<p>结果显示，XY（2D坐标）、XYZ（3D坐标）和XYZM（带有额外变量的3D，通常是测量精度）点类型分别从长度为2、3和4的向量创建。XYM类型必须使用<code>dim</code>参数（代表维度）来指定。</p>
+<p>相比之下，在多点（<code>st_multipoint()</code>）和线串（<code>st_linestring()</code>）对象的情况下，使用矩阵：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># the rbind function simplifies the creation of matrices</span></span><br><span class="line"><span class="comment">## MULTIPOINT</span></span><br><span class="line">multipoint_matrix <span class="operator">=</span> rbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">5</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">st_multipoint<span class="punctuation">(</span>multipoint_matrix<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; MULTIPOINT ((5 2), (1 3), (3 4), (3 2))</span></span><br><span class="line"><span class="comment">## LINESTRING</span></span><br><span class="line">linestring_matrix <span class="operator">=</span> rbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">st_linestring<span class="punctuation">(</span>linestring_matrix<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; LINESTRING (1 5, 4 4, 4 1, 2 2, 3 2)</span></span><br></pre></td></tr></table></figure>
+<p>最后，使用列表来创建多线串、（多）多边形和几何集合：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## POLYGON</span></span><br><span class="line">polygon_list <span class="operator">=</span> <span class="built_in">list</span><span class="punctuation">(</span>rbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">st_polygon<span class="punctuation">(</span>polygon_list<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; POLYGON ((1 5, 2 2, 4 1, 4 4, 1 5))</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## POLYGON with a hole</span></span><br><span class="line">polygon_border <span class="operator">=</span> rbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">polygon_hole <span class="operator">=</span> rbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">polygon_with_hole_list <span class="operator">=</span> <span class="built_in">list</span><span class="punctuation">(</span>polygon_border<span class="punctuation">,</span> polygon_hole<span class="punctuation">)</span></span><br><span class="line">st_polygon<span class="punctuation">(</span>polygon_with_hole_list<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; POLYGON ((1 5, 2 2, 4 1, 4 4, 1 5), (2 4, 3 4, 3 3, 2 3, 2 4))</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## MULTILINESTRING</span></span><br><span class="line">multilinestring_list <span class="operator">=</span> <span class="built_in">list</span><span class="punctuation">(</span>rbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">,</span> </span><br><span class="line">                            rbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">st_multilinestring<span class="punctuation">(</span><span class="punctuation">(</span>multilinestring_list<span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; MULTILINESTRING ((1 5, 4 4, 4 1, 2 2, 3 2), (1 2, 2 4))</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## MULTIPOLYGON</span></span><br><span class="line">multipolygon_list <span class="operator">=</span> <span class="built_in">list</span><span class="punctuation">(</span><span class="built_in">list</span><span class="punctuation">(</span>rbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">                         <span class="built_in">list</span><span class="punctuation">(</span>rbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">st_multipolygon<span class="punctuation">(</span>multipolygon_list<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; MULTIPOLYGON (((1 5, 2 2, 4 1, 4 4, 1 5)), ((0 2, 1 2, 1 3, 0 3, 0 2)))</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## GEOMETRYCOLLECTION</span></span><br><span class="line">geometrycollection_list <span class="operator">=</span> <span class="built_in">list</span><span class="punctuation">(</span>st_multipoint<span class="punctuation">(</span>multipoint_matrix<span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">                              st_linestring<span class="punctuation">(</span>linestring_matrix<span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">st_geometrycollection<span class="punctuation">(</span>geometrycollection_list<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; GEOMETRYCOLLECTION (MULTIPOINT (5 2, 1 3, 3 4, 3 2),</span></span><br><span class="line"><span class="comment">#&gt;   LINESTRING (1 5, 4 4, 4 1, 2 2, 3 2))</span></span><br></pre></td></tr></table></figure>
+<h2 id="简单特征列-sfc">简单特征列 (sfc)</h2>
+<p>一个<code>sfg</code>对象只包含一个单一的简单特征几何。简单特征几何列（<code>sfc</code>）是一个<code>sfg</code>对象的列表，此外还能包含有关正在使用的坐标参考系统的信息。例如，要将两个简单特征组合成一个具有两个特征的对象，我们可以使用<code>st_sfc()</code>函数。这一点很重要，因为<code>sfc</code>代表了<strong>sf</strong>数据框中的几何列：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sfc POINT</span></span><br><span class="line">point1 <span class="operator">=</span> st_point<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">5</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">point2 <span class="operator">=</span> st_point<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">points_sfc <span class="operator">=</span> st_sfc<span class="punctuation">(</span>point1<span class="punctuation">,</span> point2<span class="punctuation">)</span></span><br><span class="line">points_sfc</span><br><span class="line"><span class="comment">#&gt; Geometry set for 2 features </span></span><br><span class="line"><span class="comment">#&gt; Geometry type: POINT</span></span><br><span class="line"><span class="comment">#&gt; Dimension:     XY</span></span><br><span class="line"><span class="comment">#&gt; Bounding box:  xmin: 1 ymin: 2 xmax: 5 ymax: 3</span></span><br><span class="line"><span class="comment">#&gt; CRS:           NA</span></span><br><span class="line"><span class="comment">#&gt; POINT (5 2)</span></span><br><span class="line"><span class="comment">#&gt; POINT (1 3)</span></span><br></pre></td></tr></table></figure>
+<p>在大多数情况下，一个<code>sfc</code>对象包含相同几何类型的对象。因此，当我们将多边形类型的<code>sfg</code>对象转换为一个简单特征几何列时，我们也会得到一个多边形类型的<code>sfc</code>对象，这可以通过<code>st_geometry_type()</code>来验证。同样地，一个多线串的几何列将导致一个多线串类型的<code>sfc</code>对象：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sfc POLYGON</span></span><br><span class="line">polygon_list1 <span class="operator">=</span> <span class="built_in">list</span><span class="punctuation">(</span>rbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">polygon1 <span class="operator">=</span> st_polygon<span class="punctuation">(</span>polygon_list1<span class="punctuation">)</span></span><br><span class="line">polygon_list2 <span class="operator">=</span> <span class="built_in">list</span><span class="punctuation">(</span>rbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">polygon2 <span class="operator">=</span> st_polygon<span class="punctuation">(</span>polygon_list2<span class="punctuation">)</span></span><br><span class="line">polygon_sfc <span class="operator">=</span> st_sfc<span class="punctuation">(</span>polygon1<span class="punctuation">,</span> polygon2<span class="punctuation">)</span></span><br><span class="line">st_geometry_type<span class="punctuation">(</span>polygon_sfc<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] POLYGON POLYGON</span></span><br><span class="line"><span class="comment">#&gt; 18 Levels: GEOMETRY POINT LINESTRING POLYGON MULTIPOINT ... TRIANGLE</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sfc MULTILINESTRING</span></span><br><span class="line">multilinestring_list1 <span class="operator">=</span> <span class="built_in">list</span><span class="punctuation">(</span>rbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">,</span> </span><br><span class="line">                            rbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">multilinestring1 <span class="operator">=</span> st_multilinestring<span class="punctuation">(</span><span class="punctuation">(</span>multilinestring_list1<span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">multilinestring_list2 <span class="operator">=</span> <span class="built_in">list</span><span class="punctuation">(</span>rbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">7</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">5</span><span class="punctuation">,</span> <span class="number">6</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">7</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">7</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">,</span> </span><br><span class="line">                            rbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">7</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">8</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">multilinestring2 <span class="operator">=</span> st_multilinestring<span class="punctuation">(</span><span class="punctuation">(</span>multilinestring_list2<span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">multilinestring_sfc <span class="operator">=</span> st_sfc<span class="punctuation">(</span>multilinestring1<span class="punctuation">,</span> multilinestring2<span class="punctuation">)</span></span><br><span class="line">st_geometry_type<span class="punctuation">(</span>multilinestring_sfc<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] MULTILINESTRING MULTILINESTRING</span></span><br><span class="line"><span class="comment">#&gt; 18 Levels: GEOMETRY POINT LINESTRING POLYGON MULTIPOINT ... TRIANGLE</span></span><br></pre></td></tr></table></figure>
+<p>也可以从具有不同几何类型的<code>sfg</code>对象创建一个<code>sfc</code>对象：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sfc GEOMETRY</span></span><br><span class="line">point_multilinestring_sfc <span class="operator">=</span> st_sfc<span class="punctuation">(</span>point1<span class="punctuation">,</span> multilinestring1<span class="punctuation">)</span></span><br><span class="line">st_geometry_type<span class="punctuation">(</span>point_multilinestring_sfc<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] POINT           MULTILINESTRING</span></span><br><span class="line"><span class="comment">#&gt; 18 Levels: GEOMETRY POINT LINESTRING POLYGON MULTIPOINT ... TRIANGLE</span></span><br></pre></td></tr></table></figure>
+<p>如前所述，<code>sfc</code>对象还可以额外存储有关坐标参考系统（CRS）的信息。默认值是<code>NA</code>（<em>Not
+Available</em>，不可用），这可以通过<code>st_crs()</code>来验证：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">st_crs<span class="punctuation">(</span>points_sfc<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Coordinate Reference System: NA</span></span><br></pre></td></tr></table></figure>
+<p><code>sfc</code>对象中的所有几何体必须具有相同的CRS。可以使用<code>st_sfc()</code>（或<code>st_sf()</code>）的<code>crs</code>参数来指定CRS，该参数接受一个以文本字符串形式提供的<strong>CRS标识符</strong>，例如<code>crs="EPSG:4326"</code>。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set the CRS with an identifier referring to an &#x27;EPSG&#x27; CRS code:</span></span><br><span class="line">points_sfc_wgs <span class="operator">=</span> st_sfc<span class="punctuation">(</span>point1<span class="punctuation">,</span> point2<span class="punctuation">,</span> crs <span class="operator">=</span> <span class="string">&quot;EPSG:4326&quot;</span><span class="punctuation">)</span></span><br><span class="line">st_crs<span class="punctuation">(</span>points_sfc_wgs<span class="punctuation">)</span> <span class="comment"># print CRS (only first 4 lines of output shown)</span></span><br><span class="line"><span class="comment">#&gt; Coordinate Reference System:</span></span><br><span class="line"><span class="comment">#&gt;   User input: EPSG:4326 </span></span><br><span class="line"><span class="comment">#&gt;   wkt:</span></span><br><span class="line"><span class="comment">#&gt; GEOGCRS[&quot;WGS 84&quot;,</span></span><br><span class="line"><span class="comment">#&gt; ...</span></span><br></pre></td></tr></table></figure>
+<h2 id="sfheaders包">sfheaders包</h2>
+<p><strong>sfheaders</strong>是一个R包，用于加速构建、转换和操作<code>sf</code>对象<span
+class="citation"
+data-cites="cooley_sfheaders_2020">[@cooley_sfheaders_2020]</span>。它专注于从向量、矩阵和数据框快速构建<code>sf</code>对象，而无需依赖<strong>sf</strong>库；并通过头文件（因此得名<strong>sfheaders</strong>）公开其底层的C++代码。这种方法使其他人能够使用编译和快速运行的代码来扩展它。每个核心的<strong>sfheaders</strong>函数都有一个相应的C++实现，如<a
+target="_blank" rel="noopener" href="https://dcooley.github.io/sfheaders/articles/Cpp.html">the
+<code>Cpp</code>
+vignette</a>中所描述。对于大多数人来说，R函数将足以从该包的计算速度中受益。<strong>sfheaders</strong>是独立于<strong>sf</strong>开发的，但旨在完全兼容，创建有效的<code>sf</code>对象，其类型如前面的章节所述。</p>
+<p><strong>sfheaders</strong>最简单的用例在下面的代码块中有示例，其中展示了构建<code>sfg</code>、<code>sfc</code>和<code>sf</code>对象：</p>
+<ul>
+<li>向量转换为<code>sfg_POINT</code></li>
+<li>矩阵转换为<code>sfg_LINESTRING</code></li>
+<li>数据框转换为<code>sfg_POLYGON</code></li>
+</ul>
+<p>我们将从创建最简单可能的<code>sfg</code>对象开始，即一个单一的坐标对，赋值给名为<code>v</code>的向量：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span></span><br><span class="line">v_sfg_sfh <span class="operator">=</span> sfheaders<span class="operator">::</span>sfg_point<span class="punctuation">(</span>obj <span class="operator">=</span> v<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">v_sfg_sfh <span class="comment"># printing without sf loaded</span></span><br><span class="line"><span class="comment">#&gt;      [,1] [,2]</span></span><br><span class="line"><span class="comment">#&gt; [1,]    1    1</span></span><br><span class="line"><span class="comment">#&gt; attr(,&quot;class&quot;)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;XY&quot;    &quot;POINT&quot; &quot;sfg&quot; </span></span><br></pre></td></tr></table></figure>
+<p>上面的示例展示了当<strong>sf</strong>未加载时，<code>sfg</code>对象<code>v_sfg_sfh</code>是如何打印的，展示了其底层结构。当<strong>sf</strong>被加载（如这里的情况）时，上述命令的结果与<code>sf</code>对象无法区分：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">v_sfg_sf <span class="operator">=</span> st_point<span class="punctuation">(</span>v<span class="punctuation">)</span></span><br><span class="line">print<span class="punctuation">(</span>v_sfg_sf<span class="punctuation">)</span> <span class="operator">==</span> print<span class="punctuation">(</span>v_sfg_sfh<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; POINT (1 1)</span></span><br><span class="line"><span class="comment">#&gt; POINT (1 1)</span></span><br><span class="line"><span class="comment">#&gt; [1] TRUE</span></span><br></pre></td></tr></table></figure>
+<p>下一个示例展示了<strong>sfheaders</strong>如何从矩阵和数据框创建<code>sfg</code>对象：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># matrices</span></span><br><span class="line">m <span class="operator">=</span> matrix<span class="punctuation">(</span><span class="number">1</span><span class="operator">:</span><span class="number">8</span><span class="punctuation">,</span> ncol <span class="operator">=</span> <span class="number">2</span><span class="punctuation">)</span></span><br><span class="line">sfheaders<span class="operator">::</span>sfg_linestring<span class="punctuation">(</span>obj <span class="operator">=</span> m<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; LINESTRING (1 5, 2 6, 3 7, 4 8)</span></span><br><span class="line"><span class="comment"># data.frames</span></span><br><span class="line">df <span class="operator">=</span> data.frame<span class="punctuation">(</span>x <span class="operator">=</span> <span class="number">1</span><span class="operator">:</span><span class="number">4</span><span class="punctuation">,</span> y <span class="operator">=</span> <span class="number">4</span><span class="operator">:</span><span class="number">1</span><span class="punctuation">)</span></span><br><span class="line">sfheaders<span class="operator">::</span>sfg_polygon<span class="punctuation">(</span>obj <span class="operator">=</span> df<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; POLYGON ((1 4, 2 3, 3 2, 4 1, 1 4))</span></span><br></pre></td></tr></table></figure>
+<p>重用对象<code>v</code>、<code>m</code>和<code>df</code>，我们也可以如下构建简单特征列（<code>sfc</code>）（输出未显示）：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sfheaders<span class="operator">::</span>sfc_point<span class="punctuation">(</span>obj <span class="operator">=</span> v<span class="punctuation">)</span></span><br><span class="line">sfheaders<span class="operator">::</span>sfc_linestring<span class="punctuation">(</span>obj <span class="operator">=</span> m<span class="punctuation">)</span></span><br><span class="line">sfheaders<span class="operator">::</span>sfc_polygon<span class="punctuation">(</span>obj <span class="operator">=</span> df<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>同样地，<code>sf</code>对象可以如下创建：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sfheaders<span class="operator">::</span>sf_point<span class="punctuation">(</span>obj <span class="operator">=</span> v<span class="punctuation">)</span></span><br><span class="line">sfheaders<span class="operator">::</span>sf_linestring<span class="punctuation">(</span>obj <span class="operator">=</span> m<span class="punctuation">)</span></span><br><span class="line">sfheaders<span class="operator">::</span>sf_polygon<span class="punctuation">(</span>obj <span class="operator">=</span> df<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>在这些示例中，CRS（坐标参考系统）都没有定义。如果您计划使用<strong>sf</strong>函数进行任何计算或几何操作，我们建议您设置CRS（有关详细信息，请参见章节@ref(reproj-geo-data)）：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df_sf <span class="operator">=</span> sfheaders<span class="operator">::</span>sf_polygon<span class="punctuation">(</span>obj <span class="operator">=</span> df<span class="punctuation">)</span></span><br><span class="line">st_crs<span class="punctuation">(</span>df_sf<span class="punctuation">)</span> <span class="operator">=</span> <span class="string">&quot;EPSG:4326&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>sfheaders</strong>也擅长“解构”和“重构”<code>sf</code>对象，即将几何列转换为包含每个顶点和几何特征（以及多特征）ID的坐标数据的数据框。它在将几何列“转换”为不同类型方面非常快速和可靠。该包的<a
+target="_blank" rel="noopener" href="https://dcooley.github.io/sfheaders/articles/examples.html#performance">文档</a>和为本书开发的测试代码中的基准测试显示，它比<code>sf</code>包在这类操作上要快得多。</p>
+<h3 id="s2球面几何运算">S2球面几何运算</h3>
+<p>球面几何引擎基于世界是圆形的这一事实，而用于地理计算的简单数学程序，如计算两点之间的直线或多边形所围成的面积，假设是平面（投影）几何。自<strong>sf</strong>版本1.0.0以来，R通过<strong>s2</strong>接口包支持“开箱即用”的球面几何操作，该接口连接到Google的S2球面几何引擎。S2可能最为人所知的是作为一个离散全球网格系统（DGGS）的例子。另一个例子是<a
+target="_blank" rel="noopener" href="https://eng.uber.com/h3/">Uber的H3</a>全球六边形分层空间索引 <span
+class="citation"
+data-cites="bondaruk_assessing_2020">[@bondaruk_assessing_2020]</span>。</p>
+<p>尽管用于描述地球上任何地方的位置可能很有用，例如使用诸如<a
+target="_blank" rel="noopener" href="https://developers.google.com/maps/documentation/gaming/concepts_playable_locations">e66ef376f790adf8a5af7fca9e6e422c03c9143f</a>这样的字符串，但<strong>sf</strong>与S2的接口的主要优点是它提供了用于距离、缓冲区和面积计算等的即插即用函数，如在<strong>sf</strong>的内置文档中所描述，该文档可以通过命令<a
+target="_blank" rel="noopener" href="https://r-spatial.github.io/sf/articles/sf7.html"><code>vignette("sf7")</code></a>打开。</p>
+<p><strong>sf</strong>可以在两种模式下运行，分别是开启和关闭S2。默认情况下，S2几何引擎是开启的，如下面的命令所验证：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sf_use_s2<span class="punctuation">(</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] TRUE</span></span><br></pre></td></tr></table></figure>
+<p>通过在本章早些时候创建的<code>india</code>对象周围创建缓冲区，下面展示了关闭几何引擎的后果（注意当S2关闭时发出的警告）：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">india_buffer_with_s2 <span class="operator">=</span> st_buffer<span class="punctuation">(</span>india<span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span></span><br><span class="line">sf_use_s2<span class="punctuation">(</span><span class="literal">FALSE</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Spherical geometry (s2) switched off</span></span><br><span class="line">india_buffer_without_s2 <span class="operator">=</span> st_buffer<span class="punctuation">(</span>india<span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Warning in st_buffer.sfc(st_geometry(x), dist, nQuadSegs, endCapStyle =</span></span><br><span class="line"><span class="comment">#&gt; endCapStyle, : st_buffer does not correctly buffer longitude/latitude data</span></span><br><span class="line"><span class="comment">#&gt; dist is assumed to be in decimal degrees (arc_degrees).</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309020020296.png" />
+Example of the consequences of turning off the S2 geometry engine. Both
+representations of a buffer around India were created with the same
+command but the purple polygon object was created with S2 switched on,
+resulting in a buffer of 1 m. The larger light green polygon was created
+with S2 switched off, resulting in a buffer with inaccurate units of
+degrees longitude/latitude.</p>
+<p>在整本书中，我们将假设S2是开启的，除非明确说明。用以下命令再次开启它。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sf_use_s2<span class="punctuation">(</span><span class="literal">TRUE</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Spherical geometry (s2) switched on</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>📌尽管在许多情况下，<strong>sf</strong>使用S2是有道理的，但在某些情况下，有充分的理由在一个R会话或整个项目的过程中关闭S2。
+如<strong>sf</strong>的GitHub仓库中的问题<a
+target="_blank" rel="noopener" href="https://github.com/r-spatial/sf/issues/1771">1771</a>所记录，这种默认行为可能会导致在关闭S2（以及使用旧版本的<strong>sf</strong>）时可以运行的代码失败。
+这些边缘情况包括对不符合S2更严格定义的多边形的操作。
+如果你看到像<code>#&gt; Error in s2_geography_from_wkb ...</code>这样的错误消息，关闭S2后再尝试生成错误消息的命令可能是值得的。
+要在整个项目中关闭S2，你可以在项目的根目录（主文件夹）中创建一个名为.Rprofile的文件，其中包含命令<code>sf::sf_use_s2(FALSE)</code>。</p>
+</blockquote>
+<h1 id="栅格数据">栅格数据</h1>
+<p>空间栅格数据模型用连续的单元格网格（通常也称为像素；图@ref(fig:raster-intro-plot):A）来表示世界。这种数据模型通常指的是所谓的规则网格，其中每个单元格具有相同的、恒定的大小——在这本书中，我们只会关注规则网格。然而，还存在几种其他类型的网格，包括旋转的、剪切的、直线的和曲线的网格（参见@pebesma_spatial_2022的第1章或<span
+class="citation"
+data-cites="tennekes_elegant_2022的第2章">@tennekes_elegant_2022的第2章</span>）。</p>
+<p>栅格数据模型通常由一个栅格头和一个矩阵（带有行和列）组成，该矩阵表示等间隔的单元格（通常也称为像素）。<a
+href="#fn9" class="footnote-ref" id="fnref9"
+role="doc-noteref"><sup>9</sup></a>栅格头定义了坐标参考系统、范围和原点。原点（或起点）通常是矩阵左下角的坐标（然而，<strong>terra</strong>包默认使用左上角）。头通过列数、行数和单元格大小分辨率来定义范围。因此，从原点开始，我们可以通过使用单元格的ID或通过明确指定行和列来轻松访问和修改每个单个单元格。这种矩阵表示法避免了明确存储每个单元格角的四个角点的坐标（实际上它只存储一个坐标，即原点），就像矩形矢量多边形的情况那样。这一点和地图代数使栅格处理比矢量数据处理更高效、更快。然而，与矢量数据相比，一个栅格层的单元格只能容纳一个值。该值可能是数值或分类的。</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309020024034.png" />
+Raster data types: (A) cell IDs, (B) cell values, (C) a colored raster
+map.</p>
+<p>栅格地图通常表示连续的现象，如海拔、温度、人口密度或光谱数据。离散特征，如土壤或土地覆盖类别，也可以在栅格数据模型中表示。栅格数据集的这两种用途都在图中有所说明，该图显示了离散特征的边界在栅格数据集中可能会变得模糊。根据应用的性质，离散特征的矢量表示可能更为合适。</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309020025749.png" />
+Examples of continuous and categorical rasters.</p>
+<h2 id="处理栅格数据的r包">处理栅格数据的R包</h2>
+<p>在过去的二十年里，已经开发了几个用于读取和处理栅格数据集的包。其中最主要的是<strong>raster</strong>，它在2010年推出后使R的栅格处理能力发生了质的飞跃，并一直是这一领域的主要包，直到<strong>terra</strong>和<strong>stars</strong>的开发。这两个较新开发的包都提供了强大和高效的函数，用于处理栅格数据集，并且它们可能的用例之间有很大的重叠。在本书中，我们将重点介绍<strong>terra</strong>，它取代了较旧且（在大多数情况下）较慢的<strong>raster</strong>。在了解<strong>terra</strong>的类系统如何工作之前，本节将描述<strong>terra</strong>和<strong>stars</strong>之间的相似性和差异；这些知识将有助于决定在不同情况下哪个更合适。</p>
+<p>首先，<strong>terra</strong>专注于最常见的栅格数据模型（规则网格），而<strong>stars</strong>还允许存储较不流行的模型（包括规则的、旋转的、剪切的、直线的和曲线的网格）。虽然<strong>terra</strong>通常处理一个或多层的栅格<a
+href="#fn10" class="footnote-ref" id="fnref10"
+role="doc-noteref"><sup>10</sup></a>，<strong>stars</strong>包提供了存储栅格数据立方体的方法——一个具有多层（例如，波段）、多个时间点（例如，月份）和多个属性（例如，传感器类型A和传感器类型B）的栅格对象。重要的是，在这两个包中，所有层或数据立方体的元素都必须具有相同的空间尺寸和范围。其次，这两个包都允许将所有栅格数据读入内存，或者只读取其元数据——这通常是根据输入文件大小自动完成的。然而，它们存储栅格值的方式非常不同。<strong>terra</strong>基于C++代码，主要使用C++指针。<strong>stars</strong>将值存储为较小栅格的数组列表或较大栅格的文件路径。第三，<strong>stars</strong>的函数与<strong>sf</strong>中的矢量对象和函数密切相关，而<strong>terra</strong>使用其自己的矢量数据对象类，即<code>SpatVector</code>。第四，这两个包对各种函数如何作用于它们的对象有不同的方法。<strong>terra</strong>包主要依赖于大量的内置函数，其中每个函数都有一个特定的目的（例如，重新采样或裁剪）。另一方面，<strong>stars</strong>使用一些内置函数（通常名称以<code>st_</code>开头），有其自己的现有R函数（例如，<code>split()</code>或<code>aggregate()</code>）的方法，以及现有的<strong>dplyr</strong>函数（例如，<code>filter()</code>或<code>slice()</code>）的方法。</p>
+<p>重要的是，将对象从<strong>terra</strong>转换为<strong>stars</strong>（使用<code>st_as_stars()</code>）以及反过来（使用<code>rast()</code>）都是非常简单的。
+我们还鼓励您阅读@pebesma_spatial_2022，以获得对<strong>stars</strong>包最全面的介绍。</p>
+<h2 id="terra包介绍">terra包介绍</h2>
+<p><strong>terra</strong>包在R中支持栅格对象。与其前身<strong>raster</strong>（由同一开发者Robert
+Hijmans创建）一样，它提供了一整套广泛的函数，用于创建、读取、导出、操作和处理栅格数据集。<strong>terra</strong>的功能在很大程度上与更成熟的<strong>raster</strong>包相同，但也有一些差异：<strong>terra</strong>的函数通常比<strong>raster</strong>的等效函数更具计算效率。另一方面，<strong>raster</strong>的类系统很受欢迎，并被许多其他包使用。您可以无缝地在这两种类型的对象之间进行转换，以确保与旧脚本和包的向后兼容性，例如，使用<strong>raster</strong>包中的<a
+target="_blank" rel="noopener" href="https://rspatial.github.io/raster/reference/raster.html"><code>raster()</code></a>、<a
+target="_blank" rel="noopener" href="https://rspatial.github.io/raster/reference/stack.html"><code>stack()</code></a>和<code>brick()</code>函数（有关使用地理数据的R包演变的更多信息，请参见前一章）。</p>
+<p>除了用于栅格数据操作的函数外，<strong>terra</strong>还提供了许多低级函数，这些函数可以作为开发用于处理栅格数据集的新工具的基础。<strong>terra</strong>还允许您处理过大以至于无法装入主内存的大型栅格数据集。在这种情况下，<strong>terra</strong>提供了将栅格划分为更小块的可能性，并迭代地处理这些块，而不是将整个栅格文件加载到RAM中。</p>
+<p>为了说明<strong>terra</strong>的概念，我们将使用<strong>spDataLarge</strong>中的数据集。它包括几个栅格对象和一个覆盖锡安国家公园（美国犹他州）地区的矢量对象。例如，<code>srtm.tif</code>是该地区的数字高程模型（有关更多详细信息，请参见其文档<code>?srtm</code>）。首先，让我们创建一个名为<code>my_rast</code>的<code>SpatRaster</code>对象：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">raster_filepath <span class="operator">=</span> system.file<span class="punctuation">(</span><span class="string">&quot;raster/srtm.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span></span><br><span class="line">my_rast <span class="operator">=</span> rast<span class="punctuation">(</span>raster_filepath<span class="punctuation">)</span></span><br><span class="line"><span class="built_in">class</span><span class="punctuation">(</span>my_rast<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;SpatRaster&quot;</span></span><br><span class="line"><span class="comment">#&gt; attr(,&quot;package&quot;)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;terra&quot;</span></span><br></pre></td></tr></table></figure>
+<p>在控制台中输入栅格的名称，将打印出栅格头部信息（尺寸、分辨率、范围、坐标参考系统）以及一些额外信息（类别、数据源、栅格值的摘要）。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">my_rast</span><br><span class="line"><span class="comment">#&gt; class       : SpatRaster </span></span><br><span class="line"><span class="comment">#&gt; dimensions  : 457, 465, 1  (nrow, ncol, nlyr)</span></span><br><span class="line"><span class="comment">#&gt; resolution  : 0.000833, 0.000833  (x, y)</span></span><br><span class="line"><span class="comment">#&gt; extent      : -113, -113, 37.1, 37.5  (xmin, xmax, ymin, ymax)</span></span><br><span class="line"><span class="comment">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326) </span></span><br><span class="line"><span class="comment">#&gt; source      : srtm.tif </span></span><br><span class="line"><span class="comment">#&gt; name        : srtm </span></span><br><span class="line"><span class="comment">#&gt; min value   : 1024 </span></span><br><span class="line"><span class="comment">#&gt; max value   : 2892</span></span><br></pre></td></tr></table></figure>
+<p>专用函数报告每个组件：<code>dim()</code>返回行数、列数和图层数；<code>ncell()</code>返回单元格（像素）数；<code>res()</code>返回空间分辨率；<code>ext()</code>返回其空间范围；<code>crs()</code>返回其坐标参考系统。
+<code>inMemory()</code>报告栅格数据是存储在内存中还是磁盘上。</p>
+<p><code>help("terra-package")</code>返回所有可用的<strong>terra</strong>函数的完整列表。</p>
+<h2 id="绘制基础栅格地图">绘制基础栅格地图</h2>
+<aside id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>我们建议使用<a
+target="_blank" rel="noopener" href="https://r4ds.had.co.nz/workflow-projects.html">RStudio项目</a>、<a
+target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/editor/workspaces">VS
+Code工作区</a>或类似系统来管理项目。通过RStudio中的R控制台,可以使用<strong>rstudioapi</strong>包快速完成此操作。例如,使用以下命令在主目录中打开一个名为“geocompr-learning”的新项目:<code>rstudioapi::openProject("~/geocompr-learning")</code>。<a
+href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><strong>spDataLarge</strong>
+不存在于CRAN上,意味着必须通过<em>r-universe</em>或以下命令安装:<code>remotes::install_github("Nowosad/spDataLarge")</code>。<a
+href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>我们提到的原点,在图中用蓝色表示,事实上是“伪”原点。
+真正的原点,也就是畸变最小的位置,位于2°W
+49°N。这是英国测绘局选择的位置,在经度上大致位于不列颠岛的中心。简而言之,坐标由两个数字组成,表示距离一个原点的距离,通常是在<span
+class="math inline">\(x\)</span>然后<span
+class="math inline">\(y\)</span>维度上。<a href="#fnref3"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>完整的 OGC 标准包括一些相当不寻常的几何类型，包括
+'surface' 和 'curve' 几何类型，这些在现实世界应用中目前用途有限。所有 18
+种类型都可以用<strong>sf</strong>包来表示，尽管在写作时（2022年），绘图只适用于“核心
+7 种”。<a href="#fnref4" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li
+id="fn5"><p>在幕后，<strong>sf</strong>对象的<code>plot()</code>使用的是<code>sf:::plot.sf()</code>。<code>plot()</code>
+是一个通用方法，其行为因要绘制的对象的类别而有所不同。<a href="#fnref5"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>注意：当绘制多个 <code>sf</code>
+列时，许多绘图参数在面板图中会被忽略。<a href="#fnref6"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li
+id="fn7"><p>注意使用<code>st_geometry(india)</code>仅返回与对象关联的几何形状，以防止在简单特征列（<code>sfc</code>）对象中绘制属性。另一种选择是使用<code>india[0]</code>，它返回一个不包含属性数据的<code>sf</code>对象。<a
+href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li
+id="fn8"><p>其他属性可能包括城市性质类别（城市或村庄），或者如果测量是通过自动站进行的，则包括一个备注。<a
+href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li
+id="fn9"><p>根据文件格式，头部是实际图像数据文件的一部分，例如GeoTIFF，或存储在一个额外的头部或世界文件中，例如ASCII网格格式。还有无头（平面）二进制栅格格式，应便于导入到各种软件程序中。<a
+href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li
+id="fn10"><p>它还有一个额外的类<code>SpatRasterDataset</code>，用于存储许多数据集的集合。<a
+href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
 
         </div>
 
@@ -401,8 +826,8 @@
 
             <div class="post-nav">
                 <div class="post-nav-item">
-                    <a href="/2023/08/10/2023-8-10-1-%E4%BB%8B%E7%BB%8D/" rel="prev" title="(1)介绍">
-                        <i class="fa fa-angle-left"></i> (1)介绍
+                    <a href="/2023/08/10/2023-8-10-1-%E5%BC%95%E8%A8%80/" rel="prev" title="(1)引言">
+                        <i class="fa fa-angle-left"></i> (1)引言
                     </a>
                 </div>
                 <div class="post-nav-item">
@@ -431,13 +856,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">117k</span>
+    <span title="站点总字数">160k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">7:04</span>
+    <span title="站点阅读时长">9:43</span>
   </span>
 </div>
 <div class="busuanzi-count">
