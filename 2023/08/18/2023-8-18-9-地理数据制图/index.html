@@ -21,12 +21,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ancao96.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"ZQDKLA2K5M","indexName":"ZQDKLA2K5M","hits":{"per_page":10}},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true,"path":"search.xml","field":"post","content":true,"format":"html"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="前提条件  本章需要使用我们已经在使用的以下包：  12345library(sf)library(terra)library(dplyr)library(spData)library(spDataLarge)  此外，本章还使用以下可视化包（如果您想开发交互式地图应用程序，请安装shiny）：  1234# remotes::install_github(&quot;r-tmap&#x2F;tmap@v">
+    <meta name="description" content="前提条件  本章需要使用我们已经在使用的以下包：  12345library(sf)library(terra)library(dplyr)library(spData)library(spDataLarge)  此外，本章还使用以下可视化包（如果您想开发交互式地图应用程序，请安装shiny）：  1234# remotes::install_github(&quot;r-tmap&#x2F;tmap@v4">
 <meta property="og:type" content="article">
 <meta property="og:title" content="(9)地理数据制图">
 <meta property="og:url" content="https://ancao96.github.io/2023/08/18/2023-8-18-9-%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%B6%E5%9B%BE/index.html">
 <meta property="og:site_name" content="SCY SPACE">
-<meta property="og:description" content="前提条件  本章需要使用我们已经在使用的以下包：  12345library(sf)library(terra)library(dplyr)library(spData)library(spDataLarge)  此外，本章还使用以下可视化包（如果您想开发交互式地图应用程序，请安装shiny）：  1234# remotes::install_github(&quot;r-tmap&#x2F;tmap@v">
+<meta property="og:description" content="前提条件  本章需要使用我们已经在使用的以下包：  12345library(sf)library(terra)library(dplyr)library(spData)library(spDataLarge)  此外，本章还使用以下可视化包（如果您想开发交互式地图应用程序，请安装shiny）：  1234# remotes::install_github(&quot;r-tmap&#x2F;tmap@v4">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031738903.png">
 <meta property="og:image" content="https://ancao96.github.io/2023/08/18/2023-8-18-9-%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%B6%E5%9B%BE/09-mapping_files/figure-html/tmlayers-1.png">
@@ -159,7 +159,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text"> 前提条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text"> 引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%9C%B0%E5%9B%BE"><span class="nav-number">3.</span> <span class="nav-text"> 静态地图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tmap-%E5%9F%BA%E7%A1%80"><span class="nav-number">3.1.</span> <span class="nav-text"> tmap 基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%B0%E5%9B%BE%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.2.</span> <span class="nav-text"> 地图对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E5%8F%98%E9%87%8F"><span class="nav-number">3.2.1.</span> <span class="nav-text"> 可视化变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%BA%A6"><span class="nav-number">3.2.2.</span> <span class="nav-text"> 标度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E4%BE%8B"><span class="nav-number">3.2.3.</span> <span class="nav-text"> 图例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E5%B1%80"><span class="nav-number">3.2.4.</span> <span class="nav-text"> 布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9B%BE%E5%88%86%E9%9D%A2"><span class="nav-number">3.2.5.</span> <span class="nav-text"> 地图分面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%9B%BE%E5%9C%B0%E5%9B%BE"><span class="nav-number">3.2.6.</span> <span class="nav-text"> 插图地图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E7%94%BB%E5%9C%B0%E5%9B%BE"><span class="nav-number">3.3.</span> <span class="nav-text"> 动画地图</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">前提条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%9C%B0%E5%9B%BE"><span class="nav-number">3.</span> <span class="nav-text">静态地图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tmap-%E5%9F%BA%E7%A1%80"><span class="nav-number">3.1.</span> <span class="nav-text">tmap 基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%B0%E5%9B%BE%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.2.</span> <span class="nav-text">地图对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E5%8F%98%E9%87%8F"><span class="nav-number">3.2.1.</span> <span class="nav-text">可视化变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%BA%A6"><span class="nav-number">3.2.2.</span> <span class="nav-text">标度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E4%BE%8B"><span class="nav-number">3.2.3.</span> <span class="nav-text">图例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E5%B1%80"><span class="nav-number">3.2.4.</span> <span class="nav-text">布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9B%BE%E5%88%86%E9%9D%A2"><span class="nav-number">3.2.5.</span> <span class="nav-text">地图分面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%9B%BE%E5%9C%B0%E5%9B%BE"><span class="nav-number">3.2.6.</span> <span class="nav-text">插图地图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E7%94%BB%E5%9C%B0%E5%9B%BE"><span class="nav-number">3.3.</span> <span class="nav-text">动画地图</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -318,7 +318,7 @@
         
         
         
-        <div class="post-body" itemprop="articleBody"><h1 id="前提条件"><a class="markdownIt-Anchor" href="#前提条件"></a> 前提条件</h1>
+        <div class="post-body" itemprop="articleBody"><h1 id="前提条件">前提条件</h1>
 <ul>
 <li>本章需要使用我们已经在使用的以下包：</li>
 </ul>
@@ -331,28 +331,60 @@
 <li>您还需要按照以下方式读取几个数据集，以进行<em>栅格数据的空间操作</em>部分的内容：</li>
 </ul>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nz_elev <span class="operator">=</span> rast<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;raster/nz_elev.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
-<p>地理研究中令人满意和重要的一个方面是传达研究结果。制图——地图制作的艺术——是一项古老的技能，涉及沟通、细节关注和创造性元素。在R中进行静态制图非常简单，可以使用<code>plot()</code>函数。通过使用基本R方法，可以创建高级地图[@murrell_r_2016]。然而，本章的重点是使用专门的制图包进行地图制作。在学习新技能时，首先在一个领域深入掌握知识，然后再进行扩展，这是合乎情理的做法。制图也不例外，因此本章深入介绍了一个包（<strong>tmap</strong>），而不是浅尝辄止地介绍多个包。</p>
-<p>除了有趣和富有创意外，制图还具有重要的实际应用。精心制作的地图可能是传达工作结果的最佳方式，但设计不良的地图可能会留下不好的印象。常见的设计问题包括文本的位置、大小和可读性差，以及颜色的选择不慎，正如《地图杂志》的风格<a target="_blank" rel="noopener" href="https://www.tandf.co.uk//journals/authors/style/TJOM-suppmaterial-quick-guide.pdf">指南</a>中所述。此外，糟糕的地图制作可能会妨碍结果的传达[@brewer_designing_2015]：</p>
+<h1 id="引言">引言</h1>
+<p>地理研究中令人满意和重要的一个方面是传达研究结果。制图——地图制作的艺术——是一项古老的技能，涉及沟通、细节关注和创造性元素。在R中进行静态制图非常简单，可以使用<code>plot()</code>函数。通过使用基本R方法，可以创建高级地图<span
+class="citation"
+data-cites="murrell_r_2016">[@murrell_r_2016]</span>。然而，本章的重点是使用专门的制图包进行地图制作。在学习新技能时，首先在一个领域深入掌握知识，然后再进行扩展，这是合乎情理的做法。制图也不例外，因此本章深入介绍了一个包（<strong>tmap</strong>），而不是浅尝辄止地介绍多个包。</p>
+<p>除了有趣和富有创意外，制图还具有重要的实际应用。精心制作的地图可能是传达工作结果的最佳方式，但设计不良的地图可能会留下不好的印象。常见的设计问题包括文本的位置、大小和可读性差，以及颜色的选择不慎，正如《地图杂志》的风格<a
+target="_blank" rel="noopener" href="https://www.tandf.co.uk//journals/authors/style/TJOM-suppmaterial-quick-guide.pdf">指南</a>中所述。此外，糟糕的地图制作可能会妨碍结果的传达<span
+class="citation"
+data-cites="brewer_designing_2015">[@brewer_designing_2015]</span>：</p>
 <blockquote>
-<p>看起来业余的地图可能会削弱您的受众理解重要信息的能力，减弱专业数据调查的呈现效果。<br />
-数千年来，地图已被用于各种各样的目的。<br />
-历史上的例子包括3000多年前的旧巴比伦王朝的建筑和土地所有权地图，以及近2000年前托勒密在他的杰作<em>地理学</em>中的世界地图[@talbert_ancient_2014]。</p>
+<p>看起来业余的地图可能会削弱您的受众理解重要信息的能力，减弱专业数据调查的呈现效果。
+数千年来，地图已被用于各种各样的目的。
+历史上的例子包括3000多年前的旧巴比伦王朝的建筑和土地所有权地图，以及近2000年前托勒密在他的杰作<em>地理学</em>中的世界地图<span
+class="citation"
+data-cites="talbert_ancient_2014">[@talbert_ancient_2014]</span>。</p>
 </blockquote>
-<p>制图活动在历史上曾经只由精英或代表精英进行。随着开源地图制作软件的出现，如R包<strong>tmap</strong>和QGIS中的’print composer’，任何人都可以制作高质量的地图，从而实现了’公民科学’。地图也常常是以易于理解的方式呈现地理计算研究结果的最佳途径。制图因此是地理计算的关键部分，它不仅强调描述世界，还强调<em>改变</em>世界。</p>
-<p>本章介绍了如何制作各种类型的地图。接下来的部分将涵盖静态地图的各种情况，包括美学考虑、分面和插图地图。部分章节将介绍动态和交互式地图（包括网络地图和地图应用程序）。最<br />
+<p>制图活动在历史上曾经只由精英或代表精英进行。随着开源地图制作软件的出现，如R包<strong>tmap</strong>和QGIS中的'print
+composer'，任何人都可以制作高质量的地图，从而实现了'公民科学'。地图也常常是以易于理解的方式呈现地理计算研究结果的最佳途径。制图因此是地理计算的关键部分，它不仅强调描述世界，还强调<em>改变</em>世界。</p>
+<p>本章介绍了如何制作各种类型的地图。接下来的部分将涵盖静态地图的各种情况，包括美学考虑、分面和插图地图。部分章节将介绍动态和交互式地图（包括网络地图和地图应用程序）。最
 后，将介绍一系列备选的地图制作包，包括<strong>ggplot2</strong>和<strong>cartogram</strong>。</p>
-<h1 id="静态地图"><a class="markdownIt-Anchor" href="#静态地图"></a> 静态地图</h1>
-<p>静态地图是地理计算的最常见的可视输出类型。它们通常以标准格式保存，包括 <code>.png</code>和<code>.pdf</code>用于图形光栅和矢量输出。最初，静态地图是R唯一能够生成的地图类型。随着<strong>sp</strong>的发布[<a href="mailto:%E8%A7%81@pebesma">见@pebesma</a>{.email}_classes_2005]，自那时以来，许多地图制作技术、函数和软件包得到了发展。然而，尽管有交互式地图的创新，静态绘图仍然是十年后[@cheshire_spatial_2015]R中地理数据可视化的重点。</p>
-<p>通用的 <code>plot()</code> 函数是从矢量和栅格空间对象创建静态地图的最快方法。有时，在项目开发阶段，简单性和速度是首要考虑的因素，这就是 <code>plot()</code> 函数的优势所在。<br />
-基本的 R 方法也是可扩展的，<code>plot()</code> 函数提供了许多参数选项。另一种方法是使用 <strong>grid</strong> 软件包，它允许对静态地图进行低级别的控制，如 @murrell_r_2016 的第 <a target="_blank" rel="noopener" href="https://www.stat.auckland.ac.nz/~paul/RG2e/chapter14.html">14</a> 章所示。本书的这部分将重点介绍 <strong>tmap</strong>，并强调其基本的美学和布局选项。</p>
-<p><strong>tmap</strong>是一个功能强大且灵活的制图软件包，具有合理的默认设置。它具有简洁的语法，允许使用最少的代码创建具有吸引力的地图，这对于 <strong>ggplot2</strong> 用户来说会非常熟悉。它还具有独特的功能，通过<code>tmap_mode()</code>可以生成静态和交互式地图，使用相同的代码。最后，它接受比其他替代方案（如 <strong>ggplot2</strong>）更广泛的空间类别（包括 <strong>sf</strong> 和 <strong>terra</strong> 对象）。</p>
-<!--toDo:jn--> <!-- update the below vignettes links --> <!-- (see the vignettes [`tmap-getstarted`](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html) and [`tmap-changes-v2`](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-changes-v2.html), as well as @tennekes_tmap_2018, for further documentation). -->
-<h2 id="tmap-基础"><a class="markdownIt-Anchor" href="#tmap-基础"></a> tmap 基础</h2>
-<p>与<strong>ggplot2</strong>类似，<strong>tmap</strong>基于&quot;图形语法&quot;的理念 [@wilkinson_grammar_2005]。这涉及将输入数据与美学（数据如何可视化）分离：每个输入数据集可以通过多种不同的方式进行&quot;映射&quot;，包括在地图上的位置（由数据的<code>geometry</code>定义）、颜色和其他视觉变量。基本构建块是 <code>tm_shape()</code>（定义输入数据：矢量或栅格对象），然后是一个或多个图层元素，如 <code>tm_fill()</code> 和 <code>tm_dots()</code>。以下代码块演示了这种分层结构，生成了图中呈现的地图：</p>
+<h1 id="静态地图">静态地图</h1>
+<p>静态地图是地理计算的最常见的可视输出类型。它们通常以标准格式保存，包括
+<code>.png</code>和<code>.pdf</code>用于图形光栅和矢量输出。最初，静态地图是R唯一能够生成的地图类型。随着<strong>sp</strong>的发布[<a
+href="mailto:见@pebesma"
+class="email">见@pebesma</a>_classes_2005]，自那时以来，许多地图制作技术、函数和软件包得到了发展。然而，尽管有交互式地图的创新，静态绘图仍然是十年后<span
+class="citation"
+data-cites="cheshire_spatial_2015">[@cheshire_spatial_2015]</span>R中地理数据可视化的重点。</p>
+<p>通用的 <code>plot()</code>
+函数是从矢量和栅格空间对象创建静态地图的最快方法。有时，在项目开发阶段，简单性和速度是首要考虑的因素，这就是
+<code>plot()</code> 函数的优势所在。 基本的 R
+方法也是可扩展的，<code>plot()</code>
+函数提供了许多参数选项。另一种方法是使用 <strong>grid</strong>
+软件包，它允许对静态地图进行低级别的控制，如 <span class="citation"
+data-cites="murrell_r_2016">@murrell_r_2016</span> 的第 <a
+target="_blank" rel="noopener" href="https://www.stat.auckland.ac.nz/~paul/RG2e/chapter14.html">14</a>
+章所示。本书的这部分将重点介绍
+<strong>tmap</strong>，并强调其基本的美学和布局选项。</p>
+<p><strong>tmap</strong>是一个功能强大且灵活的制图软件包，具有合理的默认设置。它具有简洁的语法，允许使用最少的代码创建具有吸引力的地图，这对于
+<strong>ggplot2</strong>
+用户来说会非常熟悉。它还具有独特的功能，通过<code>tmap_mode()</code>可以生成静态和交互式地图，使用相同的代码。最后，它接受比其他替代方案（如
+<strong>ggplot2</strong>）更广泛的空间类别（包括 <strong>sf</strong> 和
+<strong>terra</strong> 对象）。 <!--toDo:jn-->
+<!-- update the below vignettes links -->
+<!-- (see the vignettes [`tmap-getstarted`](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html) and [`tmap-changes-v2`](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-changes-v2.html), as well as @tennekes_tmap_2018, for further documentation). --></p>
+<h2 id="tmap-基础">tmap 基础</h2>
+<p>与<strong>ggplot2</strong>类似，<strong>tmap</strong>基于"图形语法"的理念
+<span class="citation"
+data-cites="wilkinson_grammar_2005">[@wilkinson_grammar_2005]</span>。这涉及将输入数据与美学（数据如何可视化）分离：每个输入数据集可以通过多种不同的方式进行"映射"，包括在地图上的位置（由数据的<code>geometry</code>定义）、颜色和其他视觉变量。基本构建块是
+<code>tm_shape()</code>（定义输入数据：矢量或栅格对象），然后是一个或多个图层元素，如
+<code>tm_fill()</code> 和
+<code>tm_dots()</code>。以下代码块演示了这种分层结构，生成了图中呈现的地图：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add fill layer to nz shape</span></span><br><span class="line">tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_fill<span class="punctuation">(</span><span class="punctuation">)</span> </span><br><span class="line"><span class="comment"># Add border layer to nz shape</span></span><br><span class="line">tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_borders<span class="punctuation">(</span><span class="punctuation">)</span> </span><br><span class="line"><span class="comment"># Add fill and border layers to nz shape</span></span><br><span class="line">tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_fill<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_borders<span class="punctuation">(</span><span class="punctuation">)</span> </span><br></pre></td></tr></table></figure>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031738903.png" alt="" /><br />
-New Zealand’s shape plotted with fill (left), border (middle) and fill and border (right) layers added using tmap functions.</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031738903.png" />
+New Zealand's shape plotted with fill (left), border (middle) and fill
+and border (right) layers added using tmap functions.</p>
 <p>在这种情况下，传递给<code>tm_shape()</code>的对象是<code>nz</code>，一个代表新西兰各个地区的<code>sf</code>对象。添加图层以在视觉上表示<code>nz</code>，使用<code>tm_fill()</code>和<code>tm_borders()</code>分别在上图的左侧面板和中间面板中创建了阴影区。</p>
 <ul>
 <li><code>tm_fill()</code>: （多）多边形的阴影区域</li>
@@ -360,7 +392,9 @@ New Zealand’s shape plotted with fill (left), border (middle) and fill and bor
 <li><code>tm_polygons()</code>: （多）多边形的阴影区域和边界轮廓</li>
 <li><code>tm_lines()</code>: （多）线串的线条</li>
 <li><code>tm_symbols()</code>: （多）点、线串和多边形的符号</li>
-<li><code>tm_raster()</code>: 栅格数据的彩色单元格（也有用于具有三个图层的栅格的 <code>tm_rgb()</code>）</li>
+<li><code>tm_raster()</code>:
+栅格数据的彩色单元格（也有用于具有三个图层的栅格的
+<code>tm_rgb()</code>）</li>
 <li><code>tm_text()</code>: （多）点、线串和多边形的文本信息</li>
 </ul>
 <!--toDo: jn-->
@@ -369,278 +403,535 @@ New Zealand’s shape plotted with fill (left), border (middle) and fill and bor
 <!--toDo: jn-->
 <!-- update when/if -->
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line">&gt; `qtm()` 是一个方便的函数，用于创建快速、主题、地图（因此取了一个简洁的名字）。</span><br><span class="line">它非常简洁，对许多情况下都提供了很好的默认可视化效果：例如，`qtm(nz)` 等同于 `tm_shape(nz) + tm_fill() + tm_borders()`。</span><br><span class="line">此外，可以使用多个 `qtm()` 调用简洁地添加图层，例如 `qtm(nz) + qtm(nz_height)`。</span><br><span class="line">缺点是它使得单个图层的美学更难以控制，这就解释了为什么我们在本章中避免教授它。</span><br><span class="line">--&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="地图对象"><a class="markdownIt-Anchor" href="#地图对象"></a> 地图对象</h2>
-<p><strong>tmap</strong> 的一个有用特性是它能够存储代表地图的<em>对象</em>。下面的代码块演示了这一点，通过将上图中的最后一个绘图保存为一个<code>tmap</code>类型的对象（注意使用了<code>tm_polygons()</code>，它将<code>tm_fill()+tm_borders()</code>结合成一个函数）：</p>
+<h2 id="地图对象">地图对象</h2>
+<p><strong>tmap</strong>
+的一个有用特性是它能够存储代表地图的<em>对象</em>。下面的代码块演示了这一点，通过将上图中的最后一个绘图保存为一个<code>tmap</code>类型的对象（注意使用了<code>tm_polygons()</code>，它将<code>tm_fill()+tm_borders()</code>结合成一个函数）：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">map_nz <span class="operator">=</span> tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> tm_polygons<span class="punctuation">(</span><span class="punctuation">)</span></span><br><span class="line"><span class="built_in">class</span><span class="punctuation">(</span>map_nz<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;tmap&quot;</span></span><br></pre></td></tr></table></figure>
-<p><code>map_nz</code>可以进行绘图，例如添加额外的图层（如下所示），或者只需在控制台中运行 <code>map_nz</code>，这相当于 <code>print(map_nz)</code>。</p>
-<p>可以使用 <code>+ tm_shape(new_obj)</code> 添加新的<em>shapes</em>。在这种情况下，<code>new_obj</code>表示要绘制在之前图层之上的新的空间对象。当以这种方式添加新的形状shape时，所有后续的美学函数都会与它相关联，直到添加另一个新的shape为止。这种语法允许创建具有多个形状和图层的地图，如下面的代码块所示，使用函数 <code>tm_raster()</code>绘制一个栅格图层（设置<code>col_alpha</code> 使图层半透明）：</p>
+<p><code>map_nz</code>可以进行绘图，例如添加额外的图层（如下所示），或者只需在控制台中运行
+<code>map_nz</code>，这相当于 <code>print(map_nz)</code>。</p>
+<p>可以使用 <code>+ tm_shape(new_obj)</code>
+添加新的<em>shapes</em>。在这种情况下，<code>new_obj</code>表示要绘制在之前图层之上的新的空间对象。当以这种方式添加新的形状shape时，所有后续的美学函数都会与它相关联，直到添加另一个新的shape为止。这种语法允许创建具有多个形状和图层的地图，如下面的代码块所示，使用函数
+<code>tm_raster()</code>绘制一个栅格图层（设置<code>col_alpha</code>
+使图层半透明）：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">map_nz1 <span class="operator">=</span> map_nz <span class="operator">+</span></span><br><span class="line">  tm_shape<span class="punctuation">(</span>nz_elev<span class="punctuation">)</span> <span class="operator">+</span> tm_raster<span class="punctuation">(</span>col_alpha <span class="operator">=</span> <span class="number">0.7</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <!--toDo: jn-->
 <!-- explain the SpatRaster object downsampled to 1141 by 877 cells. message -->
-<p>Building on the previously created <code>map_nz</code> object, the preceding code creates a new map object <code>map_nz1</code> that contains another shape (<code>nz_elev</code>) representing average elevation across New Zealand (see Figure @ref(fig:tmlayers), left).<br />
-More shapes and layers can be added, as illustrated in the code chunk below which creates <code>nz_water</code>, representing New Zealand’s <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Territorial_waters">territorial waters</a>, and adds the resulting lines to an existing map object.</p>
+<p>Building on the previously created <code>map_nz</code> object, the
+preceding code creates a new map object <code>map_nz1</code> that
+contains another shape (<code>nz_elev</code>) representing average
+elevation across New Zealand (see Figure @ref(fig:tmlayers), left). More
+shapes and layers can be added, as illustrated in the code chunk below
+which creates <code>nz_water</code>, representing New Zealand's <a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Territorial_waters">territorial
+waters</a>, and adds the resulting lines to an existing map object.</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nz_water <span class="operator">=</span> st_union<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  st_buffer<span class="punctuation">(</span><span class="number">22200</span><span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  st_cast<span class="punctuation">(</span>to <span class="operator">=</span> <span class="string">&quot;LINESTRING&quot;</span><span class="punctuation">)</span></span><br><span class="line">map_nz2 <span class="operator">=</span> map_nz1 <span class="operator">+</span></span><br><span class="line">  tm_shape<span class="punctuation">(</span>nz_water<span class="punctuation">)</span> <span class="operator">+</span> tm_lines<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>There is no limit to the number of layers or shapes that can be added to <code>tmap</code> objects, and the same shape can even be used multiple times.<br />
-The final map illustrated in Figure @ref(fig:tmlayers) is created by adding a layer representing high points (stored in the object <code>nz_height</code>) onto the previously created <code>map_nz2</code> object with <code>tm_symbols()</code> (see <code>?tm_symbols</code> for details on <strong>tmap</strong>’s point plotting functions).<br />
-The resulting map, which has four layers, is illustrated in the right-hand panel of Figure @ref(fig:tmlayers):</p>
+<p>There is no limit to the number of layers or shapes that can be added
+to <code>tmap</code> objects, and the same shape can even be used
+multiple times. The final map illustrated in Figure @ref(fig:tmlayers)
+is created by adding a layer representing high points (stored in the
+object <code>nz_height</code>) onto the previously created
+<code>map_nz2</code> object with <code>tm_symbols()</code> (see
+<code>?tm_symbols</code> for details on <strong>tmap</strong>'s point
+plotting functions). The resulting map, which has four layers, is
+illustrated in the right-hand panel of Figure @ref(fig:tmlayers):</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">map_nz3 <span class="operator">=</span> map_nz2 <span class="operator">+</span></span><br><span class="line">  tm_shape<span class="punctuation">(</span>nz_height<span class="punctuation">)</span> <span class="operator">+</span> tm_symbols<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>A useful and little known feature of <strong>tmap</strong> is that multiple map objects can be arranged in a single ‘metaplot’ with <code>tmap_arrange()</code>.<br />
-This is demonstrated in the code chunk below which plots <code>map_nz1</code> to <code>map_nz3</code>, resulting in Figure @ref(fig:tmlayers).</p>
+<p>A useful and little known feature of <strong>tmap</strong> is that
+multiple map objects can be arranged in a single 'metaplot' with
+<code>tmap_arrange()</code>. This is demonstrated in the code chunk
+below which plots <code>map_nz1</code> to <code>map_nz3</code>,
+resulting in Figure @ref(fig:tmlayers).</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmap_arrange<span class="punctuation">(</span>map_nz1<span class="punctuation">,</span> map_nz2<span class="punctuation">,</span> map_nz3<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <div class="figure" style="text-align: center">
 <img data-src="09-mapping_files/figure-html/tmlayers-1.png" alt="Maps with additional layers added to the final map of Figure 9.1." width="100%" />
-<p class="caption">(\#fig:tmlayers)Maps with additional layers added to the final map of Figure 9.1.</p>
+<p class="caption">
+(#fig:tmlayers)Maps with additional layers added to the final map of
+Figure 9.1.
+</p>
 </div>
-<p>More elements can also be added with the <code>+</code> operator.<br />
-Aesthetic settings, however, are controlled by arguments to layer functions.</p>
-<h3 id="可视化变量"><a class="markdownIt-Anchor" href="#可视化变量"></a> 可视化变量</h3>
-<p>\index{tmap (package)!aesthetics} \index{tmap (package)!visual variables} The plots in the previous section demonstrate <strong>tmap</strong>’s default aesthetic settings.<br />
-Gray shades are used for <code>tm_fill()</code> and <code>tm_symbols()</code> layers and a continuous black line is used to represent lines created with <code>tm_lines()</code>.<br />
-Of course, these default values and other aesthetics can be overridden.<br />
-The purpose of this section is to show how.</p>
-<p>There are two main types of map aesthetics: those that change with the data and those that are constant.<br />
-Unlike <strong>ggplot2</strong>, which uses the helper function <code>aes()</code> to represent variable aesthetics, <strong>tmap</strong> accepts a few aesthetic arguments, depending on a selected layer type:</p>
+<p>More elements can also be added with the <code>+</code> operator.
+Aesthetic settings, however, are controlled by arguments to layer
+functions.</p>
+<h3 id="可视化变量">可视化变量</h3>
+<p> The plots in the previous section demonstrate
+<strong>tmap</strong>'s default aesthetic settings. Gray shades are used
+for <code>tm_fill()</code> and <code>tm_symbols()</code> layers and a
+continuous black line is used to represent lines created with
+<code>tm_lines()</code>. Of course, these default values and other
+aesthetics can be overridden. The purpose of this section is to show
+how.</p>
+<p>There are two main types of map aesthetics: those that change with
+the data and those that are constant. Unlike <strong>ggplot2</strong>,
+which uses the helper function <code>aes()</code> to represent variable
+aesthetics, <strong>tmap</strong> accepts a few aesthetic arguments,
+depending on a selected layer type:</p>
 <ul>
 <li><code>fill</code>: fill color of a polygon</li>
-<li><code>col</code>: color of a polygon border, line, point, or raster</li>
+<li><code>col</code>: color of a polygon border, line, point, or
+raster</li>
 <li><code>lwd</code>: line width</li>
 <li><code>lty</code>: line type</li>
 <li><code>size</code>: size of a symbol</li>
 <li><code>shape</code>: shape of a symbol</li>
 </ul>
-<p>Additionally, we may customize the fill and border color transparency using <code>fill_alpha</code> and <code>col_alpha</code>.</p>
-<p>To map a variable to an aesthetic, pass its column name to the corresponding argument, and to set a fixed aesthetic, pass the desired value instead.<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup><br />
-The impact of setting these with fixed values is illustrated in Figure @ref(fig:tmstatic).</p>
+<p>Additionally, we may customize the fill and border color transparency
+using <code>fill_alpha</code> and <code>col_alpha</code>.</p>
+<p>To map a variable to an aesthetic, pass its column name to the
+corresponding argument, and to set a fixed aesthetic, pass the desired
+value instead.<a href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a> The impact of setting these with
+fixed values is illustrated in Figure @ref(fig:tmstatic).</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ma1 <span class="operator">=</span> tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> tm_polygons<span class="punctuation">(</span>fill <span class="operator">=</span> <span class="string">&quot;red&quot;</span><span class="punctuation">)</span></span><br><span class="line">ma2 <span class="operator">=</span> tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> tm_polygons<span class="punctuation">(</span>fill <span class="operator">=</span> <span class="string">&quot;red&quot;</span><span class="punctuation">,</span> fill_alpha <span class="operator">=</span> <span class="number">0.3</span><span class="punctuation">)</span></span><br><span class="line">ma3 <span class="operator">=</span> tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> tm_polygons<span class="punctuation">(</span>col <span class="operator">=</span> <span class="string">&quot;blue&quot;</span><span class="punctuation">)</span></span><br><span class="line">ma4 <span class="operator">=</span> tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> tm_polygons<span class="punctuation">(</span>lwd <span class="operator">=</span> <span class="number">3</span><span class="punctuation">)</span></span><br><span class="line">ma5 <span class="operator">=</span> tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> tm_polygons<span class="punctuation">(</span>lty <span class="operator">=</span> <span class="number">2</span><span class="punctuation">)</span></span><br><span class="line">ma6 <span class="operator">=</span> tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> tm_polygons<span class="punctuation">(</span>fill <span class="operator">=</span> <span class="string">&quot;red&quot;</span><span class="punctuation">,</span> fill_alpha <span class="operator">=</span> <span class="number">0.3</span><span class="punctuation">,</span></span><br><span class="line">                                 col <span class="operator">=</span> <span class="string">&quot;blue&quot;</span><span class="punctuation">,</span> lwd <span class="operator">=</span> <span class="number">3</span><span class="punctuation">,</span> lty <span class="operator">=</span> <span class="number">2</span><span class="punctuation">)</span></span><br><span class="line">tmap_arrange<span class="punctuation">(</span>ma1<span class="punctuation">,</span> ma2<span class="punctuation">,</span> ma3<span class="punctuation">,</span> ma4<span class="punctuation">,</span> ma5<span class="punctuation">,</span> ma6<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <div class="figure" style="text-align: center">
 <img data-src="09-mapping_files/figure-html/tmstatic-1.png" alt="The impact of changing commonly used fill and border aesthetics to fixed values." width="100%" />
-<p class="caption">(\#fig:tmstatic)The impact of changing commonly used fill and border aesthetics to fixed values.</p>
+<p class="caption">
+(#fig:tmstatic)The impact of changing commonly used fill and border
+aesthetics to fixed values.
+</p>
 </div>
-<p>Like base R plots, arguments defining aesthetics can also receive values that vary.<br />
-Unlike the base R code below (which generates the left panel in Figure @ref(fig:tmcol)), <strong>tmap</strong> aesthetic arguments will not accept a numeric vector:</p>
+<p>Like base R plots, arguments defining aesthetics can also receive
+values that vary. Unlike the base R code below (which generates the left
+panel in Figure @ref(fig:tmcol)), <strong>tmap</strong> aesthetic
+arguments will not accept a numeric vector:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plot<span class="punctuation">(</span>st_geometry<span class="punctuation">(</span>nz<span class="punctuation">)</span><span class="punctuation">,</span> col <span class="operator">=</span> nz<span class="operator">$</span>Land_area<span class="punctuation">)</span>  <span class="comment"># works</span></span><br><span class="line">tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> tm_fill<span class="punctuation">(</span>col <span class="operator">=</span> nz<span class="operator">$</span>Land_area<span class="punctuation">)</span> <span class="comment"># fails</span></span><br><span class="line"><span class="comment">#&gt; Error: palette should be a character value</span></span><br></pre></td></tr></table></figure>
-<p>Instead <code>col</code> (and other aesthetics that can vary such as <code>lwd</code> for line layers and <code>size</code> for point layers) requires a character string naming an attribute associated with the geometry to be plotted.<br />
-Thus, one would achieve the desired result as follows (plotted in the right-hand panel of Figure @ref(fig:tmcol)):</p>
+<p>Instead <code>col</code> (and other aesthetics that can vary such as
+<code>lwd</code> for line layers and <code>size</code> for point layers)
+requires a character string naming an attribute associated with the
+geometry to be plotted. Thus, one would achieve the desired result as
+follows (plotted in the right-hand panel of Figure @ref(fig:tmcol)):</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> tm_fill<span class="punctuation">(</span>fill <span class="operator">=</span> <span class="string">&quot;Land_area&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <div class="figure" style="text-align: center">
 <img data-src="09-mapping_files/figure-html/tmcol-1.png" alt="Comparison of base (left) and tmap (right) handling of a numeric color field." width="45%" /><img data-src="09-mapping_files/figure-html/tmcol-2.png" alt="Comparison of base (left) and tmap (right) handling of a numeric color field." width="45%" />
-<p class="caption">(\#fig:tmcol)Comparison of base (left) and tmap (right) handling of a numeric color field.</p>
+<p class="caption">
+(#fig:tmcol)Comparison of base (left) and tmap (right) handling of a
+numeric color field.
+</p>
 </div>
-<p>Each visual variable has three related additional arguments, with prefixes of <code>.scale</code>, <code>.legend</code>, and <code>.free</code>.<br />
-For example, the <code>tm_fill()</code> function has arguments such as <code>fill</code>, <code>fill.scale</code>, <code>fill.legend</code>, and <code>fill.free</code>.<br />
-The <code>.scale</code> argument determines how the provided values are represented on the map and in the legend (Section @ref(scales)), while the <code>.legend</code> argument is used to customize the legend settings, such as its title, orientation, or position (Section @ref(legends)).<br />
-The <code>.free</code> argument is relevant only for maps with many facets to determine if each facet has the same or different scale and legend (Section @ref(faceted-maps)).</p>
-<h3 id="标度"><a class="markdownIt-Anchor" href="#标度"></a> 标度</h3>
-<p>\index{tmap (package)!scales} Scales control how the values are represented on the map and in the legend, and largely depend on the selected visual variable.<br />
-For example, when our visual variable is <code>col</code>, then <code>col.scale</code> controls how the colors of spatial objects are related to the provided values; and when our visual variable is <code>size</code>, then <code>size.scale</code> controls how the sizes represent the provided values.<br />
-By default, the used scale is <code>tm_scale()</code>, which selects the visual settings automatically given by the data type (factor, numeric, and integer).</p>
-<p>\index{tmap (package)!color breaks} Let’s see how the scales work by customizing polygons’ fill colors.<br />
-Color settings are an important part of map design – they can have a major impact on how spatial variability is portrayed as illustrated in Figure @ref(fig:tmpal).<br />
-This figure shows four ways of coloring regions in New Zealand depending on median income, from left to right (and demonstrated in the code chunk below):</p>
+<p>Each visual variable has three related additional arguments, with
+prefixes of <code>.scale</code>, <code>.legend</code>, and
+<code>.free</code>. For example, the <code>tm_fill()</code> function has
+arguments such as <code>fill</code>, <code>fill.scale</code>,
+<code>fill.legend</code>, and <code>fill.free</code>. The
+<code>.scale</code> argument determines how the provided values are
+represented on the map and in the legend (Section @ref(scales)), while
+the <code>.legend</code> argument is used to customize the legend
+settings, such as its title, orientation, or position (Section
+@ref(legends)). The <code>.free</code> argument is relevant only for
+maps with many facets to determine if each facet has the same or
+different scale and legend (Section @ref(faceted-maps)).</p>
+<h3 id="标度">标度</h3>
+<p> Scales control how the values are represented on the map and in the
+legend, and largely depend on the selected visual variable. For example,
+when our visual variable is <code>col</code>, then
+<code>col.scale</code> controls how the colors of spatial objects are
+related to the provided values; and when our visual variable is
+<code>size</code>, then <code>size.scale</code> controls how the sizes
+represent the provided values. By default, the used scale is
+<code>tm_scale()</code>, which selects the visual settings automatically
+given by the data type (factor, numeric, and integer).</p>
+<p> Let's see how the scales work by customizing polygons' fill colors.
+Color settings are an important part of map design -- they can have a
+major impact on how spatial variability is portrayed as illustrated in
+Figure @ref(fig:tmpal). This figure shows four ways of coloring regions
+in New Zealand depending on median income, from left to right (and
+demonstrated in the code chunk below):</p>
 <ul>
-<li>The default setting uses ‘pretty’ breaks, described in the next paragraph</li>
+<li>The default setting uses 'pretty' breaks, described in the next
+paragraph</li>
 <li><code>breaks</code> allows you to manually set the breaks</li>
-<li><code>n</code> sets the number of bins into which numeric variables are categorized</li>
-<li><code>values</code> defines the color scheme, for example, <code>BuGn</code></li>
+<li><code>n</code> sets the number of bins into which numeric variables
+are categorized</li>
+<li><code>values</code> defines the color scheme, for example,
+<code>BuGn</code></li>
 </ul>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> tm_polygons<span class="punctuation">(</span>fill <span class="operator">=</span> <span class="string">&quot;Median_income&quot;</span><span class="punctuation">)</span></span><br><span class="line">tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> tm_polygons<span class="punctuation">(</span>fill <span class="operator">=</span> <span class="string">&quot;Median_income&quot;</span><span class="punctuation">,</span></span><br><span class="line">                           fill.scale <span class="operator">=</span> tm_scale<span class="punctuation">(</span>breaks <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">30000</span><span class="punctuation">,</span> <span class="number">40000</span><span class="punctuation">,</span> <span class="number">50000</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> tm_polygons<span class="punctuation">(</span>fill <span class="operator">=</span> <span class="string">&quot;Median_income&quot;</span><span class="punctuation">,</span></span><br><span class="line">                           fill.scale <span class="operator">=</span> tm_scale<span class="punctuation">(</span>n <span class="operator">=</span> <span class="number">10</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> tm_polygons<span class="punctuation">(</span>fill <span class="operator">=</span> <span class="string">&quot;Median_income&quot;</span><span class="punctuation">,</span></span><br><span class="line">                           fill.scale <span class="operator">=</span> tm_scale<span class="punctuation">(</span>values <span class="operator">=</span> <span class="string">&quot;BuGn&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <div class="figure" style="text-align: center">
 <img data-src="09-mapping_files/figure-html/tmpal-1.png" alt="Illustration of settings that affect color settings. The results show (from left to right): default settings, manual breaks, n breaks, and the impact of changing the palette." width="100%" />
-<p class="caption">(\#fig:tmpal)Illustration of settings that affect color settings. The results show (from left to right): default settings, manual breaks, n breaks, and the impact of changing the palette.</p>
+<p class="caption">
+(#fig:tmpal)Illustration of settings that affect color settings. The
+results show (from left to right): default settings, manual breaks, n
+breaks, and the impact of changing the palette.
+</p>
 </div>
-<p>\BeginKnitrBlock{rmdnote}<div class="rmdnote">All of the above arguments (<code>breaks</code>, <code>n</code>, and <code>values</code>) also work for other types of visual variables.<br />
-For example, <code>values</code> expects a vector of colors or a palette name for <code>fill.scale</code> or <code>col.scale</code>, a vector of sizes for <code>size.scale</code>, or a vector of symbols for <code>shape.scale</code>.</div>\EndKnitrBlock{rmdnote}</p>
-<p>\index{tmap (package)!break styles} We are also able to customize scales using a family of functions that start with the <code>tm_scale_</code> prefix.<br />
-The most important ones are <code>tm_scale_intervals()</code>, <code>tm_scale_continuous()</code>, and <code>tm_scale_categorical()</code>.</p>
-<p>\index{tmap (package)!interval scale} The <code>tm_scale_intervals()</code> function splits the input data values into a set of intervals.<br />
-In addition to manually setting <code>breaks,</code> <strong>tmap</strong> allows users to specify algorithms to create breaks with the <code>style</code> argument automatically.<br />
-Here are some of the most useful scale functions (Figure @ref(fig:break-styles)):</p>
+
+<div class="rmdnote">
+All of the above arguments (<code>breaks</code>, <code>n</code>, and
+<code>values</code>) also work for other types of visual variables. For
+example, <code>values</code> expects a vector of colors or a palette
+name for <code>fill.scale</code> or <code>col.scale</code>, a vector of
+sizes for <code>size.scale</code>, or a vector of symbols for
+<code>shape.scale</code>.
+</div>
+<p> We are also able to customize scales using a family of functions
+that start with the <code>tm_scale_</code> prefix. The most important
+ones are <code>tm_scale_intervals()</code>,
+<code>tm_scale_continuous()</code>, and
+<code>tm_scale_categorical()</code>.</p>
+<p> The <code>tm_scale_intervals()</code> function splits the input data
+values into a set of intervals. In addition to manually setting
+<code>breaks,</code> <strong>tmap</strong> allows users to specify
+algorithms to create breaks with the <code>style</code> argument
+automatically. Here are some of the most useful scale functions (Figure
+@ref(fig:break-styles)):</p>
 <ul>
-<li><code>style = &quot;pretty&quot;</code>: the default setting, rounds breaks into whole numbers where possible and spaces them evenly</li>
-<li><code>style = &quot;equal&quot;</code>: divides input values into bins of equal range and is appropriate for variables with a uniform distribution (not recommended for variables with a skewed distribution as the resulting map may end-up having little color diversity)</li>
-<li><code>style = &quot;quantile&quot;</code>: ensures the same number of observations fall into each category (with the potential downside that bin ranges can vary widely)</li>
-<li><code>style = &quot;jenks&quot;</code>: identifies groups of similar values in the data and maximizes the differences between categories</li>
-<li><code>style = &quot;log10_pretty&quot;</code>: a common logarithmic (the logarithm to base 10) version of the regular pretty style used for variables with a right-skewed distribution</li>
+<li><code>style = "pretty"</code>: the default setting, rounds breaks
+into whole numbers where possible and spaces them evenly</li>
+<li><code>style = "equal"</code>: divides input values into bins of
+equal range and is appropriate for variables with a uniform distribution
+(not recommended for variables with a skewed distribution as the
+resulting map may end-up having little color diversity)</li>
+<li><code>style = "quantile"</code>: ensures the same number of
+observations fall into each category (with the potential downside that
+bin ranges can vary widely)</li>
+<li><code>style = "jenks"</code>: identifies groups of similar values in
+the data and maximizes the differences between categories</li>
+<li><code>style = "log10_pretty"</code>: a common logarithmic (the
+logarithm to base 10) version of the regular pretty style used for
+variables with a right-skewed distribution</li>
 </ul>
-<p>\BeginKnitrBlock{rmdnote}<div class="rmdnote">Although <code>style</code> is an argument of <strong>tmap</strong> functions, in fact it originates as an argument in <code>classInt::classIntervals()</code> — see the help page of this function for details.</div>\EndKnitrBlock{rmdnote}</p>
+
+<div class="rmdnote">
+Although <code>style</code> is an argument of <strong>tmap</strong>
+functions, in fact it originates as an argument in
+<code>classInt::classIntervals()</code> --- see the help page of this
+function for details.
+</div>
 <div class="figure" style="text-align: center">
 <img data-src="09-mapping_files/figure-html/break-styles-1.png" alt="Illustration of different interval scales' methods set using the style argument in tmap." width="100%" />
-<p class="caption">(\#fig:break-styles)Illustration of different interval scales' methods set using the style argument in tmap.</p>
+<p class="caption">
+(#fig:break-styles)Illustration of different interval scales' methods
+set using the style argument in tmap.
+</p>
 </div>
-<p>\index{tmap (package)!continuous scale} The <code>tm_scale_continuous()</code> function present a large number of colors over continuous color fields and are particularly suited for continuous rasters.<br />
-In case of variables with skewed distribution you can also use its variants – <code>tm_scale_continuous_log()</code> and <code>tm_scale_continuous_log1p()</code>.<br />
-\index{tmap (package)!categorical scale} Finally, <code>tm_scale_categorical()</code> was designed to represent categorical values and assures that each category receives a unique color (Figure @ref(fig:concat)).</p>
+<p> The <code>tm_scale_continuous()</code> function present a large
+number of colors over continuous color fields and are particularly
+suited for continuous rasters. In case of variables with skewed
+distribution you can also use its variants --
+<code>tm_scale_continuous_log()</code> and
+<code>tm_scale_continuous_log1p()</code>. Finally,
+<code>tm_scale_categorical()</code> was designed to represent
+categorical values and assures that each category receives a unique
+color (Figure @ref(fig:concat)).</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#&gt; Warning in strwidth(comp$text, units = &quot;inch&quot;, family = comp$fontfamily, : no</span><br><span class="line">#&gt; font could be found for family &quot;monospace&quot;</span><br><span class="line"></span><br><span class="line">#&gt; Warning in strwidth(comp$text, units = &quot;inch&quot;, family = comp$fontfamily, : no</span><br><span class="line">#&gt; font could be found for family &quot;monospace&quot;</span><br><span class="line">#&gt; Warning in strwidth(comp$text, units = &quot;inch&quot;, family = comp$fontfamily, : font</span><br><span class="line">#&gt; family &#x27;monospace&#x27; not found, will use &#x27;sans&#x27; instead</span><br><span class="line"></span><br><span class="line">#&gt; Warning in strwidth(comp$text, units = &quot;inch&quot;, family = comp$fontfamily, : font</span><br><span class="line">#&gt; family &#x27;monospace&#x27; not found, will use &#x27;sans&#x27; instead</span><br></pre></td></tr></table></figure>
 <div class="figure" style="text-align: center">
 <img data-src="09-mapping_files/figure-html/concat-1.png" alt="Illustration of continuous and categorical scales in tmap." width="100%" />
-<p class="caption">(\#fig:concat)Illustration of continuous and categorical scales in tmap.</p>
+<p class="caption">
+(#fig:concat)Illustration of continuous and categorical scales in tmap.
+</p>
 </div>
-<p>\index{tmap (package)!palettes} Palettes define the color ranges associated with the bins and determined by the <code>tm_scale_*()</code> functions, and its <code>breaks</code> and <code>n</code> arguments described above.<br />
-The default color palette is specified in <code>tm_layout()</code> (see Section @ref(layouts) to learn more); however, it could be quickly changed using the <code>values</code> argument.<br />
-It expects a vector of colors or a new color palette name, which can be find interactively with <code>cols4all::c4a_gui()</code>.<br />
-You can also add a <code>-</code> as the color palette name prefix to reverse the palette order.</p>
-<p>\BeginKnitrBlock{rmdnote}<div class="rmdnote">All of the default <code>values</code> of the visual variables, such as default color palettes for different types of input variables, can be found with <code>tmap_options()$values.var</code>.</div>\EndKnitrBlock{rmdnote}</p>
-<p>There are three main groups of color palettes\index{map making!color palettes}: categorical, sequential and diverging (Figure @ref(fig:colpal)), and each of them serves a different purpose.<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup><br />
-Categorical palettes consist of easily distinguishable colors and are most appropriate for categorical data without any particular order such as state names or land cover classes.<br />
-Colors should be intuitive: rivers should be blue, for example, and pastures green.<br />
-Avoid too many categories: maps with large legends and many colors can be uninterpretable.</p>
-<!--^[
+<p> Palettes define the color ranges associated with the bins and
+determined by the <code>tm_scale_*()</code> functions, and its
+<code>breaks</code> and <code>n</code> arguments described above. The
+default color palette is specified in <code>tm_layout()</code> (see
+Section @ref(layouts) to learn more); however, it could be quickly
+changed using the <code>values</code> argument. It expects a vector of
+colors or a new color palette name, which can be find interactively with
+<code>cols4all::c4a_gui()</code>. You can also add a <code>-</code> as
+the color palette name prefix to reverse the palette order.</p>
+
+<div class="rmdnote">
+All of the default <code>values</code> of the visual variables, such as
+default color palettes for different types of input variables, can be
+found with <code>tmap_options()$values.var</code>.
+</div>
+<p>There are three main groups of color palettes: categorical,
+sequential and diverging (Figure @ref(fig:colpal)), and each of them
+serves a different purpose.<a href="#fn2" class="footnote-ref"
+id="fnref2" role="doc-noteref"><sup>2</sup></a> Categorical palettes
+consist of easily distinguishable colors and are most appropriate for
+categorical data without any particular order such as state names or
+land cover classes. Colors should be intuitive: rivers should be blue,
+for example, and pastures green. Avoid too many categories: maps with
+large legends and many colors can be uninterpretable. <!--^[
 toDo:jn
 tmap4??
 `fill = "MAP_COLORS"` can be used in maps with a large number of individual polygons (for example, a map of individual countries) to create unique fill colors for adjacent polygons.]
--->
-<p>The second group is sequential palettes.<br />
-These follow a gradient, for example from light to dark colors (light colors often tend to represent lower values), and are appropriate for continuous (numeric) variables.<br />
-Sequential palettes can be single (<code>greens</code> goes from light to dark blue, for example) or multi-color/hue (<code>yl_gn_bu</code> is gradient from light yellow to blue via green, for example), as demonstrated in the code chunk below — output not shown, run the code yourself to see the results!</p>
+--></p>
+<p>The second group is sequential palettes. These follow a gradient, for
+example from light to dark colors (light colors often tend to represent
+lower values), and are appropriate for continuous (numeric) variables.
+Sequential palettes can be single (<code>greens</code> goes from light
+to dark blue, for example) or multi-color/hue (<code>yl_gn_bu</code> is
+gradient from light yellow to blue via green, for example), as
+demonstrated in the code chunk below --- output not shown, run the code
+yourself to see the results!</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> tm_polygons<span class="punctuation">(</span><span class="string">&quot;Median_income&quot;</span><span class="punctuation">,</span> fill.scale <span class="operator">=</span> tm_scale<span class="punctuation">(</span>values <span class="operator">=</span> <span class="string">&quot;greens&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> tm_polygons<span class="punctuation">(</span><span class="string">&quot;Median_income&quot;</span><span class="punctuation">,</span> fill.scale <span class="operator">=</span> tm_scale<span class="punctuation">(</span>values <span class="operator">=</span> <span class="string">&quot;yl_gn_bu&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>The third group, diverging palettes, typically range between three distinct colors (purple-white-green in Figure @ref(fig:colpal)) and are usually created by joining two single-color sequential palettes with the darker colors at each end.<br />
-Their main purpose is to visualize the difference from an important reference point, e.g., a certain temperature, the median household income or the mean probability for a drought event.<br />
-The reference point’s value can be adjusted in <strong>tmap</strong> using the <code>midpoint</code> argument.</p>
+<p>The third group, diverging palettes, typically range between three
+distinct colors (purple-white-green in Figure @ref(fig:colpal)) and are
+usually created by joining two single-color sequential palettes with the
+darker colors at each end. Their main purpose is to visualize the
+difference from an important reference point, e.g., a certain
+temperature, the median household income or the mean probability for a
+drought event. The reference point's value can be adjusted in
+<strong>tmap</strong> using the <code>midpoint</code> argument.</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> </span><br><span class="line">  tm_polygons<span class="punctuation">(</span><span class="string">&quot;Median_income&quot;</span><span class="punctuation">,</span></span><br><span class="line">              fill.scale <span class="operator">=</span> tm_scale_continuous<span class="punctuation">(</span>values <span class="operator">=</span> <span class="string">&quot;pu_gn_div&quot;</span><span class="punctuation">,</span> midpoint <span class="operator">=</span> <span class="number">28000</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <div class="figure" style="text-align: center">
 <img data-src="09-mapping_files/figure-html/colpal-1.png" alt="Examples of categorical, sequential and diverging palettes." width="75%" />
-<p class="caption">(\#fig:colpal)Examples of categorical, sequential and diverging palettes.</p>
+<p class="caption">
+(#fig:colpal)Examples of categorical, sequential and diverging palettes.
+</p>
 </div>
-<p>There are two important principles for consideration when working with colors: perceptibility and accessibility.<br />
-Firstly, colors on maps should match our perception.<br />
-This means that certain colors are viewed through our experience and also cultural lenses.<br />
-For example, green colors usually represent vegetation or lowlands and blue is connected with water or cool.<br />
-Color palettes should also be easy to understand to effectively convey information.<br />
-It should be clear which values are lower and which are higher, and colors should change gradually.</p>
-<!--toDo:jn--> <!-- update and improve --> <!-- This property is not preserved in the rainbow color palette; therefore, we suggest avoiding it in geographic data visualization [@borland_rainbow_2007]. --> <!-- Instead, [the viridis color palettes](https://cran.r-project.org/web/packages/viridis/), also available in **tmap**, can be used. --> Secondly, changes in colors should be accessible to the largest number of people.
-<p>Therefore, it is important to use colorblind friendly palettes as often as possible.<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup></p>
-<h3 id="图例"><a class="markdownIt-Anchor" href="#图例"></a> 图例</h3>
-<p>\index{tmap (package)!legends} After we decided on our visual variable and its properties, we should move our attention toward the related map legend style.<br />
-Using the <code>tm_legend()</code> function, we may change its title, position, orientation, or even disable it.<br />
-The most important argument in this function is <code>title</code>, which sets the title of the associated legend.<br />
-In general, a map legend title should provide two pieces of information: what the legend represents and what are the units of the presented variable.<br />
-The following code chunk demonstrates this functionality by providing a more attractive name than the variable name <code>Land_area</code> (note the use of <code>expression()</code> to create superscript text):</p>
+<p>There are two important principles for consideration when working
+with colors: perceptibility and accessibility. Firstly, colors on maps
+should match our perception. This means that certain colors are viewed
+through our experience and also cultural lenses. For example, green
+colors usually represent vegetation or lowlands and blue is connected
+with water or cool. Color palettes should also be easy to understand to
+effectively convey information. It should be clear which values are
+lower and which are higher, and colors should change gradually.
+<!--toDo:jn--> <!-- update and improve -->
+<!-- This property is not preserved in the rainbow color palette; therefore, we suggest avoiding it in geographic data visualization [@borland_rainbow_2007]. -->
+<!-- Instead, [the viridis color palettes](https://cran.r-project.org/web/packages/viridis/), also available in **tmap**, can be used. -->
+Secondly, changes in colors should be accessible to the largest number
+of people. Therefore, it is important to use colorblind friendly
+palettes as often as possible.<a href="#fn3" class="footnote-ref"
+id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<h3 id="图例">图例</h3>
+<p> After we decided on our visual variable and its properties, we
+should move our attention toward the related map legend style. Using the
+<code>tm_legend()</code> function, we may change its title, position,
+orientation, or even disable it. The most important argument in this
+function is <code>title</code>, which sets the title of the associated
+legend. In general, a map legend title should provide two pieces of
+information: what the legend represents and what are the units of the
+presented variable. The following code chunk demonstrates this
+functionality by providing a more attractive name than the variable name
+<code>Land_area</code> (note the use of <code>expression()</code> to
+create superscript text):</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">legend_title <span class="operator">=</span> <span class="built_in">expression</span><span class="punctuation">(</span><span class="string">&quot;Area (km&quot;</span><span class="operator">^</span><span class="number">2</span><span class="operator">*</span><span class="string">&quot;)&quot;</span><span class="punctuation">)</span></span><br><span class="line">map_nza <span class="operator">=</span> tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_polygons<span class="punctuation">(</span>fill <span class="operator">=</span> <span class="string">&quot;Land_area&quot;</span><span class="punctuation">,</span> fill.legend <span class="operator">=</span> tm_legend<span class="punctuation">(</span>title <span class="operator">=</span> legend_title<span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>The default legend orientation in <strong>tmap</strong> is <code>&quot;portrait&quot;</code>, however, an alternative legend orientation, <code>&quot;landscape&quot;</code>, is also possible.<br />
-Other than that, we can also customize the location of the legend using the <code>position</code> argument.</p>
+<p>The default legend orientation in <strong>tmap</strong> is
+<code>"portrait"</code>, however, an alternative legend orientation,
+<code>"landscape"</code>, is also possible. Other than that, we can also
+customize the location of the legend using the <code>position</code>
+argument.</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">map_nza2 <span class="operator">=</span> tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_polygons<span class="punctuation">(</span>fill <span class="operator">=</span> <span class="string">&quot;Land_area&quot;</span><span class="punctuation">,</span> fill.legend <span class="operator">=</span> tm_legend<span class="punctuation">(</span>title <span class="operator">=</span> legend_title<span class="punctuation">,</span></span><br><span class="line">                                                          orientation <span class="operator">=</span> <span class="string">&quot;landscape&quot;</span><span class="punctuation">,</span></span><br><span class="line">                                                          position <span class="operator">=</span> tm_pos_out<span class="punctuation">(</span><span class="string">&quot;center&quot;</span><span class="punctuation">,</span> <span class="string">&quot;bottom&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>The legend position (and also the position of several other map elements in <strong>tmap</strong>) can be customized using one of a few functions.<br />
-The two most important are:</p>
+<p>The legend position (and also the position of several other map
+elements in <strong>tmap</strong>) can be customized using one of a few
+functions. The two most important are:</p>
 <ul>
-<li><code>tm_pos_out()</code>: the default, adds the legend outside of the map frame area. We can customize its location with two values that represent the horizontal position (<code>&quot;left&quot;</code>, <code>&quot;center&quot;</code>, or <code>&quot;right&quot;</code>), and the vertical position (<code>&quot;bottom&quot;</code>, <code>&quot;center&quot;</code>, or <code>&quot;top&quot;</code>)</li>
-<li><code>tm_pos_in()</code>: puts the legend inside of the map frame area. We may decided on its position using two arguments, where the first one can be <code>&quot;left&quot;</code>, <code>&quot;center&quot;</code>, or <code>&quot;right&quot;</code>, and the second one can be <code>&quot;bottom&quot;</code>, <code>&quot;center&quot;</code>, or <code>&quot;top&quot;</code>.</li>
+<li><code>tm_pos_out()</code>: the default, adds the legend outside of
+the map frame area. We can customize its location with two values that
+represent the horizontal position (<code>"left"</code>,
+<code>"center"</code>, or <code>"right"</code>), and the vertical
+position (<code>"bottom"</code>, <code>"center"</code>, or
+<code>"top"</code>)</li>
+<li><code>tm_pos_in()</code>: puts the legend inside of the map frame
+area. We may decided on its position using two arguments, where the
+first one can be <code>"left"</code>, <code>"center"</code>, or
+<code>"right"</code>, and the second one can be <code>"bottom"</code>,
+<code>"center"</code>, or <code>"top"</code>.</li>
 </ul>
-<p>Alternatively, we may just provide a vector of two values (or two numbers between 0 and 1) here – and in such case, the legend will be put inside the map frame.</p>
-<h3 id="布局"><a class="markdownIt-Anchor" href="#布局"></a> 布局</h3>
-<p>\index{tmap (package)!layouts} The map layout refers to the combination of all map elements into a cohesive map.<br />
-Map elements include among others the objects to be mapped, the title, the scale bar, the map grid, and margins, while the color settings covered in the previous section relate to the palette and break-points used to affect how the map looks.<br />
-Both may result in subtle changes that can have an equally large impact on the impression left by your maps.</p>
-<p>Additional map elements such as graticules \index{tmap (package)!graticules}, north arrows\index{tmap (package)!north arrows}, scale bars\index{tmap (package)!scale bars} and map titles have their own functions: <code>tm_graticules()</code>, <code>tm_compass()</code>, <code>tm_scalebar()</code>, and <code>tm_title()</code> (Figure @ref(fig:na-sb)).<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup></p>
+<p>Alternatively, we may just provide a vector of two values (or two
+numbers between 0 and 1) here -- and in such case, the legend will be
+put inside the map frame.</p>
+<h3 id="布局">布局</h3>
+<p> The map layout refers to the combination of all map elements into a
+cohesive map. Map elements include among others the objects to be
+mapped, the title, the scale bar, the map grid, and margins, while the
+color settings covered in the previous section relate to the palette and
+break-points used to affect how the map looks. Both may result in subtle
+changes that can have an equally large impact on the impression left by
+your maps.</p>
+<p>Additional map elements such as graticules , north arrows, scale bars
+and map titles have their own functions: <code>tm_graticules()</code>,
+<code>tm_compass()</code>, <code>tm_scalebar()</code>, and
+<code>tm_title()</code> (Figure @ref(fig:na-sb)).<a href="#fn4"
+class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">map_nz <span class="operator">+</span> </span><br><span class="line">  tm_graticules<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_compass<span class="punctuation">(</span>type <span class="operator">=</span> <span class="string">&quot;8star&quot;</span><span class="punctuation">,</span> position <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;left&quot;</span><span class="punctuation">,</span> <span class="string">&quot;top&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_scalebar<span class="punctuation">(</span>breaks <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">100</span><span class="punctuation">,</span> <span class="number">200</span><span class="punctuation">)</span><span class="punctuation">,</span> text.size <span class="operator">=</span> <span class="number">1</span><span class="punctuation">,</span> position <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;left&quot;</span><span class="punctuation">,</span> <span class="string">&quot;top&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_title<span class="punctuation">(</span><span class="string">&quot;New Zealand&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <div class="figure" style="text-align: center">
 <img data-src="09-mapping_files/figure-html/na-sb-1.png" alt="Map with additional elements - a north arrow and scale bar." width="65%" />
-<p class="caption">(\#fig:na-sb)Map with additional elements - a north arrow and scale bar.</p>
+<p class="caption">
+(#fig:na-sb)Map with additional elements - a north arrow and scale bar.
+</p>
 </div>
-<p><strong>tmap</strong> also allows a wide variety of layout settings to be changed, some of which, produced using the following code (see <code>args(tm_layout)</code> or <code>?tm_layout</code> for a full list), are illustrated in Figure @ref(fig:layout1):</p>
+<p><strong>tmap</strong> also allows a wide variety of layout settings
+to be changed, some of which, produced using the following code (see
+<code>args(tm_layout)</code> or <code>?tm_layout</code> for a full
+list), are illustrated in Figure @ref(fig:layout1):</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">map_nz <span class="operator">+</span> tm_layout<span class="punctuation">(</span>scale <span class="operator">=</span> <span class="number">4</span><span class="punctuation">)</span></span><br><span class="line">map_nz <span class="operator">+</span> tm_layout<span class="punctuation">(</span>bg.color <span class="operator">=</span> <span class="string">&quot;lightblue&quot;</span><span class="punctuation">)</span></span><br><span class="line">map_nz <span class="operator">+</span> tm_layout<span class="punctuation">(</span>frame <span class="operator">=</span> <span class="literal">FALSE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <div class="figure" style="text-align: center">
 <img data-src="09-mapping_files/figure-html/layout1-1.png" alt="Layout options specified by (from left to right) title, scale, bg.color and frame arguments." width="100%" />
-<p class="caption">(\#fig:layout1)Layout options specified by (from left to right) title, scale, bg.color and frame arguments.</p>
+<p class="caption">
+(#fig:layout1)Layout options specified by (from left to right) title,
+scale, bg.color and frame arguments.
+</p>
 </div>
-<p>The other arguments in <code>tm_layout()</code> provide control over many more aspects of the map in relation to the canvas on which it is placed.<br />
-Here are some useful layout settings (some of which are illustrated in Figure @ref(fig:layout2)):</p>
+<p>The other arguments in <code>tm_layout()</code> provide control over
+many more aspects of the map in relation to the canvas on which it is
+placed. Here are some useful layout settings (some of which are
+illustrated in Figure @ref(fig:layout2)):</p>
 <ul>
-<li>Margin settings including <code>outer.margin</code> and <code>inner.margin</code></li>
-<li>Font settings controlled by <code>fontface</code> and <code>fontfamily</code></li>
-<li>Legend settings including options such as <code>legend.show</code> (whether or not to show the legend) <code>legend.orientation</code>, <code>legend.position</code>, and <code>legend.frame</code></li>
-<li>Frame width (<code>frame.lwd</code>) and an option to allow double lines (<code>frame.double.line</code>)</li>
-<li>Color settings controlling <code>color.sepia.intensity</code> (how <em>yellowy</em> the map looks) and <code>color.saturation</code> (a color-grayscale)</li>
+<li>Margin settings including <code>outer.margin</code> and
+<code>inner.margin</code></li>
+<li>Font settings controlled by <code>fontface</code> and
+<code>fontfamily</code></li>
+<li>Legend settings including options such as <code>legend.show</code>
+(whether or not to show the legend) <code>legend.orientation</code>,
+<code>legend.position</code>, and <code>legend.frame</code></li>
+<li>Frame width (<code>frame.lwd</code>) and an option to allow double
+lines (<code>frame.double.line</code>)</li>
+<li>Color settings controlling <code>color.sepia.intensity</code> (how
+<em>yellowy</em> the map looks) and <code>color.saturation</code> (a
+color-grayscale)</li>
 </ul>
 <div class="figure" style="text-align: center">
 <img data-src="09-mapping_files/figure-html/layout2-1.png" alt="Illustration of selected layout options." width="100%" />
-<p class="caption">(\#fig:layout2)Illustration of selected layout options.</p>
+<p class="caption">
+(#fig:layout2)Illustration of selected layout options.
+</p>
 </div>
-<h3 id="地图分面"><a class="markdownIt-Anchor" href="#地图分面"></a> 地图分面</h3>
-<p>\index{map making!faceted maps} \index{tmap (package)!faceted maps} Faceted maps, also referred to as ‘small multiples’, are composed of many maps arranged side-by-side, and sometimes stacked vertically [@meulemans_small_2017].<br />
-Facets enable the visualization of how spatial relationships change with respect to another variable, such as time.<br />
-The changing populations of settlements, for example, can be represented in a faceted map with each panel representing the population at a particular moment in time.<br />
-The time dimension could be represented via another <em>visual variable</em> such as color.<br />
-However, this risks cluttering the map because it will involve multiple overlapping points (cities do not tend to move over time!).</p>
-<p>Typically all individual facets in a faceted map contain the same geometry data repeated multiple times, once for each column in the attribute data (this is the default plotting method for <code>sf</code> objects, see Chapter @ref(spatial-class)).<br />
-However, facets can also represent shifting geometries such as the evolution of a point pattern over time.<br />
-This use case of faceted plot is illustrated in Figure @ref(fig:urban-facet).</p>
+<h3 id="地图分面">地图分面</h3>
+<p> Faceted maps, also referred to as 'small multiples', are composed of
+many maps arranged side-by-side, and sometimes stacked vertically <span
+class="citation"
+data-cites="meulemans_small_2017">[@meulemans_small_2017]</span>. Facets
+enable the visualization of how spatial relationships change with
+respect to another variable, such as time. The changing populations of
+settlements, for example, can be represented in a faceted map with each
+panel representing the population at a particular moment in time. The
+time dimension could be represented via another <em>visual variable</em>
+such as color. However, this risks cluttering the map because it will
+involve multiple overlapping points (cities do not tend to move over
+time!).</p>
+<p>Typically all individual facets in a faceted map contain the same
+geometry data repeated multiple times, once for each column in the
+attribute data (this is the default plotting method for <code>sf</code>
+objects, see Chapter @ref(spatial-class)). However, facets can also
+represent shifting geometries such as the evolution of a point pattern
+over time. This use case of faceted plot is illustrated in Figure
+@ref(fig:urban-facet).</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">urb_1970_2030 <span class="operator">=</span> urban_agglomerations <span class="operator">|&gt;</span> </span><br><span class="line">  filter<span class="punctuation">(</span>year <span class="operator">%in%</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">1970</span><span class="punctuation">,</span> <span class="number">1990</span><span class="punctuation">,</span> <span class="number">2010</span><span class="punctuation">,</span> <span class="number">2030</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line">tm_shape<span class="punctuation">(</span>world<span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_polygons<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_shape<span class="punctuation">(</span>urb_1970_2030<span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_symbols<span class="punctuation">(</span>fill <span class="operator">=</span> <span class="string">&quot;black&quot;</span><span class="punctuation">,</span> col <span class="operator">=</span> <span class="string">&quot;white&quot;</span><span class="punctuation">,</span> size <span class="operator">=</span> <span class="string">&quot;population_millions&quot;</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_facets_wrap<span class="punctuation">(</span>by <span class="operator">=</span> <span class="string">&quot;year&quot;</span><span class="punctuation">,</span> nrow <span class="operator">=</span> <span class="number">2</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <div class="figure" style="text-align: center">
 <img data-src="09-mapping_files/figure-html/urban-facet-1.png" alt="Faceted map showing the top 30 largest urban agglomerations from 1970 to 2030 based on population projections by the United Nations." width="100%" />
-<p class="caption">(\#fig:urban-facet)Faceted map showing the top 30 largest urban agglomerations from 1970 to 2030 based on population projections by the United Nations.</p>
+<p class="caption">
+(#fig:urban-facet)Faceted map showing the top 30 largest urban
+agglomerations from 1970 to 2030 based on population projections by the
+United Nations.
+</p>
 </div>
-<p>The preceding code chunk demonstrates key features of faceted maps created using the <code>tm_facets_wrap()</code> function:</p>
+<p>The preceding code chunk demonstrates key features of faceted maps
+created using the <code>tm_facets_wrap()</code> function:</p>
 <ul>
-<li>Shapes that do not have a facet variable are repeated (the countries in <code>world</code> in this case)</li>
-<li>The <code>by</code> argument which varies depending on a variable (<code>&quot;year&quot;</code> in this case)</li>
-<li>The <code>nrow</code>/<code>ncol</code> setting specifying the number of rows and columns that facets should be arranged into</li>
+<li>Shapes that do not have a facet variable are repeated (the countries
+in <code>world</code> in this case)</li>
+<li>The <code>by</code> argument which varies depending on a variable
+(<code>"year"</code> in this case)</li>
+<li>The <code>nrow</code>/<code>ncol</code> setting specifying the
+number of rows and columns that facets should be arranged into</li>
 </ul>
-<p>Alternatively, it is possible to use the <code>tm_facets_grid()</code> function that allows to have facets based on up to three different variables: one for <code>rows</code>, one for <code>columns</code>, and possibly one for <code>pages</code>.</p>
-<p>In addition to their utility for showing changing spatial relationships, faceted maps are also useful as the foundation for animated maps (see Section @ref(animated-maps)).</p>
-<h3 id="插图地图"><a class="markdownIt-Anchor" href="#插图地图"></a> 插图地图</h3>
-<p>\index{map making!inset maps} \index{tmap (package)!inset maps} An inset map is a smaller map rendered within or next to the main map.<br />
-It could serve many different purposes, including providing a context (Figure @ref(fig:insetmap1)) or bringing some non-contiguous regions closer to ease their comparison (Figure @ref(fig:insetmap2)).<br />
-They could be also used to focus on a smaller area in more detail or to cover the same area as the map, but representing a different topic.</p>
-<p>In the example below, we create a map of the central part of New Zealand’s Southern Alps.<br />
-Our inset map will show where the main map is in relation to the whole New Zealand.<br />
-The first step is to define the area of interest, which can be done by creating a new spatial object, <code>nz_region</code>.</p>
+<p>Alternatively, it is possible to use the
+<code>tm_facets_grid()</code> function that allows to have facets based
+on up to three different variables: one for <code>rows</code>, one for
+<code>columns</code>, and possibly one for <code>pages</code>.</p>
+<p>In addition to their utility for showing changing spatial
+relationships, faceted maps are also useful as the foundation for
+animated maps (see Section @ref(animated-maps)).</p>
+<h3 id="插图地图">插图地图</h3>
+<p> An inset map is a smaller map rendered within or next to the main
+map. It could serve many different purposes, including providing a
+context (Figure @ref(fig:insetmap1)) or bringing some non-contiguous
+regions closer to ease their comparison (Figure @ref(fig:insetmap2)).
+They could be also used to focus on a smaller area in more detail or to
+cover the same area as the map, but representing a different topic.</p>
+<p>In the example below, we create a map of the central part of New
+Zealand's Southern Alps. Our inset map will show where the main map is
+in relation to the whole New Zealand. The first step is to define the
+area of interest, which can be done by creating a new spatial object,
+<code>nz_region</code>.</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nz_region <span class="operator">=</span> st_bbox<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span>xmin <span class="operator">=</span> <span class="number">1340000</span><span class="punctuation">,</span> xmax <span class="operator">=</span> <span class="number">1450000</span><span class="punctuation">,</span></span><br><span class="line">                      ymin <span class="operator">=</span> <span class="number">5130000</span><span class="punctuation">,</span> ymax <span class="operator">=</span> <span class="number">5210000</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">                    crs <span class="operator">=</span> st_crs<span class="punctuation">(</span>nz_height<span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  st_as_sfc<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>In the second step, we create a base map showing the New Zealand’s Southern Alps area.<br />
-This is a place where the most important message is stated.</p>
+<p>In the second step, we create a base map showing the New Zealand's
+Southern Alps area. This is a place where the most important message is
+stated.</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nz_height_map <span class="operator">=</span> tm_shape<span class="punctuation">(</span>nz_elev<span class="punctuation">,</span> bbox <span class="operator">=</span> nz_region<span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_raster<span class="punctuation">(</span>col.scale <span class="operator">=</span> tm_scale_continuous<span class="punctuation">(</span>values <span class="operator">=</span> <span class="string">&quot;YlGn&quot;</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">            col.legend <span class="operator">=</span> tm_legend<span class="punctuation">(</span>position <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;left&quot;</span><span class="punctuation">,</span> <span class="string">&quot;top&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_shape<span class="punctuation">(</span>nz_height<span class="punctuation">)</span> <span class="operator">+</span> tm_symbols<span class="punctuation">(</span>shape <span class="operator">=</span> <span class="number">2</span><span class="punctuation">,</span> col <span class="operator">=</span> <span class="string">&quot;red&quot;</span><span class="punctuation">,</span> size <span class="operator">=</span> <span class="number">1</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_scalebar<span class="punctuation">(</span>position <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;left&quot;</span><span class="punctuation">,</span> <span class="string">&quot;bottom&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>The third step consists of the inset map creation.<br />
-It gives a context and helps to locate the area of interest.<br />
-Importantly, this map needs to clearly indicate the location of the main map, for example by stating its borders.</p>
+<p>The third step consists of the inset map creation. It gives a context
+and helps to locate the area of interest. Importantly, this map needs to
+clearly indicate the location of the main map, for example by stating
+its borders.</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nz_map <span class="operator">=</span> tm_shape<span class="punctuation">(</span>nz<span class="punctuation">)</span> <span class="operator">+</span> tm_polygons<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_shape<span class="punctuation">(</span>nz_height<span class="punctuation">)</span> <span class="operator">+</span> tm_symbols<span class="punctuation">(</span>shape <span class="operator">=</span> <span class="number">2</span><span class="punctuation">,</span> col <span class="operator">=</span> <span class="string">&quot;red&quot;</span><span class="punctuation">,</span> size <span class="operator">=</span> <span class="number">0.1</span><span class="punctuation">)</span> <span class="operator">+</span> </span><br><span class="line">  tm_shape<span class="punctuation">(</span>nz_region<span class="punctuation">)</span> <span class="operator">+</span> tm_borders<span class="punctuation">(</span>lwd <span class="operator">=</span> <span class="number">3</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_layout<span class="punctuation">(</span>bg.color <span class="operator">=</span> <span class="string">&quot;lightblue&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>One of the main differences between regular charts (e.g., scatterplots) and maps is that the input data determine the aspect ratio of maps.<br />
-Thus, in this case, we need to calculate the aspect ratios of our two main datasets, <code>nz_region</code> and <code>nz</code>.<br />
-The following function, <code>norm_dim()</code> returns the normalized width (<code>&quot;w&quot;</code>) and height (<code>&quot;h&quot;</code>) of the object (as <code>&quot;snpc&quot;</code> units understood my the graphic device).</p>
+<p>One of the main differences between regular charts (e.g.,
+scatterplots) and maps is that the input data determine the aspect ratio
+of maps. Thus, in this case, we need to calculate the aspect ratios of
+our two main datasets, <code>nz_region</code> and <code>nz</code>. The
+following function, <code>norm_dim()</code> returns the normalized width
+(<code>"w"</code>) and height (<code>"h"</code>) of the object (as
+<code>"snpc"</code> units understood my the graphic device).</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>grid<span class="punctuation">)</span></span><br><span class="line">norm_dim <span class="operator">=</span> <span class="keyword">function</span><span class="punctuation">(</span>obj<span class="punctuation">)</span><span class="punctuation">&#123;</span></span><br><span class="line">    bbox <span class="operator">=</span> st_bbox<span class="punctuation">(</span>obj<span class="punctuation">)</span></span><br><span class="line">    width <span class="operator">=</span> bbox<span class="punctuation">[[</span><span class="string">&quot;xmax&quot;</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">-</span> bbox<span class="punctuation">[[</span><span class="string">&quot;xmin&quot;</span><span class="punctuation">]</span><span class="punctuation">]</span></span><br><span class="line">    height <span class="operator">=</span> bbox<span class="punctuation">[[</span><span class="string">&quot;ymax&quot;</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">-</span> bbox<span class="punctuation">[[</span><span class="string">&quot;ymin&quot;</span><span class="punctuation">]</span><span class="punctuation">]</span></span><br><span class="line">    w <span class="operator">=</span> width <span class="operator">/</span> <span class="built_in">max</span><span class="punctuation">(</span>width<span class="punctuation">,</span> height<span class="punctuation">)</span></span><br><span class="line">    h <span class="operator">=</span> height <span class="operator">/</span> <span class="built_in">max</span><span class="punctuation">(</span>width<span class="punctuation">,</span> height<span class="punctuation">)</span></span><br><span class="line">    <span class="built_in">return</span><span class="punctuation">(</span>unit<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span>w<span class="punctuation">,</span> h<span class="punctuation">)</span><span class="punctuation">,</span> <span class="string">&quot;snpc&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line">main_dim <span class="operator">=</span> norm_dim<span class="punctuation">(</span>nz_region<span class="punctuation">)</span></span><br><span class="line">ins_dim <span class="operator">=</span> norm_dim<span class="punctuation">(</span>nz<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>Next, knowing the aspect ratios, we need to specify the sizes and locations of our two maps – the main map and the inset map – using the <code>viewport()</code> function.<br />
-A viewport is part of a graphics device we use to draw the graphical elements at a given moment.<br />
-The viewport of our main map is just the representation of its aspect ratio.</p>
+<p>Next, knowing the aspect ratios, we need to specify the sizes and
+locations of our two maps -- the main map and the inset map -- using the
+<code>viewport()</code> function. A viewport is part of a graphics
+device we use to draw the graphical elements at a given moment. The
+viewport of our main map is just the representation of its aspect
+ratio.</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">main_vp <span class="operator">=</span> viewport<span class="punctuation">(</span>width <span class="operator">=</span> main_dim<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">,</span> height <span class="operator">=</span> main_dim<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>On the other hand, the viewport of the inset map needs to specify its size and location.<br />
-Here, we would make the inset map twice smaller as the main one by multiplying the width and height by 0.5, and we will locate it 0.5 cm from the bottom right of the main map frame.</p>
+<p>On the other hand, the viewport of the inset map needs to specify its
+size and location. Here, we would make the inset map twice smaller as
+the main one by multiplying the width and height by 0.5, and we will
+locate it 0.5 cm from the bottom right of the main map frame.</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ins_vp <span class="operator">=</span> viewport<span class="punctuation">(</span>width <span class="operator">=</span> ins_dim<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span> <span class="operator">*</span> <span class="number">0.5</span><span class="punctuation">,</span> height <span class="operator">=</span> ins_dim<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span> <span class="operator">*</span> <span class="number">0.5</span><span class="punctuation">,</span></span><br><span class="line">                  x <span class="operator">=</span> unit<span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="string">&quot;npc&quot;</span><span class="punctuation">)</span> <span class="operator">-</span> unit<span class="punctuation">(</span><span class="number">0.5</span><span class="punctuation">,</span> <span class="string">&quot;cm&quot;</span><span class="punctuation">)</span><span class="punctuation">,</span> y <span class="operator">=</span> unit<span class="punctuation">(</span><span class="number">0.5</span><span class="punctuation">,</span> <span class="string">&quot;cm&quot;</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">                  just <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;right&quot;</span><span class="punctuation">,</span> <span class="string">&quot;bottom&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>Finally, we combine the two maps by creating a new, blank canvas, printing out the main map, and then placing the inset map inside of the main map viewport.</p>
+<p>Finally, we combine the two maps by creating a new, blank canvas,
+printing out the main map, and then placing the inset map inside of the
+main map viewport.</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grid.newpage<span class="punctuation">(</span><span class="punctuation">)</span></span><br><span class="line">print<span class="punctuation">(</span>nz_height_map<span class="punctuation">,</span> vp <span class="operator">=</span> main_vp<span class="punctuation">)</span></span><br><span class="line">pushViewport<span class="punctuation">(</span>main_vp<span class="punctuation">)</span></span><br><span class="line">print<span class="punctuation">(</span>nz_map<span class="punctuation">,</span> vp <span class="operator">=</span> ins_vp<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <div class="figure" style="text-align: center">
 <img data-src="09-mapping_files/figure-html/insetmap1-1.png" alt="Inset map providing a context - location of the central part of the Southern Alps in New Zealand." width="100%" />
-<p class="caption">(\#fig:insetmap1)Inset map providing a context - location of the central part of the Southern Alps in New Zealand.</p>
+<p class="caption">
+(#fig:insetmap1)Inset map providing a context - location of the central
+part of the Southern Alps in New Zealand.
+</p>
 </div>
-<p>Inset map can be saved to file either by using a graphic device (see Section @ref(visual-outputs)) or the <code>tmap_save()</code> function and its arguments - <code>insets_tm</code> and <code>insets_vp</code>.</p>
-<p>Inset maps are also used to create one map of non-contiguous areas.<br />
-Probably, the most often used example is a map of the United States, which consists of the contiguous United States, Hawaii and Alaska.<br />
-It is very important to find the best projection for each individual inset in these types of cases (see Chapter @ref(reproj-geo-data) to learn more).<br />
-We can use US National Atlas Equal Area for the map of the contiguous United States by putting its EPSG code in the <code>projection</code> argument of <code>tm_shape()</code>.</p>
+<p>Inset map can be saved to file either by using a graphic device (see
+Section @ref(visual-outputs)) or the <code>tmap_save()</code> function
+and its arguments - <code>insets_tm</code> and
+<code>insets_vp</code>.</p>
+<p>Inset maps are also used to create one map of non-contiguous areas.
+Probably, the most often used example is a map of the United States,
+which consists of the contiguous United States, Hawaii and Alaska. It is
+very important to find the best projection for each individual inset in
+these types of cases (see Chapter @ref(reproj-geo-data) to learn more).
+We can use US National Atlas Equal Area for the map of the contiguous
+United States by putting its EPSG code in the <code>projection</code>
+argument of <code>tm_shape()</code>.</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">us_states_map <span class="operator">=</span> tm_shape<span class="punctuation">(</span>us_states<span class="punctuation">,</span> projection <span class="operator">=</span> <span class="string">&quot;EPSG:2163&quot;</span><span class="punctuation">)</span> <span class="operator">+</span> tm_polygons<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">+</span> </span><br><span class="line">  tm_layout<span class="punctuation">(</span>frame <span class="operator">=</span> <span class="literal">FALSE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>The rest of our objects, <code>hawaii</code> and <code>alaska</code>, already have proper projections; therefore, we just need to create two separate maps:</p>
+<p>The rest of our objects, <code>hawaii</code> and <code>alaska</code>,
+already have proper projections; therefore, we just need to create two
+separate maps:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">hawaii_map <span class="operator">=</span> tm_shape<span class="punctuation">(</span>hawaii<span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_polygons<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">+</span> </span><br><span class="line">  tm_title<span class="punctuation">(</span><span class="string">&quot;Hawaii&quot;</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_layout<span class="punctuation">(</span>frame <span class="operator">=</span> <span class="literal">FALSE</span><span class="punctuation">,</span> bg.color <span class="operator">=</span> <span class="literal">NA</span><span class="punctuation">,</span> </span><br><span class="line">            title.position <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;LEFT&quot;</span><span class="punctuation">,</span> <span class="string">&quot;BOTTOM&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">alaska_map <span class="operator">=</span> tm_shape<span class="punctuation">(</span>alaska<span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_polygons<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">+</span> </span><br><span class="line">  tm_title<span class="punctuation">(</span><span class="string">&quot;Alaska&quot;</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_layout<span class="punctuation">(</span>frame <span class="operator">=</span> <span class="literal">FALSE</span><span class="punctuation">,</span> bg.color <span class="operator">=</span> <span class="literal">NA</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>The final map is created by combining and arranging these three maps:</p>
+<p>The final map is created by combining and arranging these three
+maps:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">us_states_map</span><br><span class="line">print<span class="punctuation">(</span>hawaii_map<span class="punctuation">,</span> vp <span class="operator">=</span> grid<span class="operator">::</span>viewport<span class="punctuation">(</span><span class="number">0.35</span><span class="punctuation">,</span> <span class="number">0.1</span><span class="punctuation">,</span> width <span class="operator">=</span> <span class="number">0.2</span><span class="punctuation">,</span> height <span class="operator">=</span> <span class="number">0.1</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">print<span class="punctuation">(</span>alaska_map<span class="punctuation">,</span> vp <span class="operator">=</span> grid<span class="operator">::</span>viewport<span class="punctuation">(</span><span class="number">0.15</span><span class="punctuation">,</span> <span class="number">0.15</span><span class="punctuation">,</span> width <span class="operator">=</span> <span class="number">0.3</span><span class="punctuation">,</span> height <span class="operator">=</span> <span class="number">0.3</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <div class="figure" style="text-align: center">
 <img data-src="09-mapping_files/figure-html/insetmap2-1.png" alt="Map of the United States." width="100%" />
-<p class="caption">(\#fig:insetmap2)Map of the United States.</p>
+<p class="caption">
+(#fig:insetmap2)Map of the United States.
+</p>
 </div>
-<p>The code presented above is compact and can be used as the basis for other inset maps but the results, in Figure @ref(fig:insetmap2), provide a poor representation of the locations of Hawaii and Alaska.<br />
-For a more in-depth approach, see the <a target="_blank" rel="noopener" href="https://geocompx.github.io/geocompkg/articles/us-map.html"><code>us-map</code></a> vignette from the <strong>geocompkg</strong>.</p>
-<h2 id="动画地图"><a class="markdownIt-Anchor" href="#动画地图"></a> 动画地图</h2>
-<hr class="footnotes-sep" />
-<section class="footnotes">
-<ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p>If there is a clash between a fixed value and a column name, the column name takes precedence.<br />
-This can be verified by running the next code chunk after running <code>nz$red = 1:nrow(nz)</code>. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
-</li>
-<li id="fn2" class="footnote-item"><p>A fourth group of color palettes, called bivariate, also exists.<br />
-They are used when we want to represent relations between two variables on one map. <a href="#fnref2" class="footnote-backref">↩︎</a></p>
-</li>
-<li id="fn3" class="footnote-item"><p>See the “Color vision” options and the “Color Blind Friendliness” panel in <code>cols4all::c4a_gui()</code>. <a href="#fnref3" class="footnote-backref">↩︎</a></p>
-</li>
-<li id="fn4" class="footnote-item"><p>Another additional map elements include <code>tm_grid()</code>, <code>tm_logo()</code> and <code>tm_credits()</code>. <a href="#fnref4" class="footnote-backref">↩︎</a></p>
-</li>
+<p>The code presented above is compact and can be used as the basis for
+other inset maps but the results, in Figure @ref(fig:insetmap2), provide
+a poor representation of the locations of Hawaii and Alaska. For a more
+in-depth approach, see the <a
+target="_blank" rel="noopener" href="https://geocompx.github.io/geocompkg/articles/us-map.html"><code>us-map</code></a>
+vignette from the <strong>geocompkg</strong>.</p>
+<h2 id="动画地图">动画地图</h2>
+<aside id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>If there is a clash between a fixed value and a column
+name, the column name takes precedence. This can be verified by running
+the next code chunk after running <code>nz$red = 1:nrow(nz)</code>.<a
+href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>A fourth group of color palettes, called bivariate, also
+exists. They are used when we want to represent relations between two
+variables on one map.<a href="#fnref2" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>See the "Color vision" options and the "Color Blind
+Friendliness" panel in <code>cols4all::c4a_gui()</code>.<a
+href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Another additional map elements include
+<code>tm_grid()</code>, <code>tm_logo()</code> and
+<code>tm_credits()</code>.<a href="#fnref4" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section>
+</aside>
 
         </div>
 
