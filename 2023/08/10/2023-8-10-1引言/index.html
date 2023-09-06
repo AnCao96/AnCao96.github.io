@@ -21,16 +21,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ancao96.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BFJCK79VF9","apiKey":"613fe5e83863193288c6ef2ab02cefad","indexName":"hexo","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="这本书是关于使用计算机的力量来处理地理数据的。它教授一系列的空间技能，包括：读、写和操作地理数据；制作静态和交互式地图；应用地理计算解决现实问题；并对地理现象进行建模。通过展示各种地理操作是如何联系在一起的，在穿插的可复制&quot;代码块&quot;中，本书还教授了一个透明而科学的工作流程。学习如何使用R命令行提供的丰富的地理空间工具令人兴奋，但创建新的工具可以真正解放。使用贯穿始终的命令行驱">
+    <meta name="description" content="本文由SCY翻译自《Geocomputation with R》第一章  这本书是关于使用计算机的力量来处理地理数据的。它教授一系列的空间技能，包括：读、写和操作地理数据；制作静态和交互式地图；应用地理计算解决现实问题；并对地理现象进行建模。通过展示各种地理操作是如何联系在一起的，在穿插的可复制&quot;代码块&quot;中，本书还教授了一个透明而科学的工作流程。学习如何使用R命令行提供的丰富的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="(1)引言">
 <meta property="og:url" content="https://ancao96.github.io/2023/08/10/2023-8-10-1%E5%BC%95%E8%A8%80/index.html">
 <meta property="og:site_name" content="SCY SPACE">
-<meta property="og:description" content="这本书是关于使用计算机的力量来处理地理数据的。它教授一系列的空间技能，包括：读、写和操作地理数据；制作静态和交互式地图；应用地理计算解决现实问题；并对地理现象进行建模。通过展示各种地理操作是如何联系在一起的，在穿插的可复制&quot;代码块&quot;中，本书还教授了一个透明而科学的工作流程。学习如何使用R命令行提供的丰富的地理空间工具令人兴奋，但创建新的工具可以真正解放。使用贯穿始终的命令行驱">
+<meta property="og:description" content="本文由SCY翻译自《Geocomputation with R》第一章  这本书是关于使用计算机的力量来处理地理数据的。它教授一系列的空间技能，包括：读、写和操作地理数据；制作静态和交互式地图；应用地理计算解决现实问题；并对地理现象进行建模。通过展示各种地理操作是如何联系在一起的，在穿插的可复制&quot;代码块&quot;中，本书还教授了一个透明而科学的工作流程。学习如何使用R命令行提供的丰富的">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309061131739.png">
 <meta property="article:published_time" content="2023-08-10T10:29:20.000Z">
-<meta property="article:modified_time" content="2023-09-06T08:19:24.466Z">
+<meta property="article:modified_time" content="2023-09-06T08:50:11.643Z">
 <meta property="article:author" content="SCY">
 <meta property="article:tag" content="R">
 <meta property="article:tag" content="Geocomputaion">
@@ -242,7 +242,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-06 16:19:24" itemprop="dateModified" datetime="2023-09-06T16:19:24+08:00">2023-09-06</time>
+      <time title="修改时间：2023-09-06 16:50:11" itemprop="dateModified" datetime="2023-09-06T16:50:11+08:00">2023-09-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -286,14 +286,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>8.4k</span>
+      <span>8.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>30 分钟</span>
+      <span>31 分钟</span>
     </span>
 </div>
 
@@ -303,7 +303,8 @@
         
         
         
-        <div class="post-body" itemprop="articleBody"><!--rl-->
+        <div class="post-body" itemprop="articleBody"><blockquote><p>本文由SCY翻译自《Geocomputation with R》<a target="_blank" rel="external nofollow noopener noreferrer" href="https://r.geocompx.org/intro#intro">第一章</a></p>
+</blockquote>
 <p>这本书是关于使用计算机的力量来处理地理数据的。它教授一系列的空间技能，包括：读、写和操作地理数据；制作静态和交互式地图；应用地理计算解决现实问题；并对地理现象进行建模。通过展示各种地理操作是如何联系在一起的，在穿插的可复制&quot;代码块&quot;中，本书还教授了一个透明而科学的工作流程。学习如何使用R命令行提供的丰富的地理空间工具令人兴奋，但创建新的工具可以真正解放。使用贯穿始终的命令行驱动方法，以及章节所涵盖的编程技术，可以帮助消除软件对您的创造力施加的限制。在读完这本书和完成练习后，你应该对R令人印象深刻的地理能力所开辟的可能性有很强的理解，用地理数据解决现实世界问题的新技能，以及用地图和可复制的代码来交流你的工作的能力。</p>
 <span id="more"></span>
 <h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
@@ -359,7 +360,7 @@
 <p>这场“地理数据革命”推动了对高性能计算硬件和高效、可扩展软件的需求，以从噪音中提取信号，了解甚至可能改变世界。空间数据库能够存储和生成大量地理数据集的可管理子集，使得从其中获取知识的界面成为未来的重要工具。R就是这样一种工具，具有先进的分析、建模和可视化能力。在这个背景下，本书的重点不在于语言本身。相反，我们使用R作为理解世界的“行业工具”，类似于洪堡使用工具深入了解自然界所有的复杂性和相互联系。尽管编程看似是一种还原主义活动，目标是教授地理计算与R，不仅仅是为了乐趣，还是为了理解世界。</p>
 <p>R是一个多平台的开源语言和环境，用于统计计算和图形（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.r-project.org/">r-project.org/</a>）。通过广泛的包，R还支持先进的地理空间统计、建模和可视化。新的集成开发环境（IDEs}）如RStudio已使R对许多人更加用户友好，通过专门用于交互式可视化的面板简化了制图工作。</p>
 <p>在其核心，R是一个面向对象的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://adv-r.hadley.nz/fp.html">函数式编程语言</a>，特别设计为其他软件的交互式接口。后者还包括许多到GIS软件、“地理库&quot;和功能（见第<a href="/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/" title="(10)连接到GIS的桥梁">10</a>章）的&quot;桥梁”。因此，它是快速创建&quot;地理工具&quot;的理想选择，无需掌握低级语言（相对于R）如C、FORTRAN或Java（见<a href="#%E5%9C%B0%E7%90%86%E8%AE%A1%E7%AE%97%E8%BD%AF%E4%BB%B6">1.3</a>节）。这可能感觉像是从基于GUI或专有地理信息系统，以查看GUI的定义，施加的比喻性&quot;玻璃天花板&quot;中挣脱出来(见表1.1GUI定义)。此外，R便于访问其他语言：例如，<strong>Rcpp</strong>和<strong>reticulate</strong>包允许访问C++和Python代码。这意味着R可以用作通往各种地理空间程序的&quot;桥梁&quot;（见<a href="#%E5%9C%B0%E7%90%86%E8%AE%A1%E7%AE%97%E8%BD%AF%E4%BB%B6">1.3</a>节）。</p>
-<p>另一个显示R灵活性和不断发展的地理能力的例子是交互式地图制作。如我们将在第<a href="/2023/08/18/2023-8-18-9%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%B6%E5%9B%BE/" title="(9)地理数据制图">9</a>章中看到，R具有“有限的交互式[绘图]功能”[@bivand_applied_2013]的说法已经不再成立。这通过以下的代码块得到证明，该代码块创建了图1.1（生成该图的函数将在第<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.scyspace.com/2023/08/18/2023-8-18-9%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%B6%E5%9B%BE.html#交互地图">9.4</a>节中介绍）。</p>
+<p>另一个显示R灵活性和不断发展的地理能力的例子是交互式地图制作。如我们将在第<a href="/2023/08/18/2023-8-18-9%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%B6%E5%9B%BE/" title="(9)地理数据制图">9</a>章中看到，R具有“有限的交互式[绘图]功能”的说法已经不再成立。这通过以下的代码块得到证明，该代码块创建了图1.1（生成该图的函数将在第9.4节中介绍）。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>leaflet<span class="punctuation">)</span></span><br><span class="line">popup <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;Robin&quot;</span><span class="punctuation">,</span> <span class="string">&quot;Jakub&quot;</span><span class="punctuation">,</span> <span class="string">&quot;Jannes&quot;</span><span class="punctuation">)</span></span><br><span class="line">leaflet<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  addProviderTiles<span class="punctuation">(</span><span class="string">&quot;NASAGIBS.ViirsEarthAtNight2012&quot;</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  addMarkers<span class="punctuation">(</span>lng <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="operator">-</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">23</span><span class="punctuation">,</span> <span class="number">11</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">             lat <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">52</span><span class="punctuation">,</span> <span class="number">53</span><span class="punctuation">,</span> <span class="number">49</span><span class="punctuation">)</span><span class="punctuation">,</span> </span><br><span class="line">             popup <span class="operator">=</span> popup<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <div class="figure" style="text-align: center">
 <iframe src="https://geocompr.github.io/img/interactive.html" width="100%" height="400px" data-external="1"></iframe>
@@ -434,9 +435,9 @@
 <p>与这些类系统和方法的开发并行，是R作为专用GIS软件接口的支持。<strong>GRASS</strong>和后续的<strong>spgrass6</strong>和<strong>rgrass7</strong>包（分别用于GRASS GIS 6和7）是这个方向的突出例子。R和GIS之间的其他桥梁例子包括<strong>RSAGA</strong>，<strong>RPyGeo</strong>，<strong>RQGIS</strong>，以及<strong>rqgisprocess</strong>。</p>
 <!--toDo--> <!-- rqgisprocess ref! -->
 <p>最初，可视化并不是重点，大部分R空间开发都集中在分析和地理操作上。<strong>sp</strong>提供了使用基础和格子绘图系统进行地图制作的方法，但对高级地图制作能力的需求正在增加。2009年首次发布的<strong>RgoogleMaps</strong>允许将R的空间数据覆盖在来自诸如Google Maps或OpenStreetMap等在线服务的’底图’瓦片上 。随后发布的<strong>ggmap</strong>包为<strong>ggplot2</strong>添加了类似的’底图’瓦片功能。尽管<strong>ggmap</strong>便于使用<strong>ggplot2</strong>进行地图制作，但其实用性受到需要<code>fortify</code>空间对象的限制，这意味着将它们转换成长数据框。这种方法对点来说效果很好，但对于线和多边形来说计算效率不高，因为每个坐标（顶点）都转换成一行，导致用于表示复杂几何形状的数据框非常庞大。尽管地理可视化倾向于专注于矢量数据，但栅格可视化在<strong>raster</strong>中得到了支持，并在<strong>rasterVis</strong>的发布后得到了提升，该包在一本关于空间和时间数据可视化主题的书中有描述。从那时起，R中的地图制作成为了一个热门话题，专用的包如<strong>tmap</strong>、<strong>leaflet</strong>、<strong>rayshader</strong>和<strong>mapview</strong>越来越受欢迎。</p>
-<p>自2018年Geocomputation with R的第一版发布以来，地理R包的开发已经加速。<strong>terra</strong>，<strong>raster</strong>包的继任者，首次在2020年发布，为使用栅格数据集的R用户带来了多个好处：它比前身更快，用户界面也更直接。</p>
-<p>在2021年中期，<strong>sf</strong>包通过整合球面几何计算进行了实质性（在某些情况下是破坏性）的更改。从那时起，默认情况下，许多具有地理CRS的数据上的空间操作使用S2球面几何引擎作为后端。自2018年以来，用R表示和处理地理数据的其他方式还包括<strong>stars</strong>和<strong>lidR</strong>包。<strong>stars</strong>与<strong>sf</strong>紧密集成，处理栅格和矢量数据立方体。<strong>lidR</strong>处理基于飞机的LiDAR（光探测与测距）点云。</p>
-<p>此次现代化有多个动机，包括新技术和标准的出现，以及R环境之外的空间软件开发的影响。最重要的外部因素影响了大多数空间软件，包括R空间包，这些因素是始于2018年的PROJ库的重大更新，其中包括许多破坏性的变化。最重要的是，这些变化迫使用’Well Known Text’替换坐标参考系统的’proj-string’表示。</p>
+<p>自2018年Geocomputation with R的第一版发布以来，地理R包的开发已经加速。<strong>terra</strong>，<strong>raster</strong>包的继任者，首次在2020年发布，为使用栅格数据集的R用户带来了多个好处：它比前身更快，用户界面也更直接，如第2.3节所示。</p>
+<p>在2021年中期，<strong>sf</strong>包通过整合球面几何计算进行了实质性（在某些情况下是破坏性）的更改。从那时起，默认情况下，许多具有地理CRS的数据上的空间操作使用S2球面几何引擎作为后端，见第2.2.9节。自2018年以来，用R表示和处理地理数据的其他方式还包括<strong>stars</strong>和<strong>lidR</strong>包。<strong>stars</strong>与<strong>sf</strong>紧密集成，处理栅格和矢量数据立方体。<strong>lidR</strong>处理基于飞机的LiDAR（光探测与测距）点云。</p>
+<p>此次现代化有多个动机，包括新技术和标准的出现，以及R环境之外的空间软件开发的影响。最重要的外部因素影响了大多数空间软件，包括R空间包，这些因素是始于2018年的PROJ库的重大更新，其中包括许多破坏性的变化。最重要的是，这些变化迫使用’Well Known Text’替换坐标参考系统的’proj-string’表示，如第2.4节和第<a href="/2023/08/16/2023-8-16-7%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E9%87%8D%E6%8A%95%E5%BD%B1/" title="(7)地理数据重投影">7</a>章所示。</p>
 <p>自2018年以来，R中空间可视化工具的进展与几个因素有关。首先，开发了新类型的空间图，包括<strong>rayshader</strong>包，它提供了光线追踪和多种山体阴影方法的组合，以生成2D和3D数据可视化 。其次，<strong>ggplot2</strong>获得了新的空间功能，主要归功于<strong>ggspatial</strong>包，该包添加了一些空间可视化元素，包括比例尺和北箭头，以及<strong>gganimate</strong>，该包允许平滑和可定制的空间动画 。第三，提高了可视化大型空间数据集的性能。这尤其与<strong>tmap</strong>中自动绘制缩小比例的栅格以及在<strong>mapview</strong>包中使用高性能交互式渲染平台的可能性有关，例如<code>&quot;leafgl&quot;</code>和<code>&quot;mapdeck&quot;</code>。最后，一些现有的映射工具已被重写，以最小化依赖性，改进用户界面或允许更容易地创建扩展。这包括<strong>mapsf</strong>包（<strong>cartography</strong>的继任者）以及<strong>tmap</strong>包的第4版，在该版本中大多数内部代码都经过了修订。</p>
 <!-- toDo: rl-->
 <!-- question: should we add a paragraph about the following stuff here?-->
@@ -448,9 +449,9 @@
 <!-- spatstat?? -->
 <p>在2021年底，Roger Bivand 在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://stat.ethz.ch/pipermail/r-sig-geo/2021-September/028760.html">R-sig-Geo 邮件列表</a>上宣布了 <strong>rgdal</strong>、<strong>rgeos</strong> 和 <strong>maptools</strong> 将于2023年底退役的计划。这不仅会对现有使用这些包的工作流程产生重大影响，也将影响依赖于 <strong>rgdal</strong>、<strong>rgeos</strong> 或 <strong>maptools</strong> 的包。因此，Bivand 的建议是转向更现代的工具，包括 <strong>sf</strong> 和 <strong>terra</strong>，正如本书接下来的章节中所解释的。</p>
 <h2 id="练习"><a class="markdownIt-Anchor" href="#练习"></a> 练习</h2>
-<p>E1. Think about the terms ‘GIS’\index{GIS}, ‘GDS’ and ‘geocomputation’ described above. Which (if any) best describes the work you would like to do using geo* methods and software and why?</p>
-<p>E2. Provide three reasons for using a scriptable language such as R for geocomputation instead of using a graphical user interface (GUI) based GIS such as QGIS\index{QGIS}.</p>
-<p>E3. In the year 2000 Stan Openshaw wrote that geocomputation involved “practical work that is beneficial or useful” to others. Think about a practical problem and possible solutions that could be informed with new evidence derived from the analysis, visualization or modelling of geographic data. With a pen and paper (or computational equivalent) sketch inputs and possible outputs illustrating how geocomputation could help.</p>
+<p>E1. 考虑上面描述的’GIS’（地理信息系统）、‘GDS’（地理数据科学）和’地理计算’这几个术语。哪个（如果有的话）最能描述你想通过使用地理*方法和软件来做的工作？为什么？</p>
+<p>E2. 提供使用可编程语言（如R）进行地理计算而不是使用基于图形用户界面（GUI）的GIS（如QGIS）的三个理由。</p>
+<p>E3. 在2000年，Stan Openshaw写道，地理计算涉及对其他人有&quot;实际益处或用处&quot;的工作。考虑一个实际问题和可能的解决方案，这些解决方案可以通过分析、可视化或模拟地理数据获得新证据来指导。用纸和笔（或其他用于计算的东西）勾画输入和可能的输出，说明地理计算如何有助于解决问题。</p>
 <!--toDo: rl -->
 <!--add solutions!-->
 <hr class="footnotes-sep">
@@ -550,13 +551,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">160k</span>
+    <span title="站点总字数">161k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">9:43</span>
+    <span title="站点阅读时长">9:44</span>
   </span>
 </div>
 <div class="busuanzi-count">
