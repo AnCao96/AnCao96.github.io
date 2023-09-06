@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.20/fancybox/fancybox.css" integrity="sha256-RvRHGSuWAxZpXKV9lLDt2e+rZ+btzn48Wp4ueS3NZKs=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ancao96.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"0SOKPRESAA","apiKey":"f7b6d6953f3de5baf0bc4ab9917765b7","indexName":"search scyspace","hits":{"per_page":10}},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true,"path":"search.xml","field":"post","content":true,"format":"html"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="R 等具有交互式控制台的语言的一个特点——严格来说是一个读取-求值-打印循环（REPL）—— 是你与它们互动的方式。与其依赖于在屏幕的不同部分上指点和点击，你可以将命令键入控制台，并使用 Enter 键执行它们。使用像RStudio或VS Code这样的交互式开发环境时，一个常见且有效的工作流程是将代码键入源文件的源编辑器中，并使用像Ctrl+Enter这样的快捷方式来控制代码的交互式执行。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(10)连接到GIS的桥梁">
+<meta property="og:url" content="https://ancao96.github.io/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/index.html">
+<meta property="og:site_name" content="SCY SPACE">
+<meta property="og:description" content="R 等具有交互式控制台的语言的一个特点——严格来说是一个读取-求值-打印循环（REPL）—— 是你与它们互动的方式。与其依赖于在屏幕的不同部分上指点和点击，你可以将命令键入控制台，并使用 Enter 键执行它们。使用像RStudio或VS Code这样的交互式开发环境时，一个常见且有效的工作流程是将代码键入源文件的源编辑器中，并使用像Ctrl+Enter这样的快捷方式来控制代码的交互式执行。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309032040589.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309032057977.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309032105108.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309032113571.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309032153101.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309032205602.png">
+<meta property="article:published_time" content="2023-08-19T11:55:20.000Z">
+<meta property="article:modified_time" content="2023-09-04T14:52:37.018Z">
+<meta property="article:author" content="SCY">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="Geocomputaion">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309032040589.png">
+
+
+<link rel="canonical" href="https://ancao96.github.io/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ancao96.github.io/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/","path":"2023/08/19/2023-8-19-10连接到GIS软件的桥梁/","title":"(10)连接到GIS的桥梁"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>(10)连接到GIS的桥梁 | SCY SPACE</title>
+    
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="https://waline-server-nxpj3ksyo-scy.vercel.app">
+    <noscript>
+      <link rel="stylesheet" href="/css/noscript.css">
+    </noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.0.0/style.css" />
+    <style>
+      body,div.post-body,h1,h2,h3,h4 {
+        font-family: "LXGW WenKai LITE", sans-serif;
+        font-size: 108%;
+      }
+    </style>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+    <div class="headband"></div>
+    <main class="main">
+      <div class="column">
+        <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SCY SPACE</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+          
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">前提条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#qgisprocess%E8%BF%9E%E6%8E%A5%E5%88%B0qgis%E5%8F%8A%E6%9B%B4%E8%BF%9C%E7%9A%84%E6%A1%A5%E6%A2%81"><span class="nav-number">3.</span> <span class="nav-text">qgisprocess：连接到QGIS及更远的桥梁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A2%E9%87%8F%E6%95%B0%E6%8D%AE"><span class="nav-number">3.1.</span> <span class="nav-text">矢量数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%85%E6%A0%BC%E6%95%B0%E6%8D%AE"><span class="nav-number">3.2.</span> <span class="nav-text">栅格数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#saga-gis"><span class="nav-number">4.</span> <span class="nav-text">SAGA GIS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grass-gis"><span class="nav-number">5.</span> <span class="nav-text">GRASS GIS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%95%E6%97%B6%E4%BD%BF%E7%94%A8%E4%BB%80%E4%B9%88"><span class="nav-number">6.</span> <span class="nav-text">何时使用什么?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%A1%A5%E6%A2%81"><span class="nav-number">7.</span> <span class="nav-text">其他桥梁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#gdal-%E6%A1%A5%E6%A2%81"><span class="nav-number">7.1.</span> <span class="nav-text">GDAL 桥梁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E5%88%B0%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%A1%A5%E6%A2%81"><span class="nav-number">7.2.</span> <span class="nav-text">连接到空间数据库的桥梁</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%91%E6%8A%80%E6%9C%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%A1%A5%E6%A2%81"><span class="nav-number">8.</span> <span class="nav-text">云技术和服务的桥梁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#staccogs%E5%92%8C%E4%BA%91%E7%AB%AF%E7%9A%84%E6%95%B0%E6%8D%AE%E7%AB%8B%E6%96%B9%E4%BD%93"><span class="nav-number">8.1.</span> <span class="nav-text">STAC，COGs，和云端的数据立方体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#openeo"><span class="nav-number">8.2.</span> <span class="nav-text">openEO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">8.3.</span> <span class="nav-text">练习</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="SCY"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">SCY</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AnCao96" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AnCao96" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ancao.cugb@gmail.com" title="E-Mail → mailto:ancao.cugb@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+      </div>
+      <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+    
+    
+
+    <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+        <link itemprop="mainEntityOfPage" href="https://ancao96.github.io/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/">
+
+        <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <meta itemprop="image" content="/images/avatar.gif">
+            <meta itemprop="name" content="SCY">
+        </span>
+
+        <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop="name" content="SCY SPACE">
+            <meta itemprop="description" content="">
+        </span>
+
+        <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+            <meta itemprop="name" content="(10)连接到GIS的桥梁 | SCY SPACE">
+            <meta itemprop="description" content="">
+        </span>
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">
+                (10)连接到GIS的桥梁
+            </h1>
+
+            <div class="post-meta-container">
+                <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-08-19 19:55:20" itemprop="dateCreated datePublished" datetime="2023-08-19T19:55:20+08:00">2023-08-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-04 22:52:37" itemprop="dateModified" datetime="2023-09-04T22:52:37+08:00">2023-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R/Geocomputaion/" itemprop="url" rel="index"><span itemprop="name">Geocomputaion</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>14k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>49 分钟</span>
+    </span>
+</div>
+
+            </div>
+        </header>
+
+        
+        
+        
+        <div class="post-body" itemprop="articleBody"><p>R
+等具有交互式控制台的语言的一个特点——严格来说是一个读取-求值-打印循环（REPL）——
+是你与它们互动的方式。与其依赖于在屏幕的不同部分上指点和点击，你可以将命令键入控制台，并使用
+<code>Enter</code> 键执行它们。使用像RStudio或VS
+Code这样的交互式开发环境时，一个常见且有效的工作流程是将代码键入源文件的源编辑器中，并使用像<code>Ctrl+Enter</code>这样的快捷方式来控制代码的交互式执行。
+<span id="more"></span></p>
+<h1 id="前提条件">前提条件</h1>
+<ul>
+<li>本章需要安装 QGIS、SAGA和GRASS，并附加以下包：</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>sf<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>terra<span class="punctuation">)</span></span><br><span class="line">remotes<span class="operator">::</span>install_github<span class="punctuation">(</span><span class="string">&quot;r-tmap/tmap&quot;</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; </span></span><br><span class="line"><span class="comment">#&gt; ── R CMD build ─────────────────────────────────────────────────────────────────</span></span><br><span class="line"><span class="comment">#&gt; * checking for file ‘/private/var/folders/x6/0mbmh6790tz0rrgmt0bqqs3m0000gn/T/RtmpjyIDsf/remotesc09c4ea71a88/r-tmap-tmap-1a2b4a7/DESCRIPTION’ ... OK</span></span><br><span class="line"><span class="comment">#&gt; * preparing ‘tmap’:</span></span><br><span class="line"><span class="comment">#&gt; * checking DESCRIPTION meta-information ... OK</span></span><br><span class="line"><span class="comment">#&gt; * checking for LF line-endings in source and make files and shell scripts</span></span><br><span class="line"><span class="comment">#&gt; * checking for empty or unneeded directories</span></span><br><span class="line"><span class="comment">#&gt; * looking to see if a ‘data/datalist’ file should be added</span></span><br><span class="line"><span class="comment">#&gt; * building ‘tmap_3.3-4.tar.gz’</span></span><br></pre></td></tr></table></figure>
+<!--toDo:jn-->
+<!-- qgisprocess to CRAN -->
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">remotes<span class="operator">::</span>install_github<span class="punctuation">(</span><span class="string">&quot;r-spatial/qgisprocess&quot;</span><span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>qgisprocess<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>Rsagacmd<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>rgrass<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>rstac<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>gdalcubes<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h1 id="引言">引言</h1>
+<p>R 等具有交互式控制台的<a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Interpreter_(computing)">interpreted</a>语言的一个特点——严格来说是一个读取-求值-打印循环（REPL）——
+是你与它们互动的方式。与其依赖于在屏幕的不同部分上指点和点击，你可以将命令键入控制台，并使用
+<code>Enter</code> 键执行它们。使用像RStudio或VS
+Code这样的交互式开发环境时，一个常见且有效的工作流程是将代码键入源文件的源编辑器中，并使用像<code>Ctrl+Enter</code>这样的快捷方式来控制代码的交互式执行。</p>
+<p>命令行界面（CLI）并不是R的独特属性：大多数早期的计算环境都依赖于命令行“shell”，直到计算机鼠标在20世纪90年代的发明和广泛采用后，图形用户界面（GUI）才变得普遍。例如，GRASS
+是最长持续开发的开源GIS软件，最初依赖于其命令行界面，直到它获得GUI<span
+class="citation"
+data-cites="landa_new_2008">[@landa_new_2008]</span>。大多数流行的GIS软件项目都是由GUI驱动的。你<em>可以</em>通过系统终端和嵌入式CLI与QGIS、SAGA、GRASS和gvSIG
+进行交互，但它们的设计鼓励大多数人通过“点和击”与之交互。根据流行QGIS软件的创建者<span
+class="citation"
+data-cites="sherman_desktop_2008">[@sherman_desktop_2008]</span>的说法：这样做的无意的后果是，大多数GIS用户错失了由CLI驱动和可编程方法带来的优势。</p>
+<blockquote>
+<p>随着“现代”GIS
+软件的出现，大多数人希望点击完成任务。这很好，但命令行为你提供了大量的灵活性和力量。很多时候，你可以在命令行上以GUI的一小部分时间来完成某些操作。</p>
+</blockquote>
+<p>“CLI 与 GUI”
+的辩论不必是敌对的：两种工作方式都有优点，取决于一系列因素，包括任务（如绘制新要素适合GUI）、所需的可重复性水平和用户的技能组合。GRASS是一个主要基于CLI但也有突出GUI的GIS软件的很好例子。同样，虽然R主要关注其CLI，但像RStudio这样的IDE为提高可访问性提供了
+GUI。软件不能被整齐地分类为基于CLI或基于GUI。然而，交互式命令行界面在以下方面具有几个重要优势：</p>
+<ul>
+<li>自动化重复任务</li>
+<li>实现透明度和可重复性</li>
+<li>通过提供修改现有功能和实现新功能的工具来鼓励软件开发</li>
+<li>发展具有高需求的未来防护和高效编程技能</li>
+<li>提高触摸打字，这是数字时代的一项关键技能</li>
+</ul>
+<p>另一方面，良好的GUI也有优势，包括：</p>
+<ul>
+<li>“浅”学习曲线意味着地理数据可以在无需数小时学习新语言的情况下进行探索和可视化</li>
+<li>支持“数字化”（创建新矢量数据集），包括跟踪、捕捉和拓扑工具。（<strong>mapedit</strong>
+R包允许在从R打开的浏览器窗口中快速编辑少量空间特性，但不支持专业的大规模制图数字化。）</li>
+<li>通过地面控制点和正射校正实现地理参考</li>
+<li>支持立体测图（例如，LiDAR 和运动结构）</li>
+</ul>
+<p>专用GIS软件项目的另一个优点是它们通过“GIS桥梁”<span class="citation"
+data-cites="neteler_open_2008">[@neteler_open_2008]</span>提供对数百个“地理算法”的访问。这些增强R解决地理数据问题能力的计算配方桥梁是本章的主题。</p>
+<blockquote>
+<p>📌命令行界面是一个通过键入和输入连续命令（命令行）与计算机程序互动的环境。
+Linux中的<code>bash</code>和Windows中的<code>PowerShell</code>是众所周知的例子，它们允许用户控制操作系统的几乎任何部分。
+像RStudio和VS
+Code这样的集成开发环境（IDE）提供代码自动补全和其他功能，以改善用户在开发代码时的体验。</p>
+</blockquote>
+<p>R是可重复数据分析工作流与GIS之间建立桥梁的自然选择，因为它<em>起源</em>于一个接口语言。R（及其前身S）的一个关键特性是，它提供了访问其他语言（特别是
+FORTRAN和C）中的统计算法的途径，但是来自一种功能强大的高级函数语言，并具有直观的REPL环境，而C和FORTRAN缺乏这样的环境<span
+class="citation"
+data-cites="chambers_extending_2016">[@chambers_extending_2016]</span>。R继续这一传统，与众多语言接口，特别是
+C++。</p>
+<p>尽管R不是作为命令行GIS设计的，但其与专用GIS接口的能力赋予了它惊人的地理空间能力。借助GIS桥梁，R可以复制更多样化的工作流，通过从编程环境和一致的CLI控制它们，还能增加额外的可重复性、可扩展性和生产力优势。此外，R
+在地理计算的某些领域超越了
+GIS，包括交互式/动画地图制作和空间统计建模。</p>
+<p>本章重点介绍了三个成熟的开源GIS产品的“桥梁”，在表中总结：</p>
+<ul>
+<li>QGIS，通过<strong>qgisprocess</strong>包</li>
+<li>SAGA，通过<strong>Rsagacmd</strong>包</li>
+<li>GRASS，通过<strong>rgrass</strong>包</li>
+</ul>
+<p>还有其他相关的桥梁，包括不再维护的R包<strong>RPyGeo</strong>，作为专有
+GIS软件的接口。 还有一些重大进展，使开源GIS软件能够从QGIS（见 <a
+target="_blank" rel="noopener" href="https://docs.qgis.org/3.28/en/docs/training_manual/processing/r_intro.html">docs.qgis.org</a>）和GRASS（见
+<a
+target="_blank" rel="noopener" href="https://grasswiki.osgeo.org/wiki/R_statistics/rgrass#R_within_GRASS">grasswiki.osgeo.org</a>）编写和执行R脚本。</p>
+<p>Table: Comparison between three open-source GIS. Hybrid refers to the
+support of vector and raster operations. |GIS |First release |No.
+functions |Support | |:-----|:-------------|:-------------|:-------|
+|QGIS |2002 |&gt;1000 |hybrid | |SAGA |2004 |&gt;600 |hybrid | |GRASS
+|1982 |&gt;500 |hybrid |</p>
+<p>除了上面提到的三种R-GIS桥接方法外,本章还简要介绍了R语言与空间库、空间数据库以及基于云的地球观测数据处理的接口。</p>
+<h1
+id="qgisprocess连接到qgis及更远的桥梁"><strong>qgisprocess</strong>：连接到QGIS及更远的桥梁</h1>
+<p>是最受欢迎的开源GIS<span class="citation"
+data-cites="graser_processing_2015">[@graser_processing_2015]</span>。QGIS提供了一个统一的接口来访问QGIS的本地地理算法、GDAL，以及当它们被安装时，来自<em>提供商</em>如GRASS和SAGA<span
+class="citation"
+data-cites="graser_processing_2015">[@graser_processing_2015]</span>。自2020年夏季发布的3.14版本以来，QGIS随附了用于访问大量地理计算功能的<code>qgis_process</code>命令行工具。<code>qgis_process</code>提供了对标准QGIS安装中的300
+多个地理算法的访问，以及通过插件对诸如GRASS和SAGA这样的外部提供商的1,000
+多个算法的访问。</p>
+<p><strong>qgisprocess</strong> 包提供了从 R
+访问<code>qgis_process</code>的能力。该包要求安装QGIS以及本章中使用的任何其他相关插件，如
+GRASS
+和SAGA，并且系统可以访问它们。有关安装说明，请参阅<strong>qgisprocess</strong>的<a
+target="_blank" rel="noopener" href="https://r-spatial.github.io/qgisprocess/">文档</a>。如果您已经安装了Docker，那么使用<strong>qgisprocess</strong>的快速方法是通过本项目开发的<code>qgis</code>镜像。假设您已经安装了Docker并且有足够的计算资源，您可以使用以下命令运行带有<strong>qgisprocess</strong>和相关插件的R会话（有关详细信息，请参阅
+<a target="_blank" rel="noopener" href="https://github.com/geocompx/docker">geocompx/docker</a>
+仓库）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -e DISABLE_AUTH=<span class="literal">true</span> -p 8786:8787 ghcr.io/geocompx/docker:qgis</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>qgisprocess<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>此包会自动尝试检测QGIS的安装，并在找不到时发出警告。<a href="#fn1"
+class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a>当配置失败时有几个可能的解决方案：你可以设置<code>options(qgisprocess.path = "path/to/your_qgis_process")</code>，或者设置<code>R_QGISPROCESS_PATH</code>环境变量。上述方法也可用于你有多个
+QGIS
+安装并想决定使用哪一个时。更多细节，请参考<strong>qgisprocess</strong>的<a
+target="_blank" rel="noopener" href="https://r-spatial.github.io/qgisprocess/articles/qgisprocess.html">'入门'小插图</a>。</p>
+<p>接下来，我们可以找到在我们的计算机上可用的插件（意味着不同的软件）。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qgis_plugins<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>这告诉我们，GRASS（<code>grassprovider</code>）和SAGA（<code>processing_saga_nextgen</code>）插件在系统上是可用的，但尚未启用。因为我们在本章后面需要它们，所以让我们启用它们。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qgis_enable_plugins<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;grassprovider&quot;</span><span class="punctuation">,</span> <span class="string">&quot;processing_saga_nextgen&quot;</span><span class="punctuation">)</span><span class="punctuation">,</span> </span><br><span class="line">                    quiet <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>请注意，除了在您的系统上安装 SAGA 之外，您还需要安装 QGIS Python 插件
+Processing Saga NextGen。您可以在 QGIS 内部通过<a
+target="_blank" rel="noopener" href="https://docs.qgis.org/latest/en/docs/training_manual/qgis_plugins/fetching_plugins.html">插件管理器</a>进行安装，或者在
+Linux 上至少可以借助Python包<a
+target="_blank" rel="noopener" href="https://github.com/3liz/qgis-plugin-manager">qgis-plugin-manager</a>以编程方式进行。</p>
+<p><code>qgis_providers()</code>会列出软件的名称和可用地理算法的相应数量。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qgis_providers<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>输出表确认我们可以通过QGIS接口使用QGIS地理算法（<code>native</code>、<code>qgis</code>、<code>3d</code>）和来自第三方提供商GDAL、SAGA和GRASS
+的外部算法。</p>
+<p>我们现在已经准备好使用QGIS及其伙伴在R内部进行一些地理计算了！让我们尝试两个示例案例研究。第一个展示如何将具有不同边界的两个多边形数据集统一。第二个专注于从表示为栅格的数字高程模型中获取新信息。</p>
+<h2 id="矢量数据">矢量数据</h2>
+<p>假设你有两个具有不同空间单位（例如，区域、行政单位）的多边形对象。我们的目标是将这两个对象合并为一个，包括所有边界线和相关属性。我们再次使用已经遇到的不一致的多边形。<strong>spData</strong>包中提供了这两个多边形数据集，我们希望对这两个数据集都使用地理坐标参考系统（CRS）。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data<span class="punctuation">(</span><span class="string">&quot;incongruent&quot;</span><span class="punctuation">,</span> <span class="string">&quot;aggregating_zones&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spData&quot;</span><span class="punctuation">)</span></span><br><span class="line">incongr_wgs <span class="operator">=</span> st_transform<span class="punctuation">(</span>incongruent<span class="punctuation">,</span> <span class="string">&quot;EPSG:4326&quot;</span><span class="punctuation">)</span></span><br><span class="line">aggzone_wgs <span class="operator">=</span> st_transform<span class="punctuation">(</span>aggregating_zones<span class="punctuation">,</span> <span class="string">&quot;EPSG:4326&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#&gt; The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,</span><br><span class="line">#&gt; which was just loaded, will retire in October 2023.</span><br><span class="line">#&gt; Please refer to R-spatial evolution reports for details, especially</span><br><span class="line">#&gt; https://r-spatial.org/r/2023/05/15/evolution4.html.</span><br><span class="line">#&gt; It may be desirable to make the sf package available;</span><br><span class="line">#&gt; package maintainers should consider adding sf to Suggests:.</span><br><span class="line">#&gt; The sp package is now running under evolution status 2</span><br><span class="line">#&gt;      (status 2 uses the sf package in place of rgdal)</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309032040589.png" />
+Illustration of two areal units: incongruent (black lines) and
+aggregating zones (red borders).</p>
+<p>要找到执行这项工作的算法，我们可以搜索 <code>qgis_algorithms()</code>
+函数的输出。这个函数返回一个数据框，包含所有可用的提供者和它们包含的算法。因此，如果你看不到预期的提供者，可能是因为你还需要安装一些外部GIS软件。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qgis_algo <span class="operator">=</span> qgis_algorithms<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p><code>qgis_algo</code>对象包含许多列，但通常我们只对<code>algorithm</code>列感兴趣，该列结合了提供商和算法名称的信息。假设函数的简短描述中包含单词"union"，我们可以运行以下代码来找到感兴趣的算法：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep<span class="punctuation">(</span><span class="string">&quot;union&quot;</span><span class="punctuation">,</span> qgis_algo<span class="operator">$</span>algorithm<span class="punctuation">,</span> value <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>上述列表中的一个算法，<code>"native:union"</code>，听起来很有希望。下一步是找出这个算法是做什么的，以及我们如何使用它。这是<code>qgis_show_help()</code>的作用，它返回算法的简短总结，包括算法的功能、参数和输出。<a
+href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a>
+这使得输出相当长。以下命令返回一个数据框，每一行代表<code>"native:union"</code>所需的一个参数，每一列包含与之关联的名称、描述、类型、默认值、可用值和可接受值：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alg <span class="operator">=</span> <span class="string">&quot;native:union&quot;</span></span><br><span class="line">union_arguments <span class="operator">=</span> qgis_get_argument_specs<span class="punctuation">(</span>alg<span class="punctuation">)</span></span><br><span class="line">union_arguments</span><br></pre></td></tr></table></figure>
+<p>包含在<code>union_arguments$name</code>中的参数有<code>INPUT</code>、<code>OVERLAY</code>、<code>OVERLAY_FIELDS_PREFIX</code>和<code>OUTPUT</code>。<code>union_arguments$acceptable_values</code>包含每个参数可能的输入值的列表。许多函数需要代表矢量层路径的输入；对于这样的参数，<strong>qgisprocess</strong>函数接受<code>sf</code>对象。当期望的是“指向栅格层的路径”时，可以使用<strong>terra</strong>和<strong>stars</strong>包中的对象。这可能非常方便，但是当你仅仅为了将其提交给<strong>qgisprocess</strong>算法而读取空间数据时，我们建议提供磁盘上空间数据的路径。<strong>qgisprocess</strong>执行地理算法的第一件事是将存储在你的R会话中的空间数据导出到QGIS所知道的格式，例如.gpkg或.tif文件。这可能会增加算法的运行时间。</p>
+<p><strong>qgisprocess</strong>的主要功能是<code>qgis_run_algorithm()</code>，它将输入发送到QGIS并返回输出。它接受所使用的算法名称和帮助列表中显示的一组命名参数，并执行预期的计算。在我们的情况下，三个参数看起来很重要——<code>INPUT</code>、<code>OVERLAY</code>和<code>OUTPUT</code>。第一个参数<code>INPUT</code>是我们的主要矢量对象<code>incongr_wgs</code>，而第二个参数<code>OVERLAY</code>是<code>aggzone_wgs</code>。最后一个参数<code>OUTPUT</code>是输出文件名，如果没有提供，<strong>qgisprocess</strong>会自动选择并在<code>tempdir()</code>中创建。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">union <span class="operator">=</span> qgis_run_algorithm<span class="punctuation">(</span>alg<span class="punctuation">,</span></span><br><span class="line">  INPUT <span class="operator">=</span> incongr_wgs<span class="punctuation">,</span> OVERLAY <span class="operator">=</span> aggzone_wgs</span><br><span class="line"><span class="punctuation">)</span></span><br><span class="line">union</span><br></pre></td></tr></table></figure>
+<p>运行上述代码行将会把我们的两个输入对象保存到临时的.gpkg文件中，然后在它们上面运行所选算法，并返回一个临时的.gpkg文件作为输出。<strong>qgisprocess</strong>包将<code>qgis_run_algorithm()</code>的结果存储为一个列表，在本例中，包含指向输出文件的路径。我们可以用<code>read_sf()</code>将这个文件读回R（例如，<code>union_sf = read_sf(union[[1]])</code>），或者直接用<code>st_as_sf()</code>。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">union_sf <span class="operator">=</span> st_as_sf<span class="punctuation">(</span>union<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>请注意，QGIS的并集操作通过使用两个输入层的交集和对称差集来将两个输入层合并为一个层（顺便说一下，这也是在
+GRASS 和 SAGA
+中进行并集操作时的默认设置）。这与<code>st_union(incongr_wgs, aggzone_wgs)</code>（见练习）<strong>不</strong>相同！</p>
+<p>结果<code>union_sf</code>是一个多边形，特征数量比两个输入对象都要多。然而，注意其中许多多边形较小，并不代表实际区域，而是由于我们两个数据集具有不同细节层次的结果。这些错误的副产品被称为割缝多边形。识别割缝的一种方法是找到相对非常小的区域的多边形，例如，在这里是25000平方米，然后将它们去除。让我们寻找一个合适的算法。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep<span class="punctuation">(</span><span class="string">&quot;clean&quot;</span><span class="punctuation">,</span> qgis_algo<span class="operator">$</span>algorithm<span class="punctuation">,</span> value <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>这次找到的算法，<code>v.clean</code>，不包括在QGIS中，而是在GRASS
+GIS中。GRASS
+GIS的<code>v.clean</code>是一个用于清理空间矢量数据拓扑的强大工具。重要的是，我们可以通过<strong>qgisprocess</strong>来使用它。</p>
+<p>与前一步类似，我们应该从查看此算法的帮助开始。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qgis_show_help<span class="punctuation">(</span><span class="string">&quot;grass7:v.clean&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>我们在这里省略了输出，因为帮助文本相当长，并且包含许多参数。<a
+href="#fn3" class="footnote-ref" id="fnref3"
+role="doc-noteref"><sup>3</sup></a>这是因为<code>v.clean</code>是一个多功能工具——它可以清理不同类型的几何体并解决不同类型的拓扑问题。</p>
+<p>对于这个示例，让我们仅关注几个参数，但我们鼓励你访问<a
+target="_blank" rel="noopener" href="https://grass.osgeo.org/grass-stable/manuals/v.clean.html">该算法的文档</a>以了解更多关于<code>v.clean</code>的功能。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">qgis_get_argument_specs<span class="punctuation">(</span><span class="string">&quot;grass7:v.clean&quot;</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  select<span class="punctuation">(</span>name<span class="punctuation">,</span> description<span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  slice_head<span class="punctuation">(</span>n <span class="operator">=</span> <span class="number">4</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>此算法的主要参数是<code>input</code>——我们的矢量对象。接下来，我们需要选择一个工具——清理方法。<a
+href="#fn4" class="footnote-ref" id="fnref4"
+role="doc-noteref"><sup>4</sup></a><code>v.clean</code>中存在大约十几个工具，可以用来删除重复的几何体、删除线之间的小角度或删除小面积等。在这个情况下，我们对最后一个工具<code>rmarea</code>感兴趣。其中一些工具，包括<code>rmarea</code>，期望一个附加参数<code>threshold</code>，其行为取决于所选工具。在我们的情况下，<code>rmarea</code>工具将删除所有小于或等于提供的<code>threshold</code>的面积。请注意，无论输入图层的坐标参考系统如何，阈值都必须以平方米为单位指定。</p>
+<p>让我们运行这个算法，把输出转化为新的<code>sf</code>对象——<code>clean_sf</code></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">clean <span class="operator">=</span> qgis_run_algorithm<span class="punctuation">(</span><span class="string">&quot;grass7:v.clean&quot;</span><span class="punctuation">,</span></span><br><span class="line">  input <span class="operator">=</span> union_sf<span class="punctuation">,</span> </span><br><span class="line">  tool <span class="operator">=</span> <span class="string">&quot;rmarea&quot;</span><span class="punctuation">,</span> threshold <span class="operator">=</span> <span class="number">25000</span></span><br><span class="line"><span class="punctuation">)</span></span><br><span class="line">clean_sf <span class="operator">=</span> st_as_sf<span class="punctuation">(</span>clean<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>结果，图右侧面板，看起来是我们期待的结果——消除了细碎的面。</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309032057977.png" />
+Sliver polygons colored in red (left panel). Cleaned polygons (right
+panel).</p>
+<h2 id="栅格数据">栅格数据</h2>
+<p>数字高程模型（DEMs）包含每个栅格单元的高程信息。它们被用于许多目的，包括卫星导航、水流模型、表面分析或可视化。在这里，我们有兴趣从DEM栅格中推导出可用作统计学习预测因子的新信息。例如，各种地形参数可能有助于滑坡的预测。</p>
+<p>对于本节，我们将使用<code>dem.tif</code>——蒙贡研究区域的数字高程模型（从Land
+Process Distributed Active Archive
+Center下载，也可参见<code>?dem.tif</code>）。它的分辨率约为30乘30米，并使用投影的CRS。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>qgisprocess<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>terra<span class="punctuation">)</span></span><br><span class="line">dem <span class="operator">=</span> system.file<span class="punctuation">(</span><span class="string">&quot;raster/dem.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p><strong>terra</strong>包的<code>terrain()</code>命令已经允许计算一些基本的地形特征，例如坡度、方位、TPI（<em>地形位置指数</em>）、TRI（<em>地形崎岖指数</em>）、粗糙度和流向。然而，GIS程序提供了许多的地形特征，其中一些在某些情境下可能更适合。例如，地形湿润指数（TWI）在研究水文和生物过程方面被发现有用<span
+class="citation"
+data-cites="sorensen_calculation_2006">[@sorensen_calculation_2006]</span>。让我们使用<code>"wetness"</code>作为关键字搜索此索引的算法列表。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">qgis_algo <span class="operator">=</span> qgis_algorithms<span class="punctuation">(</span><span class="punctuation">)</span></span><br><span class="line">grep<span class="punctuation">(</span><span class="string">&quot;wetness&quot;</span><span class="punctuation">,</span> qgis_algo<span class="operator">$</span>algorithm<span class="punctuation">,</span> value <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  head<span class="punctuation">(</span><span class="number">2</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>上述代码的输出表明，所需的算法存在于SAGA GIS软件中。<a href="#fn5"
+class="footnote-ref" id="fnref5"
+role="doc-noteref"><sup>5</sup></a>虽然SAGA是混合GIS，但其主要关注点一直是栅格处理，特别是数字高程模型（土壤性质、地形属性、气候参数）。因此，SAGA特别擅长快速处理大型（高分辨率）栅格数据集<span
+class="citation"
+data-cites="conrad_system_2015">[@conrad_system_2015]</span>。</p>
+<p><code>"sagang:sagawetnessindex"</code>算法实际上是一个修改过的TWI，其结果是对位于山谷底部的单元格的更现实的土壤湿润潜力<span
+class="citation"
+data-cites="bohner_spatial_2006">[@bohner_spatial_2006]</span>。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">qgis_show_help<span class="punctuation">(</span><span class="string">&quot;sagang:sagawetnessindex&quot;</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Saga wetness index (sagang:sagawetnessindex)</span></span><br><span class="line"><span class="comment">#&gt; Description</span></span><br></pre></td></tr></table></figure>
+<p>在这里，我们坚持对所有参数使用默认值。因此，我们只需指定一个参数——输入的<code>DEM</code>。当然，在应用此算法时，您应确保默认值与您的研究目标相符。<a
+href="#fn6" class="footnote-ref" id="fnref6"
+role="doc-noteref"><sup>6</sup></a><code>"sagang:sagawetnessindex"</code>不是返回一个而是四个栅格——集水区域、集水坡度、修改后的集水区域和地形湿润指数。</p>
+<p>在从QGIS中运行SAGA算法之前，我们将默认的栅格输出格式从<code>.tif</code>更改为SAGA的本地栅格格式<code>.sdat</code>。因此，从现在开始，我们自己不指定的所有输出栅格都将写入<code>.sdat</code>格式。根据您使用的软件版本（SAGA、GDAL），这可能不是必需的，但通常这会在尝试读取使用SAGA创建的输出栅格时减少不必的麻烦。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">options<span class="punctuation">(</span>qgisprocess.tmp_raster_ext <span class="operator">=</span> <span class="string">&quot;.sdat&quot;</span><span class="punctuation">)</span></span><br><span class="line">dem_wetness <span class="operator">=</span> qgis_run_algorithm<span class="punctuation">(</span><span class="string">&quot;sagang:sagawetnessindex&quot;</span><span class="punctuation">,</span></span><br><span class="line">  DEM <span class="operator">=</span> dem</span><br><span class="line"><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<!-- The result, `dem_wetness`, is a list with file paths to the four outputs. -->
+<p>我们可以通过在<code>qgis_as_terra()</code>函数中提供输出名称来读取选定的输出。既然我们已经从
+QGIS 内部完成了 SAGA
+处理，我们将栅格输出格式更改回<code>.tif</code>。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dem_wetness_twi <span class="operator">=</span> qgis_as_terra<span class="punctuation">(</span>dem_wetness<span class="operator">$</span>TWI<span class="punctuation">)</span></span><br><span class="line"><span class="comment"># plot(dem_wetness_twi)</span></span><br><span class="line">options<span class="punctuation">(</span>qgisprocess.tmp_raster_ext <span class="operator">=</span> <span class="string">&quot;.tif&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>你可以在下图的左侧面板上看到TWI地图。地形湿润指数是无单位的：其低值代表不会积聚水的区域，而较高的值显示将以增加的水平积聚水的区域。</p>
+<p>数字高程模型的信息也可以分类，例如，到geomorphons——代表地形形态的10个类别的地貌现象，例如斜坡、山脊或山谷<span
+class="citation"
+data-cites="jasiewicz_geomorphons_2013">[@jasiewicz_geomorphons_2013]</span>。这些表型在许多研究中被使用，包括滑坡敏感性、生态系统服务、人类流动性和数字土壤制图。</p>
+<p>geomorphons算法的原始实现是在GRASS
+GIS中创建的，我们可以在<strong>qgisprocess</strong>列表中找到它，名为<code>"grass7:r.geomorphon"</code>：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grep<span class="punctuation">(</span><span class="string">&quot;geomorphon&quot;</span><span class="punctuation">,</span> qgis_algo<span class="operator">$</span>algorithm<span class="punctuation">,</span> value <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;grass7:r.geomorphon&quot; &quot;sagang:geomorphons&quot; </span></span><br><span class="line">qgis_show_help<span class="punctuation">(</span><span class="string">&quot;grass7:r.geomorphon&quot;</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment"># output not shown</span></span><br></pre></td></tr></table></figure>
+<p>计算geomorphons需要一个输入的DEM（数字高程模型，<code>elevation</code>），并且可以通过一组可选参数进行自定义。这些包括，<code>search</code>
+——用于计算视线长度的值，以及<code>-m</code>
+——一个标志，指定搜索值将以米为单位提供（而不是单元格数量）。关于附加参数的更多信息可以在原始论文和<a
+target="_blank" rel="noopener" href="https://grass.osgeo.org/grass-stable/manuals/r.geomorphon.html">GRASS
+GIS文档</a>中找到。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dem_geomorph <span class="operator">=</span> qgis_run_algorithm<span class="punctuation">(</span><span class="string">&quot;grass7:r.geomorphon&quot;</span><span class="punctuation">,</span></span><br><span class="line">  elevation <span class="operator">=</span> dem<span class="punctuation">,</span></span><br><span class="line">  `-m` <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">,</span> search <span class="operator">=</span> <span class="number">120</span></span><br><span class="line"><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>我们的输出，<code>dem_geomorph$forms</code>，包含一个有10个类别的栅格文件——每一个都代表一个地形形态。我们可以使用<code>qgis_as_terra()</code>将其读入R中，然后进行可视化或在后续的计算中使用它。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dem_geomorph_terra <span class="operator">=</span> qgis_as_terra<span class="punctuation">(</span>dem_geomorph<span class="operator">$</span>forms<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>有趣的是，一些geomorphons与TWI（地形湿润指数）值之间存在联系，如图所示。最大的TWI值主要出现在山谷和凹地中，而最低的值则如预期那样出现在山脊上。</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309032105108.png" />
+Topographic wetness index (TWI, left panel) and geomorphons (right
+panel) derived for the Mongón study area.</p>
+<h1 id="saga-gis">SAGA GIS</h1>
+<p>自动地质科学分析系统（System for Automated Geoscientific
+Analyses，简称SAGA；表提供了通过命令行界面（在Windows下是<code>saga_cmd.exe</code>，在Linux下是<code>saga_cmd</code>）执行SAGA模块的可能性（参见<a
+target="_blank" rel="noopener" href="https://sourceforge.net/p/saga-gis/wiki/Executing%20Modules%20with%20SAGA%20CMD/">SAGA模块的wiki页面</a>）。此外，还有一个Python接口（SAGA
+Python API）。<strong>Rsagacmd</strong>使用前者从R内部运行SAGA。</p>
+<p>在本节中，我们将使用<strong>Rsagacmd</strong>来划分秘鲁Mongón研究区域在2000年9月22日的归一化植被指数（NDVI）的相似值区域，方法是使用SAGA
+GIS中的种子区域生长算法。<a href="#fn7" class="footnote-ref" id="fnref7"
+role="doc-noteref"><sup>7</sup></a></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndvi <span class="operator">=</span> rast<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;raster/ndvi.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>要开始使用<strong>Rsagacmd</strong>，我们需要运行<code>saga_gis()</code>函数。它有两个主要用途：</p>
+<ul>
+<li>它动态地<a href="#fn8" class="footnote-ref" id="fnref8"
+role="doc-noteref"><sup>8</sup></a>创建一个新对象，该对象包含指向所有有效SAGA-GIS库和工具的链接</li>
+<li>它设置了一般的包选项，例如<code>raster_backend</code>（用于处理栅格数据的R包）、<code>vector_backend</code>（用于处理矢量数据的R包）和<code>cores</code>（用于处理的CPU核心的最大数量，默认值：全部）</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>Rsagacmd<span class="punctuation">)</span></span><br><span class="line">saga <span class="operator">=</span> saga_gis<span class="punctuation">(</span>raster_backend <span class="operator">=</span> <span class="string">&quot;terra&quot;</span><span class="punctuation">,</span> vector_backend <span class="operator">=</span> <span class="string">&quot;sf&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>我们的<code>saga</code>对象包含指向所有可用SAGA工具的连接。它被组织为库列表（工具组），库内部有工具列表。我们可以使用<code>$</code>符号访问任何工具（记得使用TAB键进行自动补全）。</p>
+<p>种子区域生长算法的工作分为两个主要步骤<span class="citation"
+data-cites="adams_seeded_1994 bohner_image_2006">[@adams_seeded_1994;@bohner_image_2006]</span>。首先，通过在指定大小的局部窗口中找到方差最小的单元格来生成初始单元格（“种子”）。然后，使用区域生长算法将种子的相邻像素合并以创建均匀区域。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sg <span class="operator">=</span> saga<span class="operator">$</span>imagery_segmentation<span class="operator">$</span>seed_generation</span><br></pre></td></tr></table></figure>
+<p>在上述示例中，我们首先指向了<code>imagery_segmentation</code>库，然后是其<code>seed_generation</code>工具。我们还将其分配给了<code>sg</code>对象，以便在下一步中不重新输入整个工具代码。<a
+href="#fn9" class="footnote-ref" id="fnref9"
+role="doc-noteref"><sup>9</sup></a>如果我们只输入<code>sg</code>，我们将得到该工具的快速概述和一个带有其参数、描述和默认值的数据框。你还可以使用<code>tidy(sg)</code>仅提取参数表。<code>seed_generation</code>工具将栅格数据集作为其第一个参数（<code>features</code>）；可选参数包括指定初始多边形大小的<code>band_width</code>。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ndvi_seeds <span class="operator">=</span> sg<span class="punctuation">(</span>ndvi<span class="punctuation">,</span> band_width <span class="operator">=</span> <span class="number">2</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment"># plot(ndvi_seeds$seed_grid)</span></span><br></pre></td></tr></table></figure>
+<p>我们的输出是三个对象的列表：<code>variance</code>
+——局部方差的栅格图，<code>seed_grid</code>
+——生成种子的栅格图，以及<code>seed_points</code>
+——生成种子的空间矢量对象。</p>
+<p>我们使用的第二个SAGA GIS工具是<code>seeded_region_growing</code>。<a
+href="#fn10" class="footnote-ref" id="fnref10"
+role="doc-noteref"><sup>10</sup></a><code>seeded_region_growing</code>工具需要两个输入：我们在前一步计算的<code>seed_grid</code>和<code>ndvi</code>栅格对象。此外，我们可以指定几个参数，例如<code>normalize</code>来标准化输入特征，<code>neighbour</code>（4或8-邻域）和<code>method</code>。最后一个参数可以设置为<code>0</code>或<code>1</code>（区域生长基于栅格单元格的值及其位置，或仅基于值）。有关该方法的更详细描述，请参见@bohner_image_2006。</p>
+<p>在这里，我们只会将<code>method</code>更改为<code>1</code>，这意味着我们的输出区域将仅基于它们的NDVI值的相似性创建。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">srg <span class="operator">=</span> saga<span class="operator">$</span>imagery_segmentation<span class="operator">$</span>seeded_region_growing</span><br><span class="line">ndvi_srg <span class="operator">=</span> srg<span class="punctuation">(</span>ndvi_seeds<span class="operator">$</span>seed_grid<span class="punctuation">,</span> ndvi<span class="punctuation">,</span> method <span class="operator">=</span> <span class="number">1</span><span class="punctuation">)</span></span><br><span class="line">plot<span class="punctuation">(</span>ndvi_srg<span class="operator">$</span>segments<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>工具返回了三个对象的列表：<code>segments</code>、<code>similarity</code>、<code>table</code>。<code>similarity</code>对象是一个栅格，显示种子与其他单元之间的相似性，而<code>table</code>是一个数据框，存储有关输入种子的信息。最后，<code>ndvi_srg$segments</code>是一个栅格，显示我们的结果区域。我们可以使用<code>as.polygons()</code>和<code>st_as_sf()</code>将其转换为多边形。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ndvi_segments <span class="operator">=</span> ndvi_srg<span class="operator">$</span>segments <span class="operator">|&gt;</span></span><br><span class="line">  as.polygons<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  st_as_sf<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309032113571.png" />
+Normalized difference vegetation index (NDVI, left panel) and NDVI-based
+segments derived using the seeded region growing algorithm for the
+Mongón study area.</p>
+<p>生成的多边形（段）代表具有相似值的区域。它们还可以使用各种技术（例如，<em>k</em>-均值聚类、区域化（例如，SKATER）或监督分类方法）进一步聚合成更大的多边形。您可以在练习中尝试这样做。</p>
+<p>R还具有其他工具来实现用相似值创建多边形（所谓的段）的目标。它包括<strong>SegOptim</strong>包<span
+class="citation"
+data-cites="goncalves_segoptim_2019">[@goncalves_segoptim_2019]</span>，该包允许运行几种图像分割算法，以及<strong>supercells</strong><span
+class="citation"
+data-cites="nowosad_extended_2022">[@nowosad_extended_2022]</span>，实现了用于处理地理空间数据的超像素算法SLIC。</p>
+<h1 id="grass-gis">GRASS GIS</h1>
+<p>美国陆军工程研究实验室（USA-CERL）于1982年至1995年创建了地理资源分析支持系统（GRASS）的核心<span
+class="citation"
+data-cites="neteler_open_2008">[@neteler_open_2008]</span>。自1997年以来，学术界一直在继续这项工作。与SAGA类似，GRASS最初专注于栅格处理，但自GRASS
+6.0以来，才添加了先进的矢量功能<span class="citation"
+data-cites="bivand_applied_2013">[@bivand_applied_2013]</span>。</p>
+<p>GRASS将输入数据存储在GRASS
+GIS数据库中。关于矢量数据，GRASS默认是一个拓扑GIS，即它只存储一次相邻要素的几何形状。SQLite是矢量属性管理的默认数据库驱动程序，属性与几何形状（即GRASS
+GIS数据库）通过键链接（<a
+target="_blank" rel="noopener" href="https://grasswiki.osgeo.org/wiki/Vector_Database_Management#GRASS_GIS_vector_management_model">GRASS
+GIS矢量管理</a>）。</p>
+<p>在使用GRASS之前，必须设置GRASS
+GIS数据库（也可在R内部设置），用户可能会发现这个过程开始时有点吓人。首先，GRASS数据库需要自己的目录，其中又包含一个位置（有关详细信息，请参见<a
+target="_blank" rel="noopener" href="https://grass.osgeo.org/grass-stable/manuals/grass_database.html">GRASS
+GIS数据库</a>帮助页面<a
+target="_blank" rel="noopener" href="https://grass.osgeo.org/grass-stable/manuals/index.html">grass.osgeo.org</a>）。位置存储一个项目或一个区域的地理数据。在一个位置内，可以存在几个地图集，通常是指不同的用户或不同的任务。每个位置还有一个PERMANENT地图集——一个自动创建的强制性地图集。为了与项目的所有用户共享地理数据，数据库所有者可以将空间数据添加到PERMANENT地图集。此外，PERMANENT地图集存储栅格数据的投影、空间范围和默认分辨率。总而言之，GRASS
+GIS数据库可能包含许多位置（同一位置的所有数据具有相同的CRS），每个位置可以存储许多地图集（数据集组）。有关GRASS空间数据库系统的更多信息，请参阅@neteler_open_2008和<a
+target="_blank" rel="noopener" href="https://grass.osgeo.org/grass-stable/manuals/helptext.html">GRASS
+GIS快速入门</a>。要在R中快速使用GRASS，我们将使用<strong>link2GI</strong>包，不过，人们也可以逐步设置GRASS
+GIS数据库。参见<a
+target="_blank" rel="noopener" href="https://grasswiki.osgeo.org/wiki/R_statistics/rgrass#GRASS_within_R">GRASS
+within
+R</a>了解如何操作。请注意，如果第一次使用GRASS，接下来的段落中的代码说明可能难以理解，但通过逐行运行代码并检查中间结果，背后的推理应该会变得更加清晰。</p>
+<p>在此，我们通过地理信息科学中最有趣的问题之一——旅行推销员问题引入<strong>rgrass</strong>。假设一位旅行推销员想要拜访24个客户。此外，他想在家开始和结束他的旅程，总共有25个地点，同时以尽可能短的距离覆盖。解决这个问题有一个最佳解决方案；然而，对于现代计算机来说，检查所有可能的解决方案（大部分）是不可能的<span
+class="citation"
+data-cites="longley_geographic_2015">[@longley_geographic_2015]</span>。在我们的案例中，可能的解决方案数量对应于<code>(25 - 1)! / 2</code>，即24的阶乘除以2（因为我们不区分前进或后退方向）。即使一次迭代可以在纳秒内完成，这仍相当于9837145年。幸运的是，有聪明、近乎最优的解决方案，可以在这难以想象的时间的微小部分内运行。GRASS
+GIS提供了其中的一个解决方案（有关详细信息，请参阅<a
+target="_blank" rel="noopener" href="https://grass.osgeo.org/grass-stable/manuals/v.net.salesman.html">v.net.salesman</a>）。在我们的用例中，我们想找到伦敦街道上前25个自行车站（而不是客户）之间的最短路径（我们简单地假设第一个自行车站对应于我们的旅行推销员的家）。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data<span class="punctuation">(</span><span class="string">&quot;cycle_hire&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spData&quot;</span><span class="punctuation">)</span></span><br><span class="line">points <span class="operator">=</span> cycle_hire<span class="punctuation">[</span><span class="number">1</span><span class="operator">:</span><span class="number">25</span><span class="punctuation">,</span> <span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<p>除了自行车租赁点数据外，我们还需要该区域的街道网络。我们可以使用<strong>osmdata</strong>包的帮助从OpenStreetMap下载它。为此，我们将街道网络的查询（在OSM语言中称为“高速公路”）限制为<code>points</code>的边界框，并将相应的数据附加为<code>sf</code>对象。<code>osmdata_sf()</code>返回一个包含几个空间对象（点、线、多边形等）的列表，但在这里，我们只保留与其相关ID的线对象。<a
+href="#fn11" class="footnote-ref" id="fnref11"
+role="doc-noteref"><sup>11</sup></a></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>osmdata<span class="punctuation">)</span></span><br><span class="line">b_box <span class="operator">=</span> st_bbox<span class="punctuation">(</span>points<span class="punctuation">)</span></span><br><span class="line">london_streets <span class="operator">=</span> opq<span class="punctuation">(</span>b_box<span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  add_osm_feature<span class="punctuation">(</span>key <span class="operator">=</span> <span class="string">&quot;highway&quot;</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  osmdata_sf<span class="punctuation">(</span><span class="punctuation">)</span></span><br><span class="line">london_streets <span class="operator">=</span> london_streets<span class="punctuation">[[</span><span class="string">&quot;osm_lines&quot;</span><span class="punctuation">]</span><span class="punctuation">]</span></span><br><span class="line">london_streets <span class="operator">=</span> select<span class="punctuation">(</span>london_streets<span class="punctuation">,</span> osm_id<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>现在我们有了数据，可以开始并启动GRASS会话了。幸运的是，<strong>link2GI</strong>包中的<code>linkGRASS()</code>让我们只用一行代码就可以设置GRASS环境。您唯一需要提供的是一个确定空间数据库的投影和范围的空间对象。首先，<code>linkGRASS()</code>
+会在您的计算机上找到所有的GRASS安装。由于我们将<code>ver_select</code>设置为<code>TRUE</code>，我们可以交互式地选择找到的GRASS安装之一。如果只有一个安装，<code>linkGRASS()</code>会自动选择它。其次，<code>linkGRASS()</code>
+建立了与GRASS GIS的连接。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>rgrass<span class="punctuation">)</span></span><br><span class="line">link2GI<span class="operator">::</span>linkGRASS<span class="punctuation">(</span>london_streets<span class="punctuation">,</span> ver_select <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>在我们能使用GRASS地理算法之前，我们需要将数据添加到GRASS的空间数据库中。幸运的是，方便的函数<code>write_VECT()</code>为我们做到了这一点。（对于栅格数据，请使用<code>write_RAST()</code>。）在我们的例子中，我们在只使用第一个属性列的情况下添加街道和自行车租赁点数据，并在GRASS中将它们命名为<code>london_streets</code>和<code>points</code>。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">write_VECT<span class="punctuation">(</span>terra<span class="operator">::</span>vect<span class="punctuation">(</span>london_streets<span class="punctuation">)</span><span class="punctuation">,</span> vname <span class="operator">=</span> <span class="string">&quot;london_streets&quot;</span><span class="punctuation">)</span></span><br><span class="line">write_VECT<span class="punctuation">(</span>terra<span class="operator">::</span>vect<span class="punctuation">(</span>points<span class="punctuation">[</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span><span class="punctuation">)</span><span class="punctuation">,</span> vname <span class="operator">=</span> <span class="string">&quot;points&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p><strong>rgrass</strong>包期望其输入和输出为<strong>terra</strong>对象。因此，我们需要使用<code>vect()</code>函数将我们的<code>sf</code>空间矢量转换为<strong>terra</strong>的<code>SpatVector</code>，以便能够使用<code>write_VECT()</code>。<a
+href="#fn12" class="footnote-ref" id="fnref12"
+role="doc-noteref"><sup>12</sup></a></p>
+<p>现在，这两个数据集都存在于GRASS
+GIS数据库中。要执行我们的网络分析，我们需要一个拓扑清洁的街道网络。GRASS的<code>"v.clean"</code>负责去除重复项、小角度和悬挂等。在这里，我们在每个交叉点处断开线条，以确保后续的路由算法实际上可以在交叉口右转或左转，并将输出保存在名为<code>streets_clean</code>的GRASS对象中。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">execGRASS<span class="punctuation">(</span></span><br><span class="line">  cmd <span class="operator">=</span> <span class="string">&quot;v.clean&quot;</span><span class="punctuation">,</span> input <span class="operator">=</span> <span class="string">&quot;london_streets&quot;</span><span class="punctuation">,</span> output <span class="operator">=</span> <span class="string">&quot;streets_clean&quot;</span><span class="punctuation">,</span></span><br><span class="line">  tool <span class="operator">=</span> <span class="string">&quot;break&quot;</span><span class="punctuation">,</span> flags <span class="operator">=</span> <span class="string">&quot;overwrite&quot;</span></span><br><span class="line"><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>📌要了解GRASS
+GIS模块的可能参数和标志，您可以使用<code>help</code>标志。
+例如，尝试<code>execGRASS("g.region", flags = "help")</code>。</p>
+</blockquote>
+<p>我们的一些自行车站点可能不会完全位于街道段上。然而，为了找到它们之间的最短路线，我们需要将它们连接到最近的街道段上。<code>"v.net"</code>的连接操作符就是这样做的。我们将其输出保存在<code>streets_points_con</code>中。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">execGRASS<span class="punctuation">(</span></span><br><span class="line">  cmd <span class="operator">=</span> <span class="string">&quot;v.net&quot;</span><span class="punctuation">,</span> input <span class="operator">=</span> <span class="string">&quot;streets_clean&quot;</span><span class="punctuation">,</span> output <span class="operator">=</span> <span class="string">&quot;streets_points_con&quot;</span><span class="punctuation">,</span></span><br><span class="line">  points <span class="operator">=</span> <span class="string">&quot;points&quot;</span><span class="punctuation">,</span> operation <span class="operator">=</span> <span class="string">&quot;connect&quot;</span><span class="punctuation">,</span> threshold <span class="operator">=</span> <span class="number">0.001</span><span class="punctuation">,</span></span><br><span class="line">  flags <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;overwrite&quot;</span><span class="punctuation">,</span> <span class="string">&quot;c&quot;</span><span class="punctuation">)</span></span><br><span class="line"><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>得到的清洁数据集作为<code>"v.net.salesman"</code>算法的输入，该算法最终找到所有自行车租赁站之间的最短路线。其中一个参数是<code>center_cats</code>，它需要一个数字范围作为输入。这个范围代表应该计算最短路径的点。由于我们想计算所有自行车站的路线，所以我们将其设置为<code>1-25</code>。要访问旅行推销员算法的GRASS帮助页面，请运行<code>execGRASS("g.manual", entry = "v.net.salesman")</code>。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">execGRASS<span class="punctuation">(</span></span><br><span class="line">  cmd <span class="operator">=</span> <span class="string">&quot;v.net.salesman&quot;</span><span class="punctuation">,</span> input <span class="operator">=</span> <span class="string">&quot;streets_points_con&quot;</span><span class="punctuation">,</span></span><br><span class="line">  output <span class="operator">=</span> <span class="string">&quot;shortest_route&quot;</span><span class="punctuation">,</span> center_cats <span class="operator">=</span> paste0<span class="punctuation">(</span><span class="string">&quot;1-&quot;</span><span class="punctuation">,</span> nrow<span class="punctuation">(</span>points<span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">  flags <span class="operator">=</span> <span class="string">&quot;overwrite&quot;</span></span><br><span class="line"><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>要查看我们的结果，我们将结果读入R，将其转换为仅保留几何图形的sf对象，并借助<strong>mapview</strong>包进行可视化。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">route <span class="operator">=</span> read_VECT<span class="punctuation">(</span><span class="string">&quot;shortest_route&quot;</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  st_as_sf<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  st_geometry<span class="punctuation">(</span><span class="punctuation">)</span></span><br><span class="line">mapview<span class="operator">::</span>mapview<span class="punctuation">(</span>route<span class="punctuation">)</span> <span class="operator">+</span> points</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309032153101.png" />
+Shortest route (blue line) between 24 cycle hire stations (blue dots) on
+the OSM street network of London.</p>
+<p>在此过程中有一些重要的注意事项：</p>
+<ul>
+<li>我们本可以使用GRASS的空间数据库，从而允许更快的处理。这意味着我们仅在开始时导出了地理数据。然后我们创建了新对象，但只将最终结果导入回R。要找出当前可用的数据集，请运行<code>execGRASS("g.list", type = "vector,raster", flags = "p")</code>。</li>
+<li>我们也可以从R内部访问已经存在的GRASS空间数据库。在将数据导入R之前，您可能想要进行一些（空间）子集选择。对于矢量数据，请使用<code>"v.select"</code>和<code>"v.extract"</code>。<code>"db.select"</code>让您选择矢量图层的属性表的子集，而不返回相应的几何图形。</li>
+<li>您也可以从正在运行的GRASS会话中启动R
+[有关更多信息，请参考@bivand_applied_2013]。</li>
+<li>请参考出色的<a
+target="_blank" rel="noopener" href="https://grass.osgeo.org/grass-stable/manuals/">GRASS在线帮助</a>或<code>execGRASS("g.manual", flags = "i")</code>了解有关每个可用GRASS地理算法的更多信息。</li>
+</ul>
+<h1 id="何时使用什么">何时使用什么?</h1>
+<p>推荐单一的R-GIS界面是困难的，因为使用取决于个人偏好、手头的任务和您对不同GIS软件包的熟悉程度，这反过来可能取决于您的研究领域。正如之前提到的，SAGA特别擅长快速处理大型（高分辨率）栅格数据集，常被水文学家、气候学家和土壤科学家使用<span
+class="citation"
+data-cites="conrad_system_2015">[@conrad_system_2015]</span>。另一方面，GRASS
+GIS是此处介绍的唯一支持拓扑空间数据库的GIS，这对于网络分析甚至模拟研究特别有用。与GRASS和SAGA-GIS相比，QGIS更加用户友好，尤其对于初次使用GIS的用户，可能是最受欢迎的开源GIS。因此，<strong>qgisprocess</strong>是大多数用例的合适选择。
+其主要优势包括：</p>
+<ul>
+<li>对多个GIS的统一访问，因此提供了&gt;1000个地理算法包括重复功能，例如，您可以使用QGIS-，SAGA-或GRASS-地理算法执行覆盖操作</li>
+<li>自动数据格式转换（SAGA使用<code>.sdat</code>网格文件，GRASS使用其自己的数据库格式，但QGIS将处理相应的转换）</li>
+<li>它自动将地理R对象传递给QGIS地理算法并返回到R</li>
+<li>支持命名参数和自动默认值检索的便利功能（受<strong>rgrass</strong>的启发）</li>
+</ul>
+<p>当然，有些情况下您肯定应该使用其他R-GIS桥梁。虽然QGIS是唯一提供对几个GIS软件包统一界面的GIS，但它只提供对相应第三方地理算法的子集的访问（有关更多信息，请参考@muenchow_rqgis:_2017）。因此，要使用SAGA和GRASS的完整功能集，请坚持使用<strong>Rsagacmd</strong>和<strong>rgrass</strong>。此外，如果您想借助地理数据库运行模拟<span
+class="citation"
+data-cites="krug_clearing_2010">[@krug_clearing_2010]</span>，请直接使用<strong>rgrass</strong>，因为<strong>qgisprocess</strong>每次调用都会启动新的GRASS会话。最后，如果您需要拓扑正确的数据和/或空间数据库管理功能，例如多用户访问，我们推荐使用GRASS。</p>
+<p>请注意，还有一些GIS软件包具有脚本接口，但没有专门的R包可以访问它们：gvSig、OpenJump和Orfeo
+Toolbox。<a href="#fn13" class="footnote-ref" id="fnref13"
+role="doc-noteref"><sup>13</sup></a></p>
+<h1 id="其他桥梁">其他桥梁</h1>
+<p>本章到目前为止的重点是R与桌面GIS软件的接口。我们强调这些桥梁，因为专用的GIS软件是众所周知的，是理解地理数据的常见“入门方式”。它们还提供了许多地理算法的访问途径。</p>
+<p>其他的“桥梁”包括指向空间库的接口、空间数据库以及网络映射服务。本节只提供了部分可能性的剖析。由于R的灵活性，通过其调用系统中的其他程序和与其他语言的集成（尤其是通过<strong>Rcpp</strong>和<strong>reticulate</strong>），许多其他的桥梁是可能的。目的不是全面覆盖，而是展示在本章开头引用@sherman_desktop_2008的那句话中访问“灵活性和力量”的其他方式。</p>
+<h2 id="gdal-桥梁">GDAL 桥梁</h2>
+<p>GDAL 是一个支持许多地理数据格式的底层库。GDAL
+如此有效，以至于大多数GIS程序在后台使用GDAL
+来导入和导出地理数据，而不是重新发明轮子并使用定制的读写代码。但是，GDAL
+提供的不仅仅是数据I/O。它拥有用于矢量和栅格数据的<a
+target="_blank" rel="noopener" href="https://gdal.org/programs/index.html">地理处理工具</a>，用于在线服务栅格数据的<a
+target="_blank" rel="noopener" href="https://gdal.org/programs/gdal2tiles.html#gdal2tiles">瓦片</a>创建功能，以及对矢量数据的快速<a
+target="_blank" rel="noopener" href="https://gdal.org/programs/gdal_rasterize.html#gdal-rasterize">栅格化</a>功能。由于GDAL是一个命令行工具，因此可以通过R中的<code>system()</code>命令访问其所有命令。</p>
+<p>下面的代码段演示了这一功能：<code>linkGDAL()</code>在计算机上搜索工作的GDAL安装，并将可执行文件的位置添加到PATH变量中，从而允许调用GDAL（通常仅在Windows下需要）。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">link2GI<span class="operator">::</span>linkGDAL<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>现在我们可以使用<code>system()</code>函数调用GDAL的任何工具。例如，<code>ogrinfo</code>提供矢量数据集的元数据。在这里，我们将使用两个附加标志调用此工具：<code>-al</code>列出所有层的所有特征，<code>-so</code>仅获取摘要（而不是完整的几何列表）。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">our_filepath <span class="operator">=</span> system.file<span class="punctuation">(</span><span class="string">&quot;shapes/world.gpkg&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spData&quot;</span><span class="punctuation">)</span></span><br><span class="line">cmd <span class="operator">=</span> paste<span class="punctuation">(</span><span class="string">&quot;ogrinfo -al -so&quot;</span><span class="punctuation">,</span> our_filepath<span class="punctuation">)</span></span><br><span class="line">system<span class="punctuation">(</span>cmd<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; INFO: Open of `.../spData/shapes/world.gpkg&#x27;</span></span><br><span class="line"><span class="comment">#&gt;       using driver `GPKG&#x27; successful.</span></span><br><span class="line"><span class="comment">#&gt;</span></span><br><span class="line"><span class="comment">#&gt; Layer name: world</span></span><br><span class="line"><span class="comment">#&gt; Geometry: Multi Polygon</span></span><br><span class="line"><span class="comment">#&gt; Feature Count: 177</span></span><br><span class="line"><span class="comment">#&gt; Extent: (-180.000000, -89.900000) - (179.999990, 83.645130)</span></span><br><span class="line"><span class="comment">#&gt; Layer SRS WKT:</span></span><br><span class="line"><span class="comment">#&gt; ...</span></span><br></pre></td></tr></table></figure>
+<p>其他常用的GDAL工具包括：</p>
+<ul>
+<li><code>gdalinfo</code>：提供栅格数据集的元数据</li>
+<li><code>gdal_translate</code>：在不同的栅格文件格式之间转换</li>
+<li><code>ogr2ogr</code>：在不同的矢量文件格式之间转换</li>
+<li><code>gdalwarp</code>：重新投影、转换和剪裁栅格数据集</li>
+<li><code>gdaltransform</code>：转换坐标</li>
+</ul>
+<p>访问https://gdal.org/programs/
+查看GDAL工具的完整列表，并阅读它们的帮助文件。</p>
+<p>通过<strong>link2GI</strong>提供的对GDAL的“链接”，可以用作从R或系统CLI进行更高级GDAL工作的基础。TauDEM
+(http://hydrology.usu.edu/taudem) 和Orfeo Toolbox
+(https://www.orfeo-toolbox.org/)
+是提供命令行界面的其他空间数据处理库/程序——上述示例展示了如何通过R通过系统命令行访问这些库。反过来，这可能是以新的R包形式为这些库创建适当接口的起点。</p>
+<p>然而，在深入研究创建新桥梁的项目之前，重要的是要意识到现有R包的功能，以及<code>system()</code>调用可能不是平台无关的（可能在某些计算机上失败）。此外，<strong>sf</strong>通过<strong>Rcpp</strong>提供的R/C++接口，将GDAL、GEOS和PROJ提供的大部分功能带到R中，从而避免了<code>system()</code>调用。</p>
+<h2 id="连接到空间数据库的桥梁">连接到空间数据库的桥梁</h2>
+<p>空间数据库管理系统（空间DBMS）以结构化的方式存储空间和非空间数据。它们可以通过唯一标识符（主键和外键）以及空间来组织大量的数据集合到相关表（实体）中（例如，考虑空间连接）。这很有用，因为地理数据集很容易变得庞大和混乱。数据库能够基于空间和非空间字段有效地存储和查询大型数据集，并提供多用户访问和拓扑支持。</p>
+<p>最重要的开源空间数据库是PostGIS<span class="citation"
+data-cites="obe_postgis_2015">[@obe_postgis_2015]</span>。<a
+href="#fn14" class="footnote-ref" id="fnref14"
+role="doc-noteref"><sup>14</sup></a>
+R到空间DBMS（如PostGIS）的桥梁很重要，允许访问庞大的数据存储，而无需将几个千兆字节的地理数据加载到RAM中，从而可能导致R会话崩溃。本节的其余部分将展示如何基于<em>PostGIS
+in Action, Second Edition</em> <span class="citation"
+data-cites="obe_postgis_2015">[@obe_postgis_2015]</span>中的“Hello real
+world”从R调用PostGIS。<a href="#fn15" class="footnote-ref" id="fnref15"
+role="doc-noteref"><sup>15</sup></a></p>
+<p>以下代码需要有效的互联网连接，因为我们正在访问一个位于QGIS Cloud
+(https://qgiscloud.com/)中的PostgreSQL/PostGIS数据库。<a href="#fn16"
+class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a>
+我们的第一步是通过提供数据库的名称、主机名和用户信息来创建与数据库的连接。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>RPostgreSQL<span class="punctuation">)</span></span><br><span class="line">conn <span class="operator">=</span> dbConnect<span class="punctuation">(</span></span><br><span class="line">  drv <span class="operator">=</span> PostgreSQL<span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">  dbname <span class="operator">=</span> <span class="string">&quot;rtafdf_zljbqm&quot;</span><span class="punctuation">,</span> host <span class="operator">=</span> <span class="string">&quot;db.qgiscloud.com&quot;</span><span class="punctuation">,</span></span><br><span class="line">  port <span class="operator">=</span> <span class="string">&quot;5432&quot;</span><span class="punctuation">,</span> user <span class="operator">=</span> <span class="string">&quot;rtafdf_zljbqm&quot;</span><span class="punctuation">,</span> password <span class="operator">=</span> <span class="string">&quot;d3290ead&quot;</span></span><br><span class="line"><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>我们的新对象<code>conn</code>只是我们的R会话与数据库之间的已建立的链接。它不存储任何数据。</p>
+<p>经常的第一个问题是：“数据库中可以找到哪些表？”可以使用<code>dbListTables()</code>如下回答：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dbListTables<span class="punctuation">(</span>conn<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;spatial_ref_sys&quot; &quot;topology&quot;        &quot;layer&quot;           &quot;restaurants&quot;</span></span><br><span class="line"><span class="comment">#&gt; [5] &quot;highways&quot;</span></span><br></pre></td></tr></table></figure>
+<p>答案是五个表。在这里，我们只对<code>restaurants</code>和<code>highways</code>表感兴趣。前者代表美国的快餐餐厅的位置，后者是美国的主要公路。要了解表中可用的属性，我们可以运行<code>dbListFields</code>：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dbListFields<span class="punctuation">(</span>conn<span class="punctuation">,</span> <span class="string">&quot;highways&quot;</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;qc_id&quot;        &quot;wkb_geometry&quot; &quot;gid&quot;          &quot;feature&quot;</span></span><br><span class="line"><span class="comment">#&gt; [5] &quot;name&quot;         &quot;state&quot;</span></span><br></pre></td></tr></table></figure>
+<p>现在，由于我们知道了可用的数据集，我们可以执行一些查询——向数据库提出一些问题。查询需要用数据库能理解的语言提供——通常是SQL。第一个查询将从<code>highways</code>表中选择马里兰州（<code>MD</code>）的<code>US Route 1</code>。注意，如果<code>read_sf()</code>提供了与数据库的开放连接和查询，它就可以从数据库中读取地理数据。此外，<code>read_sf()</code>需要知道哪一列代表几何体（这里是：<code>wkb_geometry</code>）。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">query <span class="operator">=</span> paste<span class="punctuation">(</span></span><br><span class="line">  <span class="string">&quot;SELECT *&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;FROM highways&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;WHERE name = &#x27;US Route 1&#x27; AND state = &#x27;MD&#x27;;&quot;</span></span><br><span class="line"><span class="punctuation">)</span></span><br><span class="line">us_route <span class="operator">=</span> read_sf<span class="punctuation">(</span>conn<span class="punctuation">,</span> query <span class="operator">=</span> query<span class="punctuation">,</span> geom <span class="operator">=</span> <span class="string">&quot;wkb_geometry&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>这将产生一个名为<code>us_route</code>的<code>MULTILINESTRING</code>类型的<strong>sf</strong>对象。</p>
+<p>如前所述，我们还可以不仅提出非空间问题，而且可以基于数据集的空间属性查询。为了展示这一点，下一个示例在选定的公路周围增加了35公里（35,000米）的缓冲区。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">query <span class="operator">=</span> paste<span class="punctuation">(</span></span><br><span class="line">  <span class="string">&quot;SELECT ST_Union(ST_Buffer(wkb_geometry, 35000))::geometry&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;FROM highways&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;WHERE name = &#x27;US Route 1&#x27; AND state = &#x27;MD&#x27;;&quot;</span></span><br><span class="line"><span class="punctuation">)</span></span><br><span class="line">buf <span class="operator">=</span> read_sf<span class="punctuation">(</span>conn<span class="punctuation">,</span> query <span class="operator">=</span> query<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>注意，这是一个使用您应该已经熟悉的函数（<code>ST_Union()</code>，<code>ST_Buffer()</code>）的空间查询。您还可以在<strong>sf</strong>包中找到它们，尽管在这里它们是用小写字母写的（<code>st_union()</code>，<code>st_buffer()</code>）。实际上，<strong>sf</strong>包的函数名称在很大程度上遵循PostGIS的命名惯例。<a
+href="#fn17" class="footnote-ref" id="fnref17"
+role="doc-noteref"><sup>17</sup></a></p>
+<p>最后的查询将找到所有Hardee's餐厅（标记为<code>HDE</code>），它们位于所选公路周围的35公里缓冲区内。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">query <span class="operator">=</span> paste<span class="punctuation">(</span></span><br><span class="line">  <span class="string">&quot;SELECT *&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;FROM restaurants r&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;WHERE EXISTS (&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;SELECT gid&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;FROM highways&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;WHERE&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;ST_DWithin(r.wkb_geometry, wkb_geometry, 35000) AND&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;name = &#x27;US Route 1&#x27; AND&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;state = &#x27;MD&#x27; AND&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;r.franchise = &#x27;HDE&#x27;);&quot;</span></span><br><span class="line"><span class="punctuation">)</span></span><br><span class="line">hardees <span class="operator">=</span> read_sf<span class="punctuation">(</span>conn<span class="punctuation">,</span> query <span class="operator">=</span> query<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>有关空间SQL查询的详细解释，请参阅@obe_postgis_2015。最后，按照以下方式关闭数据库连接是一种良好的做法：<a
+href="#fn18" class="footnote-ref" id="fnref18"
+role="doc-noteref"><sup>18</sup></a></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RPostgreSQL<span class="operator">::</span>postgresqlCloseConnection<span class="punctuation">(</span>conn<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309032205602.png" />
+Visualization of the output of previous PostGIS commands showing the
+highway (black line), a buffer (light yellow) and four restaurants (red
+points) within the buffer.</p>
+<p>与PostGIS不同，<strong>sf</strong>只支持空间矢量数据。 <!--toDo:jn-->
+<!-- reconsider referening to rpostgis -- https://github.com/r-spatial/discuss/issues/58 -->
+要查询和操作存储在PostGIS数据库中的栅格数据，请使用<strong>rpostgis</strong>包<span
+class="citation"
+data-cites="bucklin_rpostgis_2018">[@bucklin_rpostgis_2018]</span>，或者使用诸如<code>rastertopgsql</code>这样的命令行工具，该工具是PostGIS安装的一部分。</p>
+<p>这个小节仅是PostgreSQL/PostGIS的简要介绍。尽管如此，我们还是想鼓励在空间数据库管理系统（DBMS）中存储地理和非地理数据的做法，而只将那些需要进行进一步的地理统计分析的数据子集附加到R的全局环境中。有关所提及的SQL查询的更详细描述以及关于PostgreSQL/PostGIS的更全面介绍，请参阅@obe_postgis_2015。PostgreSQL/PostGIS是一种出色的开源空间数据库选择。SQLite/SpatiaLite轻量级数据库引擎以及在背景中使用SQLite的GRASS同样也是如此。</p>
+<p>如果您的数据集对于PostgreSQL/PostGIS来说过大，并且您需要大规模的空间数据管理和查询性能，那么探索分布式计算系统上的大规模地理查询可能是值得的。这样的系统超出了本书的范围，但值得一提的是，提供此功能的开源软件确实存在。在此领域的重要项目包括<a
+target="_blank" rel="noopener" href="http://www.geomesa.org/">GeoMesa</a>和<a
+target="_blank" rel="noopener" href="https://sedona.apache.org/">Apache Sedona</a>。<a
+target="_blank" rel="noopener" href="https://cran.r-project.org/package=apache.sedona"><strong>apache.sedona</strong></a>包提供了对后者的接口。</p>
+<h1 id="云技术和服务的桥梁">云技术和服务的桥梁</h1>
+<p>近年来，云技术在互联网上越来越突出。这也包括使用云技术来存储和处理空间数据。主要的云计算提供商（如亚马逊网络服务、微软Azure
+/ Planetary
+Computer、谷歌云平台等）在其平台上提供了大量的开放地球观测数据，例如完整的Sentinel-2档案。我们可以使用R直接连接并处理这些档案中的数据，理想情况下是从同一云和地区的机器中进行。</p>
+<p>三个有前途的发展使得在云平台上使用此类图像档案变得更加<em>简单</em>和<em>高效</em>，它们分别是<a
+target="_blank" rel="noopener" href="https://stacspec.org">时空资产目录（STAC）</a>、<a
+target="_blank" rel="noopener" href="https://www.cogeo.org/">云优化的GeoTIFF（COG）</a>图像文件格式，以及数据立方体的概念。</p>
+<p>除了托管大型数据档案，近几年还推出了许多基于云的服务来处理地球观测数据。其中包括OpenEO倡议——一种在编程语言（包括R）和各种基于云的服务之间的统一接口。</p>
+<h2 id="staccogs和云端的数据立方体">STAC，COGs，和云端的数据立方体</h2>
+<p>时空资产目录（STAC）是一个用于描述时空数据的通用描述格式，用于描述云平台上的各种数据集，包括图像、合成孔径雷达（SAR）数据和点云。除了简单的静态目录描述，STAC-API还提供了一项网络服务，以通过空间、时间和其他属性查询目录中的项目（例如图像）。在R中，<strong>rstac</strong>包<span
+class="citation"
+data-cites="simoes_rstac_2021">[@simoes_rstac_2021]</span>
+允许连接到STAC-API端点并搜索项目。在下面的示例中，我们请求与预定义区域和时间相交的<a
+target="_blank" rel="noopener" href="https://registry.opendata.aws/sentinel-2-l2a-cogs">亚马逊网络服务上的Sentinel-2云优化GeoTIFF（COG）数据集</a>中的所有图像。结果包含所有找到的图像及其元数据（例如云覆盖）和指向AWS上实际文件的URL。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>rstac<span class="punctuation">)</span></span><br><span class="line"><span class="comment"># Connect to the STAC-API endpoint for Sentinel-2 data</span></span><br><span class="line"><span class="comment"># and search for images intersecting our AOI</span></span><br><span class="line">s <span class="operator">=</span> stac<span class="punctuation">(</span><span class="string">&quot;https://earth-search.aws.element84.com/v0&quot;</span><span class="punctuation">)</span></span><br><span class="line">items <span class="operator">=</span> s <span class="operator">|&gt;</span></span><br><span class="line">  stac_search<span class="punctuation">(</span></span><br><span class="line">    collections <span class="operator">=</span> <span class="string">&quot;sentinel-s2-l2a-cogs&quot;</span><span class="punctuation">,</span></span><br><span class="line">    bbox <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">7.1</span><span class="punctuation">,</span> <span class="number">51.8</span><span class="punctuation">,</span> <span class="number">7.2</span><span class="punctuation">,</span> <span class="number">52.8</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">    datetime <span class="operator">=</span> <span class="string">&quot;2020-01-01/2020-12-31&quot;</span></span><br><span class="line">  <span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  post_request<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  items_fetch<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>云存储与本地硬盘不同，传统图像文件格式在基于云的地理处理中表现不佳。广义而言，云优化GeoTIFF格式是GeoTIFF的一种特定类型，使得可以高效地从云存储中仅读取图像的某些部分。
+因此，以较低分辨率读取图像或读取图像的矩形子集变得更加高效。作为R用户，您无需安装任何东西即可使用COG，因为<a
+target="_blank" rel="noopener" href="https://gdal.org">GDAL</a>（以及使用它的任何包）已经可以与COG一起工作。然而，请注意，在浏览数据提供商的目录时，COG的可用性是一个很大的优势。</p>
+<p>对于较大的感兴趣区域，请求的图像仍然相对难以处理：它们可能使用不同的地图投影，可能在空间上重叠，空间分辨率通常取决于光谱带。<strong>gdalcubes</strong>包<span
+class="citation"
+data-cites="appel_gdalcubes_2019">[@appel_gdalcubes_2019]</span>可用于从单个图像中抽象出来，并创建和处理图像集合为四维数据立方体。</p>
+<p>下面的代码展示了一个最小示例，用于从前一个STAC-API搜索返回的Sentinel-2图像创建较低分辨率（250m）的最大NDVI合成。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>gdalcubes<span class="punctuation">)</span></span><br><span class="line"><span class="comment"># Filter images by cloud cover and create an image collection object</span></span><br><span class="line">collection <span class="operator">=</span> stac_image_collection<span class="punctuation">(</span>items<span class="operator">$</span>features<span class="punctuation">,</span></span><br><span class="line">  property_filter <span class="operator">=</span> <span class="keyword">function</span><span class="punctuation">(</span>x<span class="punctuation">)</span> <span class="punctuation">&#123;</span></span><br><span class="line">    x<span class="punctuation">[[</span><span class="string">&quot;eo:cloud_cover&quot;</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">&lt;</span> <span class="number">10</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">)</span></span><br><span class="line"><span class="comment"># Define extent, resolution (250m, daily) and CRS of the target data cube</span></span><br><span class="line">v <span class="operator">=</span> cube_view<span class="punctuation">(</span></span><br><span class="line">  srs <span class="operator">=</span> <span class="string">&quot;EPSG:3857&quot;</span><span class="punctuation">,</span> extent <span class="operator">=</span> collection<span class="punctuation">,</span> dx <span class="operator">=</span> <span class="number">250</span><span class="punctuation">,</span> dy <span class="operator">=</span> <span class="number">250</span><span class="punctuation">,</span></span><br><span class="line">  dt <span class="operator">=</span> <span class="string">&quot;P1D&quot;</span></span><br><span class="line"><span class="punctuation">)</span> <span class="comment"># &quot;P1D&quot; is an ISO 8601 duration string</span></span><br><span class="line"><span class="comment"># Create and process the data cube</span></span><br><span class="line">cube <span class="operator">=</span> raster_cube<span class="punctuation">(</span>collection<span class="punctuation">,</span> v<span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  select_bands<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;B04&quot;</span><span class="punctuation">,</span> <span class="string">&quot;B08&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  apply_pixel<span class="punctuation">(</span><span class="string">&quot;(B08-B04)/(B08+B04)&quot;</span><span class="punctuation">,</span> <span class="string">&quot;NDVI&quot;</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  reduce_time<span class="punctuation">(</span><span class="string">&quot;max(NDVI)&quot;</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment"># gdalcubes_options(parallel = 8)</span></span><br><span class="line"><span class="comment"># plot(cube, zlim = c(0, 1))</span></span><br></pre></td></tr></table></figure>
+<p>为了通过云覆盖来过滤图像，我们提供一个属性过滤函数，在创建图像集合时应用于每个STAC结果项。该函数接收图像的可用元数据作为输入列表，并返回一个逻辑值，只有函数返回TRUE的图像才会被考虑。在这种情况下，我们忽略了10%或更多云覆盖的图像。有关更多详细信息，请参考<a
+target="_blank" rel="noopener" href="https://appelmar.github.io/ogh2021/tutorial.html">2021年OpenGeoHub夏季学校上展示的教程</a>。</p>
+<p>STAC、COGs和数据立方体的组合形成了一种云——本地工作流程，用于在云中分析（大型）卫星图像集合。这些工具已经构成了某些工具的支柱，例如<strong>sits</strong>
+R包，该包允许对大型地球观测数据进行土地利用和土地覆盖分类。该包从云服务中可用的图像集合中构建EO数据立方体，并使用各种机器学习算法对数据立方体进行土地分类。有关<strong>sits</strong>的更多信息，请访问https://e-sensing.github.io/sitsbook/
+或阅读相关文章 <span class="citation"
+data-cites="rs13132428">[@rs13132428]</span>。</p>
+<h2 id="openeo">openEO</h2>
+<p>是一个倡议，通过定义用于处理数据的通用语言来支持云服务之间的互操作性。初始想法已在<a
+target="_blank" rel="noopener" href="https://r-spatial.org/2016/11/29/openeo.html">r-spatial.org博客文章</a>中描述，旨在让用户能够轻松地在云服务之间切换，并尽可能减少代码更改。<a
+target="_blank" rel="noopener" href="https://processes.openeo.org">标准化流程</a>使用多维数据立方体模型作为数据的接口。
+用户可以通过R、Python、JavaScript、QGIS或网络编辑器连接到8个不同的后端（请参见https://hub.openeo.org），并定义（和链接）集合上的流程。由于后端之间的功能和数据可用性存在差异，因此<strong>openeo</strong>
+R包 <span class="citation"
+data-cites="lahn_openeo_2021">[@lahn_openeo_2021]</span>会动态加载来自连接后端的可用流程和集合。然后，用户可以加载图像集合，应用和链接流程，提交作业，以及探索和绘制结果。</p>
+<p>以下代码将连接到<a
+target="_blank" rel="noopener" href="https://openeo.cloud/">openEO平台后端</a>，请求可用数据集、流程和输出格式，定义一个流程图来从Sentinel-2数据计算最大NDVI图像，并在登录到后端后最终执行该图。openEO平台后端包括一个免费层次，可以通过现有的机构或社交平台帐户进行注册。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>openeo<span class="punctuation">)</span></span><br><span class="line">con <span class="operator">=</span> connect<span class="punctuation">(</span>host <span class="operator">=</span> <span class="string">&quot;https://openeo.cloud&quot;</span><span class="punctuation">)</span></span><br><span class="line">p <span class="operator">=</span> processes<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># load available processes</span></span><br><span class="line">collections <span class="operator">=</span> list_collections<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># load available collections</span></span><br><span class="line">formats <span class="operator">=</span> list_file_formats<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># load available output formats</span></span><br><span class="line"><span class="comment"># Load Sentinel-2 collection</span></span><br><span class="line">s2 <span class="operator">=</span> p<span class="operator">$</span>load_collection<span class="punctuation">(</span></span><br><span class="line">  id <span class="operator">=</span> <span class="string">&quot;SENTINEL2_L2A&quot;</span><span class="punctuation">,</span></span><br><span class="line">  spatial_extent <span class="operator">=</span> <span class="built_in">list</span><span class="punctuation">(</span></span><br><span class="line">    west <span class="operator">=</span> <span class="number">7.5</span><span class="punctuation">,</span> east <span class="operator">=</span> <span class="number">8.5</span><span class="punctuation">,</span></span><br><span class="line">    north <span class="operator">=</span> <span class="number">51.1</span><span class="punctuation">,</span> south <span class="operator">=</span> <span class="number">50.1</span></span><br><span class="line">  <span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">  temporal_extent <span class="operator">=</span> <span class="built_in">list</span><span class="punctuation">(</span><span class="string">&quot;2021-01-01&quot;</span><span class="punctuation">,</span> <span class="string">&quot;2021-01-31&quot;</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">  bands <span class="operator">=</span> <span class="built_in">list</span><span class="punctuation">(</span><span class="string">&quot;B04&quot;</span><span class="punctuation">,</span> <span class="string">&quot;B08&quot;</span><span class="punctuation">)</span></span><br><span class="line"><span class="punctuation">)</span></span><br><span class="line"><span class="comment"># Compute NDVI vegetation index</span></span><br><span class="line">compute_ndvi <span class="operator">=</span> p<span class="operator">$</span>reduce_dimension<span class="punctuation">(</span></span><br><span class="line">  data <span class="operator">=</span> s2<span class="punctuation">,</span> dimension <span class="operator">=</span> <span class="string">&quot;bands&quot;</span><span class="punctuation">,</span></span><br><span class="line">  reducer <span class="operator">=</span> <span class="keyword">function</span><span class="punctuation">(</span>data<span class="punctuation">,</span> context<span class="punctuation">)</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="punctuation">(</span>data<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span> <span class="operator">-</span> data<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">/</span> <span class="punctuation">(</span>data<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span> <span class="operator">+</span> data<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">)</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">)</span></span><br><span class="line"><span class="comment"># Compute maximum over time</span></span><br><span class="line">reduce_max <span class="operator">=</span> p<span class="operator">$</span>reduce_dimension<span class="punctuation">(</span></span><br><span class="line">  data <span class="operator">=</span> compute_ndvi<span class="punctuation">,</span> dimension <span class="operator">=</span> <span class="string">&quot;t&quot;</span><span class="punctuation">,</span></span><br><span class="line">  reducer <span class="operator">=</span> <span class="keyword">function</span><span class="punctuation">(</span>x<span class="punctuation">,</span> y<span class="punctuation">)</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="built_in">max</span><span class="punctuation">(</span>x<span class="punctuation">)</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">)</span></span><br><span class="line"><span class="comment"># Export as GeoTIFF</span></span><br><span class="line">result <span class="operator">=</span> p<span class="operator">$</span>save_result<span class="punctuation">(</span>reduce_max<span class="punctuation">,</span> formats<span class="operator">$</span>output<span class="operator">$</span>GTiff<span class="punctuation">)</span></span><br><span class="line"><span class="comment"># Login, see https://docs.openeo.cloud/getting-started/r/#authentication</span></span><br><span class="line">login<span class="punctuation">(</span></span><br><span class="line">  login_type <span class="operator">=</span> <span class="string">&quot;oidc&quot;</span><span class="punctuation">,</span> provider <span class="operator">=</span> <span class="string">&quot;egi&quot;</span><span class="punctuation">,</span></span><br><span class="line">  config <span class="operator">=</span> <span class="built_in">list</span><span class="punctuation">(</span>client_id <span class="operator">=</span> <span class="string">&quot;...&quot;</span><span class="punctuation">,</span> secret <span class="operator">=</span> <span class="string">&quot;...&quot;</span><span class="punctuation">)</span></span><br><span class="line"><span class="punctuation">)</span></span><br><span class="line"><span class="comment"># Execute processes</span></span><br><span class="line">compute_result<span class="punctuation">(</span>graph <span class="operator">=</span> result<span class="punctuation">,</span> output_file <span class="operator">=</span> tempfile<span class="punctuation">(</span>fileext <span class="operator">=</span> <span class="string">&quot;.tif&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h2 id="练习">练习</h2>
+<!-- qgisprocess 1-3 -->
+<p>E1. Compute global solar irradiation for an area of
+<code>system.file("raster/dem.tif", package = "spDataLarge")</code> for
+March 21 at 11:00 AM using the <code>r.sun</code> GRASS GIS through
+<strong>qgisprocess</strong>.</p>
+<!-- sagagis 1 -->
+<p>E2. Compute catchment area and catchment slope of
+<code>system.file("raster/dem.tif", package = "spDataLarge")</code>
+using <strong>Rsagacmd</strong>.</p>
+<p>E3. Continue working on the <code>ndvi_segments</code> object created
+in the SAGA GIS section. Extract average NDVI values from the
+<code>ndvi</code> raster and group them into six clusters using
+<code>kmeans()</code>. Visualize the results.</p>
+<!-- rgrass 1 -->
+<p>E4. Attach <code>data(random_points, package = "spDataLarge")</code>
+and read
+<code>system.file("raster/dem.tif", package = "spDataLarge")</code> into
+R. Select a point randomly from <code>random_points</code> and find all
+<code>dem</code> pixels that can be seen from this point (hint: viewshed
+can be calculated using GRASS GIS). Visualize your result. For example,
+plot a hillshade, the digital elevation model, your viewshed output, and
+the point. Additionally, give <code>mapview</code> a try.</p>
+<!-- gdal 1-2 -->
+<p>E5. Use <code>gdalinfo</code> via a system call for a raster file
+stored on disk of your choice. What kind of information you can find
+there?</p>
+<p>E6. Use <code>gdalwarp</code> to decrease the resolution of your
+raster file (for example, if the resolution is 0.5, change it into 1).
+Note: <code>-tr</code> and <code>-r</code> flags will be used in this
+exercise.</p>
+<!-- postgis 1? -->
+<p>E7. Query all Californian highways from the PostgreSQL/PostGIS
+database living in the QGIS Cloud introduced in this chapter.</p>
+<!-- stac+gdalcubes 1 -->
+<p>E8. The <code>ndvi.tif</code> raster
+(<code>system.file("raster/ndvi.tif", package = "spDataLarge")</code>)
+contains NDVI calculated for the Mongón study area based on Landsat data
+from September 22nd, 2000. Use <strong>rstac</strong>,
+<strong>gdalcubes</strong>, and <strong>terra</strong> to download
+Sentinel-2 images for the same area from 2020-08-01 to 2020-10-31,
+calculate its NDVI, and then compare it with the results from
+<code>ndvi.tif</code>.</p>
+<aside id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li
+id="fn1"><p>你可以使用<code>qgis_configure()</code>查看检测过程的详细信息。<a
+href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li
+id="fn2"><p>我们还可以使用<code>qgis_get_description()</code>、<code>qgis_get_argument_specs()</code>和<code>qgis_get_output_specss()</code>独立提取其中的一些信息。<a
+href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>还要注意，这些参数与QGIS的参数不同，都是小写的。<a
+href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>也可以选择多个工具，然后按顺序执行。<a href="#fnref4"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>TWI也可以使用<code>r.topidx</code> GRASS
+GIS功能来计算。<a href="#fnref5" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li
+id="fn6"><p>有关“sagang：sagawetnessindex”的其他参数的解释详见https://gis.stackexchange.com/a/323454/20955。<a
+href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>阅读章节了解如何从遥感图像计算NDVI的详细信息。<a
+href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>这意味着可用的库将取决于安装的SAGA GIS版本。<a
+href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li
+id="fn9"><p>你可以在https://saga-gis.sourceforge.io/saga_tool_doc/8.3.0/imagery_segmentation_2.html上了解更多关于该工具的信息。<a
+href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li
+id="fn10"><p>你可以在https://saga-gis.sourceforge.io/saga_tool_doc/8.3.0/imagery_segmentation_3.html上了解更多关于该工具的信息。<a
+href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li
+id="fn11"><p>为了方便读者，可以使用<code>data("london_streets", package = "spDataLarge")</code>将<code>london_streets</code>附加到全局环境中。<a
+href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>您可以通过阅读<a
+target="_blank" rel="noopener" href="https://geocompx.org/post/2021/spatial-classes-conversion/">在R中不同空间类之间的转换</a>博客文章和<a
+target="_blank" rel="noopener" href="https://CRAN.R-project.org/package=rgrass/vignettes/coerce.html">对象格式之间的强制转换</a>小册子了解更多关于在R中转换空间类的信息<a
+href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>请注意，<strong>link2GI</strong>提供了与Orfeo
+Toolbox的部分集成，并且您还可以通过<strong>qgisprocess</strong>访问Orfeo
+Toolbox地理算法。还要注意，可以通过R包<strong>traudem</strong>从R中访问TauDEM。<a
+href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li
+id="fn14"><p>SQLite/SpatiaLite肯定也很重要，但实际上我们已经介绍了这种方法，因为GRASS在后台使用SQLite。<a
+href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>感谢Manning Publications、Regina Obe和Leo
+Hsu允许使用这个例子。<a href="#fnref15" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn16"><p>QGIS
+Cloud让您将地理数据和地图存储在云中。在后台，它使用QGIS
+Server和PostgreSQL/PostGIS。这样，读者可以在无需在本地机器上安装PostgreSQL/PostGIS的情况下跟随PostGIS示例。感谢QGIS
+Cloud团队托管这个例子。<a href="#fnref16" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn17"><p>前缀<code>st</code>代表空间/时间。<a href="#fnref17"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li
+id="fn18"><p>在这里关闭连接非常重要，因为QGIS云（免费版本）仅允许同时进行十个连接。<a
+href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
+
+        </div>
+
+        
+        
+        
+
+        <div>
+            
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------<i class="fa fa-paw"></i>已经到底啦<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+
+            
+        </div>
+
+        <footer class="post-footer">
+            <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="SCY 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="SCY 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+            <div class="post-tags">
+                <a href="/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
+                <a href="/tags/Geocomputaion/" rel="tag"><i class="fa fa-tag"></i> Geocomputaion</a>
+            </div>
+
+            
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+            <div class="post-nav">
+                <div class="post-nav-item">
+                    <a href="/2023/08/18/2023-8-18-9%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%B6%E5%9B%BE/" rel="prev" title="(9)地理数据制图">
+                        <i class="fa fa-angle-left"></i> (9)地理数据制图
+                    </a>
+                </div>
+                <div class="post-nav-item">
+                    <a href="/2023/08/20/2023-8-20-11%E8%84%9A%E6%9C%AC%E3%80%81%E7%AE%97%E6%B3%95%E5%92%8C%E5%87%BD%E6%95%B0/" rel="next" title="(11)脚本、算法和函数">
+                        (11)脚本、算法和函数 <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">160k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">9:42</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+</div>
+
+<!-- 删除 “由 Hexo & NexT.Gemini 强力驱动” -->
+<!-- -->
+
+      </div>
+    </footer>
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.20/fancybox/fancybox.umd.js" integrity="sha256-q8XkJ6dj5VwSvzI8+nATCHHQG+Xv/dAZBCgqmu93zOY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.19.1/algoliasearch-lite.umd.js" integrity="sha256-qzlNbRtZWHoUV5I2mI2t9QR7oYXlS9oNctX+0pECXI0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/instantsearch.js/4.56.8/instantsearch.production.min.js" integrity="sha256-xUys6KCuRGBxFaRaYZlWulRUjY48XFv6/Q2s0mb1dmc=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":null}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.3.0/mermaid.min.js","integrity":"sha256-9y71g5Lz/KLsHjB8uXwnkuWDtAMDSzD/HdIbqhJfTAI="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.3.0/wavedrom.min.js","integrity":"sha256-IRMDzTC+wK5stMucZ/XSXkeS5VNtxZ+/Bm8Mcqfoxdo="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.3.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+    
+  <script data-pjax async src="/js/busuanzi.js"></script>
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://ancao96.github.io/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://waline-server-nxpj3ksyo-scy.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀~","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","eemoji":["https://unpkg.com/@waline/emojis@1.1.0/tw-emoji","//unpkg.com/@waline/emojis@1.1.0/bilibili","//unpkg.com/@waline/emojis@1.1.0/alus","https://unpkg.com/@waline/emojis@1.1.0/weibo"],"el":"#waline","comment":true,"path":"/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+    <link rel="stylesheet" href="/dist/APlayer.min.css">
+    <div id="aplayer"></div>
+    <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+    <script type="text/javascript" src="/dist/music.js"></script>
+    
+  </body>
+</html>

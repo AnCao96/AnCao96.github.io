@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.20/fancybox/fancybox.css" integrity="sha256-RvRHGSuWAxZpXKV9lLDt2e+rZ+btzn48Wp4ueS3NZKs=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ancao96.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"0SOKPRESAA","apiKey":"f7b6d6953f3de5baf0bc4ab9917765b7","indexName":"search scyspace","hits":{"per_page":10}},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true,"path":"search.xml","field":"post","content":true,"format":"html"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="空间操作，包括矢量数据集之间的空间连接以及栅格数据集上的局部和焦点操作，是地理计算的重要部分。本章展示了如何基于空间对象的位置和形状以多种方式进行修改。许多空间操作有与之对应的非空间（属性）操作，因此上一章中演示的如子集提取和数据集连接等概念在此也适用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(4)空间操作">
+<meta property="og:url" content="https://ancao96.github.io/2023/08/13/2023-8-13-4%E7%A9%BA%E9%97%B4%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="SCY SPACE">
+<meta property="og:description" content="空间操作，包括矢量数据集之间的空间连接以及栅格数据集上的局部和焦点操作，是地理计算的重要部分。本章展示了如何基于空间对象的位置和形状以多种方式进行修改。许多空间操作有与之对应的非空间（属性）操作，因此上一章中演示的如子集提取和数据集连接等概念在此也适用。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308232057538.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308232211273.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308232229968.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308232332970.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308240039875.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308271029710.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308241315813.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308241401703.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308251643479.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308251958656.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308262241490.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308262308411.png">
+<meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308262319552.png">
+<meta property="article:published_time" content="2023-08-12T17:12:20.000Z">
+<meta property="article:modified_time" content="2023-09-01T06:33:55.108Z">
+<meta property="article:author" content="SCY">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="Geocomputaion">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308232057538.png">
+
+
+<link rel="canonical" href="https://ancao96.github.io/2023/08/13/2023-8-13-4%E7%A9%BA%E9%97%B4%E6%93%8D%E4%BD%9C/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ancao96.github.io/2023/08/13/2023-8-13-4%E7%A9%BA%E9%97%B4%E6%93%8D%E4%BD%9C/","path":"2023/08/13/2023-8-13-4空间操作/","title":"(4)空间操作"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>(4)空间操作 | SCY SPACE</title>
+    
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="https://waline-server-nxpj3ksyo-scy.vercel.app">
+    <noscript>
+      <link rel="stylesheet" href="/css/noscript.css">
+    </noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.0.0/style.css" />
+    <style>
+      body,div.post-body,h1,h2,h3,h4 {
+        font-family: "LXGW WenKai LITE", sans-serif;
+        font-size: 108%;
+      }
+    </style>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+    <div class="headband"></div>
+    <main class="main">
+      <div class="column">
+        <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SCY SPACE</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+          
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">前提条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%A2%E9%87%8F%E6%95%B0%E6%8D%AE%E7%A9%BA%E9%97%B4%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">矢量数据空间操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E7%9F%A2%E9%87%8F%E6%8F%90%E5%8F%96"><span class="nav-number">3.1.</span> <span class="nav-text">空间矢量提取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E5%85%B3%E7%B3%BB"><span class="nav-number">3.2.</span> <span class="nav-text">拓扑关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#de-9im-strings"><span class="nav-number">3.3.</span> <span class="nav-text">DE-9IM strings</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E8%BF%9E%E6%8E%A5"><span class="nav-number">3.4.</span> <span class="nav-text">空间连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E9%87%8D%E5%8F%A0%E8%BF%9E%E6%8E%A5"><span class="nav-number">3.5.</span> <span class="nav-text">非重叠连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E8%81%9A%E5%90%88"><span class="nav-number">3.6.</span> <span class="nav-text">空间聚合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E4%B8%8D%E4%B8%80%E8%87%B4%E5%9B%BE%E5%B1%82"><span class="nav-number">3.7.</span> <span class="nav-text">连接不一致图层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%9D%E7%A6%BB%E5%85%B3%E7%B3%BB"><span class="nav-number">3.8.</span> <span class="nav-text">距离关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%85%E6%A0%BC%E6%95%B0%E6%8D%AE%E7%A9%BA%E9%97%B4%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">栅格数据空间操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E6%A0%85%E6%A0%BC%E6%8F%90%E5%8F%96"><span class="nav-number">4.1.</span> <span class="nav-text">空间栅格提取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%B0%E5%9B%BE%E4%BB%A3%E6%95%B0"><span class="nav-number">4.2.</span> <span class="nav-text">地图代数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">4.3.</span> <span class="nav-text">局部操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%84%A6%E7%82%B9%E6%93%8D%E4%BD%9C"><span class="nav-number">4.4.</span> <span class="nav-text">焦点操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E5%9F%9F%E6%93%8D%E4%BD%9C"><span class="nav-number">4.5.</span> <span class="nav-text">区域操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E6%93%8D%E4%BD%9C%E5%92%8C%E8%B7%9D%E7%A6%BB"><span class="nav-number">4.6.</span> <span class="nav-text">全局操作和距离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A2%E9%87%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E5%9C%B0%E5%9B%BE%E4%BB%A3%E6%95%B0"><span class="nav-number">4.7.</span> <span class="nav-text">矢量数据的&quot;地图代数&quot;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E6%A0%85%E6%A0%BC"><span class="nav-number">4.8.</span> <span class="nav-text">合并栅格</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">5.</span> <span class="nav-text">练习</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="SCY"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">SCY</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AnCao96" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AnCao96" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ancao.cugb@gmail.com" title="E-Mail → mailto:ancao.cugb@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+      </div>
+      <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+    
+    
+
+    <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+        <link itemprop="mainEntityOfPage" href="https://ancao96.github.io/2023/08/13/2023-8-13-4%E7%A9%BA%E9%97%B4%E6%93%8D%E4%BD%9C/">
+
+        <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <meta itemprop="image" content="/images/avatar.gif">
+            <meta itemprop="name" content="SCY">
+        </span>
+
+        <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop="name" content="SCY SPACE">
+            <meta itemprop="description" content="">
+        </span>
+
+        <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+            <meta itemprop="name" content="(4)空间操作 | SCY SPACE">
+            <meta itemprop="description" content="">
+        </span>
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">
+                (4)空间操作
+            </h1>
+
+            <div class="post-meta-container">
+                <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-08-13 01:12:20" itemprop="dateCreated datePublished" datetime="2023-08-13T01:12:20+08:00">2023-08-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-01 14:33:55" itemprop="dateModified" datetime="2023-09-01T14:33:55+08:00">2023-09-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R/Geocomputaion/" itemprop="url" rel="index"><span itemprop="name">Geocomputaion</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2023/08/13/2023-8-13-4%E7%A9%BA%E9%97%B4%E6%93%8D%E4%BD%9C/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2023/08/13/2023-8-13-4%E7%A9%BA%E9%97%B4%E6%93%8D%E4%BD%9C/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>13k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>47 分钟</span>
+    </span>
+</div>
+
+            </div>
+        </header>
+
+        
+        
+        
+        <div class="post-body" itemprop="articleBody"><p>空间操作，包括矢量数据集之间的空间连接以及栅格数据集上的局部和焦点操作，是地理计算的重要部分。本章展示了如何基于空间对象的位置和形状以多种方式进行修改。许多空间操作有与之对应的非空间（属性）操作，因此上一章中演示的如子集提取和数据集连接等概念在此也适用。
+<span id="more"></span></p>
+<h1 id="前提条件">前提条件</h1>
+<ul>
+<li>此章节需要使用和之前章节相同的包。</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>sf<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>terra<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>dplyr<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>spData<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h1 id="引言">引言</h1>
+<p>空间操作，包括矢量数据集之间的空间连接以及栅格数据集上的局部和焦点操作，是地理计算的重要部分。本章展示了如何基于空间对象的位置和形状以多种方式进行修改。许多空间操作有与之对应的非空间（属性）操作，因此上一章中演示的如子集提取和数据集连接等概念在此也适用。对于矢量操作来说，这一点尤为适用：矢量属性操作为理解空间对应关系——即空间子集（在空间矢量提取部分中介绍）提供了基础。空间连接和空间聚合也具有非空间相似操作，已在上一章中介绍。</p>
+<p>空间操作与非空间操作在许多方面有所不同，例如：空间连接可以通过多种方式进行，包括匹配与目标数据集相交或位于目标数据集一定距离范围内的实体，而上一章节矢量属性连接中讨论的属性连接只能通过一种方式进行（除非使用模糊连接，如
+<a target="_blank" rel="noopener" href="https://cran.r-project.org/package=fuzzyjoin"
+title="fuzzyjoin"><strong>fuzzyjoin</strong></a>
+包的文档所述）。对象之间不同类型的空间关系，包括相交和分离，均在章节拓扑关系中描述。空间对象的另一个独特之处在于距离，所有的空间对象都通过空间相关联，距离计算可用于探索这种关联的强度，正如在距离关系节中描述的矢量数据的情况一样。</p>
+<p>栅格对象上的空间操作包括子集提取——在空间栅格子集提取节中进行了介绍-以及将多个栅格"瓦片"合并成一个对象，在合并栅格节中演示。地图代数涵盖了一系列修改栅格单元值的操作，可以参考周围单元值，也可以不参考周围单元值。地图代数的概念对许多应用至关重要，本节介绍了地图代数，并分别在地图代数节介绍了局部、焦点和分区地图代数操作。全局地图代数操作会生成代表整个栅格数据集的汇总统计数据，与栅格数据的距离计算在全局操作和距离章节中进行了讨论。在章节中，讨论了合并两个栅格数据集的过程，并结合一个可重现的示例进行演示。</p>
+<blockquote>
+<p>📌需要注意的是，使用两个空间对象进行空间操作需要这两个对象具有相同的坐标参考系统。这个话题在<em>crs介绍</em>中引入，并在<em>地理数据重投影</em>中进行了更详细的讨论。</p>
+</blockquote>
+<h1 id="矢量数据空间操作">矢量数据空间操作</h1>
+<p>本节概述了在<strong>sf</strong>包中表示为简单要素的矢量地理数据上的空间操作。<em>栅格数据空间操作</em>节使用
+terra 包中的类和函数对栅格数据集进行空间操作。</p>
+<h2 id="空间矢量提取">空间矢量提取</h2>
+<p>空间子集提取是将空间对象进行处理并返回一个包含与另一个对象空间相关特征的新对象的过程。类似于属性子集提取（在矢量属性提取子集）节中介绍），可使用方括号（<code>[</code>）运算符来创建
+sf
+数据框的子集，其语法为<code>x[y, , op = st_intersects]</code>，其中<code>x</code>是
+sf
+对象的一个子集，<code>y</code>是"子集对象"，<code>op = st_intersects</code>是一个可选参数，用于指定进行子集提取处理的拓扑关系（也称为二元谓词）。当未提供<code>op</code>参数时，<code>st_intersects()</code>是默认的拓扑关系。命令<code>x[y, ]</code>与上述<code>x[y, , op = st_intersects]</code>完全相同，但不同于<code>x[y, , op = st_disjoint]</code>（这些以及其他拓扑关系的含义在下一节中描述）。tidyverse中的<code>filter()</code>函数也可以使用，但这种方法更冗长，如下例所示。</p>
+<p>为了演示空间子集提取，我们将使用 spData
+包中的<code>nz</code>和<code>nz_height</code>数据集，它们分别包含新西兰16个主要地区和101个最高点的地理数据，以投影坐标系为基础。以下代码块创建的对象表示Canterbury，然后使用<strong>空间子集提取</strong>返回该区域内所有的高点：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">canterbury <span class="operator">=</span> nz <span class="operator">|&gt;</span> filter<span class="punctuation">(</span>Name <span class="operator">==</span> <span class="string">&quot;Canterbury&quot;</span><span class="punctuation">)</span></span><br><span class="line">canterbury_height <span class="operator">=</span> nz_height<span class="punctuation">[</span>canterbury<span class="punctuation">,</span> <span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<figure>
+<img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308232057538.png"
+title="Illustration of spatial subsetting with red triangles representing 101 high points in New Zealand, clustered near the central Canterbuy region (left). The points in Canterbury were created with the `[` subsetting operator (highlighted in gray, right)."
+alt="Illustration of spatial subsetting with red triangles representing 101 high points in New Zealand, clustered near the central Canterbuy region (left). The points in Canterbury were created with the `[` subsetting operator (highlighted in gray, right)." />
+<figcaption aria-hidden="true">Illustration of spatial subsetting with
+red triangles representing 101 high points in New Zealand, clustered
+near the central Canterbuy region (left). The points in Canterbury were
+created with the `[` subsetting operator (highlighted in gray,
+right).</figcaption>
+</figure>
+<p>就像属性子集提取一样，命令<code>x[y, ]</code>（相当于<code>nz_height[canterbury, ]</code>）使用源对象<code>y</code>的内容对目标<code>x</code>进行特征子集提取。然而，与<code>y</code>是逻辑或整数类的向量不同的是，对于空间子集提取，<code>x</code>和<code>y</code>都必须是地理对象。具体而言，以这种方式用于空间子集提取的对象必须具有类<code>sf</code>或<code>sfc</code>。<code>nz</code>和<code>nz_height</code>都是地理向量数据框，具有类<code>sf</code>，操作的结果将返回另一个<code>sf</code>对象，表示目标<code>nz_height</code>对象中与（在本例中位于）canterbury地区相交的特征（即位于高处的点）。</p>
+<p>用于空间子集提取的<strong>各种拓扑关系</strong>决定了目标对象中的特征，必须与要选择的子集对象具有的空间关系类型。这些关系包括<em>接触</em>、<em>交叉</em>或<em>包含</em>，在拓扑关系部分中我们将很快看到。默认设置<code>st_intersects</code>是一个"全包括"的拓扑关系，它将返回与源"子集"对象<em>接触</em>、<em>交叉</em>或<em>包含</em>的目标中的特征。如上所示，可以用<code>op=</code>参数指定其他空间运算符，如下面的命令所示，该命令返回<code>st_intersects()</code>的相反内容，即与坎特伯雷不相交的点（请参阅部分）：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nz_height<span class="punctuation">[</span>canterbury<span class="punctuation">,</span> <span class="punctuation">,</span> op <span class="operator">=</span> st_disjoint<span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>📌请注意前面代码块中的空参数用 <code>, ,</code> 表示是为了突出
+<code>op</code>，即 <code>sf</code> 对象 <code>[</code> 的第三个参数。
+可以使用这个参数以多种方式改变子集操作。
+例如，<code>nz_height[canterbury, 2, op = st_disjoint]</code>
+返回相同的行，但仅包括第二个属性列（详见 <code>sf:::`[.sf`</code> 和
+<code>?sf</code>）。</p>
+</blockquote>
+<p>对于许多应用而言，关于矢量数据的空间子集提取的知识就是你需要了解的全部内容：它只会按预期工作。如果你急于了解更多拓扑关系，超出了
+<code>st_intersects()</code>和<code>st_disjoint()</code>的范围，请跳到下一节拓扑关系。如果你对细节感兴趣，包括其他子集方式，请继续阅读。</p>
+<p>另一种进行空间子集提取的方法是使用拓扑操作返回的对象。这些对象本身就很有用，例如在探索相邻区域之间的关系图网络时，但它们也可以用于子集操作，如下方的代码块中所演示的：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sel_sgbp <span class="operator">=</span> st_intersects<span class="punctuation">(</span>x <span class="operator">=</span> nz_height<span class="punctuation">,</span> y <span class="operator">=</span> canterbury<span class="punctuation">)</span></span><br><span class="line"><span class="built_in">class</span><span class="punctuation">(</span>sel_sgbp<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;sgbp&quot; &quot;list&quot;</span></span><br><span class="line">sel_sgbp</span><br><span class="line"><span class="comment">#&gt; Sparse geometry binary predicate list of length 101, where the</span></span><br><span class="line"><span class="comment">#&gt; predicate was `intersects&#x27;</span></span><br><span class="line"><span class="comment">#&gt; first 10 elements:</span></span><br><span class="line"><span class="comment">#&gt;  1: (empty)</span></span><br><span class="line"><span class="comment">#&gt;  2: (empty)</span></span><br><span class="line"><span class="comment">#&gt;  3: (empty)</span></span><br><span class="line"><span class="comment">#&gt;  4: (empty)</span></span><br><span class="line"><span class="comment">#&gt;  5: 1</span></span><br><span class="line"><span class="comment">#&gt;  6: 1</span></span><br><span class="line"><span class="comment">#&gt;  7: 1</span></span><br><span class="line"><span class="comment">#&gt;  8: 1</span></span><br><span class="line"><span class="comment">#&gt;  9: 1</span></span><br><span class="line"><span class="comment">#&gt;  10: 1</span></span><br><span class="line">sel_logical <span class="operator">=</span> lengths<span class="punctuation">(</span>sel_sgbp<span class="punctuation">)</span> <span class="operator">&gt;</span> <span class="number">0</span></span><br><span class="line">canterbury_height2 <span class="operator">=</span> nz_height<span class="punctuation">[</span>sel_logical<span class="punctuation">,</span> <span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<p>以上代码块创建一个 <code>sgbp</code> 类的对象
+(一个稀疏几何二元谓词，一个在空间操作中长度为 <code>x</code>
+的列表)，然后将其转换为逻辑向量 <code>sel_logical</code>（包含仅为
+<code>TRUE</code> 和 <code>FALSE</code> 的值，这也可以由 dplyr 的 filter
+函数使用）。<code>lengths()</code>识别<code>nz_height</code>中的哪些要素与
+<code>y</code> 中的任何对象相交。在这种情况下，1
+是最大可能值，但对于更复杂的操作，可以使用该方法仅对与源对象中的 2
+个或更多个要素相交的要素进行子集操作。</p>
+<blockquote>
+<p>📌注意：通过在<code>st_intersects()</code>等运算符中设置<code>sparse = FALSE</code>（意思是“返回密集矩阵而不是稀疏矩阵”）也可以返回逻辑输出。例如，命令<code>st_intersects(x = nz_height, y = canterbury, sparse = FALSE)[, 1]</code>将返回与<code>sel_logical</code>相同的输出。
+注意：涉及<code>sgbp</code>对象的解决方案更具普遍性，因为它适用于多对多的操作并且对内存要求较低。</p>
+</blockquote>
+<p>使用 sf
+函数<code>st_filter()</code>可以实现相同的结果，该函数是为了增加<code>sf</code>对象与dplyr数据操作代码之间的兼容性而创建的：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">canterbury_height3 <span class="operator">=</span> nz_height <span class="operator">|&gt;</span></span><br><span class="line">  st_filter<span class="punctuation">(</span>y <span class="operator">=</span> canterbury<span class="punctuation">,</span> .predicate <span class="operator">=</span> st_intersects<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>到目前为止，有三个完全相同（除了行名）的<code>canterbury_height</code>版本，一个使用<code>[</code>操作符创建，一个通过中间选择对象创建，另一个使用sf的便捷函数<code>st_filter()</code>创建。</p>
+<p>下一节探讨了不同类型的空间关系，也称为<strong>二元谓词</strong>，可以用来确定两个特征是否存在空间关系。</p>
+<h2 id="拓扑关系">拓扑关系</h2>
+<p>拓扑关系描述了对象之间的空间关系。完整称呼为"二元拓扑关系"，是关于由有序点集（通常形成点、线和多边形）在两个或多个维度中定义的两个对象之间的空间关系的逻辑陈述（答案只能是<code>TRUE</code>或<code>FALSE</code>）。这听起来可能相当抽象，实际上，拓扑关系的定义和分类是基于1966年首次以书籍形式出版的数学基础，代数拓扑领域一直延续到21世纪。</p>
+<p>尽管拓扑关系起源于数学，但通过参考常用函数的可视化，可以直观地理解用于测试常见空间关系类型的拓扑关系。显示了各种几何对及其关联关系。图中的第三和第四对（从左到右然后向下）表明，对于某些关系，顺序很重要：虽然等于、相交、交叉、接触和重叠的关系是对称的，意味着如果<code>function(x, y)</code>为真，则<code>function(y, x)</code>也为真，但包含和内部等顺序重要的几何关系则不是。注意，每一对几何图形都有一个"DE-9IM"字符串，例如FF2F11212，将在下一节中描述。</p>
+<figure>
+<img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308232211273.png"
+title="Topological relations between vector geometries, inspired by Figures 1 and 2 in Egenhofer and Herring (1990). The relations for which the function(x, y) is true are printed for each geometry pair, with x represented in pink and y represented in blue. The nature of the spatial relationship for each pair is described by the Dimensionally Extended 9-Intersection Model string."
+alt="Topological relations between vector geometries, inspired by Figures 1 and 2 in Egenhofer and Herring (1990). The relations for which the function(x, y) is true are printed for each geometry pair, with x represented in pink and y represented in blue. The nature of the spatial relationship for each pair is described by the Dimensionally Extended 9-Intersection Model string." />
+<figcaption aria-hidden="true">Topological relations between vector
+geometries, inspired by Figures 1 and 2 in Egenhofer and Herring (1990).
+The relations for which the function(x, y) is true are printed for each
+geometry pair, with x represented in pink and y represented in blue. The
+nature of the spatial relationship for each pair is described by the
+Dimensionally Extended 9-Intersection Model string.</figcaption>
+</figure>
+<p>在<code>sf</code>中，测试不同拓扑关系的函数被称为"二元谓词"，如在操作简单要素几何的文献
+Manipulating Simple Feature Geometries 中所述，可以使用命令 <a
+target="_blank" rel="noopener" href="https://r-spatial.github.io/sf/articles/sf3.html"
+title="vignette(&quot;sf3&quot;)">vignette("sf3")</a>查看，也可以在帮助页面中查看<a
+target="_blank" rel="noopener" href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html"
+title="?geos_binary_pred">?geos_binary_pred</a>。为了更好地理解拓扑关系的实用性，我们将建立一个简单可重现的例子，基于上图中所述的关系，巩固了前一章节<em>几何</em>所介绍的矢量几何图形表示的知识。请注意，为了创建代表多边形顶点坐标（x
+和 y）的表格数据，我们使用基本 R 函数 <code>cbind()</code>
+创建表示坐标点的矩阵，一个<code>POLYGON</code>，最后是 <code>sfc</code>
+对象，如<em>空间类</em>所述：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">polygon_matrix <span class="operator">=</span> cbind<span class="punctuation">(</span></span><br><span class="line">  x <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span>   <span class="number">0</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">  y <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">0.5</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">)</span></span><br><span class="line"><span class="punctuation">)</span></span><br><span class="line">polygon_sfc <span class="operator">=</span> st_sfc<span class="punctuation">(</span>st_polygon<span class="punctuation">(</span><span class="built_in">list</span><span class="punctuation">(</span>polygon_matrix<span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>请注意在上面创建的多边形之上，我们将创建额外的几何体来展示它们在空间中的关系。所示的命令在绘制时与该多边形相关联。请注意在转换数据框时使用了函数<code>st_as_sf()</code>和参数<code>coords</code>，以高效地将包含坐标列的数据框转换为包含点的<code>sf</code>对象：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">line_sfc <span class="operator">=</span> st_sfc<span class="punctuation">(</span>st_linestring<span class="punctuation">(</span>cbind<span class="punctuation">(</span></span><br><span class="line">  x <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0.4</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">  y <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0.2</span><span class="punctuation">,</span> <span class="number">0.5</span><span class="punctuation">)</span></span><br><span class="line"><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment"># 创建点</span></span><br><span class="line">point_df <span class="operator">=</span> data.frame<span class="punctuation">(</span></span><br><span class="line">  x <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0.2</span><span class="punctuation">,</span> <span class="number">0.7</span><span class="punctuation">,</span> <span class="number">0.4</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">  y <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0.1</span><span class="punctuation">,</span> <span class="number">0.2</span><span class="punctuation">,</span> <span class="number">0.8</span><span class="punctuation">)</span></span><br><span class="line"><span class="punctuation">)</span></span><br><span class="line">point_sf <span class="operator">=</span> st_as_sf<span class="punctuation">(</span>point_df<span class="punctuation">,</span> coords <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;x&quot;</span><span class="punctuation">,</span> <span class="string">&quot;y&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<figure>
+<img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308232229968.png"
+title="Points, line and polygon objects arranged to illustrate topological relations."
+alt="Points, line and polygon objects arranged to illustrate topological relations." />
+<figcaption aria-hidden="true">Points, line and polygon objects arranged
+to illustrate topological relations.</figcaption>
+</figure>
+<p>一个简单查询是：<code>point_sf</code> 中的哪些点与多边形
+<code>polygon_sfc</code>
+以某种方式相交？此问题通过检查可得到答案（点1和点3分别与多边形相切和在多边形内）。可以使用空间谓词
+<code>st_intersects()</code>，如下所示：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">st_intersects<span class="punctuation">(</span>point_sf<span class="punctuation">,</span> polygon_sfc<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Sparse geometry binary predicate... `intersects&#x27;</span></span><br><span class="line"><span class="comment">#&gt;  1: 1</span></span><br><span class="line"><span class="comment">#&gt;  2: (empty)</span></span><br><span class="line"><span class="comment">#&gt;  3: 1</span></span><br></pre></td></tr></table></figure>
+<p>结果应该符合你的直觉：第一个和第三个点返回正（<code>1</code>）的结果，第二个点在多边形的边界之外返回负结果（用一个空向量表示）。而令人意想不到的是，结果以向量列表的形式呈现。这个<em>稀疏矩阵</em>输出只记录存在关系的部分，减少了对多要素对象进行拓扑操作时的内存需求。正如我们在前面的部分中所看到的，当<code>sparse = FALSE</code>时，返回的是一个由<code>TRUE</code>或<code>FALSE</code>值组成的<em>稠密矩阵</em>：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">st_intersects<span class="punctuation">(</span>point_sf<span class="punctuation">,</span> polygon_sfc<span class="punctuation">,</span> sparse <span class="operator">=</span> <span class="literal">FALSE</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt;       [,1]</span></span><br><span class="line"><span class="comment">#&gt; [1,]  TRUE</span></span><br><span class="line"><span class="comment">#&gt; [2,] FALSE</span></span><br><span class="line"><span class="comment">#&gt; [3,]  TRUE</span></span><br></pre></td></tr></table></figure>
+<p>在上述输出中，每一行代表目标（参数<code>x</code>）对象中的一个特征，每一列代表选择对象（<code>y</code>）中的一个特征。在这个情况下，<code>y</code>对象<code>polygon_sfc</code>中只有一个特征，所以结果只有一列，这个结果可以用于我们在<em>空间子集提取</em>部分所看到的子集提取。</p>
+<p><code>st_intersects()</code>即使在特征只是相切的情况下也返回<code>TRUE</code>，<code>intersects</code>是一种"全能"的拓扑操作，它识别许多类型的空间关系，如下图所示。更有限制的问题包括哪些点位于多边形内，以及哪些特征在<code>y</code>上或包含与<code>y</code>共享的边界？这些问题可以如下回答（结果未显示）：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">st_within<span class="punctuation">(</span>point_sf<span class="punctuation">,</span> polygon_sfc<span class="punctuation">)</span>    <span class="comment"># 在范围内</span></span><br><span class="line">st_touches<span class="punctuation">(</span>point_sf<span class="punctuation">,</span> polygon_sfc<span class="punctuation">)</span>   <span class="comment"># 相切</span></span><br></pre></td></tr></table></figure>
+<p>请注意，尽管第一个点<em>接触</em>多边形的边界，但它并不在其中；第三个点在多边形内部，但不接触其边界的任何部分。<code>st_intersects()</code>的反义词是<code>st_disjoint()</code>，它只返回与选择对象在空间上完全不相关的对象（注意<code>[,  1]</code>将结果转换为向量）：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">st_disjoint<span class="punctuation">(</span>point_sf<span class="punctuation">,</span> polygon_sfc<span class="punctuation">,</span> sparse <span class="operator">=</span> <span class="literal">FALSE</span><span class="punctuation">)</span><span class="punctuation">[</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span></span><br><span class="line"><span class="comment">#&gt; [1] FALSE  TRUE FALSE</span></span><br></pre></td></tr></table></figure>
+<p>函数<code>st_is_within_distance()</code>检测到那些<em>几乎接触</em>选择对象的特征，它有一个额外的<code>dist</code>参数。它可以用来设置目标对象需要多近才能被选择。请注意，尽管点2距离<code>polygon_sfc</code>的最近顶点的距离超过0.2个单位，但当距离设置为0.2时，它仍然被选择。这是因为距离是测量到最近的边缘，在这种情况下是多边形直接在点2上方的部分，如下图所示。（你可以用命令<code>st_distance(point_sf, polygon_sfc)</code>来验证点2和多边形之间的实际距离是0.13。）下面的代码块演示了'is
+within
+distance'二元空间谓词，其结果显示每个点都在多边形的0.2个单位内：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">st_is_within_distance<span class="punctuation">(</span>point_sf<span class="punctuation">,</span> polygon_sfc<span class="punctuation">,</span> dist <span class="operator">=</span> <span class="number">0.2</span><span class="punctuation">,</span> sparse <span class="operator">=</span> <span class="literal">FALSE</span><span class="punctuation">)</span><span class="punctuation">[</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span></span><br><span class="line"><span class="comment">#&gt; [1] TRUE TRUE TRUE</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>📌算拓扑关系的函数使用空间索引来大大提高空间查询性能。
+它们使用Sort-Tile-Recursive（STR）算法来实现。
+下一节中提到的<code>st_join</code>函数也使用空间索引。 您可以在<a
+target="_blank" rel="noopener" href="https://www.r-spatial.org/r/2017/06/22/spatial-index.html">https://www.r-spatial.org/r/2017/06/22/spatial-index.html</a>中了解更多信息。</p>
+</blockquote>
+<h2 id="de-9im-strings">DE-9IM strings</h2>
+<p>在前一节所示的二元谓词之下，隐含的是Dimensionally Extended
+9-Intersection Model
+(DE-9IM)。正如这个神秘的名字所暗示的那样，这并不是一个容易的话题。不过，学习它有可能更好地理解空间关系。此外，DE-9IM的高级用途还包括创建自定义空间谓词。该模型最初被其发明者标记为"DE
++ 9IM"，指的是"两个要素的边界、内部和外部的交界面的维度"
+，但现在被称为DE-9IM 。</p>
+<p>为了演示DE-9IM
+strings的工作原理，让我们看看中第一个几何对之间的各种关系。下图展示了9
+intersection model
+(9IM)，显示了每个对象的内部、边界和外部之间的交点，当第一个对象<code>x</code>的每个组件被排列为列，而<code>y</code>的每个组件被排列为行时，会创建出一个带有每个元素交点突出显示的分面图形。</p>
+<figure>
+<img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308232332970.png"
+title="Illustration of how the Dimensionally Extended 9 Intersection Model (DE-9IM) works. Colors not in the legend represent the overlap between different components. The thick lines highlight 2 dimensional intesections, e.g. between the boundary of object x and the interior of object y, shown in the middle top facet."
+alt="Illustration of how the Dimensionally Extended 9 Intersection Model (DE-9IM) works. Colors not in the legend represent the overlap between different components. The thick lines highlight 2 dimensional intesections, e.g. between the boundary of object x and the interior of object y, shown in the middle top facet." />
+<figcaption aria-hidden="true">Illustration of how the Dimensionally
+Extended 9 Intersection Model (DE-9IM) works. Colors not in the legend
+represent the overlap between different components. The thick lines
+highlight 2 dimensional intesections, e.g. between the boundary of
+object x and the interior of object y, shown in the middle top
+facet.</figcaption>
+</figure>
+<p>DE-9IM
+strings是基于每种关系的不同维度而产生的。在这种情况下，图中的红色交点分别有着0（点）、1（线）和2（多边形）不同的维度，如简单表格所示。</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Interior (x)</th>
+<th>Boundary (x)</th>
+<th>Exterior (x)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Interior (y)</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>Boundary (y)</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Exterior (y)</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>按行展开这个矩阵（即按顺序连接第一行、第二行、第三行）得到字符串<code>212111212</code>。另一个例子可以用来说明该系统：下图中展示的关系（第三列和第一行中的第三个多边形对）可以用DE-9IM系统定义如下：</p>
+<ul>
+<li>较大对象<code>x</code>的<em>内部</em>与<code>y</code>的内部、边界和外部之间的交集分别有维数2、1和2</li>
+<li>较大对象<code>x</code>的<em>边界</em>与<code>y</code>的内部、边界和外部之间的交叉点分别有F，F
+和1的维度，其中<code>F</code>表示<code>false</code>，物体是不相交的</li>
+<li><code>x</code>的<em>外部</em>与<code>y</code>的内部、边界和外部之间的交集分别具有F、F和2的维度，更大对象的外部不接触<code>y</code>的内部或边界，但更小和更大对象的外部覆盖相同的区域</li>
+</ul>
+<p>当这三个组件连接在一起时，创建字符串<code>212</code>、<code>FF1</code>和<code>FF2</code>。这与从函数<code>st_relations()</code>获得的结果相同(参见本章的源代码，查看图)
+中的其他几何图形是如何创建的) :</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">xy2sfc <span class="operator">=</span> <span class="keyword">function</span><span class="punctuation">(</span>x<span class="punctuation">,</span> y<span class="punctuation">)</span> st_sfc<span class="punctuation">(</span>st_polygon<span class="punctuation">(</span><span class="built_in">list</span><span class="punctuation">(</span>cbind<span class="punctuation">(</span>x<span class="punctuation">,</span> y<span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">x <span class="operator">=</span> xy2sfc<span class="punctuation">(</span>x <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">)</span><span class="punctuation">,</span> y <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">0.5</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">y <span class="operator">=</span> xy2sfc<span class="punctuation">(</span>x <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0.7</span><span class="punctuation">,</span> <span class="number">0.7</span><span class="punctuation">,</span> <span class="number">0.9</span><span class="punctuation">,</span> <span class="number">0.7</span><span class="punctuation">)</span><span class="punctuation">,</span> y <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0.8</span><span class="punctuation">,</span> <span class="number">0.5</span><span class="punctuation">,</span> <span class="number">0.5</span><span class="punctuation">,</span> <span class="number">0.8</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">st_relate<span class="punctuation">(</span>x<span class="punctuation">,</span> y<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt;      [,1]       </span></span><br><span class="line"><span class="comment">#&gt; [1,] &quot;212FF1FF2&quot;</span></span><br></pre></td></tr></table></figure>
+<p>理解DE-9IM strings可以推出新的二元空间谓词。<code>?st_relate</code>
+帮助页面包含'Queen'关系和'rook'关系的函数定义，其中多边形共享边界或仅共享一个点。'Queen'关系意味着"边界-边界"关系(简单表格中第二列和第二行的单元格或
+DE-9IM string的第五个元素)不能是空的，它相当于模式
+<code>F***T****</code>，而对于'rook'关系，则相同的元素必须是1（表示线性相交）。这些措施的执行情况如下:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">st_queen <span class="operator">=</span> <span class="keyword">function</span><span class="punctuation">(</span>x<span class="punctuation">,</span> y<span class="punctuation">)</span> st_relate<span class="punctuation">(</span>x<span class="punctuation">,</span> y<span class="punctuation">,</span> pattern <span class="operator">=</span> <span class="string">&quot;F***T****&quot;</span><span class="punctuation">)</span></span><br><span class="line">st_rook <span class="operator">=</span> <span class="keyword">function</span><span class="punctuation">(</span>x<span class="punctuation">,</span> y<span class="punctuation">)</span> st_relate<span class="punctuation">(</span>x<span class="punctuation">,</span> y<span class="punctuation">,</span> pattern <span class="operator">=</span> <span class="string">&quot;F***1****&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>在先前创建的对象<code>x</code>的基础上，我们可以使用新创建的函数来找出网格中哪些元素是'queen'和'rook'相对于网格中间的正方形，如下所示:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">grid <span class="operator">=</span> st_make_grid<span class="punctuation">(</span>x<span class="punctuation">,</span> n <span class="operator">=</span> <span class="number">3</span><span class="punctuation">)</span></span><br><span class="line">grid_sf <span class="operator">=</span> st_sf<span class="punctuation">(</span>grid<span class="punctuation">)</span></span><br><span class="line">grid_sf<span class="operator">$</span>queens <span class="operator">=</span> lengths<span class="punctuation">(</span>st_queen<span class="punctuation">(</span>grid<span class="punctuation">,</span> grid<span class="punctuation">[</span><span class="number">5</span><span class="punctuation">]</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">&gt;</span> <span class="number">0</span></span><br><span class="line">plot<span class="punctuation">(</span>grid<span class="punctuation">,</span> col <span class="operator">=</span> grid_sf<span class="operator">$</span>queens<span class="punctuation">)</span></span><br><span class="line">grid_sf<span class="operator">$</span>rooks <span class="operator">=</span> lengths<span class="punctuation">(</span>st_rook<span class="punctuation">(</span>grid<span class="punctuation">,</span> grid<span class="punctuation">[</span><span class="number">5</span><span class="punctuation">]</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">&gt;</span> <span class="number">0</span></span><br><span class="line">plot<span class="punctuation">(</span>grid<span class="punctuation">,</span> col <span class="operator">=</span> grid_sf<span class="operator">$</span>rooks<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<figure>
+<img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308240039875.png"
+title="Demonstration of custom binary spatial predicates for finding ‘queen’ (left) and ‘rook’ (right) relations to the central square in a grid with 9 geometries."
+alt="Demonstration of custom binary spatial predicates for finding ‘queen’ (left) and ‘rook’ (right) relations to the central square in a grid with 9 geometries." />
+<figcaption aria-hidden="true">Demonstration of custom binary spatial
+predicates for finding ‘queen’ (left) and ‘rook’ (right) relations to
+the central square in a grid with 9 geometries.</figcaption>
+</figure>
+<h2 id="空间连接">空间连接</h2>
+<p>连接两个非空间数据集依赖于一个共享的'key'变量，如矢量属性连接节中所述。空间数据连接应用了相同的概念，但是依赖于前面部分描述的空间关系。与属性数据一样，连接从源对象(<code>y</code>)向目标对象(参数<code>x</code>在联接函数中)添加新的列。</p>
+<p>这个过程可以通过以下例子来说明：假设你在地球表面随机分布了十个点，问这些点中哪些在陆地上，属于哪些国家。在<a
+target="_blank" rel="noopener" href="https://github.com/geocompx/geocompr/blob/main/code/04-spatial-join.R"
+title="reproducible example">reproducible
+example</a>中实现这个想法将会提高你的地理数据处理技能，并演示空间连接的运作方式。首先，需要创建随机分布在地球表面的点：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">set.seed<span class="punctuation">(</span><span class="number">2018</span><span class="punctuation">)</span> <span class="comment"># set seed for reproducibility</span></span><br><span class="line"><span class="punctuation">(</span>bb <span class="operator">=</span> st_bbox<span class="punctuation">(</span>world<span class="punctuation">)</span><span class="punctuation">)</span> <span class="comment"># the world&#x27;s bounds</span></span><br><span class="line"><span class="comment">#&gt;   xmin   ymin   xmax   ymax </span></span><br><span class="line"><span class="comment">#&gt; -180.0  -89.9  180.0   83.6</span></span><br><span class="line">random_df <span class="operator">=</span> data.frame<span class="punctuation">(</span></span><br><span class="line">  x <span class="operator">=</span> runif<span class="punctuation">(</span>n <span class="operator">=</span> <span class="number">10</span><span class="punctuation">,</span> <span class="built_in">min</span> <span class="operator">=</span> bb<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="built_in">max</span> <span class="operator">=</span> bb<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">]</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">  y <span class="operator">=</span> runif<span class="punctuation">(</span>n <span class="operator">=</span> <span class="number">10</span><span class="punctuation">,</span> <span class="built_in">min</span> <span class="operator">=</span> bb<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="built_in">max</span> <span class="operator">=</span> bb<span class="punctuation">[</span><span class="number">4</span><span class="punctuation">]</span><span class="punctuation">)</span></span><br><span class="line"><span class="punctuation">)</span></span><br><span class="line">random_points <span class="operator">=</span> random_df <span class="operator">|&gt;</span> </span><br><span class="line">  st_as_sf<span class="punctuation">(</span>coords <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;x&quot;</span><span class="punctuation">,</span> <span class="string">&quot;y&quot;</span><span class="punctuation">)</span><span class="punctuation">,</span> crs <span class="operator">=</span> <span class="string">&quot;EPSG:4326&quot;</span><span class="punctuation">)</span> <span class="comment"># set coordinates and CRS</span></span><br></pre></td></tr></table></figure>
+<p>下图中的场景显示，<code>Random_points</code>对象(左上)缺乏属性数据，而<code>world</code>(右上)具有属性，包括图例中显示的国家样本的国家名称。空间连接使用<code>st_join()</code>实现，如下面的代码块所示。输出是<code>Random_join</code>对象，如图(左下)。在创建连接的数据集之前，我们使用空间子集提取来创建<code>world_random</code>，其中只包含含有随机点的国家，以验证在连接的数据集中返回的国家名称数量应该是4(参见下图的右上面板)。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">world_random <span class="operator">=</span> world<span class="punctuation">[</span>random_points<span class="punctuation">,</span> <span class="punctuation">]</span></span><br><span class="line">nrow<span class="punctuation">(</span>world_random<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] 4</span></span><br><span class="line">random_joined <span class="operator">=</span> st_join<span class="punctuation">(</span>random_points<span class="punctuation">,</span> world<span class="punctuation">[</span><span class="string">&quot;name_long&quot;</span><span class="punctuation">]</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<figure>
+<img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308271029710.png"
+title="Illustration of a spatial join. A new attribute variable is added to random points (top left) from source world object (top right) resulting in the data represented in the final panel."
+alt="Illustration of a spatial join. A new attribute variable is added to random points (top left) from source world object (top right) resulting in the data represented in the final panel." />
+<figcaption aria-hidden="true">Illustration of a spatial join. A new
+attribute variable is added to random points (top left) from source
+world object (top right) resulting in the data represented in the final
+panel.</figcaption>
+</figure>
+<p>默认情况下，<code>st_join()</code>执行<em>左连接</em>，这意味着结果是一个包含来自
+<code>x</code> 的所有行的对象，其中包括没有匹配 <code>y</code>
+的行（请参见矢量属性连接），但是也可以通过设置参数
+<code>left = FALSE</code>
+进行内连接。与空间子集提取相似，<code>st_join()</code>
+默认使用的拓扑运算符是 <code>st_intersects()</code>，可以通过设置
+<code>join</code> 参数来更改（详见
+<code>?st_join</code>）。上面的示例演示了将多边形图层的一列添加到点图层的方法，但是该方法适用于任何几何类型。在这种情况下，例如当<code>x</code>包含多边形，每个多边形都与<code>y</code>中多个对象匹配时，空间连接将通过为每个<code>y</code>的匹配创建新行而导致重复的要素。</p>
+<h2 id="非重叠连接">非重叠连接</h2>
+<p>有时候，两个地理数据集虽然没有触碰，但仍然存在着强烈的地理关系。<code>cycle_hire</code>和<code>cycle_hire_osm</code>这两个数据集已经被附加在<strong>spData</strong>包中，它们提供了很好的例子。将它们绘制出来可以发现它们经常密切相关，但并不触碰，如下图所示。以下代码创建了基础图：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plot<span class="punctuation">(</span>st_geometry<span class="punctuation">(</span>cycle_hire<span class="punctuation">)</span><span class="punctuation">,</span> col <span class="operator">=</span> <span class="string">&quot;blue&quot;</span><span class="punctuation">)</span></span><br><span class="line">plot<span class="punctuation">(</span>st_geometry<span class="punctuation">(</span>cycle_hire_osm<span class="punctuation">)</span><span class="punctuation">,</span> add <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">,</span> pch <span class="operator">=</span> <span class="number">3</span><span class="punctuation">,</span> col <span class="operator">=</span> <span class="string">&quot;red&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>我们可以检查是否有任何点与下面所示的<code>st_intersect()</code>相同:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">any</span><span class="punctuation">(</span>st_touches<span class="punctuation">(</span>cycle_hire<span class="punctuation">,</span> cycle_hire_osm<span class="punctuation">,</span> sparse <span class="operator">=</span> <span class="literal">FALSE</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] FALSE</span></span><br></pre></td></tr></table></figure>
+<figure>
+<img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308241315813.png"
+title="The spatial distribution of cycle hire points in London based on official data (blue) and OpenStreetMap data (red)."
+alt="The spatial distribution of cycle hire points in London based on official data (blue) and OpenStreetMap data (red)." />
+<figcaption aria-hidden="true">The spatial distribution of cycle hire
+points in London based on official data (blue) and OpenStreetMap data
+(red).</figcaption>
+</figure>
+<p>想象一下，我们需要将<code>cycle_hire_osm</code>中的<code>capacity</code>变量与官方"目标"数据中的
+<code>cycle_hire</code>进行连接，此时需要使用<em>非重叠连接</em>。最简单的方法是使用二元谓词
+<code>st_is_within_distance()</code>，如下所示，使用20米的阈值距离。如果启用了球面几何引擎（s2），则可以将度量单位的阈值距离设置为<em>未投影数据</em>（例如
+lon/lat CRSs，如
+WGS84），因为它在<strong>sf</strong>中默认启用（请参见<em>s2</em>节）。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sel <span class="operator">=</span> st_is_within_distance<span class="punctuation">(</span>cycle_hire<span class="punctuation">,</span> cycle_hire_osm<span class="punctuation">,</span> </span><br><span class="line">                            dist <span class="operator">=</span> units<span class="operator">::</span>set_units<span class="punctuation">(</span><span class="number">20</span><span class="punctuation">,</span> <span class="string">&quot;m&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">summary<span class="punctuation">(</span>lengths<span class="punctuation">(</span>sel<span class="punctuation">)</span> <span class="operator">&gt;</span> <span class="number">0</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt;    Mode   FALSE    TRUE </span></span><br><span class="line"><span class="comment">#&gt; logical     304     438</span></span><br></pre></td></tr></table></figure>
+<p>这表明，目标对象<code>cycle_hire</code>内有438个点位于与<code>cycle_hire_osm</code>的阈值距离内。如何检索与各个<code>cycle_hire_osm</code>点相关联的<em>值</em>？解决方案即为使用<code>st_join()</code>，但添加了一个<code>dist</code>参数（设为20
+m）：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">z <span class="operator">=</span> st_join<span class="punctuation">(</span>cycle_hire<span class="punctuation">,</span> cycle_hire_osm<span class="punctuation">,</span> st_is_within_distance<span class="punctuation">,</span> </span><br><span class="line">            dist <span class="operator">=</span> units<span class="operator">::</span>set_units<span class="punctuation">(</span><span class="number">20</span><span class="punctuation">,</span> <span class="string">&quot;m&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">nrow<span class="punctuation">(</span>cycle_hire<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] 742</span></span><br><span class="line">nrow<span class="punctuation">(</span>z<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] 762</span></span><br></pre></td></tr></table></figure>
+<p>请注意，连接结果中的行数大于目标行数。这是因为在<code>cycle_hire</code>中的某些自行车租赁站在<code>cycle_hire_osm</code>中有多个匹配项。为了聚合重叠点的值并返回平均值，我们可以使用属性章节学习到的<em>聚合</em>方法，得到行数与目标相同的对象：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">z <span class="operator">=</span> z <span class="operator">|&gt;</span> </span><br><span class="line">  group_by<span class="punctuation">(</span>id<span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  summarize<span class="punctuation">(</span>capacity <span class="operator">=</span> mean<span class="punctuation">(</span>capacity<span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">nrow<span class="punctuation">(</span>z<span class="punctuation">)</span> <span class="operator">==</span> nrow<span class="punctuation">(</span>cycle_hire<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] TRUE</span></span><br></pre></td></tr></table></figure>
+<p>附近站点的容量可以通过比较源数据<code>cycle_hire_osm</code>的容量绘图和这个新对象的结果来进行验证(图表未显示)。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plot<span class="punctuation">(</span>cycle_hire_osm<span class="punctuation">[</span><span class="string">&quot;capacity&quot;</span><span class="punctuation">]</span><span class="punctuation">)</span></span><br><span class="line">plot<span class="punctuation">(</span>z<span class="punctuation">[</span><span class="string">&quot;capacity&quot;</span><span class="punctuation">]</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>这种连接的结果使用了空间操作，以改变与简单要素相关的属性数据；而与每个要素相关的几何体保持不变。</p>
+<h2 id="空间聚合">空间聚合</h2>
+<p>与属性数据聚合相同，空间数据聚合也可以<em>压缩</em>数据：聚合结果的行数比非聚合输入要少。统计学的<em>聚合函数</em>（如平均数或总和）可以总结变量的多个数值，并返回每个<em>分组变量</em>的单个值。在矢量属性聚合节中，我们演示了如何使用<code>aggregate()</code>和<code>group_by() |&gt; summarize()</code>根据属性变量压缩数据，本节介绍了相同的函数如何与空间对象一起工作。</p>
+<p>回到新西兰的例子中，假设您想要查找每个地区高峰的平均高度，源对象（在这种情况下是
+<code>y</code> 或 <code>nz</code>）定义了如何将目标对象（<code>x</code>
+或 <code>nz_height</code>）中的价值分组。使用基础 R 的
+<code>aggregate()</code> 方法可以在一行代码中完成此操作：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nz_agg <span class="operator">=</span> aggregate<span class="punctuation">(</span>x <span class="operator">=</span> nz_height<span class="punctuation">,</span> by <span class="operator">=</span> nz<span class="punctuation">,</span> FUN <span class="operator">=</span> mean<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>前一条命令的结果是一个具有与（空间）聚合对象（<code>nz</code>）相同几何形状的<code>sf</code>对象，您可以使用命令<code>identical(st_geometry(nz),st_geometry(nz_agg))</code>来验证。前一操作的结果如下图所示，该图显示了在新西兰的16个地区中，<code>nz_height</code>每个要素的平均值。同样的结果也可以通过将<code>st_join()</code>的输出导入到"tidy"函数<code>group_by()</code>和<code>summarize()</code>中来生成，具体如下：</p>
+<figure>
+<img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308241401703.png"
+title="Average height of the top 101 high points across the regions of New Zealand."
+alt="Average height of the top 101 high points across the regions of New Zealand." />
+<figcaption aria-hidden="true">Average height of the top 101 high points
+across the regions of New Zealand.</figcaption>
+</figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nz_agg2 <span class="operator">=</span> st_join<span class="punctuation">(</span>x <span class="operator">=</span> nz<span class="punctuation">,</span> y <span class="operator">=</span> nz_height<span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  group_by<span class="punctuation">(</span>Name<span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  summarize<span class="punctuation">(</span>elevation <span class="operator">=</span> mean<span class="punctuation">(</span>elevation<span class="punctuation">,</span> na.rm <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>通过使用函数<code>mean()</code>，<code>nz_agg</code>对象与分组对象<code>nz</code>具有相同的几何形状，但增加了一个新列，该列汇总每个地区中<code>x</code>的值。其他函数也可以用于此处，包括<code>median()</code>、<code>sd()</code>和其他每个组返回单个值的函数。需要注意的是，<code>aggregate()</code>与<code>group_by() |&gt; summarize()</code>方法之间的一个区别是前者在不匹配的区域名称上显示<code>NA</code>值，而后者保留区域名称。因此，"tidy"方法在聚合功能和结果列名称方面更具灵活性。同时，也在合并节涵盖了创建新几何体的聚合操作。</p>
+<h2 id="连接不一致图层">连接不一致图层</h2>
+<p>空间一致性是与空间聚合相关的重要概念。<em>聚合对象</em>（我们将其称为<code>y</code>）与目标对象（<code>x</code>）是<em>一致的</em>，如果这两个对象有共享的边界。通常情况下，行政边界数据满足此条件，其中大单位——例如英国的中层超输出区（<a
+target="_blank" rel="noopener" href="https://www.ons.gov.uk/methodology/geography/ukgeographies/censusgeography"
+title="MSOAs">MSOAs</a>）或许多其他欧洲国家的区域——由许多较小单位组成。</p>
+<p>相比之下，<em>不一致</em>聚合对象与目标对象没有共同的边界。这对于空间聚合(和其他空间操作)是有问题的，如下图所示。聚合每个子区域的质心将不会返回准确的结果。面积插值通过将值从一组面积单位转移到另一组面积单位来克服这个问题，使用一系列算法，包括简单的面积加权方法和更复杂的方法，如"pycnophylactic"方法。</p>
+<figure>
+<img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308251643479.png"
+title="Illustration of congruent (left) and incongruent (right) areal units with respect to larger aggregating zones (translucent ted borders)."
+alt="Illustration of congruent (left) and incongruent (right) areal units with respect to larger aggregating zones (translucent ted borders)." />
+<figcaption aria-hidden="true">Illustration of congruent (left) and
+incongruent (right) areal units with respect to larger aggregating zones
+(translucent ted borders).</figcaption>
+</figure>
+<p><strong>spData</strong>包有一个名为<code>incongruent</code>的数据集（在上图的右面板中带有黑色边框的彩色多边形），以及一个名为<code>aggregating_zones</code>的数据集（在的右面板中带有半透明蓝色边框的两个多边形）。假设<code>incongruent</code>的<code>value</code>列指的是以百万欧元为单位的总区域收入。我们如何将九个基础空间多边形的值转换为<code>aggregating_zones</code>中的两个多边形？</p>
+<p>这个最简单、有用的方法是<em>面积加权</em>空间插值方法，它按照重叠面积的比例，将值从<em>不相容</em>对象传递到<em>聚合区域</em>中的一个新列中：输入和输出要素之间的空间交叉越大，相应的值也越大。这在下面的代码片段中通过<code>st_interpolate_aw()</code>实现。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iv <span class="operator">=</span> incongruent<span class="punctuation">[</span><span class="string">&quot;value&quot;</span><span class="punctuation">]</span> <span class="comment"># keep only the values to be transferred</span></span><br><span class="line">agg_aw <span class="operator">=</span> st_interpolate_aw<span class="punctuation">(</span>iv<span class="punctuation">,</span> aggregating_zones<span class="punctuation">,</span> extensive <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Warning in st_interpolate_aw.sf(iv, aggregating_zones, extensive = TRUE):</span></span><br><span class="line"><span class="comment">#&gt; st_interpolate_aw assumes attributes are constant or uniform over areas of x</span></span><br><span class="line">agg_aw<span class="operator">$</span>value</span><br><span class="line"><span class="comment">#&gt; [1] 19.6 25.7</span></span><br></pre></td></tr></table></figure>
+<p>案例中，由于总收入是一种所谓的空间广泛变量（随着地区增大而增加），所以将落入聚合区域的交叉值进行总结是有意义的。这里假设收入在较小的区域内均匀分布（所以有上面的警告信息）。但对于空间密集变量<a
+target="_blank" rel="noopener" href="https://geodacenter.github.io/workbook/3b_rates/lab3b.html#spatially-extensive-and-spatially-intensive-variables"
+title="intensive">intensive</a>（如<em>平均</em>收入或百分比），情况会有所不同，它们不会随着区域的增加而增加。<code>st_interpolate_aw()</code>在处理空间密集变量时同样有效：将<code>extensive</code>参数设置为<code>FALSE</code>，它将在执行聚合时使用平均函数而非求和函数。</p>
+<h2 id="距离关系">距离关系</h2>
+<p>拓扑关系是二元的──一个要素要么相交，要么不相交──而距离关系是连续的。两个对象之间的距离是用<code>st_distance()</code>函数计算的。下面的代码块说明了这一点，找到了新西兰最高点与坎特伯雷地区地理重心之间的距离，该地理重心是在<em>空间子集提取</em>中创建的：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nz_highest <span class="operator">=</span> nz_height <span class="operator">|&gt;</span> slice_max<span class="punctuation">(</span>n <span class="operator">=</span> <span class="number">1</span><span class="punctuation">,</span> order_by <span class="operator">=</span> elevation<span class="punctuation">)</span></span><br><span class="line">canterbury_centroid <span class="operator">=</span> st_centroid<span class="punctuation">(</span>canterbury<span class="punctuation">)</span></span><br><span class="line">st_distance<span class="punctuation">(</span>nz_highest<span class="punctuation">,</span> canterbury_centroid<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Units: [m]</span></span><br><span class="line"><span class="comment">#&gt;        [,1]</span></span><br><span class="line"><span class="comment">#&gt; [1,] 115540</span></span><br></pre></td></tr></table></figure>
+<p>这个结果有两个令人惊讶之处:</p>
+<ul>
+<li>它具有<code>units</code>，告诉我们距离是100,000米，而不是100,000英寸或任何其他距离的度量。</li>
+<li>即使结果只包含一个单一值，它仍以矩阵形式返回</li>
+</ul>
+<p>第二个特性暗示了<code>st_length()</code>的另一个有用的特性，它能够在对象<code>x</code>和<code>y</code>中的所有特征组合之间返回<em>距离矩阵</em>。下面的命令说明了这一点，它找出了<code>nz_height</code>中前三个特征与<code>co</code>所代表的奥塔戈和坎特伯雷地区之间的距离。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">co <span class="operator">=</span> filter<span class="punctuation">(</span>nz<span class="punctuation">,</span> grepl<span class="punctuation">(</span><span class="string">&quot;Canter|Otag&quot;</span><span class="punctuation">,</span> Name<span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">st_distance<span class="punctuation">(</span>nz_height<span class="punctuation">[</span><span class="number">1</span><span class="operator">:</span><span class="number">3</span><span class="punctuation">,</span> <span class="punctuation">]</span><span class="punctuation">,</span> co<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Units: [m]</span></span><br><span class="line"><span class="comment">#&gt;        [,1]  [,2]</span></span><br><span class="line"><span class="comment">#&gt; [1,] 123537 15498</span></span><br><span class="line"><span class="comment">#&gt; [2,]  94283     0</span></span><br><span class="line"><span class="comment">#&gt; [3,]  93019     0</span></span><br></pre></td></tr></table></figure>
+<p>请注意，<code>nz_height</code>中第二和第三个要素以及<code>co</code>中第二个要素之间的距离为零。这证明了点与多边形之间的距离是指到<em>多边形的任何部分</em>的距离。<code>nz_height</code>中第二个和第三个点位于奥塔哥地区，这可以通过绘制它们来验证（结果未显示）：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plot<span class="punctuation">(</span>st_geometry<span class="punctuation">(</span>co<span class="punctuation">)</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">)</span></span><br><span class="line">plot<span class="punctuation">(</span>st_geometry<span class="punctuation">(</span>nz_height<span class="punctuation">)</span><span class="punctuation">[</span><span class="number">2</span><span class="operator">:</span><span class="number">3</span><span class="punctuation">]</span><span class="punctuation">,</span> add <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h1 id="栅格数据空间操作">栅格数据空间操作</h1>
+<p>本节建立在栅格数据操作基础上，该节重点介绍了处理栅格数据的各种基本方法，以便展示更高级和明确的空间栅格操作，并使用在本节中手动创建的<code>elev</code>和<code>grain</code>对象。为了方便读者，这些数据集也可以在<strong>spData</strong>包中找到。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">elev <span class="operator">=</span> rast<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;raster/elev.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spData&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">grain <span class="operator">=</span> rast<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;raster/grain.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spData&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h2 id="空间栅格提取">空间栅格提取</h2>
+<p>前一章栅格数据操作展示了如何检索与特定单元格ID或行列组合相关联的值。栅格对象也可以通过位置（坐标）和其他空间对象进行提取。要使用坐标进行子集提取，可以使用<strong>terra</strong>函数<code>cellFromXY()</code>将坐标'translate'为单元格ID。另一种方法是使用<code>terra::extract()</code>（请注意，在<strong>tidyverse</strong>中还有一个名为<code>extract()</code>的函数）来提取值。下面展示了两种方法来找到覆盖在坐标为0.1，0.1的点上的单元格的值。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">id <span class="operator">=</span> cellFromXY<span class="punctuation">(</span>elev<span class="punctuation">,</span> xy <span class="operator">=</span> matrix<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">0.1</span><span class="punctuation">,</span> <span class="number">0.1</span><span class="punctuation">)</span><span class="punctuation">,</span> ncol <span class="operator">=</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">elev<span class="punctuation">[</span>id<span class="punctuation">]</span></span><br><span class="line"><span class="comment"># the same as</span></span><br><span class="line">terra<span class="operator">::</span>extract<span class="punctuation">(</span>elev<span class="punctuation">,</span> matrix<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">0.1</span><span class="punctuation">,</span> <span class="number">0.1</span><span class="punctuation">)</span><span class="punctuation">,</span> ncol <span class="operator">=</span> <span class="number">2</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>栅格对象可以与另一个栅格对象进行子集提取，示例如下：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">clip <span class="operator">=</span> rast<span class="punctuation">(</span>xmin <span class="operator">=</span> <span class="number">0.9</span><span class="punctuation">,</span> xmax <span class="operator">=</span> <span class="number">1.8</span><span class="punctuation">,</span> ymin <span class="operator">=</span> <span class="operator">-</span><span class="number">0.45</span><span class="punctuation">,</span> ymax <span class="operator">=</span> <span class="number">0.45</span><span class="punctuation">,</span></span><br><span class="line">            resolution <span class="operator">=</span> <span class="number">0.3</span><span class="punctuation">,</span> vals <span class="operator">=</span> <span class="built_in">rep</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">elev<span class="punctuation">[</span>clip<span class="punctuation">]</span></span><br><span class="line"><span class="comment"># we can also use extract</span></span><br><span class="line">terra<span class="operator">::</span>extract<span class="punctuation">(</span>elev<span class="punctuation">,</span> ext<span class="punctuation">(</span>clip<span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>这等于获取第一个栅格对象（在本例中为<code>elev</code>）的值，这些值落在第二个栅格（即<code>clip</code>）的范围内，如下图所示。</p>
+<figure>
+<img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308251958656.png"
+title="Original raster (left). Raster mask (middle). Output of masking a raster (right)."
+alt="Original raster (left). Raster mask (middle). Output of masking a raster (right)." />
+<figcaption aria-hidden="true">Original raster (left). Raster mask
+(middle). Output of masking a raster (right).</figcaption>
+</figure>
+<p>上述示例返回了特定单元格的值，但在许多情况下，需要对栅格数据集进行子集提取得到空间输出。这可以通过将<code>[</code>运算符的<code>drop</code>参数设置为<code>FALSE</code>来实现。下面的代码返回<code>elev</code>的前两个单元（即顶部行的前两个单元格），并作为栅格对象返回（仅显示输出的前两行）：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">elev<span class="punctuation">[</span><span class="number">1</span><span class="operator">:</span><span class="number">2</span><span class="punctuation">,</span> drop <span class="operator">=</span> <span class="literal">FALSE</span><span class="punctuation">]</span>    <span class="comment"># spatial subsetting with cell IDs</span></span><br><span class="line"><span class="comment">#&gt; class       : SpatRaster </span></span><br><span class="line"><span class="comment">#&gt; dimensions  : 1, 2, 1  (nrow, ncol, nlyr)</span></span><br><span class="line"><span class="comment">#&gt; ...</span></span><br></pre></td></tr></table></figure>
+<p>另一个常见的空间子集提取例子是当一个具有<code>logical</code>（或<code>NA</code>）值的栅格用于掩膜具有相同范围和分辨率的另一个栅格，如上图所示。在这种情况下，可以使用<code>[</code>和
+<code>mask()</code>函数（结果未显示）:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create raster mask</span></span><br><span class="line">rmask <span class="operator">=</span> elev</span><br><span class="line">values<span class="punctuation">(</span>rmask<span class="punctuation">)</span> <span class="operator">=</span> sample<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="literal">NA</span><span class="punctuation">,</span> <span class="literal">TRUE</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="number">36</span><span class="punctuation">,</span> replace <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>在上面的代码块中，我们创建了一个名为<code>rmask</code>的掩膜对象，其值被随机分配为<code>NA</code>和<code>TRUE</code>。接下来，我们想要保留那些在<code>rmask</code>中为<code>TRUE</code>的<code>elev</code>值。换句话说，我们想要使用<code>rmask</code>屏蔽<code>elev</code>。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># spatial subsetting</span></span><br><span class="line">elev<span class="punctuation">[</span>rmask<span class="punctuation">,</span> drop <span class="operator">=</span> <span class="literal">FALSE</span><span class="punctuation">]</span>           <span class="comment"># with [ operator</span></span><br><span class="line">mask<span class="punctuation">(</span>elev<span class="punctuation">,</span> rmask<span class="punctuation">)</span>                   <span class="comment"># with mask()</span></span><br></pre></td></tr></table></figure>
+<p>以上方法还可用于使用<code>NA</code>替换某些值（例如，预计出现错误）。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">elev<span class="punctuation">[</span>elev <span class="operator">&lt;</span> <span class="number">20</span><span class="punctuation">]</span> <span class="operator">=</span> <span class="literal">NA</span></span><br></pre></td></tr></table></figure>
+<p>这些操作实际上是布尔局部操作，因为我们逐单元格比较了两个栅格。下一小节将更详细地探讨这些和相关的操作。</p>
+<h2 id="地图代数">地图代数</h2>
+<p>"地图代数"是在上世纪70年代末提出的，用于描述地理栅格数据和（虽然不那么突出）矢量数据的分析的"一套约定、功能和技术"。在这个背景下，我们更加明确地定义地图代数，作为一种修改或汇总栅格单元值的操作，涉及周围单元、区域或应用于每个单元的统计函数。</p>
+<p>地图代数操作往往是快速的，因为栅格数据集只隐式地存储坐标，因此有一句<a
+target="_blank" rel="noopener" href="https://geozoneblog.wordpress.com/2013/04/19/raster-vs-vector/"
+title="古老格言">古老格言</a>
+"栅格更快，但矢量更正确"。栅格数据集中单元的位置可以通过使用其矩阵位置和数据集的分辨率和原点（存储在标头中）来计算。然而，就处理而言，只要我们确保处理后单元格位置不变，单元格的地理位置就几乎不相关。此外，如果两个或多个栅格数据集具有相同的范围、投影和分辨率，可以将它们视为矩阵进行处理。</p>
+<p>这是使用<strong>terra</strong>包进行地图代数的方法。首先，会查询栅格数据集的标头，并（在需要处理多个数据集的地图代数运算中）检查数据集是否兼容。其次，地图代数保留所谓的一对一定位对应关系，这意味着单元格不能移动。这与矩阵代数不同，矩阵代数中，例如在矩阵乘法或除法时，值会改变位置。</p>
+<p>地图代数（或栅格数据的制图建模）将栅格操作分为四个子类，每个子类同时在一个或多个栅格上进行操作：</p>
+<ol type="1">
+<li><em>局部</em>或逐单元格操作</li>
+<li><em>焦点</em>或邻域操作。最常见的输出单元格值是3x3输入单元格块的结果</li>
+<li><em>区域</em>操作与焦点操作相似，但计算新值的周围像素网格可能具有不规则的大小和形状</li>
+<li><em>全局</em>或逐栅格操作。这意味着输出单元格可能从一个或多个整个栅格派生其值</li>
+</ol>
+<p>这种分类按照用于每个像素处理步骤的<strong>单元格数量</strong>和<strong>输出类型</strong>对地图代数操作进行分类。为了完整起见，我们应该提到栅格操作还可以按学科分类，例如地形、水文分析或图像分类。以下部分解释了每种类型的地图代数操作如何使用，参考了实际示例。</p>
+<h2 id="局部操作">局部操作</h2>
+<p><strong>局部</strong>操作包括在一个或多个层上的所有逐单元格操作。栅格代数是局部操作的典型用例——这包括从栅格中添加或减去值，平方和乘以栅格。栅格代数还允许逻辑操作，例如查找大于特定值的所有栅格单元格（在我们下面的示例中为5）。<strong>terra</strong>包支持所有这些操作及更多，如下图所示：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">elev <span class="operator">+</span> elev</span><br><span class="line">elev<span class="operator">^</span><span class="number">2</span></span><br><span class="line"><span class="built_in">log</span><span class="punctuation">(</span>elev<span class="punctuation">)</span></span><br><span class="line">elev <span class="operator">&gt;</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<figure>
+<img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308262241490.png"
+title="Examples of different local operations of the elev raster object: adding two rasters, squaring, applying logarithmic transformation, and performing a logical operation."
+alt="Examples of different local operations of the elev raster object: adding two rasters, squaring, applying logarithmic transformation, and performing a logical operation." />
+<figcaption aria-hidden="true">Examples of different local operations of
+the elev raster object: adding two rasters, squaring, applying
+logarithmic transformation, and performing a logical
+operation.</figcaption>
+</figure>
+<p><em>局部操作</em>的另一个很好的例子是将数字值的区间分为诸如将数字高程模型分为低（类别1）、中（类别2）和高（类别3）海拔的组。使用<code>classify()</code>命令，我们首先需要构建一个重分类矩阵，其中第一列对应于类别的下限，第二列对应于上限。第三列代表第一和第二列中指定范围的新值。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rcl <span class="operator">=</span> matrix<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">12</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">12</span><span class="punctuation">,</span> <span class="number">24</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">24</span><span class="punctuation">,</span> <span class="number">36</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">)</span><span class="punctuation">,</span> ncol <span class="operator">=</span> <span class="number">3</span><span class="punctuation">,</span> byrow <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br><span class="line">rcl</span><br><span class="line"><span class="comment">#&gt;      [,1] [,2] [,3]</span></span><br><span class="line"><span class="comment">#&gt; [1,]    0   12    1</span></span><br><span class="line"><span class="comment">#&gt; [2,]   12   24    2</span></span><br><span class="line"><span class="comment">#&gt; [3,]   24   36    3</span></span><br></pre></td></tr></table></figure>
+<p>在这里，我们将范围为0-12、12-24和24-36的栅格值进行了<em>重分类</em>，分别赋值为1、2和3。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">recl <span class="operator">=</span> classify<span class="punctuation">(</span>elev<span class="punctuation">,</span> rcl <span class="operator">=</span> rcl<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p><code>classify()</code>函数也可以用于我们想要减少分类栅格中类别数量的情况。我们将在<em>地理营销</em>中执行几个附加的重分类操作。</p>
+<p>除了算术运算符外，还可以使用<code>app()</code>、<code>tapp()</code>和<code>lapp()</code>函数。它们更有效率，因此，在大型栅格数据集存在的情况下，它们是首选。此外，它们允许你直接保存输出文件。<code>app()</code>函数将一个函数应用到栅格的每个单元格，并用于将多个图层的值汇总（例如，计算总和）到一个图层。<code>tapp()</code>是<code>app()</code>的扩展，允许我们选择要执行某个操作的图层子集（参见<code>index</code>参数）。最后，<code>lapp()</code>函数允许使用图层作为参数将一个函数应用到每个单元格——下面将介绍<code>lapp()</code>的一个应用。</p>
+<p>归一化植被指数（NDVI）的计算是一种众所周知的局部（逐像素）栅格操作。它返回一个值介于-1和1之间的栅格；正值表示存在活植物（通常
+&gt;
+0.2）。NDVI是从遥感影像的红色和近红外（NIR）波段计算的，通常来自Landsat或Sentinel等卫星系统。植被在可见光光谱中大量吸收光线，特别是在红色通道中，同时反射NIR光线，从而解释了NVDI公式：</p>
+<p><span class="math display">\[
+\begin{split}
+NDVI&amp;= \frac{\text{NIR} - \text{Red}}{\text{NIR} + \text{Red}}\\
+\end{split}
+\]</span></p>
+<p>让我们计算锡安国家公园的多光谱卫星影像的NDVI。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">multi_raster_file <span class="operator">=</span> system.file<span class="punctuation">(</span><span class="string">&quot;raster/landsat.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span></span><br><span class="line">multi_rast <span class="operator">=</span> rast<span class="punctuation">(</span>multi_raster_file<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>栅格对象具有四个卫星波段：蓝、绿、红和近红外（NIR）。我们下一步应该在
+R 函数中使用NDVI公式：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ndvi_fun <span class="operator">=</span> <span class="keyword">function</span><span class="punctuation">(</span>nir<span class="punctuation">,</span> red<span class="punctuation">)</span><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="punctuation">(</span>nir <span class="operator">-</span> red<span class="punctuation">)</span> <span class="operator">/</span> <span class="punctuation">(</span>nir <span class="operator">+</span> red<span class="punctuation">)</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这个函数接受两个数值参数，<code>nir</code>和<code>red</code>，并返回一个带有NDVI值的数值向量。它可以用作<code>lapp()</code>的<code>fun</code>参数。我们只需记住，我们的函数只需要两个波段（不是原始栅格的四个），并且它们需要按<code>NIR</code>、<code>red</code>的顺序排列。这就是为什么我们在进行任何计算之前，使用<code>multi_rast[[c(4, 3)]]</code>来提取输入栅格的子集。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndvi_rast <span class="operator">=</span> lapp<span class="punctuation">(</span>multi_rast<span class="punctuation">[[</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">)</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">,</span> fun <span class="operator">=</span> ndvi_fun<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>结果显示在下图的右侧面板上，可以与同一区域的RGB图像（同一图的左侧面板）进行比较。这让我们看到最大的NDVI值与该区域北部的密集森林区域相连，而最低的值则与北部的湖泊和积雪覆盖的山脊有关。</p>
+<figure>
+<img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308262308411.png"
+title="RGB image (left) and NDVI values (right) calculated for the example satellite file of the Zion National Park"
+alt="RGB image (left) and NDVI values (right) calculated for the example satellite file of the Zion National Park" />
+<figcaption aria-hidden="true">RGB image (left) and NDVI values (right)
+calculated for the example satellite file of the Zion National
+Park</figcaption>
+</figure>
+<p>预测映射是局部栅格操作的另一个有趣应用。响应变量对应于空间中测量或观察到的点，例如物种丰富度、滑坡的存在、树木疾病或农作物产量。因此，我们可以轻松从各种栅格（例如海拔、pH值、降水量、温度、土地覆盖、土壤类型等）检索空间或预测变量。随后，我们使用<code>lm()</code>、<code>glm()</code>、<code>gam()</code>或机器学习技术将响应建模为预测因子的函数。因此，将估计系数应用于预测栅格值，并对输出栅格值求和（参见
+<em>生态</em>章节），可以对栅格对象进行空间预测。</p>
+<h2 id="焦点操作">焦点操作</h2>
+<p>虽然<em>局部</em>函数可能在多个层上操作一个单元格，但<em>焦点</em>操作会考虑中心（焦点）单元格及其邻居。通常考虑的邻域（也称为内核、滤波器或移动窗口）大小为3x3个单元格（即中心单元格及其周围的八个邻居），但可以根据用户的定义采用任何其他（不一定是矩形的）形状。焦点操作将一个聚合函数应用于指定邻域内的所有单元格，将相应的输出用作中心单元格的新值，然后移至下一个中心单元格，如下图所示。此操作的其他名称是空间滤波和卷积。</p>
+<p>在R中，我们可以使用<code>focal()</code>函数来执行空间滤波。我们通过一个<code>matrix</code>定义移动窗口的形状，其值对应于权重（参见下面代码块中的<code>w</code>参数）。其次，<code>fun</code>参数让我们指定我们希望应用于这个邻域的函数。这里，我们选择最小值，但可以使用任何其他汇总函数，包括<code>sum()</code>、<code>mean()</code>或<code>var()</code>。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r_focal <span class="operator">=</span> focal<span class="punctuation">(</span>elev<span class="punctuation">,</span> w <span class="operator">=</span> matrix<span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> nrow <span class="operator">=</span> <span class="number">3</span><span class="punctuation">,</span> ncol <span class="operator">=</span> <span class="number">3</span><span class="punctuation">)</span><span class="punctuation">,</span> fun <span class="operator">=</span> <span class="built_in">min</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>这个函数还接受其他参数，例如，在过程中是否应删除<code>NA</code>值（<code>na.rm = TRUE</code>）或不删除（<code>na.rm = FALSE</code>）。</p>
+<figure>
+<img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202308262319552.png"
+title="Input raster (left) and resulting output raster (right) due to a focal operation - finding the minimum value in 3-by-3 moving windows."
+alt="Input raster (left) and resulting output raster (right) due to a focal operation - finding the minimum value in 3-by-3 moving windows." />
+<figcaption aria-hidden="true">Input raster (left) and resulting output
+raster (right) due to a focal operation - finding the minimum value in
+3-by-3 moving windows.</figcaption>
+</figure>
+<p>我们可以快速检查输出是否符合我们的预期。在我们的示例中，最小值必须始终位于移动窗口的左上角（请记住，我们通过从左上角开始逐行增加单元格值来创建输入栅格）。在此示例中，权重矩阵只包括1，这意味着每个单元格对输出具有相同的权重，但这可以更改。</p>
+<p><em>焦点</em>函数或滤波器在图像处理中起着主导作用。低通或平滑滤波使用平均函数来消除极值。在分类数据的情况下，我们可以用众数（最常见的值）替换平均数。相反，高通滤波强调特征。此处，线检测的拉普拉斯和索贝尔滤波可以作为例子。你可以查看<code>focal()</code>的帮助页面了解如何在
+R 中使用它们（这也将在本章节结束时的练习中使用）。</p>
+<p>地形处理，计算地形特性如坡度、方向和流向，依赖于<em>焦点</em>函数。虽然<code>terrain()</code>可用于计算这些指标，但一些地形算法（包括用于计算坡度的Zevenbergen和Thorne方法）并未在这个<strong>terra</strong>函数中实现。许多其他算法——包括曲率、贡献区域和湿度指数
+——是在开源桌面地理信息系统（GIS）软件中实现的。<em>GIS桥梁</em>章介绍了如何从R内部访问这样的GIS功能。</p>
+<h2 id="区域操作">区域操作</h2>
+<p>与焦点操作一样，<em>区域</em>操作将聚合函数应用于多个栅格单元格。然而，在<em>区域</em>操作的情况下，第二个栅格（通常具有分类值）定义了<em>分区滤波器</em>（或"区域"），与上一节中呈现的<em>焦点</em>操作的预定义邻域窗口相对。因此，定义<em>区域</em>滤波器的栅格单元格不一定要相邻。grain
+栅格就是一个很好的例子，不同的粒度大小在整个栅格中不规则地分布。最后，<em>区域</em>操作的结果是按区域分组的汇总表，这就是为什么这个操作在GIS世界中也被称为<em>分区统计</em>。这与返回栅格对象的焦点操作形成了对比。</p>
+<p>以下代码块使用<code>zonal()</code>函数来计算与每个粒度类别相关的平均海拔。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">z <span class="operator">=</span> zonal<span class="punctuation">(</span>elev<span class="punctuation">,</span> grain<span class="punctuation">,</span> fun <span class="operator">=</span> <span class="string">&quot;mean&quot;</span><span class="punctuation">)</span></span><br><span class="line">z</span><br><span class="line"><span class="comment">#&gt;   grain elev</span></span><br><span class="line"><span class="comment">#&gt; 1  clay 14.8</span></span><br><span class="line"><span class="comment">#&gt; 2  silt 21.2</span></span><br><span class="line"><span class="comment">#&gt; 3  sand 18.7</span></span><br></pre></td></tr></table></figure>
+<p>这将返回每个类别的统计，在这里是每个粒度大小类别的平均海拔。注意：通过将<code>as.raster</code>参数设置为<code>TRUE</code>，也可以获得每个区域的计算统计数据的栅格。</p>
+<h2 id="全局操作和距离">全局操作和距离</h2>
+<p><em>全局</em>操作是分区操作的特殊情况，整个栅格数据集代表单个区域。整个栅格数据集的描述性统计是最常见的全局操作，例如最小值或最大值——我们已经在章节栅格数据汇总中讨论过这些。</p>
+<p>除此之外，全局操作还可用于计算距离和权重栅格。在第一种情况下，可以计算每个单元格到特定目标单元格的距离。例如，人们可能想要计算到最近海岸的距离（参见<code>terra::distance()</code>）。我们也可能想要考虑地形，这意味着，我们不仅对纯粹的距离感兴趣，而且还想避免在前往海岸时穿越山脉。为此，我们可以通过海拔为距离赋权，以便每增加一个海拔米就"延长"欧氏距离。可见性和视域计算也属于全局操作的一类。</p>
+<h2 id="矢量数据的地图代数">矢量数据的"地图代数"</h2>
+<p>许多地图代数操作在矢量处理中有对应操作。在仅考虑最大距离（逻辑焦点操作）的情况下计算距离栅格（全局操作）等同于矢量缓冲操作（裁剪章节）。重分类栅格数据（根据输入是局部还是区域函数）等同于溶解矢量数据（空间连接章节）。将两个栅格叠加（局部操作），其中一个包含表示遮罩的<code>NULL</code>或<code>NA</code>值，类似于矢量裁剪（章节）。与空间裁剪非常相似的是交叉两个图层（空间矢量提取章节）。区别在于这两个图层（矢量或栅格）仅共享重叠区域。不过，要小心措辞。有时相同的词在栅格和矢量数据模型中具有略有不同的含义。虽然聚合多边形几何意味着溶解边界，但对于栅格数据几何，它意味着增加单元格大小，从而降低空间分辨率。区域操作根据另一个栅格数据集的区域（类别）使用聚合函数溶解一个栅格的单元格。</p>
+<h2 id="合并栅格">合并栅格</h2>
+<p>假设我们想计算NDVI（见局部操作章节），并且还想从高程数据中计算研究区域内观测的地形属性。这些计算依赖于遥感信息。相应的图像常常被分割成覆盖特定空间范围的场景，而研究区域通常覆盖多个场景。那么，我们就需要合并研究区域所覆盖的场景。在最简单的情况下，我们可以只是合并这些场景，即将它们并排放置。例如，可以使用数字高程数据（SRTM，ASTER）来实现。在下面的代码块中，我们首先下载了奥地利和瑞士的SRTM高程数据（有关国家代码，请参见<strong>geodata</strong>函数
+<code>country_codes()</code>）。第二步，我们将这两个栅格合并为一个。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">aut <span class="operator">=</span> geodata<span class="operator">::</span>elevation_30s<span class="punctuation">(</span>country <span class="operator">=</span> <span class="string">&quot;AUT&quot;</span><span class="punctuation">,</span> path <span class="operator">=</span> tempdir<span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">ch <span class="operator">=</span> geodata<span class="operator">::</span>elevation_30s<span class="punctuation">(</span>country <span class="operator">=</span> <span class="string">&quot;CHE&quot;</span><span class="punctuation">,</span> path <span class="operator">=</span> tempdir<span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">aut_ch <span class="operator">=</span> merge<span class="punctuation">(</span>aut<span class="punctuation">,</span> ch<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p><strong>terra</strong> 的
+<code>merge()</code>命令结合了两个图像，如果它们重叠，则使用第一个栅格的值。</p>
+<p>当重叠的值彼此不对应时，这种合并方法用处不大。当您想合并在不同日期拍摄的场景的光谱图像时，通常会出现这种情况。<code>merge()</code>
+命令仍然会工作，但在结果图像中您会看到一个明显的边界。另一方面，<code>mosaic()</code>
+命令允许您为重叠区域定义一个函数。例如，我们可以计算平均值 --
+这可能会平滑合并结果中的明显边界，但最有可能的是它不会让其消失。</p>
+<h1 id="练习">练习</h1>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>sf<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>dplyr<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>spData<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>E1. It was established in Section <span class="citation"
+data-cites="ref">@ref</span>(spatial-vec) that Canterbury was the region
+of New Zealand containing most of the 100 highest points in the country.
+How many of these high points does the Canterbury region contain?</p>
+<p><strong>Bonus:</strong> plot the result using the <code>plot()</code>
+function to show all of New Zealand, <code>canterbury</code> region
+highlighted in yellow, high points in Canterbury represented by red
+crosses (hint: <code>pch = 7</code>) and high points in other parts of
+New Zealand represented by blue circles. See the help page
+<code>?points</code> for details with an illustration of different
+<code>pch</code> values.</p>
+<p>E2. Which region has the second highest number of
+<code>nz_height</code> points, and how many does it have?</p>
+<p>E3. Generalizing the question to all regions: how many of New
+Zealand's 16 regions contain points which belong to the top 100 highest
+points in the country? Which regions?</p>
+<ul>
+<li>Bonus: create a table listing these regions in order of the number
+of points and their name.</li>
+</ul>
+<p>E4. Test your knowledge of spatial predicates by finding out and
+plotting how US states relate to each other and other spatial
+objects.</p>
+<p>The starting point of this exercise is to create an object
+representing Colorado state in the USA. Do this with the command
+<code>colorado = us_states[us_states$NAME == "Colorado",]</code> (base
+R) or with with the <code>filter()</code> function (tidyverse) and plot
+the resulting object in the context of US states.</p>
+<ul>
+<li>Create a new object representing all the states that geographically
+intersect with Colorado and plot the result (hint: the most concise way
+to do this is with the subsetting method <code>[</code>).</li>
+<li>Create another object representing all the objects that touch (have
+a shared boundary with) Colorado and plot the result (hint: remember you
+can use the argument <code>op = st_intersects</code> and other spatial
+relations during spatial subsetting operations in base R).</li>
+<li>Bonus: create a straight line from the centroid of the District of
+Columbia near the East coast to the centroid of California near the West
+coast of the USA (hint: functions <code>st_centroid()</code>,
+<code>st_union()</code> and <code>st_cast()</code> described in Chapter
+5 may help) and identify which states this long East-West line
+crosses.</li>
+</ul>
+<p>E5. Use
+<code>dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))</code>,
+and reclassify the elevation in three classes: low (&lt;300), medium and
+high (&gt;500). Secondly, read the NDVI raster
+(<code>ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))</code>)
+and compute the mean NDVI and the mean elevation for each altitudinal
+class.</p>
+<p>E6. Apply a line detection filter to
+<code>rast(system.file("ex/logo.tif", package = "terra"))</code>. Plot
+the result. Hint: Read <code>?terra::focal()</code>.</p>
+<p>E7. Calculate the Normalized Difference Water Index (NDWI;
+<code>(green - nir)/(green + nir)</code>) of a Landsat image. Use the
+Landsat image provided by the <strong>spDataLarge</strong> package
+(<code>system.file("raster/landsat.tif", package = "spDataLarge")</code>).
+Also, calculate a correlation between NDVI and NDWI for this area (hint:
+you can use the <code>layerCor()</code> function).</p>
+<p>E8. A StackOverflow <a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/35555709/global-raster-of-geographic-distances"
+title="post">post</a> shows how to compute distances to the nearest
+coastline using <code>raster::distance()</code>. Try to do something
+similar but with <code>terra::distance()</code>: retrieve a digital
+elevation model of Spain, and compute a raster which represents
+distances to the coast across the country (hint: use
+<code>geodata::elevation_30s()</code>). Convert the resulting distances
+from meters to kilometers. Note: it may be wise to increase the cell
+size of the input raster to reduce compute time during this operation
+(<code>aggregate()</code>).</p>
+<p>E9. Try to modify the approach used in the above exercise by
+weighting the distance raster with the elevation raster; every 100
+altitudinal meters should increase the distance to the coast by 10 km.
+Next, compute and visualize the difference between the raster created
+using the Euclidean distance (E7) and the raster weighted by
+elevation.</p>
+
+        </div>
+
+        
+        
+        
+
+        <div>
+            
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------<i class="fa fa-paw"></i>已经到底啦<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+
+            
+        </div>
+
+        <footer class="post-footer">
+            <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="SCY 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="SCY 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+            <div class="post-tags">
+                <a href="/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
+                <a href="/tags/Geocomputaion/" rel="tag"><i class="fa fa-tag"></i> Geocomputaion</a>
+            </div>
+
+            
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+            <div class="post-nav">
+                <div class="post-nav-item">
+                    <a href="/2023/08/12/2023-8-12-3%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C/" rel="prev" title="(3)属性操作">
+                        <i class="fa fa-angle-left"></i> (3)属性操作
+                    </a>
+                </div>
+                <div class="post-nav-item">
+                    <a href="/2023/08/14/2023-8-14-5%E5%87%A0%E4%BD%95%E6%93%8D%E4%BD%9C/" rel="next" title="(5)几何操作">
+                        (5)几何操作 <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">160k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">9:42</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+</div>
+
+<!-- 删除 “由 Hexo & NexT.Gemini 强力驱动” -->
+<!-- -->
+
+      </div>
+    </footer>
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.20/fancybox/fancybox.umd.js" integrity="sha256-q8XkJ6dj5VwSvzI8+nATCHHQG+Xv/dAZBCgqmu93zOY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.19.1/algoliasearch-lite.umd.js" integrity="sha256-qzlNbRtZWHoUV5I2mI2t9QR7oYXlS9oNctX+0pECXI0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/instantsearch.js/4.56.8/instantsearch.production.min.js" integrity="sha256-xUys6KCuRGBxFaRaYZlWulRUjY48XFv6/Q2s0mb1dmc=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":null}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.3.0/mermaid.min.js","integrity":"sha256-9y71g5Lz/KLsHjB8uXwnkuWDtAMDSzD/HdIbqhJfTAI="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.3.0/wavedrom.min.js","integrity":"sha256-IRMDzTC+wK5stMucZ/XSXkeS5VNtxZ+/Bm8Mcqfoxdo="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.3.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+    
+  <script data-pjax async src="/js/busuanzi.js"></script>
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://ancao96.github.io/2023/08/13/2023-8-13-4%E7%A9%BA%E9%97%B4%E6%93%8D%E4%BD%9C/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://waline-server-nxpj3ksyo-scy.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀~","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","eemoji":["https://unpkg.com/@waline/emojis@1.1.0/tw-emoji","//unpkg.com/@waline/emojis@1.1.0/bilibili","//unpkg.com/@waline/emojis@1.1.0/alus","https://unpkg.com/@waline/emojis@1.1.0/weibo"],"el":"#waline","comment":true,"path":"/2023/08/13/2023-8-13-4%E7%A9%BA%E9%97%B4%E6%93%8D%E4%BD%9C/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+    <link rel="stylesheet" href="/dist/APlayer.min.css">
+    <div id="aplayer"></div>
+    <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+    <script type="text/javascript" src="/dist/music.js"></script>
+    
+  </body>
+</html>
