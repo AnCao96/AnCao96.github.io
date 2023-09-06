@@ -19,14 +19,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.20/fancybox/fancybox.css" integrity="sha256-RvRHGSuWAxZpXKV9lLDt2e+rZ+btzn48Wp4ueS3NZKs=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"ancao96.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"0SOKPRESAA","apiKey":"f7b6d6953f3de5baf0bc4ab9917765b7","indexName":"search scyspace","hits":{"per_page":10}},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true,"path":"search.xml","field":"post","content":true,"format":"html"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ancao96.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BFJCK79VF9","apiKey":"613fe5e83863193288c6ef2ab02cefad","indexName":"hexo","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="前提条件 本章前提条件最小，因为它主要使用基础的R语言。sf包用于检查我们将开发的算法的结果，该算法用于计算多边形的面积。在先前知识方面，本章假设您了解在空间数据章中介绍的地理类以及它们如何用于表示各种各样的输入文件格式。 引言 引言章阐明了地理计算不仅仅是使用现有的工具，还包括以“可共享的R脚本和函数”的形式开发新工具。本章教授可复现代码的这些基础构件。它还介绍了低级几何算法，这种算法在GIS章">
+    <meta name="description" content="前提条件 本章前提条件最小，因为它主要使用基础的R语言。sf包用于检查我们将开发的算法的结果，该算法用于计算多边形的面积。在先前知识方面，本章假设您了解在空间数据章中介绍的地理类以及它们如何用于表示各种各样的输入文件格式。  引言 引言章阐明了地理计算不仅仅是使用现有的工具，还包括以“可共享的R脚本和函数”的形式开发新工具。本章教授可复现代码的这些基础构件。它还介绍了低级几何算法，这种算法在GI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="(11)脚本、算法和函数">
 <meta property="og:url" content="https://ancao96.github.io/2023/08/20/2023-8-20-11%E8%84%9A%E6%9C%AC%E3%80%81%E7%AE%97%E6%B3%95%E5%92%8C%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="SCY SPACE">
-<meta property="og:description" content="前提条件 本章前提条件最小，因为它主要使用基础的R语言。sf包用于检查我们将开发的算法的结果，该算法用于计算多边形的面积。在先前知识方面，本章假设您了解在空间数据章中介绍的地理类以及它们如何用于表示各种各样的输入文件格式。 引言 引言章阐明了地理计算不仅仅是使用现有的工具，还包括以“可共享的R脚本和函数”的形式开发新工具。本章教授可复现代码的这些基础构件。它还介绍了低级几何算法，这种算法在GIS章">
+<meta property="og:description" content="前提条件 本章前提条件最小，因为它主要使用基础的R语言。sf包用于检查我们将开发的算法的结果，该算法用于计算多边形的面积。在先前知识方面，本章假设您了解在空间数据章中介绍的地理类以及它们如何用于表示各种各样的输入文件格式。  引言 引言章阐明了地理计算不仅仅是使用现有的工具，还包括以“可共享的R脚本和函数”的形式开发新工具。本章教授可复现代码的这些基础构件。它还介绍了低级几何算法，这种算法在GI">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051045079.png">
 <meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051050278.png">
@@ -60,7 +60,7 @@
     <noscript>
       <link rel="stylesheet" href="/css/noscript.css">
     </noscript>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.0.0/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.0.0/style.css">
     <style>
       body,div.post-body,h1,h2,h3,h4 {
         font-family: "LXGW WenKai LITE", sans-serif;
@@ -147,14 +147,13 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">前提条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">脚本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%A0%E4%BD%95%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">几何算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">编程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#exercises"><span class="nav-number">7.</span> <span class="nav-text">Exercises</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text"> 前提条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text"> 引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text"> 脚本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%A0%E4%BD%95%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text"> 几何算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text"> 函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text"> 编程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#exercises"><span class="nav-number">7.</span> <span class="nav-text"> Exercises</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="SCY"
-      src="/images/avatar.gif">
+    <img class="site-author-image" itemprop="image" alt="SCY" src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">SCY</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -180,10 +179,10 @@
 </div>
   <div class="links-of-author animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/AnCao96" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AnCao96" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+        <a href="https://github.com/AnCao96" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AnCao96" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i></a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:ancao.cugb@gmail.com" title="E-Mail → mailto:ancao.cugb@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+        <a href="mailto:ancao.cugb@gmail.com" title="E-Mail → mailto:ancao.cugb@gmail.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
       </span>
   </div>
 
@@ -218,12 +217,12 @@
 
         <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
             <meta itemprop="name" content="SCY SPACE">
-            <meta itemprop="description" content="">
+            <meta itemprop="description" content>
         </span>
 
         <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
             <meta itemprop="name" content="(11)脚本、算法和函数 | SCY SPACE">
-            <meta itemprop="description" content="">
+            <meta itemprop="description" content>
         </span>
         <header class="post-header">
             <h1 class="post-title" itemprop="name headline">
@@ -306,325 +305,168 @@
         
         
         
-        <div class="post-body" itemprop="articleBody"><h1 id="前提条件">前提条件</h1>
+        <div class="post-body" itemprop="articleBody"><h1 id="前提条件"><a class="markdownIt-Anchor" href="#前提条件"></a> 前提条件</h1>
 <p>本章前提条件最小，因为它主要使用基础的R语言。<strong>sf</strong>包用于检查我们将开发的算法的结果，该算法用于计算多边形的面积。在先前知识方面，本章假设您了解在<em>空间数据</em>章中介绍的地理类以及它们如何用于表示各种各样的输入文件格式。</p>
-<h1 id="引言">引言</h1>
-<p><em>引言</em>章阐明了地理计算不仅仅是使用现有的工具，还包括以“可共享的R脚本和函数”的形式开发新工具。本章教授可复现代码的这些基础构件。它还介绍了低级几何算法，这种算法在<em>GIS</em>章中有应用。阅读本章应有助于您理解这类算法是如何工作的，并编写可多次、由多人、在多个数据集上使用的代码。然而，单凭本章自身无法使您成为一名熟练的程序员。编程是困难的，需要大量的实践<span
-class="citation"
-data-cites="abelson_structure_1996">[@abelson_structure_1996]</span>：</p>
+<h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
+<p><em>引言</em>章阐明了地理计算不仅仅是使用现有的工具，还包括以“可共享的R脚本和函数”的形式开发新工具。本章教授可复现代码的这些基础构件。它还介绍了低级几何算法，这种算法在<em>GIS</em>章中有应用。阅读本章应有助于您理解这类算法是如何工作的，并编写可多次、由多人、在多个数据集上使用的代码。然而，单凭本章自身无法使您成为一名熟练的程序员。编程是困难的，需要大量的实践[@abelson_structure_1996]：</p>
 <blockquote>
 <p>要理解编程作为一种自成体系的智力活动，您必须转向计算机编程；您必须阅读和编写计算机程序——很多程序。</p>
 </blockquote>
-<p>有充分的理由去学习编程。虽然本章本身并未教授编程——参见像@wickham_advanced_2019、<span
-class="citation"
-data-cites="gillespie_efficient_2016">@gillespie_efficient_2016</span>
-和 <span class="citation"
-data-cites="xiao_gis_2016">@xiao_gis_2016</span>
-这样的资源，它们教授R语言和其他语言的编程——但它确实提供了一些着眼于几何数据的起点，这些起点可能是发展编程技能的良好基础。</p>
-<p>本章还演示并强调了可重复性的重要性。可重复性的优点不仅仅是允许其他人复制您的工作：相对于只运行一次的代码，可重复的代码在各方面通常都更优秀，包括计算效率、'可扩展性'（代码在大数据集上运行的能力）以及更容易进行适应和维护。</p>
-<p>脚本是可重复R代码的基础，这一主题在<em>脚本</em>节中有覆盖。算法是一系列用于修改输入并得出输出的步骤的配方，如<em>几何算法</em>节所述。为了简化共享和可重复性，算法可以被放置在函数中。这是<em>函数</em>节的主题。找出多边形的质心的例子将用于整合这些概念。<em>几何操作</em>章已经介绍了一个质心函数<code>st_centroid()</code>，但这个例子突出显示了看似简单的操作其实是相对复杂代码的结果，这证实了以下的观察<span
-class="citation"
-data-cites="wise_gis_2001">[@wise_gis_2001]</span>：</p>
+<p>有充分的理由去学习编程。虽然本章本身并未教授编程——参见像@wickham_advanced_2019、@gillespie_efficient_2016 和 @xiao_gis_2016 这样的资源，它们教授R语言和其他语言的编程——但它确实提供了一些着眼于几何数据的起点，这些起点可能是发展编程技能的良好基础。</p>
+<p>本章还演示并强调了可重复性的重要性。可重复性的优点不仅仅是允许其他人复制您的工作：相对于只运行一次的代码，可重复的代码在各方面通常都更优秀，包括计算效率、‘可扩展性’（代码在大数据集上运行的能力）以及更容易进行适应和维护。</p>
+<p>脚本是可重复R代码的基础，这一主题在<em>脚本</em>节中有覆盖。算法是一系列用于修改输入并得出输出的步骤的配方，如<em>几何算法</em>节所述。为了简化共享和可重复性，算法可以被放置在函数中。这是<em>函数</em>节的主题。找出多边形的质心的例子将用于整合这些概念。<em>几何操作</em>章已经介绍了一个质心函数<code>st_centroid()</code>，但这个例子突出显示了看似简单的操作其实是相对复杂代码的结果，这证实了以下的观察[@wise_gis_2001]：</p>
 <blockquote>
 <p>关于空间数据问题最吸引人的一点是，对人来说看似极其简单的事情，在计算机上可能出奇地困难。</p>
 </blockquote>
 <p>这个例子也反映了本章的次要目标，即按照@xiao_gis_2016的说法，不是“复制现有的内容，而是展示现有内容是如何工作的”。</p>
-<h1 id="脚本">脚本</h1>
-<p>如果说包中分发的函数是R代码的基础构件，那么脚本就是将它们粘合在一起的胶水。脚本应该按照逻辑顺序存储和执行，以创建可复现的工作流，这可以手动完成，也可以使用诸如<strong>targets</strong>
-<span class="citation"
-data-cites="landau_targets_2021">[@landau_targets_2021]</span>这样的工作流自动化工具来完成。</p>
+<h1 id="脚本"><a class="markdownIt-Anchor" href="#脚本"></a> 脚本</h1>
+<p>如果说包中分发的函数是R代码的基础构件，那么脚本就是将它们粘合在一起的胶水。脚本应该按照逻辑顺序存储和执行，以创建可复现的工作流，这可以手动完成，也可以使用诸如<strong>targets</strong> [@landau_targets_2021]这样的工作流自动化工具来完成。</p>
 <p>如果你是编程新手，当你第一次遇到脚本时，它们可能看起来很令人生畏，但实际上它们只是普通的文本文件。脚本通常保存为一个扩展名代表它们包含的语言的文件，例如，用Python编写的脚本使用<code>.py</code>扩展名，用Rust编写的脚本使用<code>.rs</code>扩展名。R脚本应该保存为<code>.R</code>扩展名，并且名字应该反映它们的功能。</p>
-<p>一个例子是<a
-target="_blank" rel="noopener" href="https://github.com/geocompx/geocompr/blob/main/code/11-hello.R"><code>11-hello.R</code></a>，这是一个存储在书籍仓库的<a
-target="_blank" rel="noopener" href="https://github.com/geocompx/geocompr/blob/main/code/"><code>code</code></a>文件夹中的脚本文件。<code>11-hello.R</code>是一个非常简单的脚本，只包含两行代码，其中一行是注释。</p>
+<p>一个例子是<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/geocompx/geocompr/blob/main/code/11-hello.R"><code>11-hello.R</code></a>，这是一个存储在书籍仓库的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/geocompx/geocompr/blob/main/code/"><code>code</code></a>文件夹中的脚本文件。<code>11-hello.R</code>是一个非常简单的脚本，只包含两行代码，其中一行是注释。</p>
 <p>这些脚本通常是科研过程中非常有用的组成部分，特别是当你需要对大量栅格和矢量数据进行处理和后续分析时，它们可以帮助你实现高度自动化和可复现的工作流程。而使用例如<strong>targets</strong>这样的工作流工具，可以进一步提高代码的结构性和可维护性。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Aim: provide a minimal R script</span></span><br><span class="line">print<span class="punctuation">(</span><span class="string">&quot;Hello geocompr&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <p>这个脚本的内容并不特别令人兴奋，但它说明了一点：脚本不需要复杂。保存的脚本可以通过R命令行中的<code>source()</code>函数完整地调用和执行，如下面所示。这个命令的输出显示，注释会被忽略，但<code>print()</code>命令会被执行：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source<span class="punctuation">(</span><span class="string">&quot;code/11-hello.R&quot;</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;Hello geocompr&quot;</span></span><br></pre></td></tr></table></figure>
-<p>你也可以从系统命令行shell，例如<code>bash</code>和<code>PowerShell</code>，调用R脚本，前提是<code>RScript</code>可执行文件已经<a
-target="_blank" rel="noopener" href="https://www.reddit.com/r/Rlanguage/comments/zaovly/is_anybody_able_to_run_a_r_script_in_powershell/">配置</a>好，例如如下：</p>
+<p>你也可以从系统命令行shell，例如<code>bash</code>和<code>PowerShell</code>，调用R脚本，前提是<code>RScript</code>可执行文件已经<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.reddit.com/r/Rlanguage/comments/zaovly/is_anybody_able_to_run_a_r_script_in_powershell/">配置</a>好，例如如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Rscript code/11-hello.R</span><br></pre></td></tr></table></figure>
 <p>关于脚本文件中可以和不能包含什么，并没有严格的规定，也没有什么能阻止你保存错误的、不可复制的代码。不包含有效R代码的代码行应该被注释掉，通过在行的开始处添加<code>#</code>，以防止错误，如<code>11-hello.R</code>脚本中的第一行所示。然而，有一些值得遵循的惯例：</p>
 <ul>
-<li>按顺序编写脚本：就像电影的剧本一样，脚本应该有一个明确的顺序，比如'设置'、'数据处理'和'保存结果'（大致相当于电影中的'开头'、'中间'和'结尾'）。</li>
-<li>向脚本添加注释，以便其他人（以及你未来的自己）能够理解它。
-至少，注释应该说明脚本的目的（见图@ref(fig:codecheck)）并（对于长脚本）将其划分为几个部分。
-这可以在RStudio中通过快捷键<code>Ctrl+Shift+R</code>来完成，它会创建'可折叠'的代码段标题。</li>
-<li>最重要的是，脚本应该是可复制的：能在任何计算机上运行的自包含脚本比只能在你的计算机上、在好天气下运行的脚本更有用。
-这涉及到在开始时附加所需的包，从持久性来源（如可靠网站）读取数据，并确保已经采取了之前的步骤。<a
-href="#fn1" class="footnote-ref" id="fnref1"
-role="doc-noteref"><sup>1</sup></a></li>
+<li>按顺序编写脚本：就像电影的剧本一样，脚本应该有一个明确的顺序，比如’设置’、‘数据处理’和’保存结果’（大致相当于电影中的’开头’、‘中间’和’结尾’）。</li>
+<li>向脚本添加注释，以便其他人（以及你未来的自己）能够理解它。<br>
+至少，注释应该说明脚本的目的（见图@ref(fig:codecheck)）并（对于长脚本）将其划分为几个部分。<br>
+这可以在RStudio\index{RStudio}中通过快捷键<code>Ctrl+Shift+R</code>来完成，它会创建’可折叠’的代码段标题。</li>
+<li>最重要的是，脚本应该是可复制的：能在任何计算机上运行的自包含脚本比只能在你的计算机上、在好天气下运行的脚本更有用。<br>
+这涉及到在开始时附加所需的包，从持久性来源（如可靠网站）读取数据，并确保已经采取了之前的步骤。<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></li>
 </ul>
-<p>在R脚本中强制可复制性是困难的，但有一些工具可以帮助。默认情况下，RStudio
-会'代码检查' R脚本，并用红色波浪线标出有问题的代码，如下图所示：</p>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051045079.png" />
-Code checking in RStudio. This example, from the script
-11-centroid-alg.R, highlights an unclosed curly bracket on line 19.</p>
+<p>在R脚本中强制可复制性是困难的，但有一些工具可以帮助。默认情况下，RStudio \index{RStudio} 会’代码检查’ R脚本，并用红色波浪线标出有问题的代码，如下图所示：</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051045079.png" alt><br>
+Code checking in RStudio. This example, from the script 11-centroid-alg.R, highlights an unclosed curly bracket on line 19.</p>
 <blockquote>
-<p>📌A useful tool for reproducibility is the <strong>reprex</strong>
-package. Its main function <code>reprex()</code> tests lines of R code
-to check if they are reproducible, and provides markdown output to
-facilitate communication on sites such as GitHub. See the web page
-reprex.tidyverse.org for details.</p>
+<p>📌A useful tool for reproducibility is the <strong>reprex</strong> package.<br>
+Its main function <code>reprex()</code> tests lines of R code to check if they are reproducible, and provides markdown output to facilitate communication on sites such as GitHub.<br>
+See the web page <a target="_blank" rel="external nofollow noopener noreferrer" href="http://reprex.tidyverse.org">reprex.tidyverse.org</a> for details.</p>
 </blockquote>
-<p>
-本节的内容适用于任何类型的R脚本。对于地理计算脚本的特殊考虑是，它们往往具有外部依赖性，例如在第@ref(read-write)章中重度使用的用于处理地理数据的核心R包所需的GDAL依赖，用于数据导入和导出。运行更专业的地理算法可能需要GIS软件依赖，如第@ref(gis)章所概述。处理地理数据的脚本还常常要求输入数据集以特定格式提供。这种依赖应在脚本的注释中或其所属项目的其他地方进行说明，如脚本
-<a
-target="_blank" rel="noopener" href="https://github.com/geocompx/geocompr/blob/main/code/11-centroid-alg.R"><code>11-centroid-alg.R</code></a>
-所示。'防御性'
-编程技巧和良好的错误信息可以通过检查依赖性和与用户沟通（如果某些需求未得到满足）来节省时间。如果语句，用R中的<code>if ()</code>实现，可用于发送消息或运行代码行，只有在满足某些条件时才会这样做。例如，以下代码行会在缺少某个文件时向用户发送消息：</p>
+<p>\index{reproducibility}<br>
+本节的内容适用于任何类型的R脚本。对于地理计算脚本的特殊考虑是，它们往往具有外部依赖性，例如在第@ref(read-write)章中重度使用的用于处理地理数据的核心R包所需的GDAL依赖，用于数据导入和导出。运行更专业的地理算法可能需要GIS软件依赖，如第@ref(gis)章所概述。处理地理数据的脚本还常常要求输入数据集以特定格式提供。这种依赖应在脚本的注释中或其所属项目的其他地方进行说明，如脚本 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/geocompx/geocompr/blob/main/code/11-centroid-alg.R"><code>11-centroid-alg.R</code></a> 所示。‘防御性’ 编程技巧和良好的错误信息可以通过检查依赖性和与用户沟通（如果某些需求未得到满足）来节省时间。如果语句，用R中的<code>if ()</code>实现，可用于发送消息或运行代码行，只有在满足某些条件时才会这样做。例如，以下代码行会在缺少某个文件时向用户发送消息：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="punctuation">(</span><span class="operator">!</span>file.exists<span class="punctuation">(</span><span class="string">&quot;required_geo_data.gpkg&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="punctuation">&#123;</span></span><br><span class="line">  message<span class="punctuation">(</span><span class="string">&quot;No file, required_geo_data.gpkg is missing!&quot;</span><span class="punctuation">)</span></span><br><span class="line"><span class="punctuation">&#125;</span> </span><br><span class="line"><span class="comment">#&gt; No file, required_geo_data.gpkg is missing!</span></span><br></pre></td></tr></table></figure>
-<p><code>11-centroid-alg.R</code>脚本所进行的工作在下面的可复制示例中有所展示，该示例创建了一个名为<code>poly_mat</code>的预备对象，代表一个边长为9单位的正方形。这个例子显示了<code>source()</code>可以与URLs一同工作，假设你有互联网连接。如果没有，相同的脚本可以通过<code>source("code/11-centroid-alg.R")</code>来调用，前提是你之前已经下载了<a
-target="_blank" rel="noopener" href="https://github.com/geocompx/geocompr">github.com/geocompx/geocompr</a>仓库，并且你正在<code>geocompr</code>文件夹中运行R。</p>
+<p><code>11-centroid-alg.R</code>脚本所进行的工作在下面的可复制示例中有所展示，该示例创建了一个名为<code>poly_mat</code>的预备对象，代表一个边长为9单位的正方形。这个例子显示了<code>source()</code>可以与URLs一同工作，假设你有互联网连接。如果没有，相同的脚本可以通过<code>source(&quot;code/11-centroid-alg.R&quot;)</code>来调用，前提是你之前已经下载了<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/geocompx/geocompr">github.com/geocompx/geocompr</a>仓库，并且你正在<code>geocompr</code>文件夹中运行R。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">poly_mat <span class="operator">=</span> cbind<span class="punctuation">(</span></span><br><span class="line">  x <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">  y <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">)</span></span><br><span class="line"><span class="punctuation">)</span></span><br><span class="line"><span class="comment"># Short URL to code/11-centroid-alg.R in the geocompr repo</span></span><br><span class="line">source<span class="punctuation">(</span><span class="string">&quot;https://t.ly/0nzj&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#&gt; [1] &quot;The area is: 81&quot;</span><br><span class="line">#&gt; [1] &quot;The coordinates of the centroid are: 4.5, 4.5&quot;</span><br></pre></td></tr></table></figure>
-<h1 id="几何算法">几何算法</h1>
+<h1 id="几何算法"><a class="markdownIt-Anchor" href="#几何算法"></a> 几何算法</h1>
 <p>我们可以这么理解算法，它相当于烘焙食谱。它们是一整套指导方针，当对输入进行操作时，会得到有用/美味的结果。输入在烘焙的情况下是如面粉和糖的成分，在算法的情况下是数据和输入参数。而烘焙食谱可能导致美味的蛋糕，成功的算法应有带来环境/社会/其他利益的计算结果。在深入可复制示例之前，下面简短的历史将展示算法是如何与脚本（在<em>脚本</em>节中涉及）和函数（可以用来概括算法，使其更便携和易于使用，我们将在<em>函数</em>节中看到）相关联的。</p>
-<p>"算法"这个词源自9世纪在巴格达出版的早期数学教科书 <em>Hisab al-jabr
-w’al-muqabala</em>。这本书被译成拉丁文，并变得非常流行，以至于作者的姓氏，<a
-target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Muhammad_ibn_Musa_al-Khwarizmi">al-Khwārizmī</a>，“被永久地当作一个科学术语来记忆：Al-Khwarizmi
-变成了 Alchoarismi、Algorismi，最终变成了 algorithm” <span
-class="citation"
-data-cites="bellos_alex_2011">[@bellos_alex_2011]</span>。在计算时代，算法指的是解决问题的一系列步骤，从而得出预定义的输出。输入必须在适当的数据结构中正式定义<span
-class="citation"
-data-cites="wise_gis_2001">[@wise_gis_2001]</span>。算法通常从流程图或伪代码开始，展示过程的目标，然后在代码中实现。为了简化可用性，常见的算法通常被封装在函数内，这些函数可能会隐藏一些或所有已采取的步骤（除非你查看函数的源代码，参见<em>函数</em>节）。</p>
-<p>地理算法，比如我们在<em>GIS</em>章节中遇到的，是接收地理数据并通常返回地理结果的算法（同样的东西还有其他术语，比如<em>GIS算法</em>和<em>几何算法</em>）。这可能听起来简单，但这是一个深刻的主题，有一个专门的学术领域，<em>计算几何</em>，致力于它们的研究<span
-class="citation"
-data-cites="berg_computational_2008">[@berg_computational_2008]</span>，以及关于该主题的大量书籍。<span
-class="citation"
-data-cites="orourke_computational_1998">@orourke_computational_1998</span>，例如，使用可复制和免费提供的C代码，以一系列逐渐复杂的几何算法介绍该主题。</p>
-<p>几何算法的一个例子是找出多边形的质心的算法。有许多方法来计算质心，其中一些仅适用于特定类型的<a
-target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Centroid">空间数据</a>。为了本节的目的，我们选择一种容易可视化的方法：将多边形分解成许多三角形，并找出每个三角形的质心，这种方法由
-<span class="citation"
-data-cites="kaiser_algorithms_1993">@kaiser_algorithms_1993</span>
-讨论，还简短地在 <span class="citation"
-data-cites="orourke_computational_1998">@orourke_computational_1998</span>
-中提到。在编写任何代码之前，进一步将这种方法分解成离散任务会有所帮助（后来称为步骤1到步骤4，这些也可以以示意图或伪代码的形式呈现）：</p>
-<ol type="1">
+<p>&quot;算法&quot;这个词源自9世纪在巴格达出版的早期数学教科书 <em>Hisab al-jabr w’al-muqabala</em>。这本书被译成拉丁文，并变得非常流行，以至于作者的姓氏，<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Muhammad_ibn_Musa_al-Khwarizmi">al-Khwārizmī</a>，“被永久地当作一个科学术语来记忆：Al-Khwarizmi 变成了 Alchoarismi、Algorismi，最终变成了 algorithm” [@bellos_alex_2011]。在计算时代，算法指的是解决问题的一系列步骤，从而得出预定义的输出。输入必须在适当的数据结构中正式定义[@wise_gis_2001]。算法通常从流程图或伪代码开始，展示过程的目标，然后在代码中实现。为了简化可用性，常见的算法通常被封装在函数内，这些函数可能会隐藏一些或所有已采取的步骤（除非你查看函数的源代码，参见<em>函数</em>节）。</p>
+<p>地理算法，比如我们在<em>GIS</em>章节中遇到的，是接收地理数据并通常返回地理结果的算法（同样的东西还有其他术语，比如<em>GIS算法</em>和<em>几何算法</em>）。这可能听起来简单，但这是一个深刻的主题，有一个专门的学术领域，<em>计算几何</em>，致力于它们的研究[@berg_computational_2008]，以及关于该主题的大量书籍。@orourke_computational_1998，例如，使用可复制和免费提供的C代码，以一系列逐渐复杂的几何算法介绍该主题。</p>
+<p>几何算法的一个例子是找出多边形的质心的算法。有许多方法来计算质心，其中一些仅适用于特定类型的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Centroid">空间数据</a>。为了本节的目的，我们选择一种容易可视化的方法：将多边形分解成许多三角形，并找出每个三角形的质心，这种方法由 @kaiser_algorithms_1993 讨论，还简短地在 @orourke_computational_1998 中提到。在编写任何代码之前，进一步将这种方法分解成离散任务会有所帮助（后来称为步骤1到步骤4，这些也可以以示意图或伪代码的形式呈现）：</p>
+<ol>
 <li>将多边形分成相邻的三角形。</li>
 <li>找出每个三角形的质心。</li>
 <li>找出每个三角形的面积。</li>
 <li>找出三角形质心的面积加权平均值。</li>
 </ol>
-<p>这些步骤可能听起来很简单，但将单词转换成工作代码需要一些工作和大量的反复试验，即使输入有限制：算法仅适用于<em>凸多边形</em>，它们不包含大于180°的内角，不允许星形（<strong>decido</strong>和<strong>sfdct</strong>软件包可以使用外部库对非凸多边形进行三角剖分，如<a
-target="_blank" rel="noopener" href="https://geocompx.github.io/geocompkg/articles/algorithm.html">algorithm</a>
-小册子中所示，该小册子托管在 <a
-target="_blank" rel="noopener" href="https://geocompx.org/">geocompx.org</a> 上）。</p>
-<p>表示多边形最简单的数据结构是一个矩阵，其中x和y坐标在每行表示一个顶点，以追踪多边形边界的顺序，其中第一行和最后一行是相同的<span
-class="citation"
-data-cites="wise_gis_2001">[@wise_gis_2001]</span>。在这种情况下，我们将用基础的R创建一个有五个顶点的多边形，该多边形建立在<em>GIS
-Algorithms</em> <span class="citation"
-data-cites="xiao_gis_2016参见">[@xiao_gis_2016参见[github.com/gisalgs](https://github.com/gisalgs/geom)
-以获取 Python 代码]</span>的一个示例上，如下图所示。</p>
+<p>这些步骤可能听起来很简单，但将单词转换成工作代码需要一些工作和大量的反复试验，即使输入有限制：算法仅适用于<em>凸多边形</em>，它们不包含大于180°的内角，不允许星形（<strong>decido</strong>和<strong>sfdct</strong>软件包可以使用外部库对非凸多边形进行三角剖分，如<a target="_blank" rel="external nofollow noopener noreferrer" href="https://geocompx.github.io/geocompkg/articles/algorithm.html">algorithm</a> 小册子中所示，该小册子托管在 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://geocompx.org/">geocompx.org</a> 上）。</p>
+<p>表示多边形最简单的数据结构是一个矩阵，其中x和y坐标在每行表示一个顶点，以追踪多边形边界的顺序，其中第一行和最后一行是相同的[@wise_gis_2001]。在这种情况下，我们将用基础的R创建一个有五个顶点的多边形，该多边形建立在<em>GIS  Algorithms</em> [@xiao_gis_2016参见<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/gisalgs/geom">github.com/gisalgs</a> 以获取 Python 代码]的一个示例上，如下图所示。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># generate a simple matrix representation of a polygon:</span></span><br><span class="line">x_coords <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">10</span><span class="punctuation">,</span> <span class="number">20</span><span class="punctuation">,</span> <span class="number">12</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">)</span></span><br><span class="line">y_coords <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">15</span><span class="punctuation">,</span> <span class="number">20</span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">)</span></span><br><span class="line">poly_mat <span class="operator">=</span> cbind<span class="punctuation">(</span>x_coords<span class="punctuation">,</span> y_coords<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>现在我们有了一个示例数据集，我们准备进行上面概述的第1步。下面的代码展示了通过创建一个单一的三角形（<code>T1</code>）来实现这一点，该代码演示了该方法；它还通过基于<a
-target="_blank" rel="noopener" href="https://math.stackexchange.com/a/1702606">公式</a><span
-class="math inline">\(1/3(a + b + c)\)</span>
-来计算其质心，从而演示了第2步，其中<span
-class="math inline">\(a\)</span>到<span
-class="math inline">\(c\)</span>是表示三角形顶点的坐标：</p>
+<p>现在我们有了一个示例数据集，我们准备进行上面概述的第1步。下面的代码展示了通过创建一个单一的三角形（<code>T1</code>）来实现这一点，该代码演示了该方法；它还通过基于<a target="_blank" rel="external nofollow noopener noreferrer" href="https://math.stackexchange.com/a/1702606">公式</a><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><mn>3</mn><mo stretchy="false">(</mo><mi>a</mi><mo>+</mo><mi>b</mi><mo>+</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">1/3(a + b + c)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord">3</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">c</span><span class="mclose">)</span></span></span></span> 来计算其质心，从而演示了第2步，其中<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">a</span></span></span></span>到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">c</span></span></span></span>是表示三角形顶点的坐标：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create a point representing the origin:</span></span><br><span class="line">Origin <span class="operator">=</span> poly_mat<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="punctuation">]</span></span><br><span class="line"><span class="comment"># create &#x27;triangle matrix&#x27;:</span></span><br><span class="line">T1 <span class="operator">=</span> rbind<span class="punctuation">(</span>Origin<span class="punctuation">,</span> poly_mat<span class="punctuation">[</span><span class="number">2</span><span class="operator">:</span><span class="number">3</span><span class="punctuation">,</span> <span class="punctuation">]</span><span class="punctuation">,</span> Origin<span class="punctuation">)</span> </span><br><span class="line">C1 <span class="operator">=</span> <span class="punctuation">(</span>T1<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span><span class="punctuation">]</span> <span class="operator">+</span> T1<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span><span class="punctuation">]</span> <span class="operator">+</span> T1<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">/</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051050278.png" />
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051050278.png" alt><br>
 Illustration of polygon centroid calculation problem.</p>
-<p>第3步是找出每个三角形的面积，以便计算一个<em>加权平均值</em>，该值会考虑到大三角形的不成比例影响。计算三角形面积的公式如下<span
-class="citation"
-data-cites="kaiser_algorithms_1993">[@kaiser_algorithms_1993]</span>：</p>
-<p><span class="math display">\[
-\frac{A_x ( B_y − C_y ) + B_x ( C_y − A_y ) + C_x ( A_y − B_y )}{ 2 }
-\]</span></p>
-<p>式中，<span class="math inline">\(A\)</span>到<span
-class="math inline">\(C\)</span>是三角形的三个点，而<span
-class="math inline">\(x\)</span>和<span
-class="math inline">\(y\)</span>分别指代 x 和 y
-的维度。将这个公式翻译成能够处理矩阵表示形式的三角形 <code>T1</code>
-数据的 R 代码如下（函数 <code>abs()</code> 确保了结果为正）：</p>
+<p>第3步是找出每个三角形的面积，以便计算一个<em>加权平均值</em>，该值会考虑到大三角形的不成比例影响。计算三角形面积的公式如下[@kaiser_algorithms_1993]：</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><msub><mi>A</mi><mi>x</mi></msub><mo stretchy="false">(</mo><msub><mi>B</mi><mi>y</mi></msub><mtext>−</mtext><msub><mi>C</mi><mi>y</mi></msub><mo stretchy="false">)</mo><mo>+</mo><msub><mi>B</mi><mi>x</mi></msub><mo stretchy="false">(</mo><msub><mi>C</mi><mi>y</mi></msub><mtext>−</mtext><msub><mi>A</mi><mi>y</mi></msub><mo stretchy="false">)</mo><mo>+</mo><msub><mi>C</mi><mi>x</mi></msub><mo stretchy="false">(</mo><msub><mi>A</mi><mi>y</mi></msub><mtext>−</mtext><msub><mi>B</mi><mi>y</mi></msub><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{A_x ( B_y − C_y ) + B_x ( C_y − A_y ) + C_x ( A_y − B_y )}{ 2 }
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.113em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.05017em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord">−</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.05017em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord">−</span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord">−</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.05017em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>式中，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span>到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span>是三角形的三个点，而<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span>分别指代 x 和 y 的维度。将这个公式翻译成能够处理矩阵表示形式的三角形 <code>T1</code> 数据的 R 代码如下（函数 <code>abs()</code> 确保了结果为正）：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># calculate the area of the triangle represented by matrix T1:</span></span><br><span class="line"><span class="built_in">abs</span><span class="punctuation">(</span>T1<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span> <span class="operator">*</span> <span class="punctuation">(</span>T1<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span> <span class="operator">-</span> T1<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">    T1<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span> <span class="operator">*</span> <span class="punctuation">(</span>T1<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span> <span class="operator">-</span> T1<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">    T1<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span> <span class="operator">*</span> <span class="punctuation">(</span>T1<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span> <span class="operator">-</span> T1<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">/</span> <span class="number">2</span></span><br><span class="line"><span class="comment">#&gt; [1] 85</span></span><br></pre></td></tr></table></figure>
-<p>该代码块输出了正确的结果。<a href="#fn2" class="footnote-ref"
-id="fnref2"
-role="doc-noteref"><sup>2</sup></a>问题在于代码比较笨拙，如果我们想要在另一个三角形矩阵上运行它，就必须重新键入。为了使代码更具通用性，我们将在<em>函数</em>节中看到如何将其转换为一个函数。</p>
-<p>第4步要求在所有三角形上（如上面所示），而不仅仅是一个三角形上，进行第2步和第3步。这就需要<em>迭代</em>以创建表示多边形的所有三角形，如下图所示。这里使用
-<code>lapply()</code>和
-<code>vapply()</code>来迭代每个三角形，因为它们在基础 R
-中提供了一个简洁的解决方案：<a href="#fn3" class="footnote-ref"
-id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>该代码块输出了正确的结果。<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>问题在于代码比较笨拙，如果我们想要在另一个三角形矩阵上运行它，就必须重新键入。为了使代码更具通用性，我们将在<em>函数</em>节中看到如何将其转换为一个函数。</p>
+<p>第4步要求在所有三角形上（如上面所示），而不仅仅是一个三角形上，进行第2步和第3步。这就需要<em>迭代</em>以创建表示多边形的所有三角形，如下图所示。这里使用 <code>lapply()</code>和 <code>vapply()</code>来迭代每个三角形，因为它们在基础 R 中提供了一个简洁的解决方案：<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">i <span class="operator">=</span> <span class="number">2</span><span class="operator">:</span><span class="punctuation">(</span>nrow<span class="punctuation">(</span>poly_mat<span class="punctuation">)</span> <span class="operator">-</span> <span class="number">2</span><span class="punctuation">)</span></span><br><span class="line">T_all <span class="operator">=</span> lapply<span class="punctuation">(</span>i<span class="punctuation">,</span> <span class="keyword">function</span><span class="punctuation">(</span>x<span class="punctuation">)</span> <span class="punctuation">&#123;</span></span><br><span class="line">  rbind<span class="punctuation">(</span>Origin<span class="punctuation">,</span> poly_mat<span class="punctuation">[</span>x<span class="operator">:</span><span class="punctuation">(</span>x <span class="operator">+</span> <span class="number">1</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="punctuation">]</span><span class="punctuation">,</span> Origin<span class="punctuation">)</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line">C_list <span class="operator">=</span> lapply<span class="punctuation">(</span>T_all<span class="punctuation">,</span>  <span class="keyword">function</span><span class="punctuation">(</span>x<span class="punctuation">)</span> <span class="punctuation">(</span>x<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="punctuation">]</span> <span class="operator">+</span> x<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="punctuation">]</span> <span class="operator">+</span> x<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span> <span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">/</span> <span class="number">3</span><span class="punctuation">)</span></span><br><span class="line">C <span class="operator">=</span> do.call<span class="punctuation">(</span>rbind<span class="punctuation">,</span> C_list<span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line">A <span class="operator">=</span> vapply<span class="punctuation">(</span>T_all<span class="punctuation">,</span> <span class="keyword">function</span><span class="punctuation">(</span>x<span class="punctuation">)</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="built_in">abs</span><span class="punctuation">(</span>x<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span> <span class="operator">*</span> <span class="punctuation">(</span>x<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span> <span class="operator">-</span> x<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">        x<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span> <span class="operator">*</span> <span class="punctuation">(</span>x<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span> <span class="operator">-</span> x<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">        x<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span> <span class="operator">*</span> <span class="punctuation">(</span>x<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span> <span class="operator">-</span> x<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="punctuation">)</span> <span class="operator">/</span> <span class="number">2</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span> FUN.VALUE <span class="operator">=</span> double<span class="punctuation">(</span><span class="number">1</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051055873.png" />
-Illustration of iterative centroid algorithm with triangles. The X
-represents the area-weighted centroid in iterations 2 and 3.</p>
-<p>现在，我们有条件完成第4步，使用<code>sum(A)</code>来计算总面积，以及使用
-<code>weighted.mean(C[, 1], A)</code> 和
-<code>weighted.mean(C[, 2], A)</code>
-来计算多边形的质心坐标（给警觉的读者一个练习：验证这些命令是否有效）。为了展示算法与脚本之间的联系，本节的内容已经被压缩成
-<code>11-centroid-alg.R</code>。我们在<em>脚本</em>节末尾看到，这个脚本如何计算一个正方形的质心。<em>编写脚本</em>
-的优点是，它适用于新的 <code>poly_mat</code> 对象（参见下面的练习，以
-<code>st_centroid()</code> 为参考来验证这些结果）：</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051055873.png" alt><br>
+Illustration of iterative centroid algorithm with triangles. The X represents the area-weighted centroid in iterations 2 and 3.</p>
+<p>现在，我们有条件完成第4步，使用<code>sum(A)</code>来计算总面积，以及使用 <code>weighted.mean(C[, 1], A)</code> 和 <code>weighted.mean(C[, 2], A)</code> 来计算多边形的质心坐标（给警觉的读者一个练习：验证这些命令是否有效）。为了展示算法与脚本之间的联系，本节的内容已经被压缩成 <code>11-centroid-alg.R</code>。我们在<em>脚本</em>节末尾看到，这个脚本如何计算一个正方形的质心。<em>编写脚本</em> 的优点是，它适用于新的 <code>poly_mat</code> 对象（参见下面的练习，以 <code>st_centroid()</code> 为参考来验证这些结果）：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">source<span class="punctuation">(</span><span class="string">&quot;code/11-centroid-alg.R&quot;</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;The area is: 245&quot;</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;The coordinates of the centroid are: 8.83, 9.22&quot;</span></span><br></pre></td></tr></table></figure>
-<p>上面的示例表明，使用基础 R
-从基础原理出发，<em>确实可以</em>开发出低级地理操作。它还表明，如果已经存在一个经过验证的解决方案，那么重新发明轮子可能是不值得的：如果我们的目标仅仅是找到多边形的质心，那么将<code>poly_mat</code>表示为一个<strong>sf</strong>对象并使用现有的<code>sf::st_centroid()</code>
-函数可能会更快。然而，从1<sup>st</sup>
-原理编写算法的巨大好处是，你将理解整个过程的每一个步骤，这是使用其他人代码时无法保证的。另一个需要考虑的因素是性能，与低级语言如C++相比，R在进行数字计算方面可能较慢（参见<em>地理计算软件</em>节），并且难以优化。如果目的是开发新方法，那么计算效率不应该是优先考虑的。这一点体现在“过早优化是编程中一切（或至少大部分）邪恶的根源”<span
-class="citation"
-data-cites="knuth_computer_1974">[@knuth_computer_1974]</span>这一说法中。</p>
-<p>算法开发是困难的。这一点应该从开发一个仅仅是一种相对低效的解决方案、对实际问题（实际中凸多边形并不常见）具有有限应用的基础
-R 的质心算法中显而易见。这种经验应该会让人更加重视像GEO（它是
-<code>sf::st_centroid()</code>
-的基础）和CGAL（计算几何算法库）这样的低级地理库，这些库不仅运行快，还适用于多种类型的输入几何。
-这些库开源的一个重要优点是，其源代码便于学习、理解，并且（对于具备技能和信心的人）进行修改。<a
-href="#fn4" class="footnote-ref" id="fnref4"
-role="doc-noteref"><sup>4</sup></a></p>
-<h1 id="函数">函数</h1>
-<p>与算法类似，函数接收一个输入并返回一个输出。然而，函数是特定编程语言中实现的，而不是“配方”本身。在
-R
-中，函数本身就是对象，可以以模块化的方式创建和组合。例如，我们可以创建一个执行我们质心生成算法第二步的函数，如下所示：</p>
+<p>上面的示例表明，使用基础 R 从基础原理出发，<em>确实可以</em>开发出低级地理操作。它还表明，如果已经存在一个经过验证的解决方案，那么重新发明轮子可能是不值得的：如果我们的目标仅仅是找到多边形的质心\index{centroid}，那么将<code>poly_mat</code>表示为一个<strong>sf</strong>对象并使用现有的<code>sf::st_centroid()</code> 函数可能会更快。然而，从1<sup>st</sup> 原理编写算法的巨大好处是，你将理解整个过程的每一个步骤，这是使用其他人代码时无法保证的。另一个需要考虑的因素是性能，与低级语言如C++相比，R在进行数字计算方面可能较慢（参见<em>地理计算软件</em>节），并且难以优化。如果目的是开发新方法，那么计算效率不应该是优先考虑的。这一点体现在“过早优化是编程中一切（或至少大部分）邪恶的根源”[@knuth_computer_1974]这一说法中。</p>
+<p>算法开发是困难的。这一点应该从开发一个仅仅是一种相对低效的解决方案、对实际问题（实际中凸多边形并不常见）具有有限应用的基础 R 的质心算法中显而易见。这种经验应该会让人更加重视像GEO（它是 <code>sf::st_centroid()</code> 的基础）和CGAL（计算几何算法库）这样的低级地理库，这些库不仅运行快，还适用于多种类型的输入几何。<br>
+这些库开源的一个重要优点是，其源代码便于学习、理解，并且（对于具备技能和信心的人）进行修改。<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup></p>
+<h1 id="函数"><a class="markdownIt-Anchor" href="#函数"></a> 函数</h1>
+<p>与算法类似，函数接收一个输入并返回一个输出。然而，函数是特定编程语言中实现的，而不是“配方”本身。在 R 中，函数本身就是对象，可以以模块化的方式创建和组合。例如，我们可以创建一个执行我们质心生成算法第二步的函数，如下所示：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t_centroid <span class="operator">=</span> <span class="keyword">function</span><span class="punctuation">(</span>x<span class="punctuation">)</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="punctuation">(</span>x<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="punctuation">]</span> <span class="operator">+</span> x<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="punctuation">]</span> <span class="operator">+</span> x<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span> <span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">/</span> <span class="number">3</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>上面的示例演示了<a
-target="_blank" rel="noopener" href="https://adv-r.hadley.nz/functions.html">函数</a>的两个关键组件：1）函数
-<em>主体</em>，即定义函数如何处理输入的大括号内的代码；和 2）
-<em>形式参数</em>，即函数使用的参数列表——在这种情况下是
-<code>x</code>（第三个关键组件，环境，超出了本节的范围）。默认情况下，函数返回最后一个被计算的对象（在
-<code>t_centroid()</code> 的情况下是质心的坐标）。<a href="#fn5"
-class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p>上面的示例演示了<a target="_blank" rel="external nofollow noopener noreferrer" href="https://adv-r.hadley.nz/functions.html">函数</a>的两个关键组件：1）函数 <em>主体</em>，即定义函数如何处理输入的大括号内的代码；和 2） <em>形式参数</em>，即函数使用的参数列表——在这种情况下是 <code>x</code>（第三个关键组件，环境，超出了本节的范围）。默认情况下，函数返回最后一个被计算的对象（在 <code>t_centroid()</code> 的情况下是质心的坐标）。<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup></p>
 <p>该函数现在适用于你传递给它的任何输入，如下面的命令所示，该命令计算了上一节中示例多边形中第1个三角形的面积：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t_centroid<span class="punctuation">(</span>T1<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; x_coords y_coords </span></span><br><span class="line"><span class="comment">#&gt;     14.0     11.7</span></span><br></pre></td></tr></table></figure>
-<p>我们还可以创建一个函数来计算三角形的面积，我们将其命名为
-<code>t_area()</code>：</p>
+<p>我们还可以创建一个函数\index{function}来计算三角形的面积，我们将其命名为 <code>t_area()</code>：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">t_area <span class="operator">=</span> <span class="keyword">function</span><span class="punctuation">(</span>x<span class="punctuation">)</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="built_in">abs</span><span class="punctuation">(</span></span><br><span class="line">    x<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span> <span class="operator">*</span> <span class="punctuation">(</span>x<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span> <span class="operator">-</span> x<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">    x<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span> <span class="operator">*</span> <span class="punctuation">(</span>x<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span> <span class="operator">-</span> x<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">    x<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span> <span class="operator">*</span> <span class="punctuation">(</span>x<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span> <span class="operator">-</span> x<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span><span class="punctuation">)</span></span><br><span class="line">  <span class="punctuation">)</span> <span class="operator">/</span> <span class="number">2</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>注意，在创建函数之后，可以用一行代码计算三角形的面积，避免了冗长代码的重复：函数是一种
-<em>泛化</em>
-代码的机制。新创建的函数<code>t_area()</code>接受任何对象<code>x</code>，假设其具有与我们一直在使用的“三角形矩阵”数据结构相同的维度，并返回其面积，如下面在<code>T1</code>上的示例：</p>
+<p>注意，在创建函数之后，可以用一行代码计算三角形的面积，避免了冗长代码的重复：函数是一种 <em>泛化</em> 代码的机制。新创建的函数<code>t_area()</code>接受任何对象<code>x</code>，假设其具有与我们一直在使用的“三角形矩阵”数据结构相同的维度，并返回其面积，如下面在<code>T1</code>上的示例：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t_area<span class="punctuation">(</span>T1<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] 85</span></span><br></pre></td></tr></table></figure>
 <p>我们可以通过使用它来找到一个新的三角形矩阵的面积来测试函数的泛化性，该三角形矩阵的高度为1，底边为3：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">t_new <span class="operator">=</span> cbind<span class="punctuation">(</span>x <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">              y <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">t_area<span class="punctuation">(</span>t_new<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt;   x </span></span><br><span class="line"><span class="comment">#&gt; 1.5</span></span><br></pre></td></tr></table></figure>
-<p>函数的一个有用特性是它们是模块化的。只要你知道输出会是什么，一个函数就可以用作另一个函数的构建块。因此，<code>t_centroid()</code>
-和
-<code>t_area()</code>可以用作更大的函数的子组件，以执行脚本<code>11-centroid-alg.R</code>的工作：计算任何凸多边形的面积。下面的代码块创建了
-<code>poly_centroid()</code> 函数，以模仿针对凸多边形的
-<code>sf::st_centroid()</code> 的行为：<a href="#fn6"
-class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>函数的一个有用特性是它们是模块化的。只要你知道输出会是什么，一个函数就可以用作另一个函数的构建块。因此，<code>t_centroid()</code> 和 <code>t_area()</code>可以用作更大的函数的子组件，以执行脚本<code>11-centroid-alg.R</code>的工作：计算任何凸多边形的面积。下面的代码块创建了 <code>poly_centroid()</code> 函数，以模仿针对凸多边形的 <code>sf::st_centroid()</code> 的行为：<sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">poly_centroid <span class="operator">=</span> <span class="keyword">function</span><span class="punctuation">(</span>poly_mat<span class="punctuation">)</span> <span class="punctuation">&#123;</span></span><br><span class="line">  Origin <span class="operator">=</span> poly_mat<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="punctuation">]</span> <span class="comment"># create a point representing the origin</span></span><br><span class="line">  i <span class="operator">=</span> <span class="number">2</span><span class="operator">:</span><span class="punctuation">(</span>nrow<span class="punctuation">(</span>poly_mat<span class="punctuation">)</span> <span class="operator">-</span> <span class="number">2</span><span class="punctuation">)</span></span><br><span class="line">  T_all <span class="operator">=</span> lapply<span class="punctuation">(</span>i<span class="punctuation">,</span> <span class="keyword">function</span><span class="punctuation">(</span>x<span class="punctuation">)</span> <span class="punctuation">&#123;</span>rbind<span class="punctuation">(</span>Origin<span class="punctuation">,</span> poly_mat<span class="punctuation">[</span>x<span class="operator">:</span><span class="punctuation">(</span>x <span class="operator">+</span> <span class="number">1</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="punctuation">]</span><span class="punctuation">,</span> Origin<span class="punctuation">)</span><span class="punctuation">&#125;</span><span class="punctuation">)</span></span><br><span class="line">  C_list <span class="operator">=</span> lapply<span class="punctuation">(</span>T_all<span class="punctuation">,</span> t_centroid<span class="punctuation">)</span></span><br><span class="line">  C <span class="operator">=</span> do.call<span class="punctuation">(</span>rbind<span class="punctuation">,</span> C_list<span class="punctuation">)</span></span><br><span class="line">  A <span class="operator">=</span> vapply<span class="punctuation">(</span>T_all<span class="punctuation">,</span> t_area<span class="punctuation">,</span> FUN.VALUE <span class="operator">=</span> double<span class="punctuation">(</span><span class="number">1</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">  <span class="built_in">c</span><span class="punctuation">(</span>weighted.mean<span class="punctuation">(</span>C<span class="punctuation">[</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span><span class="punctuation">,</span> A<span class="punctuation">)</span><span class="punctuation">,</span> weighted.mean<span class="punctuation">(</span>C<span class="punctuation">[</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span><span class="punctuation">,</span> A<span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">poly_centroid<span class="punctuation">(</span>poly_mat<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] 8.83 9.22</span></span><br></pre></td></tr></table></figure>
-<p>像 <code>poly_centroid()</code>
-这样的函数可以进一步扩展以提供不同类型的输出。例如，要将结果作为类
-<code>sfg</code> 的对象返回，可以使用 '包装器' 函数来修改
-<code>poly_centroid()</code> 的输出，然后返回结果：</p>
+<p>像 <code>poly_centroid()</code> 这样的函数可以进一步扩展以提供不同类型的输出。例如，要将结果作为类 <code>sfg</code> 的对象返回，可以使用 ‘包装器’ 函数来修改 <code>poly_centroid()</code> 的输出，然后返回结果：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">poly_centroid_sfg <span class="operator">=</span> <span class="keyword">function</span><span class="punctuation">(</span>x<span class="punctuation">)</span> <span class="punctuation">&#123;</span></span><br><span class="line">  centroid_coords <span class="operator">=</span> poly_centroid<span class="punctuation">(</span>x<span class="punctuation">)</span></span><br><span class="line">  sf<span class="operator">::</span>st_point<span class="punctuation">(</span>centroid_coords<span class="punctuation">)</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>我们可以通过以下方式验证输出与 <code>sf::st_centroid()</code>
-的输出相同：</p>
+<p>我们可以通过以下方式验证输出与 <code>sf::st_centroid()</code> 的输出相同：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">poly_sfc <span class="operator">=</span> sf<span class="operator">::</span>st_polygon<span class="punctuation">(</span><span class="built_in">list</span><span class="punctuation">(</span>poly_mat<span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">identical<span class="punctuation">(</span>poly_centroid_sfg<span class="punctuation">(</span>poly_mat<span class="punctuation">)</span><span class="punctuation">,</span> sf<span class="operator">::</span>st_centroid<span class="punctuation">(</span>poly_sfc<span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] FALSE</span></span><br></pre></td></tr></table></figure>
-<h1 id="编程">编程</h1>
+<h1 id="编程"><a class="markdownIt-Anchor" href="#编程"></a> 编程</h1>
 <p>在本章中，我们的速度很快，从脚本到函数，再到算法这个棘手的主题。我们不仅在抽象层面上讨论了它们，还创建了针对特定问题的工作示例：</p>
 <ul>
-<li>介绍并演示了在'多边形矩阵'上运行的脚本<code>11-centroid-alg.R</code></li>
-<li>描述了允许此脚本工作的各个步骤，被称为算法，一个计算性的配方</li>
+<li>介绍并演示了在’多边形矩阵’上运行的脚本<code>11-centroid-alg.R</code></li>
+<li>描述了允许此脚本工作的各个步骤，被称为算法\，一个计算性的配方</li>
 <li>为了通用化这个算法，我们将其转换成模块化的函数，最终组合成上一节中的函数<code>poly_centroid()</code></li>
 </ul>
 <p>每一个可能看似简单。然而，熟练的编程是复杂的，涉及将每个元素——脚本、算法和函数——<em>组合</em>成一个<em>系统</em>，具有效率和风格。最终的结果应该是健壮且用户友好的工具，供其他人使用。如我们预期本书的大多数读者将是编程新手，能够遵循并复现前面几节的结果是一个重大成就。编程需要许多小时的专门学习和实践才能熟练。</p>
-<p>面对希望以有效方式实现新算法的开发者的挑战，可以通过考虑创建一个简单但并非用于生产的函数所付出的努力量来考虑：在当前状态下，<code>poly_centroid()</code>在大多数（非凸）多边形上失败！这提出了一个问题：如何通用化这个函数？两个选项是（1）找到三角化非凸多边形的方法（这是本章支持的在线<a
-target="_blank" rel="noopener" href="https://geocompx.github.io/geocompkg/articles/algorithm.html">算法</a>文章所涵盖的主题）和（2）探索其他不依赖于三角网格的质心算法。</p>
-<p>一个更广泛的问题是：当已经有高性能的算法被实现并打包成诸如<code>st_centroid()</code>这样的函数时，是否值得编程解决方案？在这个特定情况下，简单的答案是'否'。在更广泛的背景下，考虑到学习编程的好处，答案是'视情况而定'。在编程中，很容易浪费时间尝试实现一种方法，只有到最后才发现有人已经做了艰苦的工作。你可以把这一章看作是通往几何算法编程魔法的垫脚石。然而，它也可以被看作是何时尝试编程一个通用解决方案，以及何时使用现有的更高级解决方案的一堂课。肯定会有编写新函数是最佳方案的时候，但也会有使用已经存在的函数是最佳方案的时候。</p>
+<p>面对希望以有效方式实现新算法的开发者的挑战，可以通过考虑创建一个简单但并非用于生产的函数所付出的努力量来考虑：在当前状态下，<code>poly_centroid()</code>在大多数（非凸）多边形上失败！这提出了一个问题：如何通用化这个函数？两个选项是（1）找到三角化非凸多边形的方法（这是本章支持的在线<a target="_blank" rel="external nofollow noopener noreferrer" href="https://geocompx.github.io/geocompkg/articles/algorithm.html">算法</a>文章所涵盖的主题）和（2）探索其他不依赖于三角网格的质心算法。</p>
+<p>一个更广泛的问题是：当已经有高性能的算法被实现并打包成诸如<code>st_centroid()</code>这样的函数时，是否值得编程解决方案？在这个特定情况下，简单的答案是’否’。在更广泛的背景下，考虑到学习编程的好处，答案是’视情况而定’。在编程中，很容易浪费时间尝试实现一种方法，只有到最后才发现有人已经做了艰苦的工作。你可以把这一章看作是通往几何算法编程魔法的垫脚石。然而，它也可以被看作是何时尝试编程一个通用解决方案，以及何时使用现有的更高级解决方案的一堂课。肯定会有编写新函数是最佳方案的时候，但也会有使用已经存在的函数是最佳方案的时候。</p>
 <p>“不要重复发明轮子”一样适用于编程，甚至更适用于生活中的其他方面。项目开始时进行一点研究和思考可以帮助决定编程时间最好如何使用。以下三个原则也可以帮助最大化编写代码时的努力，无论它是一个简单的脚本还是由数百个函数组成的包：</p>
-<ol type="1">
-<li><a
-target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>（不要重复自己）：尽量减少代码重复，并以更少的代码行解决特定问题。
-这一原则在《R for Data Science》<span class="citation"
-data-cites="grolemund_r_2016">[@grolemund_r_2016]</span>的函数章节中有解释。</li>
-<li><a
-target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/KISS_principle">KISS</a>（保持简单愚蠢）：这一原则建议首先尝试简单解决方案，优先于复杂解决方案，需要时使用依赖项，目标是保持脚本简洁。
-这一原则是<a
-target="_blank" rel="noopener" href="https://www.nature.com/articles/d41586-018-05004-4">名言</a>“事物应尽量简单，但不能更简单”的计算类比。</li>
+<ol>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>（不要重复自己）：尽量减少代码重复，并以更少的代码行解决特定问题。<br>
+这一原则在《R for Data Science》[@grolemund_r_2016]的函数章节中有解释。</li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/KISS_principle">KISS</a>（保持简单愚蠢）：这一原则建议首先尝试简单解决方案，优先于复杂解决方案，需要时使用依赖项，目标是保持脚本简洁。<br>
+这一原则是<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.nature.com/articles/d41586-018-05004-4">名言</a>“事物应尽量简单，但不能更简单”的计算类比。</li>
 <li>模块性：如果你的代码被划分成明确定义的片段，它将更容易维护。一个函数应该只做一件事，但要做得非常好。如果你的函数变得太长，考虑将其拆分成多个小函数，每个都可以用于其他目的，支持DRY和KISS原则。</li>
 </ol>
 <p>我们不能保证这一章会立即让你能够为你的工作创建完美的函数。然而，我们确信其内容将帮助你决定何时是适当的尝试时机（当没有其他现有的函数解决问题，当编程任务在你的能力范围内，当解决方案的好处可能大于开发它的时间成本）。通过使用上述原则，结合通过完成上面的实例获得的实践经验，你将建立你的脚本编写、包编写和编程技能。编程的第一步可能会很慢（下面的练习不应该匆忙完成），但长期的回报可能会很大。</p>
-<h1 id="exercises">Exercises</h1>
-<p>E1. Read the script <a
-target="_blank" rel="noopener" href="https://github.com/geocompx/geocompr/blob/main/code/11-centroid-alg.R"><code>11-centroid-alg.R</code></a>
-in the <code>code</code> folder of the book's GitHub repo.</p>
+<h1 id="exercises"><a class="markdownIt-Anchor" href="#exercises"></a> Exercises</h1>
+<p>E1. Read the script <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/geocompx/geocompr/blob/main/code/11-centroid-alg.R"><code>11-centroid-alg.R</code></a> in the <code>code</code> folder of the book’s GitHub repo.</p>
 <ul>
-<li>Which of the best practices covered in Section @ref(scripts) does it
-follow?</li>
-<li>Create a version of the script on your computer in an IDE such as
-RStudio (preferably by typing-out the script line-by-line, in your own
-coding style and with your own comments, rather than copy-pasting ---
-this will help you learn how to type scripts). Using the example of a
-square polygon (e.g., created with
-<code>poly_mat = cbind(x = c(0, 9, 9, 0, 0), y = c(0, 0, 9, 9, 0))</code>)
-execute the script line-by-line.</li>
-<li>What changes could be made to the script to make it more
-reproducible?</li>
+<li>Which of the best practices covered in Section @ref(scripts) does it follow?</li>
+<li>Create a version of the script on your computer in an IDE\index{IDE} such as RStudio\index{RStudio} (preferably by typing-out the script line-by-line, in your own coding style and with your own comments, rather than copy-pasting — this will help you learn how to type scripts). Using the example of a square polygon (e.g., created with <code>poly_mat = cbind(x = c(0, 9, 9, 0, 0), y = c(0, 0, 9, 9, 0))</code>) execute the script line-by-line.</li>
+<li>What changes could be made to the script to make it more reproducible?</li>
 <li>How could the documentation be improved?</li>
 </ul>
-<p>E2. In the geometric algorithms section we calculated that the area
-and geographic centroid of the polygon represented by
-<code>poly_mat</code> was 245 and 8.8, 9.2, respectively.</p>
+<p>E2. In the geometric algorithms section we calculated that the area and geographic centroid of the polygon represented by <code>poly_mat</code> was 245 and 8.8, 9.2, respectively.</p>
 <ul>
-<li>Reproduce the results on your own computer with reference to the
-script <a
-target="_blank" rel="noopener" href="https://github.com/geocompx/geocompr/blob/main/code/11-centroid-alg.R"><code>11-centroid-alg.R</code></a>,
-an implementation of this algorithm (bonus: type out the commands - try
-to avoid copy-pasting).</li>
-<li>Are the results correct? Verify them by converting
-<code>poly_mat</code> into an <code>sfc</code> object (named
-<code>poly_sfc</code>) with <code>st_polygon()</code> (hint: this
-function takes objects of class <code>list()</code>) and then using
-<code>st_area()</code> and <code>st_centroid()</code>.</li>
+<li>Reproduce the results on your own computer with reference to the script <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/geocompx/geocompr/blob/main/code/11-centroid-alg.R"><code>11-centroid-alg.R</code></a>, an implementation of this algorithm (bonus: type out the commands - try to avoid copy-pasting).</li>
+<li>Are the results correct? Verify them by converting <code>poly_mat</code> into an <code>sfc</code> object (named <code>poly_sfc</code>) with <code>st_polygon()</code> (hint: this function takes objects of class <code>list()</code>) and then using <code>st_area()</code> and <code>st_centroid()</code>.</li>
 </ul>
-<p>E3. It was stated that the algorithm we created only works for
-<em>convex hulls</em>. Define convex hulls (see the geometry operations
-chapter) and test the algorithm on a polygon that is <em>not</em> a
-convex hull.</p>
+<p>E3. It was stated that the algorithm\index{algorithm} we created only works for <em>convex hulls</em>. Define convex hulls\index{convex hull} (see the geometry operations chapter) and test the algorithm on a polygon that is <em>not</em> a convex hull.</p>
 <ul>
-<li>Bonus 1: Think about why the method only works for convex hulls and
-note changes that would need to be made to the algorithm to make it work
-for other types of polygon.</li>
-<li>Bonus 2: Building on the contents of <code>11-centroid-alg.R</code>,
-write an algorithm only using base R functions that can find the total
-length of linestrings represented in matrix form.</li>
+<li>Bonus 1: Think about why the method only works for convex hulls and note changes that would need to be made to the algorithm to make it work for other types of polygon.</li>
+<li>Bonus 2: Building on the contents of <code>11-centroid-alg.R</code>, write an algorithm only using base R functions that can find the total length of linestrings represented in matrix form.</li>
 </ul>
 <!-- Todo: add example of matrix representing a linestring, demonstrate code to verify the answer, suggest alternative functions to decompose as a bonus. -->
-<p>E4. In the functions section we created different versions of the
-<code>poly_centroid()</code> function that generated outputs of class
-<code>sfg</code> (<code>poly_centroid_sfg()</code>) and type-stable
-<code>matrix</code> outputs (<code>poly_centroid_type_stable()</code>).
-Further extend the function by creating a version (e.g., called
-<code>poly_centroid_sf()</code>) that is type stable (only accepts
-inputs of class <code>sf</code>) <em>and</em> returns <code>sf</code>
-objects (hint: you may need to convert the object <code>x</code> into a
-matrix with the command <code>sf::st_coordinates(x)</code>).</p>
+<p>E4. In the functions section we created different versions of the <code>poly_centroid()</code> function that generated outputs of class <code>sfg</code> (<code>poly_centroid_sfg()</code>) and type-stable <code>matrix</code> outputs (<code>poly_centroid_type_stable()</code>).<br>
+Further extend the function by creating a version (e.g., called <code>poly_centroid_sf()</code>) that is type stable (only accepts inputs of class <code>sf</code>) <em>and</em> returns <code>sf</code> objects (hint: you may need to convert the object <code>x</code> into a matrix with the command <code>sf::st_coordinates(x)</code>).</p>
 <ul>
-<li>Verify it works by running
-<code>poly_centroid_sf(sf::st_sf(sf::st_sfc(poly_sfc)))</code></li>
-<li>What error message do you get when you try to run
-<code>poly_centroid_sf(poly_mat)</code>?</li>
+<li>Verify it works by running <code>poly_centroid_sf(sf::st_sf(sf::st_sfc(poly_sfc)))</code></li>
+<li>What error message do you get when you try to run <code>poly_centroid_sf(poly_mat)</code>?</li>
 </ul>
-<aside id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>
-之前的步骤可以用注释或者if语句来指出，比如<code>if (!exists("x")) source("x.R")</code>（如果对象<code>x</code>不存在，则会运行脚本文件<code>x.R</code>）。<a
-href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li
-id="fn2"><p>可以用以下公式（该公式假设底边是水平的）来验证结果：面积是底边宽度与高度乘积的一半，<span
-class="math inline">\(A = B * H / 2\)</span>。在这种情况下 <span
-class="math inline">\(10 * 10 / 2 = 50\)</span>。<a href="#fnref2"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>有关文档，请参见
-<code>?lapply</code>，更多关于迭代的信息，请参见第@ref(location)章。<a
-href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>事实上，CGAL函数 <code>CGAL::centroid()</code>
-是由7个子函数组成的，如https://doc.cgal.org/latest/Kernel_23/group__centroid__grp.html
-所描述，使其能够适用于多种类型的输入数据，而我们创建的解决方案仅适用于一种非常特定的输入数据类型。GEOS
-函数 <code>Centroid::getCentroid()</code> 的底层源代码可以在
-https://github.com/libgeos/geos/search?q=getCentroid 上找到。<a
-href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>你也可以通过在函数主体中添加 <code>return(output)</code>
-明确设置函数的输出，其中 <code>output</code> 是要返回的结果。<a
-href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>注意，我们创建的函数在 <code>lapply()</code>和
-<code>vapply()</code> 函数调用中被迭代地调用。<a href="#fnref6"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><br>
+之前的步骤可以用注释或者if语句来指出，比如<code>if (!exists(&quot;x&quot;)) source(&quot;x.R&quot;)</code>（如果对象<code>x</code>不存在，则会运行脚本文件<code>x.R</code>）。<br>
+ <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>可以用以下公式（该公式假设底边是水平的）来验证结果：面积是底边宽度与高度乘积的一半，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>=</mo><mi>B</mi><mo>∗</mo><mi>H</mi><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">A = B * H / 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord">/</span><span class="mord">2</span></span></span></span>。在这种情况下 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mo>∗</mo><mn>10</mn><mi mathvariant="normal">/</mi><mn>2</mn><mo>=</mo><mn>50</mn></mrow><annotation encoding="application/x-tex">10 * 10 / 2 = 50</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">/</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span><span class="mord">0</span></span></span></span>。 <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>有关文档，请参见 <code>?lapply</code>，更多关于迭代的信息，请参见第@ref(location)章。 <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p>事实上，CGAL函数 <code>CGAL::centroid()</code> 是由7个子函数组成的，如<a target="_blank" rel="external nofollow noopener noreferrer" href="https://doc.cgal.org/latest/Kernel_23/group__centroid__grp.html">https://doc.cgal.org/latest/Kernel_23/group__centroid__grp.html</a> 所描述，使其能够适用于多种类型的输入数据，而我们创建的解决方案仅适用于一种非常特定的输入数据类型。GEOS 函数 <code>Centroid::getCentroid()</code> 的底层源代码可以在 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/libgeos/geos/search?q=getCentroid">https://github.com/libgeos/geos/search?q=getCentroid</a> 上找到。 <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn5" class="footnote-item"><p>你也可以通过在函数主体中添加 <code>return(output)</code> 明确设置函数的输出，其中 <code>output</code> 是要返回的结果。 <a href="#fnref5" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn6" class="footnote-item"><p>注意，我们创建的函数在 <code>lapply()</code>和 <code>vapply()</code> 函数调用中被迭代地调用。 <a href="#fnref6" class="footnote-backref">↩︎</a></p>
+</li>
 </ol>
-</aside>
+</section>
 
         </div>
 
@@ -669,7 +511,7 @@ class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 
             
   <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
-    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+    <a class="a2a_dd" target="_blank" rel="external nofollow noopener noreferrer" href="https://www.addtoany.com/share"></a>
       <a class="a2a_button_facebook"></a>
       <a class="a2a_button_twitter"></a>
   </div>
@@ -712,7 +554,7 @@ class="footnote-back" role="doc-backlink">↩︎</a></p></li>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">9:42</span>
+    <span title="站点阅读时长">9:43</span>
   </span>
 </div>
 <div class="busuanzi-count">

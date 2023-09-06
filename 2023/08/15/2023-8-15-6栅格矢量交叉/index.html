@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.20/fancybox/fancybox.css" integrity="sha256-RvRHGSuWAxZpXKV9lLDt2e+rZ+btzn48Wp4ueS3NZKs=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"ancao96.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"0SOKPRESAA","apiKey":"f7b6d6953f3de5baf0bc4ab9917765b7","indexName":"search scyspace","hits":{"per_page":10}},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true,"path":"search.xml","field":"post","content":true,"format":"html"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ancao96.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BFJCK79VF9","apiKey":"613fe5e83863193288c6ef2ab02cefad","indexName":"hexo","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="本章专注于栅格和矢量地理数据模型之间的相互作用。包括四个主要技术：使用矢量对象进行栅格裁剪和遮罩；使用不同类型的矢量数据提取栅格值；以及栅格与矢量之间的转换。以上概念使用前几章中使用的数据进行演示，以了解其潜在的现实应用。">
 <meta property="og:type" content="article">
@@ -66,7 +66,7 @@
     <noscript>
       <link rel="stylesheet" href="/css/noscript.css">
     </noscript>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.0.0/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.0.0/style.css">
     <style>
       body,div.post-body,h1,h2,h3,h4 {
         font-family: "LXGW WenKai LITE", sans-serif;
@@ -153,14 +153,13 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%85%E6%A0%BC%E8%A3%81%E5%89%AA"><span class="nav-number">2.</span> <span class="nav-text">栅格裁剪</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%85%E6%A0%BC%E6%8F%90%E5%8F%96"><span class="nav-number">2.1.</span> <span class="nav-text">栅格提取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%85%E6%A0%BC%E5%8C%96"><span class="nav-number">2.2.</span> <span class="nav-text">栅格化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E7%9F%A2%E9%87%8F%E5%8C%96"><span class="nav-number">2.3.</span> <span class="nav-text">空间矢量化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">2.4.</span> <span class="nav-text">练习</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text"> 前提条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text"> 引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%85%E6%A0%BC%E8%A3%81%E5%89%AA"><span class="nav-number">3.</span> <span class="nav-text"> 栅格裁剪</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%85%E6%A0%BC%E6%8F%90%E5%8F%96"><span class="nav-number">3.1.</span> <span class="nav-text"> 栅格提取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%85%E6%A0%BC%E5%8C%96"><span class="nav-number">3.2.</span> <span class="nav-text"> 栅格化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E7%9F%A2%E9%87%8F%E5%8C%96"><span class="nav-number">3.3.</span> <span class="nav-text"> 空间矢量化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">3.4.</span> <span class="nav-text"> 练习</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="SCY"
-      src="/images/avatar.gif">
+    <img class="site-author-image" itemprop="image" alt="SCY" src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">SCY</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -186,10 +185,10 @@
 </div>
   <div class="links-of-author animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/AnCao96" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AnCao96" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+        <a href="https://github.com/AnCao96" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AnCao96" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i></a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:ancao.cugb@gmail.com" title="E-Mail → mailto:ancao.cugb@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+        <a href="mailto:ancao.cugb@gmail.com" title="E-Mail → mailto:ancao.cugb@gmail.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
       </span>
   </div>
 
@@ -224,12 +223,12 @@
 
         <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
             <meta itemprop="name" content="SCY SPACE">
-            <meta itemprop="description" content="">
+            <meta itemprop="description" content>
         </span>
 
         <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
             <meta itemprop="name" content="(6)栅格矢量交叉 | SCY SPACE">
-            <meta itemprop="description" content="">
+            <meta itemprop="description" content>
         </span>
         <header class="post-header">
             <h1 class="post-title" itemprop="name headline">
@@ -312,75 +311,56 @@
         
         
         
-        <div class="post-body" itemprop="articleBody"><p>本章专注于栅格和矢量地理数据模型之间的相互作用。包括四个主要技术：使用矢量对象进行栅格裁剪和遮罩；使用不同类型的矢量数据提取栅格值；以及栅格与矢量之间的转换。以上概念使用前几章中使用的数据进行演示，以了解其潜在的现实应用。
-<span id="more"></span> # 前提条件</p>
+        <div class="post-body" itemprop="articleBody"><p>本章专注于栅格和矢量地理数据模型之间的相互作用。包括四个主要技术：使用矢量对象进行栅格裁剪和遮罩；使用不同类型的矢量数据提取栅格值；以及栅格与矢量之间的转换。以上概念使用前几章中使用的数据进行演示，以了解其潜在的现实应用。</p>
+<span id="more"></span>
+<h1 id="前提条件"><a class="markdownIt-Anchor" href="#前提条件"></a> 前提条件</h1>
 <ul>
 <li>本章要求下列包：</li>
 </ul>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>sf<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>terra<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>dplyr<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<h1 id="引言">引言</h1>
+<h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
 <p>本章专注于栅格和矢量地理数据模型之间的相互作用。包括四个主要技术：使用矢量对象进行栅格裁剪和遮罩；使用不同类型的矢量数据提取栅格值；以及栅格与矢量之间的转换。以上概念使用前几章中使用的数据进行演示，以了解其潜在的现实应用。</p>
-<h1 id="栅格裁剪">栅格裁剪</h1>
+<h1 id="栅格裁剪"><a class="markdownIt-Anchor" href="#栅格裁剪"></a> 栅格裁剪</h1>
 <p>许多地理数据项目涉及从许多不同来源整合数据，例如遥感图像（栅格）和行政边界（矢量）。通常，输入栅格数据集的范围大于感兴趣的区域。在这种情况下，栅格<strong>裁剪</strong>和<strong>掩膜</strong>对于统一输入数据的空间范围非常有用。这两个操作减少了对象的内存使用和后续分析步骤的相关计算资源，而且是创建涉及栅格数据地图之前必要的预处理步骤。</p>
 <p>我们将使用两个对象来说明栅格裁剪：</p>
 <ul>
 <li>一个代表犹他州西南部海拔高度（海平面以上米数）的<code>SpatRaster</code>对象<code>srtm</code></li>
-<li>一个代表锡安国家公园的矢量（<code>sf</code>）对象
-<code>zion</code></li>
+<li>一个代表锡安国家公园的矢量（<code>sf</code>）对象 <code>zion</code></li>
 </ul>
-<p>目标对象和裁剪对象必须具有相同的投影。因此，下面的代码块不仅从<strong>spDataLarge</strong>包中读取了章节@ref(spatial-class)
-中安装的数据集，还对<code>zion</code>进行了“重投影”。</p>
+<p>目标对象和裁剪对象必须具有相同的投影。因此，下面的代码块不仅从<strong>spDataLarge</strong>包中读取了章节@ref(spatial-class) 中安装的数据集，还对<code>zion</code>进行了“重投影”。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">srtm <span class="operator">=</span> rast<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;raster/srtm.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">zion <span class="operator">=</span> read_sf<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;vector/zion.gpkg&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">zion <span class="operator">=</span> st_transform<span class="punctuation">(</span>zion<span class="punctuation">,</span> crs<span class="punctuation">(</span>srtm<span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <p>我们使用<strong>terra</strong>包的<code>crop()</code>函数来裁剪<code>srtm</code>栅格。该函数根据传递给其第二个参数的对象的范围减小传递给其第一个参数的对象的矩形范围。下面的命令演示了这个功能，生成了图：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srtm_cropped <span class="operator">=</span> crop<span class="punctuation">(</span>srtm<span class="punctuation">,</span> zion<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <p>与<code>crop()</code>相关的是<strong>terra</strong>函数<code>mask()</code>，它将传递给第二个参数的对象范围之外的值设置为<code>NA</code>。因此，以下命令会掩膜锡安国家公园边界以外的每一个单元格：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srtm_masked <span class="operator">=</span> mask<span class="punctuation">(</span>srtm<span class="punctuation">,</span> zion<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>重要的是，在大多数情况下，我们想要同时使用<code>crop()</code>和<code>mask()</code>
-这两个函数。这组函数的组合将(a)将栅格的范围限制在我们感兴趣的区域内，然后
-(b) 将该区域外的所有值替换为NA。</p>
+<p>重要的是，在大多数情况下，我们想要同时使用<code>crop()</code>和<code>mask()</code> 这两个函数。这组函数的组合将(a)将栅格的范围限制在我们感兴趣的区域内，然后 (b) 将该区域外的所有值替换为NA。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">srtm_cropped <span class="operator">=</span> crop<span class="punctuation">(</span>srtm<span class="punctuation">,</span> zion<span class="punctuation">)</span></span><br><span class="line">srtm_final <span class="operator">=</span> mask<span class="punctuation">(</span>srtm_cropped<span class="punctuation">,</span> zion<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>更改<code>mask()</code>的设置会产生不同的结果。设置<code>inverse = TRUE</code>将会屏蔽公园范围<em>内</em>的所有内容（详见<code>?mask</code>），而设置
-<code>updatevalue = 0</code> 将会将国家公园外的所有像素设置为0。</p>
+<p>更改<code>mask()</code>的设置会产生不同的结果。设置<code>inverse = TRUE</code>将会屏蔽公园范围<em>内</em>的所有内容（详见<code>?mask</code>），而设置 <code>updatevalue = 0</code> 将会将国家公园外的所有像素设置为0。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srtm_inv_masked <span class="operator">=</span> mask<span class="punctuation">(</span>srtm<span class="punctuation">,</span> zion<span class="punctuation">,</span> inverse <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#&gt; The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,</span><br><span class="line">#&gt; which was just loaded, will retire in October 2023.</span><br><span class="line">#&gt; Please refer to R-spatial evolution reports for details, especially</span><br><span class="line">#&gt; https://r-spatial.org/r/2023/05/15/evolution4.html.</span><br><span class="line">#&gt; It may be desirable to make the sf package available;</span><br><span class="line">#&gt; package maintainers should consider adding sf to Suggests:.</span><br><span class="line">#&gt; The sp package is now running under evolution status 2</span><br><span class="line">#&gt;      (status 2 uses the sf package in place of rgdal)</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309030016800.png" />
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309030016800.png" alt><br>
 Illustration of raster cropping and raster masking.</p>
-<h2 id="栅格提取">栅格提取</h2>
-<p>
-栅格提取是识别并返回基于（通常是矢量）地理“选择器”对象在特定位置的“目标”栅格关联的值的过程。结果取决于所使用的选择器的类型（点、线或多边形）以及传递给<code>terra::extract()</code>函数的参数。栅格提取的反向过程
---- 基于矢量对象分配栅格单元格值 --- 是<em>栅格化</em>，详见
-@ref(rasterization) 部分。</p>
-<p>
-基本示例是在特定<strong>点</strong>处提取栅格单元格的值。为此，我们将使用
-<code>zion_points</code>，其中包含锡安国家公园内的30个位置样本（见图
-@ref(fig:pointextr)）。以下命令从<code>srtm</code>中提取高程值，并创建一个包含点的ID（每个矢量的一行一个值）和每个点的相关<code>srtm</code>值的数据框。现在，我们可以使用<code>cbind()</code>函数将结果对象添加到我们的<code>zion_points</code>数据集中：</p>
+<h2 id="栅格提取"><a class="markdownIt-Anchor" href="#栅格提取"></a> 栅格提取</h2>
+<p>\index{raster extraction}  栅格提取是识别并返回基于（通常是矢量）地理“选择器”对象在特定位置的“目标”栅格关联的值的过程。结果取决于所使用的选择器的类型（点、线或多边形）以及传递给<code>terra::extract()</code>函数的参数。栅格提取的反向过程 — 基于矢量对象分配栅格单元格值 — 是<em>栅格化</em>，详见 @ref(rasterization) 部分。</p>
+<p>\index{raster extraction!points}  基本示例是在特定<strong>点</strong>处提取栅格单元格的值。为此，我们将使用 <code>zion_points</code>，其中包含锡安国家公园内的30个位置样本（见图 @ref(fig:pointextr)）。以下命令从<code>srtm</code>中提取高程值，并创建一个包含点的ID（每个矢量的一行一个值）和每个点的相关<code>srtm</code>值的数据框。现在，我们可以使用<code>cbind()</code>函数将结果对象添加到我们的<code>zion_points</code>数据集中：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data<span class="punctuation">(</span><span class="string">&quot;zion_points&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span></span><br><span class="line">elevation <span class="operator">=</span> terra<span class="operator">::</span>extract<span class="punctuation">(</span>srtm<span class="punctuation">,</span> zion_points<span class="punctuation">)</span></span><br><span class="line">zion_points <span class="operator">=</span> cbind<span class="punctuation">(</span>zion_points<span class="punctuation">,</span> elevation<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <div class="figure" style="text-align: center">
-<img data-src="06-raster-vector_files/figure-html/pointextr-1.png" alt="Locations of points used for raster extraction." width="100%" />
-<p class="caption">
-(#fig:pointextr)Locations of points used for raster extraction.
-</p>
+<img data-src="06-raster-vector_files/figure-html/pointextr-1.png" alt="Locations of points used for raster extraction." width="100%">
+<p class="caption">(\#fig:pointextr)Locations of points used for raster extraction.</p>
 </div>
-<p>
-栅格提取也适用于<strong>线</strong>选择器。提取线所接触的每个栅格单元格的一个值。然而，线提取方法不推荐用于沿截面获取值，因为很难获得每一对提取的栅格值之间的正确距离。</p>
-<p>在这种情况下，更好的方法是将线分割成许多点，然后为这些点提取值。为了演示这一点，下面的代码创建了
-<code>zion_transect</code>，一条从锡安国家公园的西北部到东南部的直线，如图
-@ref(fig:lineextr)(A)所示（有关矢量数据模型的回顾，请参见
-@ref(vector-data) 部分）：</p>
+<p>\index{raster extraction!lines}  栅格提取也适用于<strong>线</strong>选择器。提取线所接触的每个栅格单元格的一个值。然而，线提取方法不推荐用于沿截面获取值，因为很难获得每一对提取的栅格值之间的正确距离。</p>
+<p>在这种情况下，更好的方法是将线分割成许多点，然后为这些点提取值。为了演示这一点，下面的代码创建了 <code>zion_transect</code>，一条从锡安国家公园的西北部到东南部的直线，如图 @ref(fig:lineextr)(A)所示（有关矢量数据模型的回顾，请参见 @ref(vector-data) 部分）：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">zion_transect <span class="operator">=</span> cbind<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="operator">-</span><span class="number">113.2</span><span class="punctuation">,</span> <span class="operator">-</span><span class="number">112.9</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">37.45</span><span class="punctuation">,</span> <span class="number">37.2</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  st_linestring<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  st_sfc<span class="punctuation">(</span>crs <span class="operator">=</span> crs<span class="punctuation">(</span>srtm<span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  st_sf<span class="punctuation">(</span>geometry <span class="operator">=</span> _<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <p>规划徒步旅行时，从线性选择器中提取高度的实用性可见一斑。下面演示的方法提供了路线的“海拔剖面图”（线不需要是直的），这对于估计由于长时间攀爬而需要的时间非常有用。</p>
-<p>第一步是为每个截面添加唯一的 <code>id</code>。接下来，我们可以使用
-<code>st_segmentize()</code>函数在我们的线（或线）上用提供的密度（<code>dfMaxLength</code>）添加点，并使用
-<code>st_cast()</code> 将它们转换为点。</p>
+<p>第一步是为每个截面添加唯一的 <code>id</code>。接下来，我们可以使用 <code>st_segmentize()</code>函数在我们的线（或线）上用提供的密度（<code>dfMaxLength</code>）添加点，并使用 <code>st_cast()</code> 将它们转换为点。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zion_transect<span class="operator">$</span>id <span class="operator">=</span> <span class="number">1</span><span class="operator">:</span>nrow<span class="punctuation">(</span>zion_transect<span class="punctuation">)</span></span><br><span class="line">zion_transect <span class="operator">=</span> st_segmentize<span class="punctuation">(</span>zion_transect<span class="punctuation">,</span> dfMaxLength <span class="operator">=</span> <span class="number">250</span><span class="punctuation">)</span></span><br><span class="line">zion_transect <span class="operator">=</span> st_cast<span class="punctuation">(</span>zion_transect<span class="punctuation">,</span> <span class="string">&quot;POINT&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <p>现在，我们有了一大组点，我们想要推导出我们的截面中第一个点与后续各点之间的距离。在这种情况下，我们只有一个截面，但原则上，代码应该适用于任何数量的截面：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zion_transect <span class="operator">=</span> zion_transect <span class="operator">|&gt;</span> </span><br><span class="line">  group_by<span class="punctuation">(</span>id<span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  mutate<span class="punctuation">(</span>dist <span class="operator">=</span> st_distance<span class="punctuation">(</span>geometry<span class="punctuation">)</span><span class="punctuation">[</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span><span class="punctuation">)</span> </span><br></pre></td></tr></table></figure>
 <p>最后，我们可以提取截面中每个点的高程值，并将此信息与我们的主要对象结合起来。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zion_elev <span class="operator">=</span> terra<span class="operator">::</span>extract<span class="punctuation">(</span>srtm<span class="punctuation">,</span> zion_transect<span class="punctuation">)</span></span><br><span class="line">zion_transect <span class="operator">=</span> cbind<span class="punctuation">(</span>zion_transect<span class="punctuation">,</span> zion_elev<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <p>所得到的<code>zion_transect</code>可以用来创建高程剖面图，如图所示。</p>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031415868.png" />
-Location of a line used for raster extraction (left) and the elevation
-along this line (right).</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031415868.png" alt><br>
+Location of a line used for raster extraction (left) and the elevation along this line (right).</p>
 <p>栅格提取的最后一种地理矢量对象是<strong>多边形</strong>。与线条一样，多边形每个多边形倾向于返回许多栅格值。以下命令演示了这一点，其结果是一个数据框，列名为<code>ID</code>（多边形的行号）和<code>srtm</code>（相关的海拔值）：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zion_srtm_values <span class="operator">=</span> terra<span class="operator">::</span>extract<span class="punctuation">(</span>x <span class="operator">=</span> srtm<span class="punctuation">,</span> y <span class="operator">=</span> zion<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <p>这样的结果可以用来生成每个多边形的栅格值的汇总统计信息，例如用来描述单个区域或比较多个区域。下面的代码展示了这一点，它创建了对象<code>zion_srtm_df</code>，包含锡安国家公园内的海拔值的汇总统计信息：</p>
@@ -388,42 +368,30 @@ along this line (right).</p>
 <p>前述代码段使用了<strong>dplyr</strong>来提供每个多边形ID的单元格值的汇总统计信息。结果提供了有用的总结，例如公园内的最大高度约为海拔2661米（也可以用这种方式计算其他汇总统计信息，如标准差）。因为示例中只有一个多边形，所以返回了一个单行的数据框；然而，当使用多个选择多边形时，该方法同样适用。</p>
 <p>相似的方法适用于在多边形内计数分类栅格值的出现次数。这通过一个土地覆盖数据集（<code>nlcd</code>）在上图中进行说明，并在下面的代码中演示：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">nlcd <span class="operator">=</span> rast<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;raster/nlcd.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">zion2 <span class="operator">=</span> st_transform<span class="punctuation">(</span>zion<span class="punctuation">,</span> st_crs<span class="punctuation">(</span>nlcd<span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">zion_nlcd <span class="operator">=</span> terra<span class="operator">::</span>extract<span class="punctuation">(</span>nlcd<span class="punctuation">,</span> zion2<span class="punctuation">)</span></span><br><span class="line">zion_nlcd <span class="operator">|&gt;</span> </span><br><span class="line">  group_by<span class="punctuation">(</span>ID<span class="punctuation">,</span> levels<span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  count<span class="punctuation">(</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; # A tibble: 7 × 3</span></span><br><span class="line"><span class="comment">#&gt; # Groups:   ID, levels [7]</span></span><br><span class="line"><span class="comment">#&gt;      ID levels         n</span></span><br><span class="line"><span class="comment">#&gt;   &lt;dbl&gt; &lt;fct&gt;      &lt;int&gt;</span></span><br><span class="line"><span class="comment">#&gt; 1     1 Developed   4205</span></span><br><span class="line"><span class="comment">#&gt; 2     1 Barren     98285</span></span><br><span class="line"><span class="comment">#&gt; 3     1 Forest    298299</span></span><br><span class="line"><span class="comment">#&gt; 4     1 Shrubland 203701</span></span><br><span class="line"><span class="comment">#&gt; # ℹ 3 more rows</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031417001.png" />
-Area used for continuous (left) and categorical (right) raster
-extraction.</p>
-<p>尽管<strong>terra</strong>包提供了在多边形内快速提取栅格值的功能，<code>extract()</code>在处理大型多边形数据集时仍可能成为瓶颈。<strong>exactextractr</strong>包通过<code>exact_extract()</code>函数提供了一个<a
-target="_blank" rel="noopener" href="https://github.com/geocompx/geocompr/issues/813">明显更快的替代方案</a>用于提取像素值。<code>exact_extract()</code>函数还默认计算了每个栅格单元被多边形重叠的部分，这更为精确（有关详细信息，请参见下面的注释）。</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031417001.png" alt><br>
+Area used for continuous (left) and categorical (right) raster extraction.</p>
+<p>尽管<strong>terra</strong>包提供了在多边形内快速提取栅格值的功能，<code>extract()</code>在处理大型多边形数据集时仍可能成为瓶颈。<strong>exactextractr</strong>包通过<code>exact_extract()</code>函数提供了一个<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/geocompx/geocompr/issues/813">明显更快的替代方案</a>用于提取像素值。<code>exact_extract()</code>函数还默认计算了每个栅格单元被多边形重叠的部分，这更为精确（有关详细信息，请参见下面的注释）。</p>
 <blockquote>
-<p>📌多边形通常具有不规则的形状，因此，多边形可能只与栅格的某些部分重叠。
-为了获得更详细的结果，<code>terra::extract()</code> 函数有一个叫做
-<code>exact</code> 的参数。 通过设置
-<code>exact = TRUE</code>，我们在输出的数据框中多得到一列<code>fraction</code>，代表每个单元格被多边形覆盖的部分。
-这可以用于计算例如连续栅格的加权平均值或者分类栅格的更精确覆盖率。
-默认情况下，它的值为 <code>FALSE</code>，因为这个操作需要更多的计算。
-<code>exactextractr::exact_extract()</code>
-函数始终计算多边形在每个单元格中的覆盖部分。</p>
+<p>📌多边形通常具有不规则的形状，因此，多边形可能只与栅格的某些部分重叠。<br>
+为了获得更详细的结果，<code>terra::extract()</code> 函数有一个叫做 <code>exact</code> 的参数。<br>
+通过设置 <code>exact = TRUE</code>，我们在输出的数据框中多得到一列<code>fraction</code>，代表每个单元格被多边形覆盖的部分。<br>
+这可以用于计算例如连续栅格的加权平均值或者分类栅格的更精确覆盖率。<br>
+默认情况下，它的值为 <code>FALSE</code>，因为这个操作需要更多的计算。<br>
+<code>exactextractr::exact_extract()</code> 函数始终计算多边形在每个单元格中的覆盖部分。</p>
 </blockquote>
-<h2 id="栅格化">栅格化</h2>
+<h2 id="栅格化"><a class="markdownIt-Anchor" href="#栅格化"></a> 栅格化</h2>
 <p>栅格化是将矢量对象转换为栅格对象表示的过程。通常，输出栅格随后用于定量分析（例如，地形分析）或建模。栅格数据模型具有一些特性，使其有助于某些方法。此外，栅格化过程可以帮助简化数据集，因为所得的值都具有相同的空间分辨率：栅格化可以看作是地理数据聚合的一种特殊类型。</p>
-<p><strong>terra</strong> 包中包含了用于执行此工作的
-<code>rasterize()</code> 函数。其前两个参数是
-<code>x</code>（要栅格化的矢量对象）和<code>y</code>（定义输出范围、分辨率和坐标参考系统的“模板栅格”对象）。输入栅格的地理分辨率对结果有重大影响：如果分辨率过低（单元格大小过大），结果可能会错过矢量数据的全部地理变化；如果分辨率过高，则计算时间可能过长。在决定适当的地理分辨率时没有简单的规则可遵循，这在很大程度上取决于结果的预期用途。例如，当栅格化的输出需要与某些其他现有栅格对齐时，目标分辨率通常由用户决定。</p>
+<p><strong>terra</strong> 包中包含了用于执行此工作的 <code>rasterize()</code> 函数。其前两个参数是 <code>x</code>（要栅格化的矢量对象）和<code>y</code>（定义输出范围、分辨率和坐标参考系统的“模板栅格”对象）。输入栅格的地理分辨率对结果有重大影响：如果分辨率过低（单元格大小过大），结果可能会错过矢量数据的全部地理变化；如果分辨率过高，则计算时间可能过长。在决定适当的地理分辨率时没有简单的规则可遵循，这在很大程度上取决于结果的预期用途。例如，当栅格化的输出需要与某些其他现有栅格对齐时，目标分辨率通常由用户决定。</p>
 <p>为了演示栅格化的实际效果，我们将使用一个模板栅格，其范围和坐标参考系统与输入矢量数据<code>cycle_hire_osm_projected</code>相同，并且空间分辨率为1000米：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cycle_hire_osm <span class="operator">=</span> spData<span class="operator">::</span>cycle_hire_osm</span><br><span class="line">cycle_hire_osm_projected <span class="operator">=</span> st_transform<span class="punctuation">(</span>cycle_hire_osm<span class="punctuation">,</span> <span class="string">&quot;EPSG:27700&quot;</span><span class="punctuation">)</span></span><br><span class="line">raster_template <span class="operator">=</span> rast<span class="punctuation">(</span>ext<span class="punctuation">(</span>cycle_hire_osm_projected<span class="punctuation">)</span><span class="punctuation">,</span> resolution <span class="operator">=</span> <span class="number">1000</span><span class="punctuation">,</span></span><br><span class="line">                       crs <span class="operator">=</span> st_crs<span class="punctuation">(</span>cycle_hire_osm_projected<span class="punctuation">)</span><span class="operator">$</span>wkt<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>栅格化是一项非常灵活的操作：结果不仅取决于模板栅格的性质，还取决于输入矢量的类型（例如，点、多边形）以及
-<code>rasterize()</code> 函数所采用的各种参数。</p>
-<p>为了说明这种灵活性，我们将尝试三种不同的栅格化方法。首先，我们创建一个表示自行车租赁点存在或不存在的栅格（称为存在/不存在栅格）。在这种情况下，<code>rasterize()</code>
-除了上述的矢量和栅格对象 <code>x</code> 和 <code>y</code>
-之外，不需要任何参数。</p>
+<p>栅格化是一项非常灵活的操作：结果不仅取决于模板栅格的性质，还取决于输入矢量的类型（例如，点、多边形）以及 <code>rasterize()</code> 函数所采用的各种参数。</p>
+<p>为了说明这种灵活性，我们将尝试三种不同的栅格化方法。首先，我们创建一个表示自行车租赁点存在或不存在的栅格（称为存在/不存在栅格）。在这种情况下，<code>rasterize()</code> 除了上述的矢量和栅格对象 <code>x</code> 和 <code>y</code> 之外，不需要任何参数。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ch_raster1 <span class="operator">=</span> rasterize<span class="punctuation">(</span>cycle_hire_osm_projected<span class="punctuation">,</span> raster_template<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p><code>fun</code>参数用于指定将紧密相邻的多个观测值转换为栅格对象中的关联单元格所使用的汇总统计信息。默认情况下使用
-<code>fun = "last"</code>，但也可以使用其他选项，例如
-<code>fun = "length"</code>，在这种情况下，用于计算每个网格单元格中自行车租赁点的数量。</p>
+<p><code>fun</code>参数用于指定将紧密相邻的多个观测值转换为栅格对象中的关联单元格所使用的汇总统计信息。默认情况下使用 <code>fun = &quot;last&quot;</code>，但也可以使用其他选项，例如 <code>fun = &quot;length&quot;</code>，在这种情况下，用于计算每个网格单元格中自行车租赁点的数量。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ch_raster2 <span class="operator">=</span> rasterize<span class="punctuation">(</span>cycle_hire_osm_projected<span class="punctuation">,</span> raster_template<span class="punctuation">,</span> </span><br><span class="line">                       fun <span class="operator">=</span> <span class="string">&quot;length&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>新的输出结果，<code>ch_raster2</code>，展示了每个网格单元中的自行车租赁点数量。自行车租赁地点拥有不同数量的自行车，由<code>capacity</code>变量描述，这引发了一个问题：每个网格单元的容量是多少？为了计算这个值，我们必须对字段（<code>"capacity"</code>）进行求和，从而得到图所示的输出结果（也可以使用其他汇总函数，例如
-<code>mean</code>）。</p>
+<p>新的输出结果，<code>ch_raster2</code>，展示了每个网格单元中的自行车租赁点数量。自行车租赁地点拥有不同数量的自行车，由<code>capacity</code>变量描述，这引发了一个问题：每个网格单元的容量是多少？为了计算这个值，我们必须对字段（<code>&quot;capacity&quot;</code>）进行求和，从而得到图所示的输出结果（也可以使用其他汇总函数，例如 <code>mean</code>）。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ch_raster3 <span class="operator">=</span> rasterize<span class="punctuation">(</span>cycle_hire_osm_projected<span class="punctuation">,</span> raster_template<span class="punctuation">,</span> </span><br><span class="line">                       field <span class="operator">=</span> <span class="string">&quot;capacity&quot;</span><span class="punctuation">,</span> fun <span class="operator">=</span> <span class="built_in">sum</span><span class="punctuation">,</span> na.rm <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031421627.png" />
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031421627.png" alt><br>
 Examples of point rasterization.</p>
 <p>另一个基于加利福尼亚州的多边形和边界的数据集（如下所示）用于说明线的栅格化。在将多边形对象转换为多段线后，创建了一个具有0.5度分辨率的模板栅格。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">california <span class="operator">=</span> dplyr<span class="operator">::</span>filter<span class="punctuation">(</span>us_states<span class="punctuation">,</span> NAME <span class="operator">==</span> <span class="string">&quot;California&quot;</span><span class="punctuation">)</span></span><br><span class="line">california_borders <span class="operator">=</span> st_cast<span class="punctuation">(</span>california<span class="punctuation">,</span> <span class="string">&quot;MULTILINESTRING&quot;</span><span class="punctuation">)</span></span><br><span class="line">raster_template2 <span class="operator">=</span> rast<span class="punctuation">(</span>ext<span class="punctuation">(</span>california<span class="punctuation">)</span><span class="punctuation">,</span> resolution <span class="operator">=</span> <span class="number">0.5</span><span class="punctuation">,</span></span><br><span class="line">                        crs <span class="operator">=</span> st_crs<span class="punctuation">(</span>california<span class="punctuation">)</span><span class="operator">$</span>wkt<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
@@ -431,83 +399,59 @@ Examples of point rasterization.</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">california_raster1 <span class="operator">=</span> rasterize<span class="punctuation">(</span>california_borders<span class="punctuation">,</span> raster_template2<span class="punctuation">,</span></span><br><span class="line">                               touches <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <p>与多边形栅格化相比，默认情况下<code>touches = FALSE</code>，只选择其质心在选择多边形内的栅格单元格，如图所示。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">california_raster2 <span class="operator">=</span> rasterize<span class="punctuation">(</span>california<span class="punctuation">,</span> raster_template2<span class="punctuation">)</span> </span><br></pre></td></tr></table></figure>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031422308.png" />
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031422308.png" alt><br>
 Examples of line and polygon rasterizations.</p>
-<h2 id="空间矢量化">空间矢量化</h2>
+<h2 id="空间矢量化"><a class="markdownIt-Anchor" href="#空间矢量化"></a> 空间矢量化</h2>
 <p>空间矢量化是栅格化的对应部分，但方向相反。它涉及将空间连续的栅格数据转换为空间离散的矢量数据，例如点、线或多边形。</p>
 <blockquote>
-<p>📌确实，我们应当小心措辞以避免混淆！
+<p>📌确实，我们应当小心措辞以避免混淆！<br>
 在R语言中，矢量化通常指的是通过类似<code>1:10/2</code>这样的操作来替代<code>for</code>循环等结构的可能性（详见@wickham_advanced_2019）。所以，当谈到将栅格数据转换为矢量数据时，我们应避免使用“矢量化”一词，以免与R中的这一特定概念混淆。</p>
 </blockquote>
 <p>矢量化的最简单形式是将栅格单元格的中心点转换为点。<code>as.points()</code>正是针对所有非<code>NA</code>的栅格网格单元格进行此操作。注意，这里我们还使用了<code>st_as_sf()</code>来将结果对象转换为<code>sf</code>类。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">elev <span class="operator">=</span> rast<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;raster/elev.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spData&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">elev_point <span class="operator">=</span> as.points<span class="punctuation">(</span>elev<span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  st_as_sf<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031426621.png" />
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031426621.png" alt><br>
 Raster and point representation of the elev object.</p>
-<p>另一种常见的空间矢量化类型是创建代表连续高度或温度（例如等温线）的等高线。我们将使用现实世界的数字高程模型（DEM），因为人造栅格<code>elev</code>会产生平行线（读者的任务：验证并解释为什么会发生这种情况）。可以使用
-<strong>terra</strong> 函数
-<code>as.contour()</code>创建等高线，该函数本身是R内置函数<code>filled.contour()</code>的封装，如下所示（未显示）：</p>
+<p>另一种常见的空间矢量化类型是创建代表连续高度或温度（例如等温线）的等高线。我们将使用现实世界的数字高程模型（DEM），因为人造栅格<code>elev</code>会产生平行线（读者的任务：验证并解释为什么会发生这种情况）。可以使用 <strong>terra</strong> 函数 <code>as.contour()</code>创建等高线，该函数本身是R内置函数<code>filled.contour()</code>的封装，如下所示（未显示）：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dem <span class="operator">=</span> rast<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;raster/dem.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">cl <span class="operator">=</span> as.contour<span class="punctuation">(</span>dem<span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  st_as_sf<span class="punctuation">(</span><span class="punctuation">)</span></span><br><span class="line">plot<span class="punctuation">(</span>dem<span class="punctuation">,</span> axes <span class="operator">=</span> <span class="literal">FALSE</span><span class="punctuation">)</span></span><br><span class="line">plot<span class="punctuation">(</span>cl<span class="punctuation">,</span> add <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <p>等高线也可以通过诸如<code>contour()</code>、<code>rasterVis::contourplot()</code>或<code>tmap::tm_iso()</code>等函数添加到现有的绘图中。如图所示，等值线可以加标签。</p>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031428007.png" />
-DEM with hillshading, showing the southern flank of Mt. Mongón overlaid
-with contour lines.</p>
-<p>最后一种矢量化涉及将栅格转换为多边形。这可以通过
-<code>terra::as.polygons()</code>来完成，该函数将每个栅格单元格转换为由五个坐标组成的多边形，所有这些都存储在内存中（这解释了为什么与矢量相比，栅格通常更快！）。</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031428007.png" alt><br>
+DEM with hillshading, showing the southern flank of Mt. Mongón overlaid with contour lines.</p>
+<p>最后一种矢量化涉及将栅格转换为多边形。这可以通过 <code>terra::as.polygons()</code>来完成，该函数将每个栅格单元格转换为由五个坐标组成的多边形，所有这些都存储在内存中（这解释了为什么与矢量相比，栅格通常更快！）。</p>
 <p>下面通过将<code>grain</code>对象转换为多边形，并随后消除具有相同属性值的多边形之间的边界（还可以参见<code>as.polygons()</code>中的<code>dissolve</code>参数）来进行说明。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grain <span class="operator">=</span> rast<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;raster/grain.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spData&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">grain_poly <span class="operator">=</span> as.polygons<span class="punctuation">(</span>grain<span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  st_as_sf<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031429271.png" />
-Illustration of vectorization of raster (left) into polygons (dissolve =
-FALSE; center) and aggregated polygons (dissolve = TRUE; right).</p>
-<p><code>grain</code>数据集的聚合多边形具有直线边界，这是由于通过连接矩形像素来定义所产生的。<strong>smoothr</strong>包可用于平滑多边形的边缘。由于平滑会消除多边形边界中的锐角，平滑后的多边形将不具有与原始像素完全相同的空间覆盖（有关示例，请参见
-<strong>smoothr</strong><a
-target="_blank" rel="noopener" href="https://strimas.com/smoothr/">website</a>
-）。因此，在使用平滑后的多边形进行进一步分析时应谨慎。</p>
-<h2 id="练习">练习</h2>
-<p>Some of the following exercises use a vector
-(<code>zion_points</code>) and raster dataset (<code>srtm</code>) from
-the <strong>spDataLarge</strong> package. They also use a polygonal
-'convex hull' derived from the vector dataset (<code>ch</code>) to
-represent the area of interest:</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031429271.png" alt><br>
+Illustration of vectorization of raster (left) into polygons (dissolve = FALSE; center) and aggregated polygons (dissolve = TRUE; right).</p>
+<p><code>grain</code>数据集的聚合多边形具有直线边界，这是由于通过连接矩形像素来定义所产生的。<strong>smoothr</strong>包可用于平滑多边形的边缘。由于平滑会消除多边形边界中的锐角，平滑后的多边形将不具有与原始像素完全相同的空间覆盖（有关示例，请参见 <strong>smoothr</strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://strimas.com/smoothr/">website</a> ）。因此，在使用平滑后的多边形进行进一步分析时应谨慎。</p>
+<h2 id="练习"><a class="markdownIt-Anchor" href="#练习"></a> 练习</h2>
+<p>Some of the following exercises use a vector (<code>zion_points</code>) and raster dataset (<code>srtm</code>) from the <strong>spDataLarge</strong> package.<br>
+They also use a polygonal ‘convex hull’ derived from the vector dataset (<code>ch</code>) to represent the area of interest:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>sf<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>terra<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>spData<span class="punctuation">)</span></span><br><span class="line">zion_points_path <span class="operator">=</span> system.file<span class="punctuation">(</span><span class="string">&quot;vector/zion_points.gpkg&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span></span><br><span class="line">zion_points <span class="operator">=</span> read_sf<span class="punctuation">(</span>zion_points_path<span class="punctuation">)</span></span><br><span class="line">srtm <span class="operator">=</span> rast<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;raster/srtm.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">ch <span class="operator">=</span> st_combine<span class="punctuation">(</span>zion_points<span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  st_convex_hull<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  st_as_sf<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>E1. Crop the <code>srtm</code> raster using (1) the
-<code>zion_points</code> dataset and (2) the <code>ch</code> dataset.
-Are there any differences in the output maps? Next, mask
-<code>srtm</code> using these two datasets. Can you see any difference
-now? How can you explain that?</p>
-<p>E2. Firstly, extract values from <code>srtm</code> at the points
-represented in <code>zion_points</code>. Next, extract average values of
-<code>srtm</code> using a 90 buffer around each point from
-<code>zion_points</code> and compare these two sets of values. When
-would extracting values by buffers be more suitable than by points
-alone?</p>
+<p>E1. Crop the <code>srtm</code> raster using (1) the <code>zion_points</code> dataset and (2) the <code>ch</code> dataset.<br>
+Are there any differences in the output maps?<br>
+Next, mask <code>srtm</code> using these two datasets.<br>
+Can you see any difference now?<br>
+How can you explain that?</p>
+<p>E2. Firstly, extract values from <code>srtm</code> at the points represented in <code>zion_points</code>.<br>
+Next, extract average values of <code>srtm</code> using a 90 buffer around each point from <code>zion_points</code> and compare these two sets of values.<br>
+When would extracting values by buffers be more suitable than by points alone?</p>
 <ul>
-<li>Bonus: Implement extraction using the <strong>exactextractr</strong>
-package and compare the results.</li>
+<li>Bonus: Implement extraction using the <strong>exactextractr</strong> package and compare the results.</li>
 </ul>
-<p>E3. Subset points higher than 3100 meters in New Zealand (the
-<code>nz_height</code> object) and create a template raster with a
-resolution of 3 km for the extent of the new point dataset. Using these
-two new objects:</p>
+<p>E3. Subset points higher than 3100 meters in New Zealand (the <code>nz_height</code> object) and create a template raster with a resolution of 3 km for the extent of the new point dataset.<br>
+Using these two new objects:</p>
 <ul>
 <li>Count numbers of the highest points in each grid cell.</li>
 <li>Find the maximum elevation in each grid cell.</li>
 </ul>
-<p>E4. Aggregate the raster counting high points in New Zealand (created
-in the previous exercise), reduce its geographic resolution by half (so
-cells are 6 by 6 km) and plot the result.</p>
+<p>E4. Aggregate the raster counting high points in New Zealand (created in the previous exercise), reduce its geographic resolution by half (so cells are 6 by 6 km) and plot the result.</p>
 <ul>
-<li>Resample the lower resolution raster back to the original resolution
-of 3 km. How have the results changed?</li>
-<li>Name two advantages and disadvantages of reducing raster
-resolution.</li>
+<li>Resample the lower resolution raster back to the original resolution of 3 km. How have the results changed?</li>
+<li>Name two advantages and disadvantages of reducing raster resolution.</li>
 </ul>
-<p>E5. Polygonize the <code>grain</code> dataset and filter all squares
-representing clay.</p>
+<p>E5. Polygonize the <code>grain</code> dataset and filter all squares representing clay.</p>
 <ul>
-<li>Name two advantages and disadvantages of vector data over raster
-data.</li>
-<li>When would it be useful to convert rasters to vectors in your
-work?</li>
+<li>Name two advantages and disadvantages of vector data over raster data.</li>
+<li>When would it be useful to convert rasters to vectors in your work?</li>
 </ul>
 
         </div>
@@ -553,7 +497,7 @@ work?</li>
 
             
   <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
-    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+    <a class="a2a_dd" target="_blank" rel="external nofollow noopener noreferrer" href="https://www.addtoany.com/share"></a>
       <a class="a2a_button_facebook"></a>
       <a class="a2a_button_twitter"></a>
   </div>
@@ -596,7 +540,7 @@ work?</li>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">9:42</span>
+    <span title="站点阅读时长">9:43</span>
   </span>
 </div>
 <div class="busuanzi-count">
