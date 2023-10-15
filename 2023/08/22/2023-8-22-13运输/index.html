@@ -21,12 +21,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ancao96.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BFJCK79VF9","apiKey":"613fe5e83863193288c6ef2ab02cefad","indexName":"hexo","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="前提条件  本章使用下列包：1  2：nabor 必须安装。 1234567library(sf)library(dplyr)library(spDataLarge)library(stplanr)      # for processing geographic transport datalibrary(tmap)         # map making (see Chapter 9)lib">
+    <meta name="description" content="本文由SCY翻译自《Geocomputation with R》第十三章  前提条件  本章使用下列包：^[13-transport-1]  ^[13-transport-1]：nabor 必须安装。 1234567library(sf)library(dplyr)library(spDataLarge)library(stplanr)      # for processing geograph">
 <meta property="og:type" content="article">
 <meta property="og:title" content="(13)（应用）运输">
 <meta property="og:url" content="https://ancao96.github.io/2023/08/22/2023-8-22-13%E8%BF%90%E8%BE%93/index.html">
 <meta property="og:site_name" content="SCY SPACE">
-<meta property="og:description" content="前提条件  本章使用下列包：1  2：nabor 必须安装。 1234567library(sf)library(dplyr)library(spDataLarge)library(stplanr)      # for processing geographic transport datalibrary(tmap)         # map making (see Chapter 9)lib">
+<meta property="og:description" content="本文由SCY翻译自《Geocomputation with R》第十三章  前提条件  本章使用下列包：^[13-transport-1]  ^[13-transport-1]：nabor 必须安装。 1234567library(sf)library(dplyr)library(spDataLarge)library(stplanr)      # for processing geograph">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051448576.png">
 <meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051544306.png">
@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051653021.png">
 <meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051701347.png">
 <meta property="article:published_time" content="2023-08-21T21:26:20.000Z">
-<meta property="article:modified_time" content="2023-09-05T11:26:28.880Z">
+<meta property="article:modified_time" content="2023-10-04T05:08:11.438Z">
 <meta property="article:author" content="SCY">
 <meta property="article:tag" content="R">
 <meta property="article:tag" content="Geocomputaion">
@@ -105,7 +105,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">20</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">10</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">22</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -152,7 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">前提条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%83%E9%87%8C%E6%96%AF%E6%89%98%E5%B0%94%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6"><span class="nav-number">3.</span> <span class="nav-text">布里斯托尔案例研究</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%A4%E9%80%9A%E5%8C%BA%E5%9F%9F"><span class="nav-number">4.</span> <span class="nav-text">交通区域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AC%B2%E6%9C%9B%E7%BA%BF"><span class="nav-number">5.</span> <span class="nav-text">欲望线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8A%82%E7%82%B9"><span class="nav-number">6.</span> <span class="nav-text">节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E7%BA%BF"><span class="nav-number">7.</span> <span class="nav-text">路线</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%BA%BF%E6%AE%B5%E5%92%8C%E7%8E%AF%E8%8A%82"><span class="nav-number">7.1.</span> <span class="nav-text">路线、段和环节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8r%E8%BF%9B%E8%A1%8C%E5%86%85%E5%AD%98%E5%86%85%E8%B7%AF%E7%94%B1"><span class="nav-number">7.2.</span> <span class="nav-text">使用R进行内存内路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%89%98%E7%AE%A1%E7%9A%84%E4%B8%93%E7%94%A8%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E"><span class="nav-number">7.3.</span> <span class="nav-text">本地托管的专用路由引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E6%89%98%E7%AE%A1%E7%9A%84%E4%B8%93%E7%94%A8%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E"><span class="nav-number">7.4.</span> <span class="nav-text">远程托管的专用路由引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92%E4%B8%80%E4%B8%AA%E5%AE%9E%E9%99%85%E7%A4%BA%E4%BE%8B"><span class="nav-number">7.5.</span> <span class="nav-text">路径规划：一个实际示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E7%BA%BF%E7%BD%91%E7%BB%9C"><span class="nav-number">8.</span> <span class="nav-text">路线网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E8%80%83%E8%99%91%E6%96%B0%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD"><span class="nav-number">9.</span> <span class="nav-text">优先考虑新基础设施</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%85%E8%A1%8C%E7%9A%84%E6%9C%AA%E6%9D%A5%E6%96%B9%E5%90%91"><span class="nav-number">10.</span> <span class="nav-text">旅行的未来方向</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">11.</span> <span class="nav-text">练习</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">前提条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">布里斯托尔案例研究</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">交通区域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">欲望线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">路线</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%BA%BF%E3%80%81%E6%AE%B5%E5%92%8C%E7%8E%AF%E8%8A%82"><span class="nav-number">7.1.</span> <span class="nav-text">路线、段和环节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8R%E8%BF%9B%E8%A1%8C%E5%86%85%E5%AD%98%E5%86%85%E8%B7%AF%E7%94%B1"><span class="nav-number">7.2.</span> <span class="nav-text">使用R进行内存内路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%89%98%E7%AE%A1%E7%9A%84%E4%B8%93%E7%94%A8%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E"><span class="nav-number">7.3.</span> <span class="nav-text">本地托管的专用路由引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E6%89%98%E7%AE%A1%E7%9A%84%E4%B8%93%E7%94%A8%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E"><span class="nav-number">7.4.</span> <span class="nav-text">远程托管的专用路由引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%AE%9E%E9%99%85%E7%A4%BA%E4%BE%8B"><span class="nav-number">7.5.</span> <span class="nav-text">路径规划：一个实际示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">路线网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">9.</span> <span class="nav-text">优先考虑新基础设施</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">10.</span> <span class="nav-text">旅行的未来方向</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">11.</span> <span class="nav-text">练习</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -166,18 +166,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -249,7 +249,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-05 19:26:28" itemprop="dateModified" datetime="2023-09-05T19:26:28+08:00">2023-09-05</time>
+      <time title="修改时间：2023-10-04 13:08:11" itemprop="dateModified" datetime="2023-10-04T13:08:11+08:00">2023-10-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -310,275 +310,196 @@
         
         
         
-        <div class="post-body" itemprop="articleBody"><h1 id="前提条件">前提条件</h1>
+        <div class="post-body" itemprop="articleBody"><blockquote><p>本文由SCY翻译自《Geocomputation with R》<a target="_blank" rel="external nofollow noopener noreferrer" href="https://r.geocompx.org/transport">第十三章</a></p>
+</blockquote>
+<h1>前提条件</h1>
 <ul>
-<li>本章使用下列包：<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li>本章使用下列包：^[13-transport-1]</li>
 </ul>
-<p><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>：<strong>nabor</strong>
-必须安装。</p>
+<p>^[13-transport-1]：<strong>nabor</strong> 必须安装。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>sf<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>dplyr<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>spDataLarge<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>stplanr<span class="punctuation">)</span>      <span class="comment"># for processing geographic transport data</span></span><br><span class="line">library<span class="punctuation">(</span>tmap<span class="punctuation">)</span>         <span class="comment"># map making (see Chapter 9)</span></span><br><span class="line">library<span class="punctuation">(</span>ggplot2<span class="punctuation">)</span>      <span class="comment"># data visualization package</span></span><br><span class="line">library<span class="punctuation">(</span>sfnetworks<span class="punctuation">)</span>   <span class="comment"># spatial network classes and functions </span></span><br></pre></td></tr></table></figure>
-<h1 id="引言">引言</h1>
-<p>很少有其他部门的地理空间比交通更有形。移动(克服距离)的努力是地理学“第一定律”的核心，Waldo
-Tobler 在1970年定义如下(Tobler 1970) :</p>
+<h1>引言</h1>
+<p>很少有其他部门的地理空间比交通更有形。移动(克服距离)的努力是地理学“第一定律”的核心，Waldo Tobler 在1970年定义如下(Tobler 1970) :</p>
 <blockquote>
 <p>一切事物都与其他事物相关，但是近的事物比远的事物更相关。</p>
 </blockquote>
-<p>这个“定律”是空间自相关和其他关键地理概念的基础。它适用于各种各样的现象，如友谊网络和生态多样性，可以用交通成本来解释——在时间、精力和金钱方面——这些构成了“距离摩擦”。从这个角度来看，运输技术具有颠覆性，改变了包括移动人员和货物在内的地理实体之间的空间关系:
-“运输的目的是克服空间”(Rodrigue，Comtois，and Slack 2013)。</p>
-<p>运输是一个固有的空间活动，包括从一个起点‘ A’到目的地‘
-B’，通过无限的位置之间。因此，交通运输研究人员长期以来一直采用地理和计算方法来理解运动模式，以及干预措施如何能够提高他们的表现，这并不令人惊讶(Lovelace
-2021)。</p>
+<p>这个“定律”是空间自相关和其他关键地理概念的基础。它适用于各种各样的现象，如友谊网络和生态多样性，可以用交通成本来解释——在时间、精力和金钱方面——这些构成了“距离摩擦”。从这个角度来看，运输技术具有颠覆性，改变了包括移动人员和货物在内的地理实体之间的空间关系: “运输的目的是克服空间”(Rodrigue，Comtois，and Slack 2013)。</p>
+<p>运输是一个固有的空间活动，包括从一个起点‘ A’到目的地‘ B’，通过无限的位置之间。因此，交通运输研究人员长期以来一直采用地理和计算方法来理解运动模式，以及干预措施如何能够提高他们的表现，这并不令人惊讶(Lovelace 2021)。</p>
 <p>本章介绍了不同地理层次运输系统的地理分析:</p>
 <ul>
-<li><strong>Areal units</strong>:
-交通模式可以通过参考区域总量来理解，比如主要的出行方式(例如，汽车、自行车或步行)
-，以及生活在特定区域的人们的平均出行距离(见第13.3节)</li>
-<li><strong>Desire lines</strong>:
-表示“起点-目的地”数据的直线，记录有多少人在地理空间的不同地点(点或区域)之间旅行(或可能旅行)
-，这是第13.4节的主题</li>
-<li><strong>Nodes</strong>:
-这些是交通系统中可以代表共同起点和目的地的点，以及公共交通站点，如公共汽车站和火车站，这是第13.5节的主题</li>
-<li><strong>Routes</strong>:
-这些线路表示沿着路由网络沿着所需的线路和节点之间的路径。路由(可以表示为单行字符串或多个<em>短段</em>)和生成它们的<em>路由引擎</em>，在第13.6节中介绍</li>
-<li><strong>Route networks</strong>:
-这些代表了一个区域内的道路、路径和其他线性特征的系统，在第13.6节中有介绍。
-它们可以表示为地理特征（通常是组成完整网络的短路段）或结构化为一个相互连接的图，不同段上的交通流量被运输模型师称为“流量”(Hollander
-2016)。</li>
+<li><strong>Areal units</strong>: 交通模式可以通过参考区域总量来理解，比如主要的出行方式(例如，汽车、自行车或步行) ，以及生活在特定区域的人们的平均出行距离(见第13.3节)</li>
+<li><strong>Desire lines</strong>: 表示“起点-目的地”数据的直线，记录有多少人在地理空间的不同地点(点或区域)之间旅行(或可能旅行) ，这是第13.4节的主题</li>
+<li><strong>Nodes</strong>: 这些是交通系统中可以代表共同起点和目的地的点，以及公共交通站点，如公共汽车站和火车站，这是第13.5节的主题</li>
+<li><strong>Routes</strong>: 这些线路表示沿着路由网络沿着所需的线路和节点之间的路径。路由(可以表示为单行字符串或多个<em>短段</em>)和生成它们的<em>路由引擎</em>，在第13.6节中介绍</li>
+<li><strong>Route networks</strong>: 这些代表了一个区域内的道路、路径和其他线性特征的系统，在第13.6节中有介绍。<br>
+它们可以表示为地理特征（通常是组成完整网络的短路段）或结构化为一个相互连接的图，不同段上的交通流量被运输模型师称为“流量”(Hollander 2016)。</li>
 </ul>
-<p>This highlights an important feature of transport systems: they are
-closely linked to broader phenomena and land-use patterns.
-另一个关键层次是<strong>代理</strong>，如你我以及使我们能够移动的交通工具，比如自行车和公交车。这些可以在像<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.matsim.org/">MATSim</a>和<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/a-b-street/abstreet">A/B
-Street</a>这样的软件中以计算方式表示，它们使用基于代理的建模（ABM）框架，通常具有很高的空间和时间分辨率，来表示交通系统的动态性(Horni，Nagel
-和 Axhausen
-2016)。尽管ABM是一种具有很大整合潜力的强大的交通研究方法，尤其是与R的空间类(Thiele
-2014; Lovelace and Dumont 2016)
-，但它不在本章的范围内。除了地理层次和代理之外，许多交通模型中的基本分析单位是<strong>行程</strong>，即从一个起点'A'到一个终点'B'的单一目的地之旅(Hollander
-2016)。行程连接了交通系统的不同层次，并可以简单地表示为连接<em>区域</em>质心（<em>节点</em>）的地理<em>需求线</em>，或作为遵循交通<em>路线网络</em>的路线。在这种情况下，<em>代理人</em>通常是在交通网络内移动的点实体。</p>
-<p>交通系统是动态的(Xie and Levinson
-2011)。尽管本章的重点是交通系统的<em>地理</em>分析，但它也提供了如何使用这种方法来模拟变化情景的见解，在第13.8节中有介绍。地理交通建模的目的可以理解为以捕捉其本质的方式简化这些时空系统的复杂性。选择适当的地理分析层次可以在不失去其最重要的特征和变量的情况下，简化这种复杂性，从而实现更好的决策和更有效的干预(Hollander
-2016)。</p>
+<p>This highlights an important feature of transport systems: they are closely linked to broader phenomena and land-use patterns.<br>
+另一个关键层次是<strong>代理</strong>，如你我以及使我们能够移动的交通工具，比如自行车和公交车。这些可以在像<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.matsim.org/">MATSim</a>和<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/a-b-street/abstreet">A/B Street</a>这样的软件中以计算方式表示，它们使用基于代理的建模（ABM）框架，通常具有很高的空间和时间分辨率，来表示交通系统的动态性(Horni，Nagel 和 Axhausen 2016)。尽管ABM是一种具有很大整合潜力的强大的交通研究方法，尤其是与R的空间类(Thiele 2014; Lovelace and Dumont 2016) ，但它不在本章的范围内。除了地理层次和代理之外，许多交通模型中的基本分析单位是<strong>行程</strong>，即从一个起点’A’到一个终点’B’的单一目的地之旅(Hollander 2016)。行程连接了交通系统的不同层次，并可以简单地表示为连接<em>区域</em>质心（<em>节点</em>）的地理<em>需求线</em>，或作为遵循交通<em>路线网络</em>的路线。在这种情况下，<em>代理人</em>通常是在交通网络内移动的点实体。</p>
+<p>交通系统是动态的(Xie and Levinson 2011)。尽管本章的重点是交通系统的<em>地理</em>分析，但它也提供了如何使用这种方法来模拟变化情景的见解，在第13.8节中有介绍。地理交通建模的目的可以理解为以捕捉其本质的方式简化这些时空系统的复杂性。选择适当的地理分析层次可以在不失去其最重要的特征和变量的情况下，简化这种复杂性，从而实现更好的决策和更有效的干预(Hollander 2016)。</p>
 <p>通常，模型被设计用来解决特定问题，比如如何提高交通系统的安全性或环境性能。因此，本章围绕一个政策情境展开，将在下一节中介绍，即：如何增加布里斯托尔市的自行车使用？第14章演示了地理计算的一个相关应用：优先考虑新自行车店的位置。章节之间有一个联系：新的和有效定位的自行车基础设施可以使人们开始骑自行车，从而增加对自行车店和当地经济活动的需求。这突出了交通系统的一个重要特点：它们与更广泛的现象和土地利用模式密切相关。</p>
-<h1 id="布里斯托尔案例研究">布里斯托尔案例研究</h1>
+<h1>布里斯托尔案例研究</h1>
 <p>本章使用的案例研究位于英格兰西部的布里斯托尔市，距离威尔士首都加的夫约30公里以东。该地区的交通网络概览在下图中展示，图中展示了多样的交通基础设施，包括自行车、公共交通和私家车。</p>
 <p>布里斯托尔是一个充满活力和多样性的城市，拥有各种各样的交通选项。从自行车道到公交线路，再到繁忙的高速公路，布里斯托尔的交通网络反映了其居民多样化的出行需求。这为进行地理和交通研究提供了一个极为丰富的背景。</p>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051448576.png">
-Bristol's transport network represented by colored lines for active
-(green), public (railways, black) and private motor (red) modes of
-travel. Black border lines represent the inner city boundary
-(highlighted in yellow) and the larger Travel To Work Area (TTWA).</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051448576.png" alt><br>
+Bristol’s transport network represented by colored lines for active (green), public (railways, black) and private motor (red) modes of travel. Black border lines represent the inner city boundary (highlighted in yellow) and the larger Travel To Work Area (TTWA).</p>
 <p>布里斯托尔是英格兰第十大的市议会，拥有50万人口，尽管其交通服务覆盖区域更广泛（参见13.3节）。该市拥有一个充满活力的经济体，包括航空航天、媒体、金融服务和旅游公司，以及两所主要大学。尽管布里斯托尔的人均收入较高，但也有严重贫困的地区(布里斯托尔市议会2015年)。</p>
-<p>从交通角度看，布里斯托尔的铁路和公路连接非常便利，活跃出行的水平相对较高。根据<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.gov.uk/government/statistical-data-sets/how-often-and-time-spent-walking-and-cycling-at-local-authority-level-cw010#table-cw0103">Active
-People
-Survey</a>，19%的市民每月至少骑一次自行车，88%的人每月至少走一次路（全国平均分别为15%和81%）。2011年的人口普查数据显示，8%的人口自行车上班，而全国平均仅为3%。</p>
-<p>与许多城市一样，布里斯托尔面临严重的交通拥堵、空气质量和体力不活跃的问题。自行车出行能有效地解决这些问题：与步行相比，自行车更有可能替代汽车出行，因为其典型<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Bicycle_performance">速度</a>为15-20
-km/h，而步行为4-6 km/h。因此，布里斯托尔的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.bristol.gov.uk/council-and-mayor/policies-plans-and-strategies/bristol-transport-strategy">交通战略</a>对自行车出行有着雄心勃勃的计划。</p>
+<p>从交通角度看，布里斯托尔的铁路和公路连接非常便利，活跃出行的水平相对较高。根据<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.gov.uk/government/statistical-data-sets/how-often-and-time-spent-walking-and-cycling-at-local-authority-level-cw010#table-cw0103">Active People Survey</a>，19%的市民每月至少骑一次自行车，88%的人每月至少走一次路（全国平均分别为15%和81%）。2011年的人口普查数据显示，8%的人口自行车上班，而全国平均仅为3%。</p>
+<p>与许多城市一样，布里斯托尔面临严重的交通拥堵、空气质量和体力不活跃的问题。自行车出行能有效地解决这些问题：与步行相比，自行车更有可能替代汽车出行，因为其典型<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Bicycle_performance">速度</a>为15-20 km/h，而步行为4-6 km/h。因此，布里斯托尔的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.bristol.gov.uk/council-and-mayor/policies-plans-and-strategies/bristol-transport-strategy">交通战略</a>对自行车出行有着雄心勃勃的计划。</p>
 <p>为了强调政策考虑在交通研究中的重要性，本章旨在为那些负责让人们从汽车转向更可持续出行方式（特别是步行和自行车）的人（如交通规划师、政治家和其他利益相关者）提供证据。更广泛的目标是演示地理计算如何支持基于证据的交通规划。</p>
 <p>在本章中，你将学习如何：</p>
 <ul>
 <li>描述城市交通行为的地理模式</li>
 <li>识别支持多模式出行的关键公共交通节点</li>
-<li>分析旅行"愿望线"，找出哪里有许多人驾车短途出行</li>
+<li>分析旅行&quot;愿望线&quot;，找出哪里有许多人驾车短途出行</li>
 <li>识别鼓励少开车、多骑自行车的自行车路线位置</li>
 </ul>
 <p>为了在实践方面展开本章的内容，下一节将开始加载关于旅行模式的区域数据。这些区域级别的数据集虽小，但对于获取对城市整体交通系统的基本了解至关重要。</p>
-<h1 id="交通区域">交通区域</h1>
-<p>尽管交通系统主要基于线性特征和节点——包括路径和车站——从面数据开始通常更有意义，以将连续空间划分为可触及的单位
-(Hollander
-2016)。除了定义研究区域的边界（在这种情况下是布里斯托尔）之外，对交通研究人员尤为感兴趣的两种区域类型是：起源区域和目的区域。通常，相同的地理单位用于起点和目的地。然而，不同的分区系统，例如
-'<a target="_blank" rel="external nofollow noopener noreferrer" href="https://data.gov.uk/dataset/workplace-zones-a-new-geography-for-workplace-statistics3">工作区</a>'，可能更适合代表在有许多'旅行吸引点'的区域内旅行目的地的增加密度
-(国家统计局2014年)。</p>
-<p>最简单定义研究区域的方式通常是第一个由OpenStreetMap返回的匹配边界。这可以通过诸如
-<code>osmdata::getbb("Bristol", format_out = "sf_polygon",  limit = 1)</code>
-的命令来完成。这返回一个 <code>sf</code> 对象（或者如果没有指定
-<code>limit = 1</code>，则返回一组 <code>sf</code>
-对象），代表最大匹配城市区域的范围，要么是边界框的矩形多边形，要么是一个详细的多边形边界。<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>对于布里斯托尔，返回了一个详细的多边形，由
-<strong>spDataLarge</strong> 包中的 <code>bristol_region</code>
-对象表示。请参见上图中的内部蓝色边界：这种方法有几个问题：</p>
+<h1>交通区域</h1>
+<p>尽管交通系统主要基于线性特征和节点——包括路径和车站——从面数据开始通常更有意义，以将连续空间划分为可触及的单位 (Hollander 2016)。除了定义研究区域的边界（在这种情况下是布里斯托尔）之外，对交通研究人员尤为感兴趣的两种区域类型是：起源区域和目的区域。通常，相同的地理单位用于起点和目的地。然而，不同的分区系统，例如 ‘<a target="_blank" rel="external nofollow noopener noreferrer" href="https://data.gov.uk/dataset/workplace-zones-a-new-geography-for-workplace-statistics3">工作区</a>’，可能更适合代表在有许多’旅行吸引点’的区域内旅行目的地的增加密度 (国家统计局2014年)。</p>
+<p>最简单定义研究区域的方式通常是第一个由OpenStreetMap返回的匹配边界。这可以通过诸如 <code>osmdata::getbb(&quot;Bristol&quot;, format_out = &quot;sf_polygon&quot;,  limit = 1)</code> 的命令来完成。这返回一个 <code>sf</code> 对象（或者如果没有指定 <code>limit = 1</code>，则返回一组 <code>sf</code> 对象），代表最大匹配城市区域的范围，要么是边界框的矩形多边形，要么是一个详细的多边形边界。[^13-transport-2]对于布里斯托尔，返回了一个详细的多边形，由 <strong>spDataLarge</strong> 包中的 <code>bristol_region</code> 对象表示。请参见上图中的内部蓝色边界：这种方法有几个问题：</p>
+<p>[^13-transport-2]: 在第一个匹配没有提供正确名称的情况下，应指定国家或地区，例如位于美国的布里斯托尔应为 <code>Bristol Tennessee</code>。</p>
 <ul>
 <li>第一个由OSM返回的OSM边界可能不是当地政府使用的官方边界</li>
 <li>即使OSM返回官方边界，这也可能不适合交通研究，因为它们与人们的旅行路线关系不大</li>
 </ul>
-<p>工作通勤区域（TTWAs）通过创建一个类似于水文流域的分区系统来解决这些问题。TTWAs最初被定义为连续区域，在其中75%的人口前往工作(Coombes,
-Green, and Openshaw
-1986)，这是本章使用的定义。由于布里斯托尔是一个主要的雇主，吸引了周边城镇的旅行，因此其TTWA比城市界限要大得多（见上图）。代表这一以交通为导向的边界的多边形存储在由章节开始时加载的
-<strong>spDataLarge</strong> 包提供的 <code>bristol_ttwa</code>
-对象中。</p>
-<p>本章使用的起点和终点区域是相同的：官方定义的中等地理分辨率区域（它们的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/bulletins/annualsmallareapopulationestimates/2014-10-23">官方</a>名称是中层超级输出区域或MSOAs）。
-每个区域大约有8,000人。这种行政区域可以为交通分析提供重要的背景信息，例如可能最受特定干预措施影响的人群类型(例如,
-Moreno-Monroy, Lovelace, and Ramos 2017)。</p>
-<p>这些区域的地理分辨率很重要：小区域具有高地理分辨率通常更可取，但它们在大区域中的高数量可能对处理（尤其是对于起点-终点分析，在其中可能性作为区域数量的非线性函数增加）有影响
-(Hollander 2016)。</p>
+<p>工作通勤区域（TTWAs）通过创建一个类似于水文流域的分区系统来解决这些问题。TTWAs最初被定义为连续区域，在其中75%的人口前往工作(Coombes, Green, and Openshaw 1986)，这是本章使用的定义。由于布里斯托尔是一个主要的雇主，吸引了周边城镇的旅行，因此其TTWA比城市界限要大得多（见上图）。代表这一以交通为导向的边界的多边形存储在由章节开始时加载的 <strong>spDataLarge</strong> 包提供的 <code>bristol_ttwa</code> 对象中。</p>
+<p>本章使用的起点和终点区域是相同的：官方定义的中等地理分辨率区域（它们的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/bulletins/annualsmallareapopulationestimates/2014-10-23">官方</a>名称是中层超级输出区域或MSOAs）。<br>
+每个区域大约有8,000人。这种行政区域可以为交通分析提供重要的背景信息，例如可能最受特定干预措施影响的人群类型(例如, Moreno-Monroy, Lovelace, and Ramos 2017)。</p>
+<p>这些区域的地理分辨率很重要：小区域具有高地理分辨率通常更可取，但它们在大区域中的高数量可能对处理（尤其是对于起点-终点分析，在其中可能性作为区域数量的非线性函数增加）有影响 (Hollander 2016)。</p>
 <blockquote>
-<p>📌与小区域相关的另一个问题与匿名规则有关。为了使在区域内无法推断个人身份，详细社会人口统计变量通常仅在低地理分辨率下可用。例如，旅行方式的年龄和性别细分在英国的地方当局层面上可用，但不在更高的输出区域层面上，其中每个区域大约包含100户家庭。有关更多详细信息，请参阅
-www.ons.gov.uk/methodology/geography。</p>
+<p>📌与小区域相关的另一个问题与匿名规则有关。为了使在区域内无法推断个人身份，详细社会人口统计变量通常仅在低地理分辨率下可用。例如，旅行方式的年龄和性别细分在英国的地方当局层面上可用，但不在更高的输出区域层面上，其中每个区域大约包含100户家庭。有关更多详细信息，请参阅 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.ons.gov.uk/methodology/geography%E3%80%82">www.ons.gov.uk/methodology/geography。</a></p>
 </blockquote>
-<p>本章中使用的102个区域存储在 <code>bristol_zones</code>
-中，如下图所示。注意，在人口密集地区，区域变得更小：每个区域都有类似数量的人。<code>bristol_zones</code>
-不包含关于交通的属性数据，只有每个区域的名称和代码：</p>
+<p>本章中使用的102个区域存储在 <code>bristol_zones</code> 中，如下图所示。注意，在人口密集地区，区域变得更小：每个区域都有类似数量的人。<code>bristol_zones</code> 不包含关于交通的属性数据，只有每个区域的名称和代码：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">names</span><span class="punctuation">(</span>bristol_zones<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;geo_code&quot; &quot;name&quot;     &quot;geometry&quot;</span></span><br></pre></td></tr></table></figure>
-<p>为了添加旅行数据，我们将执行<em>属性连接</em>，这是在<em>矢量属性连接</em>节中描述的常见任务。我们将使用来自英国2011年人口普查关于工作通勤的问题的旅行数据，该数据存储在
-<code>bristol_od</code> 中，由 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.ons.gov.uk/help/localstatistics">ons.gov.uk</a>
-数据门户提供。<code>bristol_od</code>
-是一个关于英国2011年人口普查中各区域间通勤旅行的起点-终点（OD）数据集。第一列是起始区域的ID，第二列是目的区域。<code>bristol_od</code>
-的行数比 <code>bristol_zones</code>
-多，代表的是区域<em>之间</em>的旅行，而不是区域本身：</p>
+<p>为了添加旅行数据，我们将执行<em>属性连接</em>，这是在<em>矢量属性连接</em>节中描述的常见任务。我们将使用来自英国2011年人口普查关于工作通勤的问题的旅行数据，该数据存储在 <code>bristol_od</code> 中，由 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.ons.gov.uk/help/localstatistics">ons.gov.uk</a> 数据门户提供。<code>bristol_od</code> 是一个关于英国2011年人口普查中各区域间通勤旅行的起点-终点（OD）数据集。第一列是起始区域的ID，第二列是目的区域。<code>bristol_od</code> 的行数比 <code>bristol_zones</code> 多，代表的是区域<em>之间</em>的旅行，而不是区域本身：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nrow<span class="punctuation">(</span>bristol_od<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] 2910</span></span><br><span class="line">nrow<span class="punctuation">(</span>bristol_zones<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] 102</span></span><br></pre></td></tr></table></figure>
-<p>前一个代码块的结果显示，每个区域有超过10个起点-终点（OD）对，这意味着在将其与
-<code>bristol_zones</code>
-进行连接之前，我们需要对起点-终点数据进行聚合，如下图所示 ：
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">zones_attr <span class="operator">=</span> bristol_od <span class="operator">|&gt;</span> </span><br><span class="line">  group_by<span class="punctuation">(</span>o<span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  summarize<span class="punctuation">(</span>across<span class="punctuation">(</span>where<span class="punctuation">(</span><span class="built_in">is.numeric</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">sum</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  dplyr<span class="operator">::</span>rename<span class="punctuation">(</span>geo_code <span class="operator">=</span> o<span class="punctuation">)</span></span><br></pre></td></tr></table></figure></p>
+<p>前一个代码块的结果显示，每个区域有超过10个起点-终点（OD）对，这意味着在将其与 <code>bristol_zones</code> 进行连接之前，我们需要对起点-终点数据进行聚合，如下图所示<br>
+：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">zones_attr <span class="operator">=</span> bristol_od <span class="operator">|&gt;</span> </span><br><span class="line">  group_by<span class="punctuation">(</span>o<span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  summarize<span class="punctuation">(</span>across<span class="punctuation">(</span>where<span class="punctuation">(</span><span class="built_in">is.numeric</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">sum</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  dplyr<span class="operator">::</span>rename<span class="punctuation">(</span>geo_code <span class="operator">=</span> o<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <p>前面的代码块执行了以下操作：</p>
 <ul>
 <li>按照起点区域（包含在<code>o</code>列中）对数据进行了分组</li>
-<li><em>如果</em>在<code>bristol_od</code>
-数据集中的变量是数值型的，就对它们进行了聚合，以找出每个区域中按交通方式分布的人口总数<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></li>
+<li><em>如果</em>在<code>bristol_od</code> 数据集中的变量是数值型的，就对它们进行了聚合，以找出每个区域中按交通方式分布的人口总数[^13-transport-3]</li>
 <li>将分组变量<code>o</code>重命名，使其与<code>bristol_zones</code>对象中的ID列<code>geo_code</code>匹配</li>
 </ul>
+<p>[^13-transport-3]: <code>_if</code> 后缀要求对变量提出一个 <code>TRUE</code>/<code>FALSE</code> 的问题，在这个情况下是’是否为数值型?’ 只有返回 true 的变量会被汇总。</p>
 <p>由此产生的对象<code>zones_attr</code>是一个数据框，其行代表各个区域和一个ID变量。我们可以使用<code>%in%</code>操作符验证这些ID是否与<code>zones</code>数据集中的ID匹配，操作如下：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">summary<span class="punctuation">(</span>zones_attr<span class="operator">$</span>geo_code <span class="operator">%in%</span> bristol_zones<span class="operator">$</span>geo_code<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt;    Mode    TRUE </span></span><br><span class="line"><span class="comment">#&gt; logical     102</span></span><br></pre></td></tr></table></figure>
-<p>结果显示，新对象中包含所有102个区域，而<code>zone_attr</code>具有可以与区域连接的形式<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>。这是通过使用连接函数
-<code>left_join()</code>
-来完成的（注意，在这里<code>inner_join()</code>也会产生相同的结果）。</p>
+<p>结果显示，新对象中包含所有102个区域，而<code>zone_attr</code>具有可以与区域连接的形式[^13-transport-4]。这是通过使用连接函数 <code>left_join()</code> 来完成的（注意，在这里<code>inner_join()</code>也会产生相同的结果）。</p>
+<p>[^13-transport-4]: 在实际数据中，检查ID在反方向上是否匹配也同样重要。这可以通过改变<code>summary()</code>命令中ID的顺序来完成——<code>summary(bristol_zones$geo_code %in% zones_attr$geo_code)</code>——或者通过如下使用<code>setdiff()</code>：<code>setdiff(bristol_zones$geo_code, zones_attr$geo_code)</code>。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">zones_joined <span class="operator">=</span> left_join<span class="punctuation">(</span>bristol_zones<span class="punctuation">,</span> zones_attr<span class="punctuation">,</span> by <span class="operator">=</span> <span class="string">&quot;geo_code&quot;</span><span class="punctuation">)</span></span><br><span class="line"><span class="built_in">sum</span><span class="punctuation">(</span>zones_joined<span class="operator">$</span><span class="built_in">all</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] 238805</span></span><br><span class="line"><span class="built_in">names</span><span class="punctuation">(</span>zones_joined<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;geo_code&quot;   &quot;name&quot;       &quot;all&quot;        &quot;bicycle&quot;    &quot;foot&quot;      </span></span><br><span class="line"><span class="comment">#&gt; [6] &quot;car_driver&quot; &quot;train&quot;      &quot;geometry&quot;</span></span><br></pre></td></tr></table></figure>
-<p>结果是<code>zones_joined</code>，它包含新的列，代表研究区域内每个区域起始的总出行次数（接近四分之一百万次）以及它们的出行方式（自行车、步行、汽车和火车）。出行起点的地理分布在下图的左侧地图中有所体现。这显示了大多数区域在研究区内有0至4000次的出行起始。生活在布里斯托尔市中心附近的人进行的出行次数更多，而在城市边缘的则较少。这是为什么呢？记住我们只在研究区域内处理出行：边缘区域低出行次数可以归因于这些周边区域的许多人会前往研究区域之外的其他地区。通过一个特殊的目的地ID，研究区域之外的出行可以被包括在区域模型中，该ID涵盖了任何前往模型中未表示的区域的出行(Hollander
-2016)。然而，<code>bristol_od</code>中的数据简单地忽略了这样的出行：它是一个“区域内”的模型。</p>
+<p>结果是<code>zones_joined</code>，它包含新的列，代表研究区域内每个区域起始的总出行次数（接近四分之一百万次）以及它们的出行方式（自行车、步行、汽车和火车）。出行起点的地理分布在下图的左侧地图中有所体现。这显示了大多数区域在研究区内有0至4000次的出行起始。生活在布里斯托尔市中心附近的人进行的出行次数更多，而在城市边缘的则较少。这是为什么呢？记住我们只在研究区域内处理出行：边缘区域低出行次数可以归因于这些周边区域的许多人会前往研究区域之外的其他地区。通过一个特殊的目的地ID，研究区域之外的出行可以被包括在区域模型中，该ID涵盖了任何前往模型中未表示的区域的出行(Hollander 2016)。然而，<code>bristol_od</code>中的数据简单地忽略了这样的出行：它是一个“区域内”的模型。</p>
 <p>与OD（出发-目的地）数据集可以聚合到出发区域的方式相同，它们也可以被聚合以提供关于目的地区域的信息。人们倾向于聚集在中心地区。这解释了为什么下图右侧面板中表示的空间分布相对不均匀，最常见的目的地区域集中在布里斯托尔市中心。结果是<code>zones_od</code>，其中包含一个新列，报告了任何出行方式的目的地数量，如下所创建：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">zones_destinations <span class="operator">=</span> bristol_od <span class="operator">|&gt;</span> </span><br><span class="line">  group_by<span class="punctuation">(</span>d<span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  summarize<span class="punctuation">(</span>across<span class="punctuation">(</span>where<span class="punctuation">(</span><span class="built_in">is.numeric</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="built_in">sum</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  select<span class="punctuation">(</span>geo_code <span class="operator">=</span> d<span class="punctuation">,</span> all_dest <span class="operator">=</span> <span class="built_in">all</span><span class="punctuation">)</span></span><br><span class="line">zones_od <span class="operator">=</span> inner_join<span class="punctuation">(</span>zones_joined<span class="punctuation">,</span> zones_destinations<span class="punctuation">,</span> by <span class="operator">=</span> <span class="string">&quot;geo_code&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>下面的代码创建了一个简化版本的下图（参见书籍GitHub仓库的 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/geocompx/geocompr/tree/main/code"><code>code</code></a>
-文件夹中的 <code>12-zones.R</code>
-文件以重现该图，以及有关使用<strong>tmap</strong>创建分面地图的详细信息）：
-<!-- toDo: rl   --> <!-- qtm does not exist... --></p>
+<p>下面的代码创建了一个简化版本的下图（参见书籍GitHub仓库的 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/geocompx/geocompr/tree/main/code"><code>code</code></a> 文件夹中的 <code>12-zones.R</code> 文件以重现该图，以及有关使用<strong>tmap</strong>创建分面地图的详细信息）：</p>
+<!-- toDo: rl   -->
+<!-- qtm does not exist... -->
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qtm<span class="punctuation">(</span>zones_od<span class="punctuation">,</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;all&quot;</span><span class="punctuation">,</span> <span class="string">&quot;all_dest&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  tm_layout<span class="punctuation">(</span>panel.labels <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;Origin&quot;</span><span class="punctuation">,</span> <span class="string">&quot;Destination&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051544306.png">
-Number of trips (commuters) living and working in the region. The left
-map shows zone of origin of commute trips; the right map shows zone of
-destination (generated by the script 13-zones.R).</p>
-<h1 id="欲望线">欲望线</h1>
-<p>欲望线连接起点和终点，表示人们<em>想要</em>去的地方，通常是在各个区域之间。它们代表了从A点到B点最快的“直线”或“鸟飞”路线，如果没有建筑物和弯曲道路的阻碍的话（我们将在下一节看到如何将欲望线转化为实际路线）。通常，欲望线在地理上表示为每个区域的地理（或人口加权）中心的起点和终点。这是我们将在本节中创建和使用的欲望线类型，尽管值得注意的是，“抖动”技术能够增加多个起点和终点，以提高基于OD数据构建的分析的空间覆盖和准确性
-(Lovelace，Félix 和 Carlino 2022)。</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051544306.png" alt><br>
+Number of trips (commuters) living and working in the region. The left map shows zone of origin of commute trips; the right map shows zone of destination (generated by the script 13-zones.R).</p>
+<h1>欲望线</h1>
+<p>欲望线连接起点和终点，表示人们<em>想要</em>去的地方，通常是在各个区域之间。它们代表了从A点到B点最快的“直线”或“鸟飞”路线，如果没有建筑物和弯曲道路的阻碍的话（我们将在下一节看到如何将欲望线转化为实际路线）。通常，欲望线在地理上表示为每个区域的地理（或人口加权）中心的起点和终点。这是我们将在本节中创建和使用的欲望线类型，尽管值得注意的是，“抖动”技术能够增加多个起点和终点，以提高基于OD数据构建的分析的空间覆盖和准确性 (Lovelace，Félix 和 Carlino 2022)。</p>
 <p>我们已经在数据集<code>bristol_od</code>中加载了代表欲望线的数据。这个起点-终点（OD）数据框对象表示在<code>o</code>和<code>d</code>所代表的区域之间旅行的人数，如下表所示。要按所有旅行对OD数据进行排序，然后只过滤出前5名，请输入：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">od_top5 <span class="operator">=</span> bristol_od <span class="operator">|&gt;</span> </span><br><span class="line">  slice_max<span class="punctuation">(</span><span class="built_in">all</span><span class="punctuation">,</span> n <span class="operator">=</span> <span class="number">5</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>Table: Sample of the top 5 origin-destination pairs in the Bristol OD data frame, representing travel desire lines between zones in the study area.</p>
 <table>
-<caption>Sample of the top 5 origin-destination pairs in the Bristol OD
-data frame, representing travel desire lines between zones in the study
-area.</caption>
 <thead>
-<tr class="header">
-<th style="text-align: left;">o</th>
-<th style="text-align: left;">d</th>
-<th style="text-align: right;">all</th>
-<th style="text-align: right;">bicycle</th>
-<th style="text-align: right;">foot</th>
-<th style="text-align: right;">car_driver</th>
-<th style="text-align: right;">train</th>
+<tr>
+<th style="text-align:left">o</th>
+<th style="text-align:left">d</th>
+<th style="text-align:right">all</th>
+<th style="text-align:right">bicycle</th>
+<th style="text-align:right">foot</th>
+<th style="text-align:right">car_driver</th>
+<th style="text-align:right">train</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">E02003043</td>
-<td style="text-align: left;">E02003043</td>
-<td style="text-align: right;">1493</td>
-<td style="text-align: right;">66</td>
-<td style="text-align: right;">1296</td>
-<td style="text-align: right;">64</td>
-<td style="text-align: right;">8</td>
+<tr>
+<td style="text-align:left">E02003043</td>
+<td style="text-align:left">E02003043</td>
+<td style="text-align:right">1493</td>
+<td style="text-align:right">66</td>
+<td style="text-align:right">1296</td>
+<td style="text-align:right">64</td>
+<td style="text-align:right">8</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">E02003047</td>
-<td style="text-align: left;">E02003043</td>
-<td style="text-align: right;">1300</td>
-<td style="text-align: right;">287</td>
-<td style="text-align: right;">751</td>
-<td style="text-align: right;">148</td>
-<td style="text-align: right;">8</td>
+<tr>
+<td style="text-align:left">E02003047</td>
+<td style="text-align:left">E02003043</td>
+<td style="text-align:right">1300</td>
+<td style="text-align:right">287</td>
+<td style="text-align:right">751</td>
+<td style="text-align:right">148</td>
+<td style="text-align:right">8</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">E02003031</td>
-<td style="text-align: left;">E02003043</td>
-<td style="text-align: right;">1221</td>
-<td style="text-align: right;">305</td>
-<td style="text-align: right;">600</td>
-<td style="text-align: right;">176</td>
-<td style="text-align: right;">7</td>
+<tr>
+<td style="text-align:left">E02003031</td>
+<td style="text-align:left">E02003043</td>
+<td style="text-align:right">1221</td>
+<td style="text-align:right">305</td>
+<td style="text-align:right">600</td>
+<td style="text-align:right">176</td>
+<td style="text-align:right">7</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">E02003037</td>
-<td style="text-align: left;">E02003043</td>
-<td style="text-align: right;">1186</td>
-<td style="text-align: right;">88</td>
-<td style="text-align: right;">908</td>
-<td style="text-align: right;">110</td>
-<td style="text-align: right;">3</td>
+<tr>
+<td style="text-align:left">E02003037</td>
+<td style="text-align:left">E02003043</td>
+<td style="text-align:right">1186</td>
+<td style="text-align:right">88</td>
+<td style="text-align:right">908</td>
+<td style="text-align:right">110</td>
+<td style="text-align:right">3</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">E02003034</td>
-<td style="text-align: left;">E02003043</td>
-<td style="text-align: right;">1177</td>
-<td style="text-align: right;">281</td>
-<td style="text-align: right;">711</td>
-<td style="text-align: right;">100</td>
-<td style="text-align: right;">7</td>
+<tr>
+<td style="text-align:left">E02003034</td>
+<td style="text-align:left">E02003043</td>
+<td style="text-align:right">1177</td>
+<td style="text-align:right">281</td>
+<td style="text-align:right">711</td>
+<td style="text-align:right">100</td>
+<td style="text-align:right">7</td>
 </tr>
 </tbody>
 </table>
-<p>生成的表格提供了关于布里斯托尔通勤（上班往返）出行模式的快照。它表明，在前5大起点-终点（OD）组合中，步行是最受欢迎的出行方式，而<code>E02003043</code>
-区域是一个受欢迎的目的地（布里斯托尔市中心，所有前5大OD组合的目的地），并且<em>区内</em>
-出行，从<code>E02003043</code>
-区域的一个部分到另一个部分（表的第一行），是数据集中出行最多的OD组合。但从政策角度看，表中呈现的原始数据用处有限：除了它仅包含了2,910个OD组合中的一小部分之外，它几乎没有告诉我们<em>在哪里</em>需要政策措施，或者<em>有多少比例</em>的出行是通过步行和骑自行车完成的。
+<p>生成的表格提供了关于布里斯托尔通勤（上班往返）出行模式的快照。它表明，在前5大起点-终点（OD）组合中，步行是最受欢迎的出行方式，而<code>E02003043</code> 区域是一个受欢迎的目的地（布里斯托尔市中心，所有前5大OD组合的目的地），并且<em>区内</em> 出行，从<code>E02003043</code> 区域的一个部分到另一个部分（表的第一行），是数据集中出行最多的OD组合。但从政策角度看，表中呈现的原始数据用处有限：除了它仅包含了2,910个OD组合中的一小部分之外，它几乎没有告诉我们<em>在哪里</em>需要政策措施，或者<em>有多少比例</em>的出行是通过步行和骑自行车完成的。<br>
 以下命令计算了由这些积极模式完成的每条欲望线的百分比：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bristol_od<span class="operator">$</span>Active <span class="operator">=</span> <span class="punctuation">(</span>bristol_od<span class="operator">$</span>bicycle <span class="operator">+</span> bristol_od<span class="operator">$</span>foot<span class="punctuation">)</span> <span class="operator">/</span></span><br><span class="line">  bristol_od<span class="operator">$</span><span class="built_in">all</span> <span class="operator">*</span> <span class="number">100</span></span><br></pre></td></tr></table></figure>
-<p>有两种主要类型的OD（起点-终点）组合：<em>区间（Interzonal）</em> 和
-<em>区内（Intrazonal）</em>。区间的OD组合代表了目的地与起点不同区域之间的出行。区内的OD组合代表了在同一区域内的出行（参见表的顶行）。以下代码块将
-<code>od_bristol</code> 分为这两种类型：</p>
+<p>有两种主要类型的OD（起点-终点）组合：<em>区间（Interzonal）</em> 和 <em>区内（Intrazonal）</em>。区间的OD组合代表了目的地与起点不同区域之间的出行。区内的OD组合代表了在同一区域内的出行（参见表的顶行）。以下代码块将 <code>od_bristol</code> 分为这两种类型：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">od_intra <span class="operator">=</span> filter<span class="punctuation">(</span>bristol_od<span class="punctuation">,</span> o <span class="operator">==</span> d<span class="punctuation">)</span></span><br><span class="line">od_inter <span class="operator">=</span> filter<span class="punctuation">(</span>bristol_od<span class="punctuation">,</span> o <span class="operator">!=</span> d<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>下一步是将区间（interzonal）的OD组合转换为一个表示“欲望线（desire
-lines）”的<code>sf</code>对象，这可以通过使用 <strong>stplanr</strong>
-函数 <code>od2line()</code> 来在地图上进行绘制。<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>下一步是将区间（interzonal）的OD组合转换为一个表示“欲望线（desire lines）”的<code>sf</code>对象，这可以通过使用 <strong>stplanr</strong> 函数 <code>od2line()</code> 来在地图上进行绘制。[^13-transport-5]</p>
+<p>[^13-transport-5]: <code>od2line()</code> 的工作方式是通过匹配 <code>bristol_od</code> 对象的前两列中的ID与地理 <code>zones_od</code> 对象中的 <code>zone_code</code> ID列。需要注意的是，该操作会发出一个警告，因为 <code>od2line()</code> 是通过将每一对起点-终点分配给其起源和目的地区域的<em>质心</em>\index{centroid}来工作的。对于实际应用，人们会使用由投影数据生成的质心值，或者更好地使用<em>基于人口加权</em>的质心[@lovelace_propensity_2017]。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">desire_lines <span class="operator">=</span> od2line<span class="punctuation">(</span>od_inter<span class="punctuation">,</span> zones_od<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Creating centroids representing desire line start and end points.</span></span><br></pre></td></tr></table></figure>
-<p>下图展示了结果的示例，其简化版本可以通过以下命令创建（要完全复制该图形，请查看
-<code>13-desire.R</code> 中的代码，有关使用 <strong>tmap</strong>
-进行可视化的详细信息，请参见章节<em>高级制图</em>）：</p>
+<p>下图展示了结果的示例，其简化版本可以通过以下命令创建（要完全复制该图形，请查看 <code>13-desire.R</code> 中的代码，有关使用 <strong>tmap</strong> 进行可视化的详细信息，请参见章节<em>高级制图</em>）：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qtm<span class="punctuation">(</span>desire_lines<span class="punctuation">,</span> lines.lwd <span class="operator">=</span> <span class="string">&quot;all&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051558946.png">
-Desire lines representing trip patterns in Bristol, with width
-representing number of trips and color representing the percentage of
-trips made by active modes (walking and cycling). The four black lines
-represent the interzonal OD pairs in Table 7.1.</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051558946.png" alt><br>
+Desire lines representing trip patterns in Bristol, with width representing number of trips and color representing the percentage of trips made by active modes (walking and cycling). The four black lines represent the interzonal OD pairs in Table 7.1.</p>
 <p>该地图显示，市中心主导了该地区的交通模式，这暗示政策应当优先考虑这里，尽管也可以看到一些边缘的次中心。欲望线是交通系统中重要的概括性组成部分。更具体的组成部分包括节点，这些节点有特定的目的地（而不是欲望线中所表示的假设直线）。下一节将涵盖节点。</p>
-<h1 id="节点">节点</h1>
+<h1>节点</h1>
 <p>在地理交通数据集中，节点是组成交通网络的主要线性特征之间的点。大致上，有两种主要类型的交通节点：</p>
-<ol type="1">
+<ol>
 <li>不直接位于网络上的节点，例如区域质心或个体的起点和终点（如住宅和工作场所）。</li>
-<li>是交通网络一部分的节点。
+<li>是交通网络一部分的节点。<br>
 从技术上讲，一个节点可以位于交通网络上的任何点，但实际上它们通常是特殊类型的顶点，例如路径（交叉口）之间的交点和进入或退出交通网络的点，如公交站和火车站[^13-transport-6]。</li>
 </ol>
-<p>交通网络可以表示为图形，其中每个段通过地理线（代表边）与网络中的一个或多个其他边相连。可以通过“质心连接器”添加网络之外的节点，这些新的路线段连接到网络上附近的节点(Hollander
-2016)[^13-transport-7]。网络中的每个节点然后通过一个或多个代表网络上个别段的“边”进行连接。我们将在<em>路线网络</em>节中看到如何将交通网络表示为图。</p>
-<p>公共交通站点是特别重要的节点，可以表示为两种类型的节点：是道路的一部分的公交站，或由距离铁路轨道数百米的行人入口点代表的大型铁路站。我们将使用火车站来说明与布里斯托尔市增加自行车使用相关的公共交通节点。这些站由
-<strong>spDataLarge</strong> 在 <code>bristol_stations</code>
-中提供。</p>
+<p>交通网络可以表示为图形，其中每个段通过地理线（代表边）与网络中的一个或多个其他边相连。可以通过“质心连接器”添加网络之外的节点，这些新的路线段连接到网络上附近的节点(Hollander 2016)[^13-transport-7]。网络中的每个节点然后通过一个或多个代表网络上个别段的“边”进行连接。我们将在<em>路线网络</em>节中看到如何将交通网络表示为图。</p>
+<p>公共交通站点是特别重要的节点，可以表示为两种类型的节点：是道路的一部分的公交站，或由距离铁路轨道数百米的行人入口点代表的大型铁路站。我们将使用火车站来说明与布里斯托尔市增加自行车使用相关的公共交通节点。这些站由 <strong>spDataLarge</strong> 在 <code>bristol_stations</code> 中提供。</p>
 <p>一个常见的障碍是，从家到工作的距离太远，无法步行或骑自行车。公共交通可以通过为进入城市的常见路线提供快速和高容量的选择来减少这一障碍。从积极出行的角度来看，长途旅行的公共交通“腿”将旅行分为三部分：</p>
 <ul>
 <li>起点腿，通常从住宅区到公共交通站</li>
 <li>公共交通腿，通常从离旅行起点最近的站到离目的地最近的站</li>
 <li>目的地腿，从下车站到目的地</li>
 </ul>
-<p>在<em>欲望线</em>节进行的分析的基础上，公共交通节点可用于为可乘坐公共汽车和（在本例中使用的）火车的旅行构建三部分欲望线。第一阶段是确定具有最多公共交通出行的欲望线，在我们的情况下这很容易，因为我们之前创建的数据集
-<code>desire_lines</code> 已经包含了描述火车旅行数量的变量（也可以使用如
-<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.opentripplanner.org/">OpenTripPlanner</a>
-等公共交通路线服务来估计公共交通潜力）。为了使该方法更容易遵循，我们将仅选择关于铁路使用方面的前三条欲望线。</p>
+<p>在<em>欲望线</em>节进行的分析的基础上，公共交通节点可用于为可乘坐公共汽车和（在本例中使用的）火车的旅行构建三部分欲望线。第一阶段是确定具有最多公共交通出行的欲望线，在我们的情况下这很容易，因为我们之前创建的数据集 <code>desire_lines</code> 已经包含了描述火车旅行数量的变量（也可以使用如 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.opentripplanner.org/">OpenTripPlanner</a> 等公共交通路线服务来估计公共交通潜力）。为了使该方法更容易遵循，我们将仅选择关于铁路使用方面的前三条欲望线。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desire_rail <span class="operator">=</span> top_n<span class="punctuation">(</span>desire_lines<span class="punctuation">,</span> n <span class="operator">=</span> <span class="number">3</span><span class="punctuation">,</span> wt <span class="operator">=</span> train<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>现在的挑战是将每一条这样的线分解为三部分，代表通过公共交通节点的出行。这可以通过将一条欲望线转换为一个由三个线几何体组成的多线字符串对象来实现，这三个线几何体分别代表行程的起点、公共交通和终点阶段。这个操作可以分为三个阶段：矩阵创建（代表起点、终点和表示铁路站的“途经”点）、最近邻标识和转换为多线字符串。这些都由<code>line_via()</code>函数来完成。这个<strong>stplanr</strong>函数接受输入线和点，并返回一份欲望线的副本——具体细节请参见<a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.ropensci.org/stplanr/reference/line_via.html"><code>?line_via()</code></a>。
+<p>现在的挑战是将每一条这样的线分解为三部分，代表通过公共交通节点的出行。这可以通过将一条欲望线转换为一个由三个线几何体组成的多线字符串对象来实现，这三个线几何体分别代表行程的起点、公共交通和终点阶段。这个操作可以分为三个阶段：矩阵创建（代表起点、终点和表示铁路站的“途经”点）、最近邻标识和转换为多线字符串。这些都由<code>line_via()</code>函数来完成。这个<strong>stplanr</strong>函数接受输入线和点，并返回一份欲望线的副本——具体细节请参见<a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.ropensci.org/stplanr/reference/line_via.html"><code>?line_via()</code></a>。<br>
 输出与输入线相同，只不过它有新的几何列，代表通过公共交通节点的行程，如下所示：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ncol<span class="punctuation">(</span>desire_rail<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] 9</span></span><br><span class="line">desire_rail <span class="operator">=</span> line_via<span class="punctuation">(</span>desire_rail<span class="punctuation">,</span> bristol_stations<span class="punctuation">)</span></span><br><span class="line">ncol<span class="punctuation">(</span>desire_rail<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] 12</span></span><br></pre></td></tr></table></figure>
-<p>如下图所示，初始的 <code>desire_rail</code>
-线现在有三个额外的几何列表列，分别代表从家到起点站、从那里到目的地，以及最后从目的地站到目的地的旅行。在这种情况下，目的地段非常短（步行距离），但起点段可能足够远，以证明需要在骑行基础设施上进行投资，以鼓励人们在上班途中到居住区周围的三个起点站骑自行车，如下图所示。</p>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051613261.png">
-Station nodes (red dots) used as intermediary points that convert
-straight desire lines with high rail usage (thin green lines) into three
-legs: to the origin station (orange) via public transport (blue) and to
-the destination (pink, not visible because it is so short).</p>
-<h1 id="路线">路线</h1>
+<p>如下图所示，初始的 <code>desire_rail</code> 线现在有三个额外的几何列表列，分别代表从家到起点站、从那里到目的地，以及最后从目的地站到目的地的旅行。在这种情况下，目的地段非常短（步行距离），但起点段可能足够远，以证明需要在骑行基础设施上进行投资，以鼓励人们在上班途中到居住区周围的三个起点站骑自行车，如下图所示。</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051613261.png" alt><br>
+Station nodes (red dots) used as intermediary points that convert straight desire lines with high rail usage (thin green lines) into three legs: to the origin station (orange) via public transport (blue) and to the destination (pink, not visible because it is so short).</p>
+<h1>路线</h1>
 <p>从地理角度看，路线是不再直线的需求线：起点和终点与旅行的需求线表示相同，但从A到B的路径更为复杂。路线的几何形状通常（但不总是）由交通网络决定。</p>
 <p>虽然需求线仅包含两个顶点（其起点和终点），但路线可以包含任意数量的顶点，代表由直线连接的A和B之间的点：这就是linestring几何形状的定义。覆盖大距离或遵循复杂网络的路线可能有数百个顶点；基于网格或简化道路网络的路线通常较少。</p>
 <p>路线是由需求线生成的，或更常见地，由包含代表需求线的坐标对的矩阵生成。这个路由过程是由一系列广义定义的<em>路由引擎</em>完成的：软件和Web服务，它们返回描述如何从起点到终点的几何形状和属性。根据它们相对于R运行的<em>位置</em>，路由引擎可以被分类为：</p>
@@ -587,124 +508,68 @@ the destination (pink, not visible because it is so short).</p>
 <li>本地托管的、外部于R的路由引擎，可以从R中调用</li>
 <li>由外部实体远程托管的路由引擎，提供一个可以从R中调用的Web API</li>
 </ul>
-<p>在描述每一个之前，值得概述分类路由引擎的其他方式。路由引擎可以是多模式的，意味着它们可以计算由多种交通方式组成的行程，或者不是。多模式路由引擎可以返回由不同交通方式组成的多个<em>段</em>的结果。从住宅区到商业区的最佳路线可能涉及1）步行到最近的公交车站，2）乘公交车到离目的地最近的节点，以及3）步行到目的地，给定一组输入参数。这三段之间的转换点通常被称为“进入”和“出口”，意味着上下公共交通工具。像R5这样的多模式路由引擎比如OSRM这样的'单一模式'路由引擎更为复杂，并且有更大的输入数据要求。</p>
-<p>多模式引擎的一个主要优势是它们能够表示由火车、公共汽车等组成的“公共交通”行程。多模型路由引擎需要代表公共交通网络的输入数据集，通常以General
-Transit Feed Specification（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://developers.google.com/transit/gtfs">GTFS</a>）文件形式，这些可以用<a target="_blank" rel="external nofollow noopener noreferrer" href="https://r-transit.github.io/tidytransit/index.html"><strong>tidytransit</strong></a>和<a target="_blank" rel="external nofollow noopener noreferrer" href="https://ipeagit.github.io/gtfstools/"><strong>gtfstools</strong></a>包（也有其他用于处理GTFS文件的包和工具）中的函数进行处理。对于专注于特定（非公共）交通方式的项目，单一模式路由引擎可能就足够了。另一种分类路由引擎（或设置）的方式是通过输出的地理级别：路线、段和环节。</p>
-<h2 id="路线段和环节">路线、段和环节</h2>
+<p>在描述每一个之前，值得概述分类路由引擎的其他方式。路由引擎可以是多模式的，意味着它们可以计算由多种交通方式组成的行程，或者不是。多模式路由引擎可以返回由不同交通方式组成的多个<em>段</em>的结果。从住宅区到商业区的最佳路线可能涉及1）步行到最近的公交车站，2）乘公交车到离目的地最近的节点，以及3）步行到目的地，给定一组输入参数。这三段之间的转换点通常被称为“进入”和“出口”，意味着上下公共交通工具。像R5这样的多模式路由引擎比如OSRM这样的’单一模式’路由引擎更为复杂，并且有更大的输入数据要求。</p>
+<p>多模式引擎的一个主要优势是它们能够表示由火车、公共汽车等组成的“公共交通”行程。多模型路由引擎需要代表公共交通网络的输入数据集，通常以General Transit Feed Specification（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://developers.google.com/transit/gtfs">GTFS</a>）文件形式，这些可以用<a target="_blank" rel="external nofollow noopener noreferrer" href="https://r-transit.github.io/tidytransit/index.html"><strong>tidytransit</strong></a>和<a target="_blank" rel="external nofollow noopener noreferrer" href="https://ipeagit.github.io/gtfstools/"><strong>gtfstools</strong></a>包（也有其他用于处理GTFS文件的包和工具）中的函数进行处理。对于专注于特定（非公共）交通方式的项目，单一模式路由引擎可能就足够了。另一种分类路由引擎（或设置）的方式是通过输出的地理级别：路线、段和环节。</p>
+<h2 id="路线、段和环节">路线、段和环节</h2>
 <p>路由引擎可以在三个地理级别生成输出：路线、段和环节：</p>
 <ul>
 <li><strong>路线</strong>级别的输出每个起点-终点对包含一个单一特征（通常是数据框表示中的多线几何和关联行），意味着每次行程的数据有一行。</li>
 <li><strong>段</strong>级别的输出在每个起点-终点对内的每个<em>模式</em>都包含一个单一特征和相关属性。对于仅涉及一种模式的行程（例如，从家到工作的驾驶，忽略走到汽车的短距离），段与路线相同：即汽车行程。对于涉及公共交通的行程，段提供关键信息。<strong>r5r</strong>函数<code>detailed_itineraries()</code>返回的段有时令人困惑地被称为“环节”。</li>
 <li>环节级别的输出提供了有关路线的最详细信息，具有交通网络的每个小段的记录。通常，环节在长度上类似于，或与，OpenStreetMap中的道路相同。<strong>cyclestreets</strong>函数<code>journey()</code>返回在环节级别的数据，这些数据可以通过对<strong>stplanr</strong>中<code>route()</code>函数返回的起点和终点级别数据进行分组而聚合。</li>
 </ul>
-<p>大多数路由引擎默认返回路线级别的输出，尽管多模式引擎通常在段级别提供输出（每个连续运动的单一交通模式一个特征）。
-环节级别的输出有提供更多细节的优点。
-<strong>cyclestreets</strong>包返回每条路线的多个“安静度”级别，使得可以识别自行车网络中的“最薄弱环节”。
-环节级别输出的劣势包括增加的文件大小和与额外细节相关的复杂性。</p>
-<p>使用函数<code>stplanr::overline()</code><span class="citation" data-cites="morgan_travel_2020">[@morgan_travel_2020]</span>，路线级别的结果可以转换为环节级别的结果。在使用环节或段级别的数据时，通过对表示行程起点和终点的列进行分组，并汇总/聚合包含环节级别数据的列，可以返回路线级别的统计数据。</p>
-<h2 id="使用r进行内存内路由">使用R进行内存内路由</h2>
-<p>R中的路由引擎允许将存储为R对象的<em>内存内</em>路由网络用作路由计算的基础。选项包括<a target="_blank" rel="external nofollow noopener noreferrer" href="https://luukvdmeer.github.io/sfnetworks/"><strong>sfnetworks</strong></a>、<a target="_blank" rel="external nofollow noopener noreferrer" href="https://atfutures.github.io/dodgr/"><strong>dodgr</strong></a> 和
-<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/vlarmet/cppRouting"><strong>cppRouting</strong></a>
-包，每个包都提供了它们自己的类系统来表示路由网络，这是下一节的主题。</p>
+<p>大多数路由引擎默认返回路线级别的输出，尽管多模式引擎通常在段级别提供输出（每个连续运动的单一交通模式一个特征）。  环节级别的输出有提供更多细节的优点。  <strong>cyclestreets</strong>包返回每条路线的多个“安静度”级别，使得可以识别自行车网络中的“最薄弱环节”。  环节级别输出的劣势包括增加的文件大小和与额外细节相关的复杂性。</p>
+<p>使用函数<code>stplanr::overline()</code>[@morgan_travel_2020]，路线级别的结果可以转换为环节级别的结果。在使用环节或段级别的数据时，通过对表示行程起点和终点的列进行分组，并汇总/聚合包含环节级别数据的列，可以返回路线级别的统计数据。</p>
+<h2 id="使用R进行内存内路由">使用R进行内存内路由</h2>
+<p>R中的路由引擎允许将存储为R对象的<em>内存内</em>路由网络用作路由计算的基础。选项包括<a target="_blank" rel="external nofollow noopener noreferrer" href="https://luukvdmeer.github.io/sfnetworks/"><strong>sfnetworks</strong></a>、<a target="_blank" rel="external nofollow noopener noreferrer" href="https://atfutures.github.io/dodgr/"><strong>dodgr</strong></a> 和 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/vlarmet/cppRouting"><strong>cppRouting</strong></a> 包，每个包都提供了它们自己的类系统来表示路由网络，这是下一节的主题。</p>
 <p>尽管快速和灵活，使用原生R的路由选项通常比用于现实路由计算的专用路由引擎更难设置。路由是一个复杂问题，开源路由引擎已经投入了很多时间，这些引擎可以下载并在本地主机上运行。另一方面，基于R的路由引擎可能非常适用于模型实验和网络上变化影响的统计分析。在单一语言中更改路由网络特性（或与不同路由段类型相关联的权重）、重新计算路由和分析多个场景下的结果对研究应用有益。</p>
 <h2 id="本地托管的专用路由引擎">本地托管的专用路由引擎</h2>
-<p><strong>本地托管</strong>的路由引擎包括OpenTripPlanner、<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/valhalla/valhalla">Valhalla</a>
-和R5（它们是多模式的），以及OpenStreetMap路由机器（OSRM）（它是“单模式”的）。这些可以通过<strong>opentripplanner</strong>、<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/chris31415926535/valhallr"><strong>valhalla</strong></a>、<strong>r5r</strong>
-和 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/riatelab/osrm"><strong>osrm</strong></a>
-包从R中访问(Morgan 等，2019; Pereira
-等，2021)。本地托管的路由引擎在用户的计算机上运行，但在一个与R分开的进程中。它们的优点包括执行速度和对不同运输模式的权重配置文件的控制。劣势包括在本地表示复杂网络的困难；时间动态（主要是由于交通）；以及需要专用外部软件。</p>
+<p><strong>本地托管</strong>的路由引擎包括OpenTripPlanner、<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/valhalla/valhalla">Valhalla</a> 和R5（它们是多模式的），以及OpenStreetMap路由机器（OSRM）（它是“单模式”的）。这些可以通过<strong>opentripplanner</strong>、<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/chris31415926535/valhallr"><strong>valhalla</strong></a>、<strong>r5r</strong> 和 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/riatelab/osrm"><strong>osrm</strong></a> 包从R中访问(Morgan 等，2019; Pereira 等，2021)。本地托管的路由引擎在用户的计算机上运行，但在一个与R分开的进程中。它们的优点包括执行速度和对不同运输模式的权重配置文件的控制。劣势包括在本地表示复杂网络的困难；时间动态（主要是由于交通）；以及需要专用外部软件。</p>
 <h2 id="远程托管的专用路由引擎">远程托管的专用路由引擎</h2>
-<p><strong>远程托管</strong>的路由引擎使用web
-API发送有关起点和终点的查询并返回结果。基于开源路由引擎的路由服务，例如OSRM的公开可用服务，在从R调用时与本地托管实例的工作方式相同，只需更新指定“基础URL”的参数即可。然而，由于外部路由服务托管在专用机器上（通常由有激励生成准确路由的商业公司资助），这可能给它们带来优势，包括：</p>
+<p><strong>远程托管</strong>的路由引擎使用web API发送有关起点和终点的查询并返回结果。基于开源路由引擎的路由服务，例如OSRM的公开可用服务，在从R调用时与本地托管实例的工作方式相同，只需更新指定“基础URL”的参数即可。然而，由于外部路由服务托管在专用机器上（通常由有激励生成准确路由的商业公司资助），这可能给它们带来优势，包括：</p>
 <ul>
 <li>提供全球（或通常至少在大区域内）的路由服务</li>
 <li>已建立的路由服务通常会定期更新，并且经常能够响应交通水平</li>
 <li>路由服务通常在专用硬件和软件上运行，包括像负载均衡器这样的系统以确保性能稳定</li>
 </ul>
 <p>远程路由服务的劣势包括批量作业不可能时的速度（它们通常依赖于一条条路由的基础上通过互联网进行数据传输）、价格（例如，谷歌路由API限制了免费查询的数量）和许可问题。</p>
-<p><a target="_blank" rel="external nofollow noopener noreferrer" href="http://symbolixau.github.io/googleway/"><strong>googleway</strong></a>
-和 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://walker-data.com/mapboxapi/articles/navigation.html"><strong>mapbox</strong></a>
-包通过提供对Google和Mapbox的路由服务的访问来展示这种方法。免费（但有速率限制）的路由服务包括
-<a target="_blank" rel="external nofollow noopener noreferrer" href="http://project-osrm.org/">OSRM</a> 和 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://openrouteservice.org/">openrouteservice.org</a>，它们可以通过
-<a target="_blank" rel="external nofollow noopener noreferrer" href="https://rgeomatic.hypotheses.org/category/osrm"><strong>osrm</strong></a>
-和 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/GIScience/openrouteservice-r"><strong>openrouteservice</strong></a>
-包从R中访问，后者不在CRAN上。还有更具体的路由服务，例如由 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.cyclestreets.net/">CycleStreets.net</a>
-提供的，这是一个自行车旅行规划器和非营利性交通技术公司“为骑自行车者，由骑自行车者”。虽然R用户可以通过
-<a target="_blank" rel="external nofollow noopener noreferrer" href="https://rpackage.cyclestreets.net/"><strong>cyclestreets</strong></a>
-包访问CycleStreets路由，但许多路由服务缺乏R接口，这代表了一个巨大的软件包开发机会：构建一个R包以提供一个接口到web
-API可能是一种有益的经历。</p>
-<p>R包用于计算和导入代表交通网络上路由的数据的广泛范围是一种优势，这意味着该语言近年来越来越多地用于交通研究。然而，这种包和方法的激增的一个小缺点是有很多包和函数名称需要记住。
-<strong>stplanr</strong> 包通过提供一个用于生成路由的统一接口
-<code>route()</code>
-函数来解决这个问题。该函数接受广泛的输入，包括地理欲望线（使用
-<code>l =</code>
-参数）、坐标甚至表示独特地址的文本字符串，并返回作为一致 <code>sf</code>
-对象的路由数据。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="http://symbolixau.github.io/googleway/"><strong>googleway</strong></a> 和 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://walker-data.com/mapboxapi/articles/navigation.html"><strong>mapbox</strong></a> 包通过提供对Google和Mapbox的路由服务的访问来展示这种方法。免费（但有速率限制）的路由服务包括 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://project-osrm.org/">OSRM</a> 和 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://openrouteservice.org/">openrouteservice.org</a>，它们可以通过 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://rgeomatic.hypotheses.org/category/osrm"><strong>osrm</strong></a> 和 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/GIScience/openrouteservice-r"><strong>openrouteservice</strong></a> 包从R中访问，后者不在CRAN上。还有更具体的路由服务，例如由 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.cyclestreets.net/">CycleStreets.net</a> 提供的，这是一个自行车旅行规划器和非营利性交通技术公司“为骑自行车者，由骑自行车者”。虽然R用户可以通过 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://rpackage.cyclestreets.net/"><strong>cyclestreets</strong></a> 包访问CycleStreets路由，但许多路由服务缺乏R接口，这代表了一个巨大的软件包开发机会：构建一个R包以提供一个接口到web API可能是一种有益的经历。</p>
+<p>R包用于计算和导入代表交通网络上路由的数据的广泛范围是一种优势，这意味着该语言近年来越来越多地用于交通研究。然而，这种包和方法的激增的一个小缺点是有很多包和函数名称需要记住。<br>
+<strong>stplanr</strong> 包通过提供一个用于生成路由的统一接口 <code>route()</code> 函数来解决这个问题。该函数接受广泛的输入，包括地理欲望线（使用 <code>l =</code> 参数）、坐标甚至表示独特地址的文本字符串，并返回作为一致 <code>sf</code> 对象的路由数据。</p>
 <!-- TODO: 在某个时候我希望创建一个专用的路由包，如果它被创建了，请提及（RL 2022-07） -->
-<h2 id="路径规划一个实际示例">路径规划：一个实际示例</h2>
+<h2 id="路径规划：一个实际示例">路径规划：一个实际示例</h2>
 <p>与其对部分生成的<em>所有</em>期望线进行路径规划，我们专注于高度政策相关的一个子集。在尝试处理整个数据集之前，先对一个子集进行计算密集型操作通常是明智的，这同样适用于路径规划。路径规划可能需要消耗大量时间和内存，并生成大型对象，这是因为路线对象的详细几何形状和额外属性。因此，我们将在本节中过滤期望线，然后计算路径。</p>
-<p>当骑行替代开车出行时，效益最大。短距离（大约5公里，以20公里/小时的速度可以在15分钟内骑完）有相对较高的被骑行的概率，当使用<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.sciencedirect.com/science/article/pii/S0967070X21003401">电动自行车</a>进行出行时，最大距离会增加(Lovelace
-等，2017)。以下代码片段考虑了这些因素，过滤了期望线，并返回了表示OD对（起点到终点对）的对象
-<code>desire_lines_short</code>，在这些OD对之间有很多（100+）短距离（2.5至5公里的欧几里得距离）的车程：</p>
+<p>当骑行替代开车出行时，效益最大。短距离（大约5公里，以20公里/小时的速度可以在15分钟内骑完）有相对较高的被骑行的概率，当使用<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.sciencedirect.com/science/article/pii/S0967070X21003401">电动自行车</a>进行出行时，最大距离会增加(Lovelace 等，2017)。以下代码片段考虑了这些因素，过滤了期望线，并返回了表示OD对（起点到终点对）的对象 <code>desire_lines_short</code>，在这些OD对之间有很多（100+）短距离（2.5至5公里的欧几里得距离）的车程：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">desire_lines<span class="operator">$</span>distance_km <span class="operator">=</span> <span class="built_in">as.numeric</span><span class="punctuation">(</span>st_length<span class="punctuation">(</span>desire_lines<span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">/</span> <span class="number">1000</span></span><br><span class="line">desire_lines_short <span class="operator">=</span> desire_lines <span class="operator">|&gt;</span> </span><br><span class="line">  filter<span class="punctuation">(</span>car_driver <span class="operator">&gt;=</span> <span class="number">100</span><span class="punctuation">,</span> distance_km <span class="operator">&lt;=</span> <span class="number">5</span><span class="punctuation">,</span> distance_km <span class="operator">&gt;=</span> <span class="number">2.5</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>在上面的代码中，<code>st_length()</code>
-计算了每个期望线的长度。<strong>dplyr</strong> 的 <code>filter()</code>
-函数基于上述标准过滤了 <code>desire_lines</code>
-数据集。下一步是将这些期望线转换为路线。这是通过下面的代码块中使用公开可用的OSRM服务和
-<strong>stplanr</strong> 的 <code>route()</code> 和
-<code>route_osrm()</code> 函数来完成的：</p>
+<p>在上面的代码中，<code>st_length()</code> 计算了每个期望线的长度。<strong>dplyr</strong> 的 <code>filter()</code> 函数基于上述标准过滤了 <code>desire_lines</code> 数据集。下一步是将这些期望线转换为路线。这是通过下面的代码块中使用公开可用的OSRM服务和 <strong>stplanr</strong> 的 <code>route()</code> 和 <code>route_osrm()</code> 函数来完成的：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">routes_short <span class="operator">=</span> route<span class="punctuation">(</span>l <span class="operator">=</span> desire_lines_short<span class="punctuation">,</span> route_fun <span class="operator">=</span> route_osrm<span class="punctuation">,</span></span><br><span class="line">                     osrm.profile <span class="operator">=</span> <span class="string">&quot;bike&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>输出是
-<code>routes_short</code>，一个代表适用于骑自行车的交通网络上的路线的
-<code>sf</code> 对象（至少根据 OSRM
-路由引擎是这样），每个期望线对应一个。注意：像上面的命令中那样调用外部路由引擎只有在有互联网连接的情况下才能工作（有时还需要存储在环境变量中的
-API 密钥，尽管在这种情况下不需要）。除了 <code>desire_lines</code>
-对象中包含的列之外，新的路线数据集还包含
-<code>distance</code>（这次是指路线距离）和
-<code>duration</code>（以秒为单位）列，这些提供了有关每条路线性质的潜在有用额外信息。我们将绘制沿着这些线路进行许多短途汽车行驶的期望线和骑行路线。通过使路线的宽度与可能被替换的汽车行驶数量成比例，提供了一种有效的方式来优先考虑对道路网络进行干预(Lovelace
-等 2017)。
-下面的代码块绘制了期望线和路线，该图显示了人们驾驶短距离的路线：<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051636508.png">
-Routes along which many (100+) short (&lt;5km Euclidean distance) car
-journeys are made (red) overlaying desire lines representing the same
-trips (black) and zone centroids (dots).</p>
-<p>通过在交互式地图上绘制结果，例如使用
-<code>mapview::mapview(st_geometry(routes_short))</code>，可以看到许多短途汽车行程发生在布拉德利斯托克（Bradley
-Stoke）及其周围，距离布里斯托尔（Bristol）市中心大约10公里以北。找出该地区高度依赖汽车的原因很容易：根据<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Bradley_Stoke">维基百科</a>，布拉德利斯托克是“欧洲最大的由私人投资建设的新城镇”，这暗示了有限的公共交通供应。此外，该城镇被包括M4和M5高速公路在内的大型（对自行车不友好）的道路结构所环绕（tallon
-2007)。</p>
-<p>将旅行需求线转换为路线有很多好处。重要的是要记住，我们不能确定有多少（如果有的话）行程会沿着路由引擎计算出的确切路线进行。然而，路线和街道/道路/段级别的结果可能具有很高的政策相关性。路段结果可以根据可用数据(Lovelace
-等 2017)，实现在最需要的地方优先进行投资。</p>
-<h1 id="路线网络">路线网络</h1>
+<p>输出是 <code>routes_short</code>，一个代表适用于骑自行车的交通网络上的路线的 <code>sf</code> 对象（至少根据 OSRM 路由引擎是这样），每个期望线对应一个。注意：像上面的命令中那样调用外部路由引擎只有在有互联网连接的情况下才能工作（有时还需要存储在环境变量中的 API 密钥，尽管在这种情况下不需要）。除了 <code>desire_lines</code> 对象中包含的列之外，新的路线数据集还包含 <code>distance</code>（这次是指路线距离）和 <code>duration</code>（以秒为单位）列，这些提供了有关每条路线性质的潜在有用额外信息。我们将绘制沿着这些线路进行许多短途汽车行驶的期望线和骑行路线。通过使路线的宽度与可能被替换的汽车行驶数量成比例，提供了一种有效的方式来优先考虑对道路网络进行干预(Lovelace 等 2017)。<br>
+下面的代码块绘制了期望线和路线，该图显示了人们驾驶短距离的路线：<a href="%E6%B3%A8%E6%84%8F%EF%BC%8C%E7%BA%A2%E8%89%B2%E7%9A%84%E8%B7%AF%E7%BA%BF%E5%92%8C%E9%BB%91%E8%89%B2%E7%9A%84%E6%9C%9F%E6%9C%9B%E7%BA%BF%E7%9A%84%E8%B5%B7%E7%82%B9%E5%B9%B6%E4%B8%8D%E5%AE%8C%E5%85%A8%E7%9B%B8%E5%90%8C%E3%80%82%E8%BF%99%E6%98%AF%E5%9B%A0%E4%B8%BA%E5%8C%BA%E5%9F%9F%E8%B4%A8%E5%BF%83%E5%BE%88%E5%B0%91%E4%BD%8D%E4%BA%8E%E8%B7%AF%E7%BA%BF%E7%BD%91%E7%BB%9C%E4%B8%8A%EF%BC%9A%E7%9B%B8%E5%8F%8D%EF%BC%8C%E8%B7%AF%E7%BA%BF%E8%B5%B7%E6%BA%90%E4%BA%8E%E8%B7%9D%E7%A6%BB%E8%B4%A8%E5%BF%83%E6%9C%80%E8%BF%91%E7%9A%84%E4%BA%A4%E9%80%9A%E7%BD%91%E7%BB%9C%E8%8A%82%E7%82%B9%E3%80%82%E8%BF%98%E8%A6%81%E6%B3%A8%E6%84%8F%EF%BC%8C%E5%81%87%E8%AE%BE%E8%B7%AF%E7%BA%BF%E8%B5%B7%E6%BA%90%E4%BA%8E%E5%8C%BA%E5%9F%9F%E8%B4%A8%E5%BF%83%EF%BC%8C%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8C%96%E5%81%87%E8%AE%BE%EF%BC%8C%E7%94%A8%E4%BA%8E%E5%87%8F%E5%B0%91%E8%AE%A1%E7%AE%97%E6%89%80%E6%9C%89%E5%8F%AF%E8%83%BD%E8%B5%B7%E7%82%B9%E5%92%8C%E7%BB%88%E7%82%B9%E7%BB%84%E5%90%88%E4%B9%8B%E9%97%B4%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E6%89%80%E9%9C%80%E7%9A%84%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%5B@hollander_transport_2016%5D%E3%80%82">^13-transport-8</a></p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051636508.png" alt><br>
+Routes along which many (100+) short (&lt;5km Euclidean distance) car journeys are made (red) overlaying desire lines representing the same trips (black) and zone centroids (dots).</p>
+<p>通过在交互式地图上绘制结果，例如使用 <code>mapview::mapview(st_geometry(routes_short))</code>，可以看到许多短途汽车行程发生在布拉德利斯托克（Bradley Stoke）及其周围，距离布里斯托尔（Bristol）市中心大约10公里以北。找出该地区高度依赖汽车的原因很容易：根据<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Bradley_Stoke">维基百科</a>，布拉德利斯托克是“欧洲最大的由私人投资建设的新城镇”，这暗示了有限的公共交通供应。此外，该城镇被包括M4和M5高速公路在内的大型（对自行车不友好）的道路结构所环绕（tallon 2007)。</p>
+<p>将旅行需求线转换为路线有很多好处。重要的是要记住，我们不能确定有多少（如果有的话）行程会沿着路由引擎计算出的确切路线进行。然而，路线和街道/道路/段级别的结果可能具有很高的政策相关性。路段结果可以根据可用数据(Lovelace 等 2017)，实现在最需要的地方优先进行投资。</p>
+<h1>路线网络</h1>
 <p>虽然路线通常包含有关旅行<em>行为</em>的数据，在与需求线和OD（起点-终点）对相同的地理层级上，路线网络数据集通常代表物理交通网络。路线网络中的每个<em>段</em>大致对应于交叉口之间的连续街道段，并且只出现一次，尽管段的平均长度取决于数据源（本节中使用的由OSM（开放街道地图）派生的<code>bristol_ways</code>数据集中的段平均长度刚好超过200米，标准差接近500米）。段长度的可变性可以由这样一个事实来解释：在一些农村地区，交叉口相距很远，而在密集的城市区域，每隔几米就有交叉口和其他段的断点。</p>
 <p>路线网络可以是交通数据分析项目的输入或输出，或者两者都是。任何涉及路线计算的交通研究都需要内部或外部路由引擎中的路线网络数据集（在后一种情况下，路线网络数据不一定需要导入到R中）。然而，路线网络在许多交通研究项目中也是重要的输出：总结诸如特定段上可能进行的潜在行程数量的数据，并以路线网络的形式表示，可以帮助在最需要的地方优先进行投资。</p>
-<p>为了演示如何从路线级别的数据中创建路线网络作为输出，想象一个简单的模式转移场景。假设0到3公里的路线距离之间的50%的汽车行程被自行车取代，这一百分比每增加1公里的路线距离就减少10个百分点，以至于6公里的汽车行程有20%被自行车取代，而8公里或更长的汽车行程没有被自行车取代。当然，这是一个不现实的情景(Lovelace
-等 2017)，但它是一个有用的起点。
+<p>为了演示如何从路线级别的数据中创建路线网络作为输出，想象一个简单的模式转移场景。假设0到3公里的路线距离之间的50%的汽车行程被自行车取代，这一百分比每增加1公里的路线距离就减少10个百分点，以至于6公里的汽车行程有20%被自行车取代，而8公里或更长的汽车行程没有被自行车取代。当然，这是一个不现实的情景(Lovelace 等 2017)，但它是一个有用的起点。<br>
 在这种情况下，我们可以按照以下方式模拟从汽车到自行车的模式转移：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">uptake <span class="operator">=</span> <span class="keyword">function</span><span class="punctuation">(</span>x<span class="punctuation">)</span> <span class="punctuation">&#123;</span></span><br><span class="line">  case_when<span class="punctuation">(</span></span><br><span class="line">    x <span class="operator">&lt;=</span> <span class="number">3</span> <span class="operator">~</span> <span class="number">0.5</span><span class="punctuation">,</span></span><br><span class="line">    x <span class="operator">&gt;=</span> <span class="number">8</span> <span class="operator">~</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="literal">TRUE</span> <span class="operator">~</span> <span class="punctuation">(</span><span class="number">8</span> <span class="operator">-</span> x<span class="punctuation">)</span> <span class="operator">/</span> <span class="punctuation">(</span><span class="number">8</span> <span class="operator">-</span> <span class="number">3</span><span class="punctuation">)</span> <span class="operator">*</span> <span class="number">0.5</span></span><br><span class="line">  <span class="punctuation">)</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line">routes_short_scenario <span class="operator">=</span> routes_short <span class="operator">|&gt;</span> </span><br><span class="line">  mutate<span class="punctuation">(</span>uptake <span class="operator">=</span> uptake<span class="punctuation">(</span>distance <span class="operator">/</span> <span class="number">1000</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  mutate<span class="punctuation">(</span>bicycle <span class="operator">=</span> bicycle <span class="operator">+</span> car_driver <span class="operator">*</span> uptake<span class="punctuation">,</span></span><br><span class="line">         car_driver <span class="operator">=</span> car_driver <span class="operator">*</span> <span class="punctuation">(</span><span class="number">1</span> <span class="operator">-</span> uptake<span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line"><span class="built_in">sum</span><span class="punctuation">(</span>routes_short_scenario<span class="operator">$</span>bicycle<span class="punctuation">)</span> <span class="operator">-</span> <span class="built_in">sum</span><span class="punctuation">(</span>routes_short<span class="operator">$</span>bicycle<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] 3733</span></span><br></pre></td></tr></table></figure>
-<p>在创建了一个大约有4000次行程从驾驶转向骑自行车的场景后，我们现在可以模拟这个更新后的模拟自行车活动将在哪里发生。为此，我们将使用<strong>stplanr</strong>包中的<code>overline()</code>函数。该函数在交叉口（两条或更多的折线几何相交的地方）处断开折线，并计算每个唯一路段的聚合统计信息(Morgan
-和 Lovelace
-2020)，它将包含路线的对象和要汇总的属性的名称作为第一和第二个参数：</p>
+<p>在创建了一个大约有4000次行程从驾驶转向骑自行车的场景后，我们现在可以模拟这个更新后的模拟自行车活动将在哪里发生。为此，我们将使用<strong>stplanr</strong>包中的<code>overline()</code>函数。该函数在交叉口（两条或更多的折线几何相交的地方）处断开折线，并计算每个唯一路段的聚合统计信息(Morgan 和 Lovelace 2020)，它将包含路线的对象和要汇总的属性的名称作为第一和第二个参数：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route_network_scenario <span class="operator">=</span> overline<span class="punctuation">(</span>routes_short_scenario<span class="punctuation">,</span> attrib <span class="operator">=</span> <span class="string">&quot;bicycle&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <p>前面两个代码块的输出总结如下面的图所示。</p>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051646384.png">
-Illustration of the percentage of car trips switching to cycling as a
-function of distance (left) and route network level results of this
-function (right).</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051646384.png" alt><br>
+Illustration of the percentage of car trips switching to cycling as a function of distance (left) and route network level results of this function (right).</p>
 <p>具有在路段级别的记录的交通网络，通常带有诸如道路类型和宽度之类的属性，构成了一种常见的路线网络。这种路线网络数据集在全球范围内都可以从OpenStreetMap获得，并可以使用诸如<strong>osmdata</strong>和<strong>osmextract</strong>这样的软件包进行下载。为了节省下载和准备OSM的时间，我们将使用来自<strong>spDataLarge</strong>包的<code>bristol_ways</code>对象，这是一个带有LINESTRING几何图形和属性的<code>sf</code>对象，代表了案例研究区域内交通网络的一个样本（详见<code>?bristol_ways</code>以获取详细信息），如下面的输出所示：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">summary<span class="punctuation">(</span>bristol_ways<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt;      highway       maxspeed             ref                     geometry   </span></span><br><span class="line"><span class="comment">#&gt;  cycleway:1721   Length:6160        Length:6160        LINESTRING   :6160  </span></span><br><span class="line"><span class="comment">#&gt;  rail    :1017   Class :character   Class :character   epsg:4326    :   0  </span></span><br><span class="line"><span class="comment">#&gt;  road    :3422   Mode  :character   Mode  :character   +proj=long...:   0</span></span><br></pre></td></tr></table></figure>
 <p>输出显示<code>bristol_ways</code>代表了交通网络上刚刚超过6千个路段。这种和其他地理网络可以表示为数学图，网络上的节点由边连接。一些R软件包已经为处理这样的图而开发，尤其是<strong>igraph</strong>。您可以手动将路线网络转换为<code>igraph</code>对象，但地理属性将会丢失。为了克服<strong>igraph</strong>的这一局限性，开发了<strong>sfnetworks</strong>软件包，该软件包能够同时将路线网络表示为图<em>和</em>地理线。我们将在<code>bristol_ways</code>对象上演示<strong>sfnetworks</strong>的功能。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bristol_ways<span class="operator">$</span>lengths <span class="operator">=</span> st_length<span class="punctuation">(</span>bristol_ways<span class="punctuation">)</span></span><br><span class="line">ways_sfn <span class="operator">=</span> as_sfnetwork<span class="punctuation">(</span>bristol_ways<span class="punctuation">)</span></span><br><span class="line"><span class="built_in">class</span><span class="punctuation">(</span>ways_sfn<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;sfnetwork&quot; &quot;tbl_graph&quot; &quot;igraph&quot;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ways_sfn</span><br><span class="line"><span class="comment">#&gt; # A sfnetwork with 5728 nodes and 4915 edges</span></span><br><span class="line"><span class="comment">#&gt; # A directed multigraph with 1013 components with spatially explicit edges</span></span><br><span class="line"><span class="comment">#&gt; # Node Data:     5,728 × 1 (active)</span></span><br><span class="line"><span class="comment">#&gt; # Edge Data:     4,915 × 7</span></span><br><span class="line"><span class="comment">#&gt;    from    to highway maxspeed ref                              geometry lengths</span></span><br><span class="line"><span class="comment">#&gt;   &lt;int&gt; &lt;int&gt; &lt;fct&gt;   &lt;fct&gt;    &lt;fct&gt;                    &lt;LINESTRING [°]&gt;     [m]</span></span><br><span class="line"><span class="comment">#&gt; 1     1     2 road    &lt;NA&gt;     B3130 (-2.61 51.4, -2.61 51.4, -2.61 51.…    218.</span></span><br><span class="line"><span class="comment">#&gt; # … </span></span><br></pre></td></tr></table></figure>
-<p>由于空间考虑，前一个代码块的输出（最后的输出被缩短，仅包含最重要的8行）显示<code>ways_sfn</code>是一个复合对象，以图和空间形式包含节点和边。<code>ways_sfn</code>是<code>sfnetwork</code>类，该类基于<strong>igraph</strong>包中的<code>igraph</code>类。在下面的示例中，计算了'边介数'，也就是经过每条边的最短路径的数量（有关更多详细信息，请参见<code>?igraph::betweenness</code>）。边介数计算的输出显示在下图，该图以用<code>overline()</code>函数计算的自行车路线网络数据集作为叠加层进行比较。结果表明，每个图的边代表一个路段：靠近道路网络中心的路段具有最高的介数值，而靠近布里斯托尔中心的路段基于这些简单数据集具有更高的自行车潜力。</p>
+<p>由于空间考虑，前一个代码块的输出（最后的输出被缩短，仅包含最重要的8行）显示<code>ways_sfn</code>是一个复合对象，以图和空间形式包含节点和边。<code>ways_sfn</code>是<code>sfnetwork</code>类，该类基于<strong>igraph</strong>包中的<code>igraph</code>类。在下面的示例中，计算了’边介数’，也就是经过每条边的最短路径的数量（有关更多详细信息，请参见<code>?igraph::betweenness</code>）。边介数计算的输出显示在下图，该图以用<code>overline()</code>函数计算的自行车路线网络数据集作为叠加层进行比较。结果表明，每个图的边代表一个路段：靠近道路网络中心的路段具有最高的介数值，而靠近布里斯托尔中心的路段基于这些简单数据集具有更高的自行车潜力。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ways_centrality <span class="operator">=</span> ways_sfn <span class="operator">|&gt;</span> </span><br><span class="line">  activate<span class="punctuation">(</span><span class="string">&quot;edges&quot;</span><span class="punctuation">)</span> <span class="operator">|&gt;</span>  </span><br><span class="line">  mutate<span class="punctuation">(</span>betweenness <span class="operator">=</span> tidygraph<span class="operator">::</span>centrality_edge_betweenness<span class="punctuation">(</span>lengths<span class="punctuation">)</span><span class="punctuation">)</span> </span><br></pre></td></tr></table></figure>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051653021.png">
-Illustration of route network datasets. The grey lines represent a
-simplified road network, with segment thickness proportional to
-betweenness. The green lines represent potential cycling flows (one way)
-calculated with the code above</p>
-<p>人们还可以使用<strong>sfnetworks</strong>包中的这种路由网络的图表示法来找到起点和终点之间的最短路线。<!-- TODO: 如果时间允许，基于这一点制作一个练习（RL 2022-07） -->与可能的情况相比，本节介绍的方法相对简单。<strong>sfnetworks</strong>开放的双重图/空间功能使得许多新的强大技术得以实现，这些在本节中无法完全涵盖。然而，本节确实为进一步探索和研究该领域提供了一个坚实的起点。最后一点是，我们上面使用的示例数据集相对较小。也可能值得考虑如何将工作适应到更大的网络：在数据的子集上测试方法，并确保您有足够的RAM将有所帮助，尽管也值得探索其他优化用于大型网络的交通网络分析工具，比如R5
-(Alessandretti 等 2022)。</p>
-<h1 id="优先考虑新基础设施">优先考虑新基础设施</h1>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051653021.png" alt><br>
+Illustration of route network datasets. The grey lines represent a simplified road network, with segment thickness proportional to betweenness. The green lines represent potential cycling flows (one way) calculated with the code above</p>
+<p>人们还可以使用<strong>sfnetworks</strong>包中的这种路由网络的图表示法来找到起点和终点之间的最短路线。<!-- TODO: 如果时间允许，基于这一点制作一个练习（RL 2022-07） -->与可能的情况相比，本节介绍的方法相对简单。<strong>sfnetworks</strong>开放的双重图/空间功能使得许多新的强大技术得以实现，这些在本节中无法完全涵盖。然而，本节确实为进一步探索和研究该领域提供了一个坚实的起点。最后一点是，我们上面使用的示例数据集相对较小。也可能值得考虑如何将工作适应到更大的网络：在数据的子集上测试方法，并确保您有足够的RAM将有所帮助，尽管也值得探索其他优化用于大型网络的交通网络分析工具，比如R5 (Alessandretti 等 2022)。</p>
+<h1>优先考虑新基础设施</h1>
 <p>本节演示了地理计算如何在交通规划领域创造与政策相关的成果。我们将使用一个简单的方法（出于教育目的）来识别可持续交通基础设施投资的有希望的地点。</p>
 <p>本章概述的数据驱动方法的一个优点是其模块性：每个方面本身就很有用，并可以融入更广泛的分析中。使我们达到这一阶段的步骤包括在<em>路线</em>节中识别短途但依赖汽车的通勤路线（由欲望线生成），以及使用<strong>sfnetworks</strong>包在<em>路线网络</em>中分析路由网络特性。本章的最后一个代码块将这些分析纵向结合，通过在代表距离自行车基础设施很近的区域的新数据集上覆盖上一节中的自行车潜力估计。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">existing_cycleways_buffer <span class="operator">=</span> bristol_ways <span class="operator">|&gt;</span> </span><br><span class="line">  filter<span class="punctuation">(</span>highway <span class="operator">==</span> <span class="string">&quot;cycleway&quot;</span><span class="punctuation">)</span> <span class="operator">|&gt;</span>    <span class="comment"># 1) filter out cycleways</span></span><br><span class="line">  st_union<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">|&gt;</span>                       <span class="comment"># 2) unite geometries</span></span><br><span class="line">  st_buffer<span class="punctuation">(</span>dist <span class="operator">=</span> <span class="number">100</span><span class="punctuation">)</span>               <span class="comment"># 3) create buffer</span></span><br></pre></td></tr></table></figure>
@@ -716,83 +581,38 @@ calculated with the code above</p>
 <!-- toDo: rl -->
 <!-- the next figure must be updated -->
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#&gt; Warning: Some legend items or map compoments do not fit well (e.g. due to the</span><br><span class="line">#&gt; specified font size).</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051701347.png">
-Potential routes along which to prioritise cycle infrastructure in
-Bristol to reduce car dependency. The static map provides an overview of
-the overlay between existing infrastructure and routes with high
-car-bike switching potential (left). The screenshot the interactive map
-generated from the <code>qtm()</code> function highlights Whiteladies
-Road as somewhere that would benefit from a new cycleway (right).</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309051701347.png" alt><br>
+Potential routes along which to prioritise cycle infrastructure in Bristol to reduce car dependency. The static map provides an overview of the overlay between existing infrastructure and routes with high car-bike switching potential (left). The screenshot the interactive map generated from the <code>qtm()</code> function highlights Whiteladies Road as somewhere that would benefit from a new cycleway (right).</p>
 <p>该方法存在一些局限性：实际上，人们并不总是前往区域中心或始终使用特定模式的最短路径算法。然而，结果展示了如何使用地理数据分析来突出可能特别有益于新投资自行车道的地方，尽管这种方法很简单。为了在实践中指导交通规划设计，这种分析需要大幅扩展——包括使用更大的输入数据集。</p>
-<h1 id="旅行的未来方向">旅行的未来方向</h1>
+<h1>旅行的未来方向</h1>
 <p>这一章提供了使用地理计算进行交通研究的可能性的一个概览，并使用开放数据和可复制代码探讨了构成城市交通系统的一些关键地理元素。这些结果有助于规划需要投资的地方。</p>
 <p>交通系统在多个相互作用的层面上运行，这意味着地理计算方法有很大的潜力，可以生成有关它们如何运作以及不同干预措施可能产生的影响的见解。在这一领域还有更多可以做的事情：基于本章提供的基础，有很多方向可以进行拓展。</p>
-<p>交通是许多国家温室气体排放增长最快的来源，并将成为“尤其是在发达国家中最大的温室气体排放部门”。交通相关的排放在社会上分布不均，但（与食物和供暖不同）对幸福来说并非必需品。通过需求减少、车队电气化以及积极采取像步行和骑自行车这样的活动出行方式，该部门有很大的快速减碳潜力。新技术可以通过更多的汽车共享来减少对汽车的依赖。诸如无桩自行车和电动滑板车方案这样的“微移动”系统也正在出现，以General
-Bikeshare Feed Specification（GBFS）格式创建有价值的数据集，可以用<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/simonpcouch/gbfs"><strong>gbfs</strong></a>包进行导入和处理。</p>
+<p>交通是许多国家温室气体排放增长最快的来源，并将成为“尤其是在发达国家中最大的温室气体排放部门”。交通相关的排放在社会上分布不均，但（与食物和供暖不同）对幸福来说并非必需品。通过需求减少、车队电气化以及积极采取像步行和骑自行车这样的活动出行方式，该部门有很大的快速减碳潜力。新技术可以通过更多的汽车共享来减少对汽车的依赖。诸如无桩自行车和电动滑板车方案这样的“微移动”系统也正在出现，以General Bikeshare Feed Specification（GBFS）格式创建有价值的数据集，可以用<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/simonpcouch/gbfs"><strong>gbfs</strong></a>包进行导入和处理。</p>
 <p>从方法论的角度看，本章提供的基础可以通过在分析中包括更多变量来进行扩展。例如，通过使用R语言的统计建模能力，这可以用来预测当前和未来的自行车使用水平。</p>
-<p>这种类型的分析是Propensity to Cycle
-Tool（PCT）的基础，这是一个用R语言开发的，用于优先考虑英格兰各地自行车投资的公开可访问的映射工具（lovelace
-2017）。类似的工具可以用于鼓励与空气污染和公共交通准入等其他主题相关的基于证据的交通政策。</p>
-<h1 id="练习">练习</h1>
-<p>E1. In much of the analysis presented in the chapter we focused on
-active modes, but what about driving trips?</p>
+<p>这种类型的分析是Propensity to Cycle Tool（PCT）的基础，这是一个用R语言开发的，用于优先考虑英格兰各地自行车投资的公开可访问的映射工具（lovelace 2017）。类似的工具可以用于鼓励与空气污染和公共交通准入等其他主题相关的基于证据的交通政策。</p>
+<h1>练习</h1>
+<p>E1. 在本章的大部分分析中，我们关注的是主动模式，但是驾驶行程呢？</p>
 <ul>
-<li>What proportion of trips in the <code>desire_lines</code> object are
-made by driving?</li>
-<li>What proportion of <code>desire_lines</code> have a straight line
-length of 5 km or more in distance?</li>
-<li>What proportion of trips in desire lines that are longer than 5 km
-in length are made by driving?</li>
-<li>Plot the desire lines that are both less than 5 km in length and
-along which more than 50% of trips are made by car.</li>
-<li>What do you notice about the location of these car dependent yet
-short desire lines?</li>
+<li>在<code>desire_lines</code>对象中，有多大比例的行程是通过驾驶完成的？</li>
+<li>有多大比例的<code>desire_lines</code>的直线长度为5公里或更远？</li>
+<li>在长度超过5公里的<code>desire_lines</code>中，有多大比例的行程是通过驾驶完成的？</li>
+<li>绘制那些长度小于5公里且其中超过50%的行程是通过汽车完成的<code>desire_lines</code>。</li>
+<li>你注意到这些依赖汽车但<code>desire_lines</code>较短的地方有什么特点？</li>
 </ul>
-<p>E2. What additional length of cycleways would result if all the
-routes presented in the last Figure, on sections beyond 100 m from
-existing cycleways, were constructed?</p>
-<p>E3. What proportion of trips represented in the
-<code>desire_lines</code> are accounted for in the
-<code>routes_short_scenario</code> object?</p>
+<p>E2. 如果在离现有自行车道超过100米的区段上建造了上图中展示的所有路线，会增加多少长度的自行车道？</p>
+<p>E3. <code>desire_lines</code>中表示的行程有多大比例在<code>routes_short_scenario</code>对象中得到了体现？</p>
 <ul>
-<li>Bonus: what proportion of all trips happen on desire lines that
-cross <code>routes_short_scenario</code>?</li>
+<li>奖励：所有行程中有多大比例发生在穿越<code>routes_short_scenario</code>的<code>desire_lines</code>上？</li>
 </ul>
-<p>E4. The analysis presented in this chapter is designed for teaching
-how geocomputation methods can be applied to transport research. If you
-were doing this for real, in government or for a transport consultancy,
-what top 3 things would you do differently?</p>
-<p>E5. Clearly, the routes identified in the last Figure only provide
-part of the picture. How would you extend the analysis?</p>
-<p>E6. Imagine that you want to extend the scenario by creating key
-<em>areas</em> (not routes) for investment in place-based cycling
-policies such as car-free zones, cycle parking points and reduced car
-parking strategy. How could raster datasets assist with this work?</p>
+<p>E4. 本章展示的分析旨在教授如何将地理计算方法应用于交通研究。<br>
+如果你是在政府或交通咨询公司中真正进行这项工作，你会有哪三个不同的做法？</p>
+<p>E5. 显然，上图中识别的路线只是部分情况。<br>
+你会如何扩展这个分析？</p>
+<p>E6. 假设你想通过创建投资基于场所的自行车政策的关键<em>区域</em>（而不是路线）来扩展场景，比如无车区、自行车停车点和减少汽车停车策略。<br>
+栅格数据集如何协助完成这项工作？</p>
 <ul>
-<li>Bonus: develop a raster layer that divides the Bristol region into
-100 cells (10 by 10) and estimate the average speed limit of roads in
-each, from the <code>bristol_ways</code> dataset (see Chapter
-@ref(location)).</li>
+<li>奖励：开发一个光栅层，将布里斯托地区划分为100个单元格（10x10），并从<code>bristol_ways</code>数据集（参见章节 @ref(location)）估算每个单元格中道路的平均速度限制。</li>
 </ul>
-<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>13-transport-1<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>13-transport-1<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>在第一个匹配没有提供正确名称的情况下，应指定国家或地区，例如位于美国的布里斯托尔应为
-<code>Bristol Tennessee</code>。<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p><code>_if</code> 后缀要求对变量提出一个
-<code>TRUE</code>/<code>FALSE</code>
-的问题，在这个情况下是'是否为数值型?' 只有返回 true 的变量会被汇总。<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>在实际数据中，检查ID在反方向上是否匹配也同样重要。这可以通过改变<code>summary()</code>命令中ID的顺序来完成——<code>summary(bristol_zones$geo_code %in% zones_attr$geo_code)</code>——或者通过如下使用<code>setdiff()</code>：<code>setdiff(bristol_zones$geo_code, zones_attr$geo_code)</code>。<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p><code>od2line()</code> 的工作方式是通过匹配
-<code>bristol_od</code> 对象的前两列中的ID与地理 <code>zones_od</code>
-对象中的 <code>zone_code</code>
-ID列。需要注意的是，该操作会发出一个警告，因为 <code>od2line()</code>
-是通过将每一对起点-终点分配给其起源和目的地区域的<em>质心</em>来工作的。对于实际应用，人们会使用由投影数据生成的质心值，或者更好地使用<em>基于人口加权</em>的质心<span class="citation" data-cites="lovelace_propensity_2017">[@lovelace_propensity_2017]</span>。<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>注意，红色的路线和黑色的期望线的起点并不完全相同。这是因为区域质心很少位于路线网络上：相反，路线起源于距离质心最近的交通网络节点。还要注意，假设路线起源于区域质心，这是一个简化假设，用于减少计算所有可能起点和终点组合之间的最短路径所需的计算资源<span class="citation" data-cites="hollander_transport_2016">[@hollander_transport_2016]</span>。<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</aside>
 
         </div>
 
@@ -874,13 +694,13 @@ ID列。需要注意的是，该操作会发出一个警告，因为 <code>od2li
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">168k</span>
+    <span title="站点总字数">178k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:12</span>
+    <span title="站点阅读时长">10:47</span>
   </span>
 </div>
 <div class="busuanzi-count">
