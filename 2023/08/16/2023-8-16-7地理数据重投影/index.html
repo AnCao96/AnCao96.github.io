@@ -149,7 +149,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9D%90%E6%A0%87%E5%8F%82%E8%80%83%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">坐标参考系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%AE%BE%E7%BD%AE%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-number">3.</span> <span class="nav-text">查询和设置坐标系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%95%E5%BD%B1%E5%92%8C%E6%9C%AA%E6%8A%95%E5%BD%B1%E6%95%B0%E6%8D%AE%E4%B8%8A%E7%9A%84%E5%87%A0%E4%BD%95%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">投影和未投影数据上的几何操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%95%E6%97%B6%E9%87%8D%E6%8A%95%E5%BD%B1"><span class="nav-number">5.</span> <span class="nav-text">何时重投影？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E5%93%AA%E4%B8%AAcrs%E4%BD%BF%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text">选择哪个CRS使用?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%A2%E9%87%8F%E5%87%A0%E4%BD%95%E9%87%8D%E6%8A%95%E5%BD%B1"><span class="nav-number">7.</span> <span class="nav-text">矢量几何重投影</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%85%E6%A0%BC%E5%87%A0%E4%BD%95%E9%87%8D%E6%8A%95%E5%BD%B1"><span class="nav-number">8.</span> <span class="nav-text">栅格几何重投影</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-number">9.</span> <span class="nav-text">自定义坐标系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">10.</span> <span class="nav-text">练习</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">前提条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">坐标参考系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">查询和设置坐标系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">投影和未投影数据上的几何操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">何时重投影？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">选择哪个CRS使用?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">矢量几何重投影</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">9.</span> <span class="nav-text">栅格几何重投影</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">10.</span> <span class="nav-text">自定义坐标系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">11.</span> <span class="nav-text">练习</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -309,64 +309,45 @@
         
         <div class="post-body" itemprop="articleBody"><blockquote><p>本文由SCY翻译自《Geocomputation with R》<a target="_blank" rel="external nofollow noopener noreferrer" href="https://r.geocompx.org/reproj-geo-data">第七章</a></p>
 </blockquote>
-<p>本章演示了如何设置并将地理数据从一个CRS<em>转换</em>到另一个CRS，并进一步突出了由于忽略CRS而可能出现的特定问题，当您的数据以经纬度坐标存储时，应该特别注意。
-<span id="more"></span> # 前提条件</p>
+<p>本章演示了如何设置并将地理数据从一个CRS<em>转换</em>到另一个CRS，并进一步突出了由于忽略CRS而可能出现的特定问题，当您的数据以经纬度坐标存储时，应该特别注意。</p>
+<span id="more"></span>
+<h1>前提条件</h1>
 <ul>
 <li>本章要求下列包：</li>
 </ul>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>sf<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>terra<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>dplyr<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>spData<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>spDataLarge<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<h1 id="引言">引言</h1>
-<p>前面章节介绍了坐标参照系统（CRSs），主要集中在两个主要类型：<em>地理</em>（'lon/lat'，其单位为经度和纬度的度数）和<em>投影</em>（通常以米为单位，从基准点开始）坐标系统。本章在此基础上进一步拓展。它演示了如何设置并将地理数据从一个CRS<em>转换</em>到另一个CRS，并进一步突出了由于忽略CRS而可能出现的特定问题，您应该特别注意，特别是当您的数据以经纬度坐标存储时。</p>
+<h1>引言</h1>
+<p>前面章节介绍了坐标参照系统（CRSs），主要集中在两个主要类型：<em>地理</em>（‘lon/lat’，其单位为经度和纬度的度数）和<em>投影</em>（通常以米为单位，从基准点开始）坐标系统。本章在此基础上进一步拓展。它演示了如何设置并将地理数据从一个CRS<em>转换</em>到另一个CRS，并进一步突出了由于忽略CRS而可能出现的特定问题，您应该特别注意，特别是当您的数据以经纬度坐标存储时。</p>
 <p>在许多项目中，不需要担心不同的CRS，更不用说在不同的CRS之间转换了。了解您的数据是在投影坐标系统还是地理坐标系统中，以及这对几何操作的影响非常重要。然而，如果您知道您的数据的CRS以及几何操作的影响（在下一节中介绍），CRS应该在幕后<em>正常工作</em>，人们通常在事情出错时突然需要了解CRS。拥有明确定义的CRS，并且所有项目数据都在其中，再加上理解如何以及为什么使用不同的CRS，可以确保事情不会出错。此外，学习坐标系统将加深您对地理数据集及其有效使用方法的了解。</p>
 <p>本章教授CRS的基础知识，展示了使用不同CRS的后果（包括可能出错的情况），以及如何将数据集从一个坐标系统“重新投影”到另一个坐标系统。在下一节中，我们将介绍R中的CRS，展示如何获取和设置与空间对象关联的CRS。通过创建缓冲区的实际示例演示了了解数据所在CRS的重要性。本章解决了何时重新投影以及使用哪个CRS的问题。本章介绍了重新投影矢量和栅格对象，并在章节中修改了地图投影。</p>
-<h1 id="坐标参考系统">坐标参考系统</h1>
-<p>大多数现代地理工具都需要CRS转换，包括核心R空间包和桌面GIS软件如QGIS，它们与
-<a target="_blank" rel="external nofollow noopener noreferrer" href="https://proj.org">PROJ</a>
-接口，这是一个开源C++库，用于“将坐标从一个坐标参考系统（CRS）转换到另一个”。CRS可以用多种方式描述，包括以下几种。</p>
-<ol type="1">
+<h1>坐标参考系统</h1>
+<p>大多数现代地理工具都需要CRS转换，包括核心R空间包和桌面GIS软件如QGIS，它们与 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://proj.org">PROJ</a> 接口，这是一个开源C++库，用于“将坐标从一个坐标参考系统（CRS）转换到另一个”。CRS可以用多种方式描述，包括以下几种。</p>
+<ol>
 <li>简单但可能含糊不清的陈述，如“它在经/纬坐标中”</li>
-<li>正式化但现已过时的“proj4字符串”（也称为“proj-string”），如
-<code>+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs</code></li>
-<li>使用标识的'authority:code'文本字符串，如 <code>EPSG:4326</code></li>
+<li>正式化但现已过时的“proj4字符串”（也称为“proj-string”），如 <code>+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs</code></li>
+<li>使用标识的’authority:code’文本字符串，如 <code>EPSG:4326</code></li>
 </ol>
 <p>每个都指的是同一件事：构成全球定位系统（GPS）坐标和许多其他数据集基础的“WGS84”坐标系统。但哪一个才是正确的？</p>
-<p>简短的回答是，识别CRSs的第三种方式是首选：<code>EPSG:4326</code>
-由本书涵盖的 <strong>sf</strong>（以及扩展的 <strong>stars</strong>）和
-<strong>terra</strong>
-包以及许多其他用于处理地理数据的软件项目所理解，包括 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.qgis.org/3.16/en/docs/user_manual/working_with_projections/working_with_projections.html">QGIS</a>
-和 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://proj.org/development/quickstart.html">PROJ</a>。<code>EPSG:4326</code>
-在未来可靠的。此外，尽管它是机器可读的，但与proj-string表示法不同，“EPSG:4326”
-简短、易记且在网上非常容易找到（例如，搜索EPSG:4326会在网站 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://epsg.io/4326">epsg.io</a> 上找到专 dedicated
-页）。更简洁的标识符<code>4326</code>由<strong>sf</strong>理解，但<strong>我们建议使用更明确的
-<code>AUTHORITY:CODE</code> 表示法来消除歧义并提供上下文</strong>。</p>
-<p>较长的回答是，这三个描述都不够，并且需要更多的细节来进行明确的CRS处理和转换：由于CRS的复杂性，不可能在如此短的文本字符串中捕获有关它们的所有相关信息。出于这个原因，开放地理空间联盟（OGC，还开发了<strong>sf</strong>
-包实现的简单要素规范）开发了一种用于描述CRS的开放标准格式，称为WKT（众所周知的文本）。这在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://portal.opengeospatial.org/files/18-010r7">100多页的文档</a>中详细介绍了“定义了坐标参考系统的抽象模型的文本字符串实现的结构和内容，该抽象模型描述在ISO
-19111:2019”中。WGS84
-CRS的WKT表示法具有<strong>标识符</strong><code>EPSG:4326</code>，如下所示：</p>
+<p>简短的回答是，识别CRSs的第三种方式是首选：<code>EPSG:4326</code> 由本书涵盖的 <strong>sf</strong>（以及扩展的 <strong>stars</strong>）和 <strong>terra</strong> 包以及许多其他用于处理地理数据的软件项目所理解，包括 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.qgis.org/3.16/en/docs/user_manual/working_with_projections/working_with_projections.html">QGIS</a> 和 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://proj.org/development/quickstart.html">PROJ</a>。<code>EPSG:4326</code> 在未来可靠的。此外，尽管它是机器可读的，但与proj-string表示法不同，“EPSG:4326” 简短、易记且在网上非常容易找到（例如，搜索EPSG:4326会在网站 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://epsg.io/4326">epsg.io</a> 上找到专 dedicated 页）。更简洁的标识符<code>4326</code>由<strong>sf</strong>理解，但<strong>我们建议使用更明确的 <code>AUTHORITY:CODE</code> 表示法来消除歧义并提供上下文</strong>。</p>
+<p>较长的回答是，这三个描述都不够，并且需要更多的细节来进行明确的CRS处理和转换：由于CRS的复杂性，不可能在如此短的文本字符串中捕获有关它们的所有相关信息。出于这个原因，开放地理空间联盟（OGC，还开发了<strong>sf</strong> 包实现的简单要素规范）开发了一种用于描述CRS的开放标准格式，称为WKT（众所周知的文本）。这在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://portal.opengeospatial.org/files/18-010r7">100多页的文档</a>中详细介绍了“定义了坐标参考系统的抽象模型的文本字符串实现的结构和内容，该抽象模型描述在ISO 19111:2019”中。WGS84 CRS的WKT表示法具有<strong>标识符</strong><code>EPSG:4326</code>，如下所示：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">st_crs<span class="punctuation">(</span><span class="string">&quot;EPSG:4326&quot;</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Coordinate Reference System:</span></span><br><span class="line"><span class="comment">#&gt;   User input: EPSG:4326 </span></span><br><span class="line"><span class="comment">#&gt;   wkt:</span></span><br><span class="line"><span class="comment">#&gt; GEOGCRS[&quot;WGS 84&quot;,</span></span><br><span class="line"><span class="comment">#&gt;     ENSEMBLE[&quot;World Geodetic System 1984 ensemble&quot;,</span></span><br><span class="line"><span class="comment">#&gt;         MEMBER[&quot;World Geodetic System 1984 (Transit)&quot;],</span></span><br><span class="line"><span class="comment">#&gt;         MEMBER[&quot;World Geodetic System 1984 (G730)&quot;],</span></span><br><span class="line"><span class="comment">#&gt;         MEMBER[&quot;World Geodetic System 1984 (G873)&quot;],</span></span><br><span class="line"><span class="comment">#&gt;         MEMBER[&quot;World Geodetic System 1984 (G1150)&quot;],</span></span><br><span class="line"><span class="comment">#&gt;         MEMBER[&quot;World Geodetic System 1984 (G1674)&quot;],</span></span><br><span class="line"><span class="comment">#&gt;         MEMBER[&quot;World Geodetic System 1984 (G1762)&quot;],</span></span><br><span class="line"><span class="comment">#&gt;         MEMBER[&quot;World Geodetic System 1984 (G2139)&quot;],</span></span><br><span class="line"><span class="comment">#&gt;         ELLIPSOID[&quot;WGS 84&quot;,6378137,298.257223563,</span></span><br><span class="line"><span class="comment">#&gt;             LENGTHUNIT[&quot;metre&quot;,1]],</span></span><br><span class="line"><span class="comment">#&gt;         ENSEMBLEACCURACY[2.0]],</span></span><br><span class="line"><span class="comment">#&gt;     PRIMEM[&quot;Greenwich&quot;,0,</span></span><br><span class="line"><span class="comment">#&gt;         ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],</span></span><br><span class="line"><span class="comment">#&gt;     CS[ellipsoidal,2],</span></span><br><span class="line"><span class="comment">#&gt;         AXIS[&quot;geodetic latitude (Lat)&quot;,north,</span></span><br><span class="line"><span class="comment">#&gt;             ORDER[1],</span></span><br><span class="line"><span class="comment">#&gt;             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],</span></span><br><span class="line"><span class="comment">#&gt;         AXIS[&quot;geodetic longitude (Lon)&quot;,east,</span></span><br><span class="line"><span class="comment">#&gt;             ORDER[2],</span></span><br><span class="line"><span class="comment">#&gt;             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],</span></span><br><span class="line"><span class="comment">#&gt;     USAGE[</span></span><br><span class="line"><span class="comment">#&gt;         SCOPE[&quot;Horizontal component of 3D system.&quot;],</span></span><br><span class="line"><span class="comment">#&gt;         AREA[&quot;World.&quot;],</span></span><br><span class="line"><span class="comment">#&gt;         BBOX[-90,-180,90,180]],</span></span><br><span class="line"><span class="comment">#&gt;     ID[&quot;EPSG&quot;,4326]]</span></span><br></pre></td></tr></table></figure>
-<p>命令的输出显示了CRS标识符（也称为空间参考标识符或<a target="_blank" rel="external nofollow noopener noreferrer" href="https://postgis.net/workshops/postgis-intro/projection.html">SRID</a>）的工作方式：它只是一个查找，提供与CRS的更完整WKT表示形式关联的唯一标识符。这提出了一个问题：如果标识符和CRS的较长WKT表示之间存在不匹配怎么办？关于这一点，<span class="citation" data-cites="opengeospatialconsortium_wellknown_2019很明确">@opengeospatialconsortium_wellknown_2019很明确</span>，详细的WKT表示优先于<a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.opengeospatial.org/is/18-010r7/18-010r7.html#37">identifier</a>：</p>
+<p>命令的输出显示了CRS标识符（也称为空间参考标识符或<a target="_blank" rel="external nofollow noopener noreferrer" href="https://postgis.net/workshops/postgis-intro/projection.html">SRID</a>）的工作方式：它只是一个查找，提供与CRS的更完整WKT表示形式关联的唯一标识符。这提出了一个问题：如果标识符和CRS的较长WKT表示之间存在不匹配怎么办？关于这一点，@opengeospatialconsortium_wellknown_2019很明确，详细的WKT表示优先于<a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.opengeospatial.org/is/18-010r7/18-010r7.html#37">identifier</a>：</p>
 <blockquote>
 <p>📌如果引用的标识符中给出的任何属性或值与WKT描述中明确给出的属性或值冲突，则WKT值应优先。</p>
 </blockquote>
-<p>以<code>AUTHORITY:CODE</code>形式引用CRS标识符的惯例，也被用于其他<a target="_blank" rel="external nofollow noopener noreferrer" href="https://jorisvandenbossche.github.io/blog/2020/02/11/geopandas-pyproj-crs/">languages</a>编写的地理软件，允许广泛引用正式定义的坐标系统。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>CRS标识符中最常用的权威机构是<em>EPSG</em>，这是欧洲石油调查小组的首字母缩写，该小组发布了CRS的标准化列表（EPSG由油气机构<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.iogp.org/our-committees/geomatics/">Geomatics
-Committee of the International Association of Oil &amp; Gas
-Producers</a>在2005年<a target="_blank" rel="external nofollow noopener noreferrer" href="http://wiki.gis.com/wiki/index.php/European_Petroleum_Survey_Group">taken
-over</a>）。CRS标识符中可以使用其他权威机构。
+<p>以<code>AUTHORITY:CODE</code>形式引用CRS标识符的惯例，也被用于其他<a target="_blank" rel="external nofollow noopener noreferrer" href="https://jorisvandenbossche.github.io/blog/2020/02/11/geopandas-pyproj-crs/">languages</a>编写的地理软件，允许广泛引用正式定义的坐标系统。^[可以使用几种其他方法来引用唯一的CRS，<a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.qgis.org/3.16/en/docs/pyqgis_developer_cookbook/crs.html?highlight=srid">QGIS</a>和其他标识符类型（例如<code>EPSG:4326</code>标识符的更详细变体，<code>urn:ogc:def:crs:EPSG::4326</code>）接受五种标识符类型（EPSG代码，PostGIS SRID，INTERNAL SRID，proj-string和WKT字符串）。]CRS标识符中最常用的权威机构是<em>EPSG</em>，这是欧洲石油调查小组的首字母缩写，该小组发布了CRS的标准化列表（EPSG由油气机构<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.iogp.org/our-committees/geomatics/">Geomatics Committee of the International Association of Oil &amp; Gas Producers</a>在2005年<a target="_blank" rel="external nofollow noopener noreferrer" href="http://wiki.gis.com/wiki/index.php/European_Petroleum_Survey_Group">taken over</a>）。CRS标识符中可以使用其他权威机构。<br>
 例如，<code>ESRI:54030</code>指的是ESRI对罗宾逊投影的实现，其具有以下WKT字符串（仅显示前8行）：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">st_crs<span class="punctuation">(</span><span class="string">&quot;ESRI:54030&quot;</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Coordinate Reference System:</span></span><br><span class="line"><span class="comment">#&gt;   User input: ESRI:54030 </span></span><br><span class="line"><span class="comment">#&gt;   wkt:</span></span><br><span class="line"><span class="comment">#&gt; PROJCRS[&quot;World_Robinson&quot;,</span></span><br><span class="line"><span class="comment">#&gt;     BASEGEOGCRS[&quot;WGS 84&quot;,</span></span><br><span class="line"><span class="comment">#&gt;         DATUM[&quot;World Geodetic System 1984&quot;,</span></span><br><span class="line"><span class="comment">#&gt;             ELLIPSOID[&quot;WGS 84&quot;,6378137,298.257223563,</span></span><br><span class="line"><span class="comment">#&gt;                 LENGTHUNIT[&quot;metre&quot;,1]]],</span></span><br><span class="line"><span class="comment">#&gt; ...</span></span><br></pre></td></tr></table></figure>
-<p>WKT字符串详尽、精确且准确，允许无歧义地存储和转换CRS。它们包含了任何给定CRS的所有相关信息，包括其基准面和椭球体、本初子午线、投影和单位。<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>最近的PROJ版本（6+）仍允许使用proj-string来定义坐标操作，但一些proj-string键（如<code>+nadgrids</code>、<code>+towgs84</code>、<code>+k</code>、<code>+init=epsg:</code>）要么不再受支持，要么不鼓励使用。
-此外，只有三个基准面（即WGS84、NAD83和NAD27）可以在proj-string中直接设置。关于CRS定义和PROJ库演变的更长解释可以在@bivand_progress_2021，<span class="citation" data-cites="pebesma_spatial_2022的第2章">@pebesma_spatial_2022的第2章</span>，以及<a target="_blank" rel="external nofollow noopener noreferrer" href="https://inbo.github.io/tutorials/tutorials/spatial_crs_coding/">Floris
-Vanderhaeghe的博客文章</a>中找到。此外，如<a target="_blank" rel="external nofollow noopener noreferrer" href="https://proj.org/development/reference/cpp/cpp_general.html">PROJ文档</a>所概述的，WKT
-CRS格式有不同的版本，包括WKT1和WKT2的两个变体，其中后者（WKT2，2018规范）对应于ISO
-19111:2019。</p>
-<h1 id="查询和设置坐标系">查询和设置坐标系</h1>
+<p>WKT字符串详尽、精确且准确，允许无歧义地存储和转换CRS。它们包含了任何给定CRS的所有相关信息，包括其基准面和椭球体、本初子午线、投影和单位。^[在WKTCRS定义出现之前，proj-string是指定坐标操作和存储CRS的标准方式。这些基于键=值形式（例如，<code>+proj=longlat +datum=WGS84+no_defs</code>）构建的字符串表示，在大多数情况下已经被或者将来应该被WKT表示所取代。]</p>
+<p>最近的PROJ版本（6+）仍允许使用proj-string来定义坐标操作，但一些proj-string键（如<code>+nadgrids</code>、<code>+towgs84</code>、<code>+k</code>、<code>+init=epsg:</code>）要么不再受支持，要么不鼓励使用。<br>
+此外，只有三个基准面（即WGS84、NAD83和NAD27）可以在proj-string中直接设置。关于CRS定义和PROJ库演变的更长解释可以在@bivand_progress_2021，@pebesma_spatial_2022的第2章，以及<a target="_blank" rel="external nofollow noopener noreferrer" href="https://inbo.github.io/tutorials/tutorials/spatial_crs_coding/">Floris Vanderhaeghe的博客文章</a>中找到。此外，如<a target="_blank" rel="external nofollow noopener noreferrer" href="https://proj.org/development/reference/cpp/cpp_general.html">PROJ文档</a>所概述的，WKT CRS格式有不同的版本，包括WKT1和WKT2的两个变体，其中后者（WKT2，2018规范）对应于ISO 19111:2019。</p>
+<h1>查询和设置坐标系</h1>
 <p>让我们看看CRS是如何存储在R的空间对象中的，以及如何查询和设置它们。首先，我们将研究如何在<strong>矢量</strong>地理数据对象中获取和设置CRS，从以下示例开始：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vector_filepath <span class="operator">=</span> system.file<span class="punctuation">(</span><span class="string">&quot;shapes/world.gpkg&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spData&quot;</span><span class="punctuation">)</span></span><br><span class="line">new_vector <span class="operator">=</span> read_sf<span class="punctuation">(</span>vector_filepath<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <p>我们的新对象<code>new_vector</code>是一个<code>sf</code>类的数据框，代表了全球各个国家（有关详细信息，请参阅帮助页面<code>?spData::world</code>）。可以使用<strong>sf</strong>函数<code>st_crs()</code>来检索CRS。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">st_crs<span class="punctuation">(</span>new_vector<span class="punctuation">)</span> <span class="comment"># get CRS</span></span><br><span class="line"><span class="comment">#&gt; Coordinate Reference System:</span></span><br><span class="line"><span class="comment">#&gt;   User input: WGS 84 </span></span><br><span class="line"><span class="comment">#&gt;   wkt:</span></span><br><span class="line"><span class="comment">#&gt;   ...</span></span><br></pre></td></tr></table></figure>
 <p>输出是一个包含两个主要组件的列表：</p>
-<ol type="1">
+<ol>
 <li><code>User input</code>（在此情况下为<code>WGS 84</code>，即<code>EPSG:4326</code>的同义词，它在这种情况下是从输入文件中获取的），对应于上述的CRS标识符</li>
 <li><code>wkt</code>，包含有关CRS的所有相关信息的完整WKT字符串</li>
 </ol>
@@ -375,7 +356,7 @@ CRS格式有不同的版本，包括WKT1和WKT2的两个变体，其中后者（
 <ul>
 <li><code>st_crs(new_vector)$IsGeographic</code>来检查CRS是否是地理的</li>
 <li><code>st_crs(new_vector)$units_gdal</code>找出CRS的单位</li>
-<li><code>st_crs(new_vector)$srid</code>提取其'SRID'标识符（如果可用）</li>
+<li><code>st_crs(new_vector)$srid</code>提取其’SRID’标识符（如果可用）</li>
 <li><code>st_crs(new_vector)$proj4string</code>提取proj-string表示</li>
 </ul>
 <p>在坐标参考系统（CRS）缺失或设置错误的CRS的情况下，可以使用<code>st_set_crs()</code>函数（在这种情况下，由于文件在读入时已经正确设置了CRS，WKT字符串保持不变）：</p>
@@ -388,82 +369,57 @@ CRS格式有不同的版本，包括WKT1和WKT2的两个变体，其中后者（
 <p>重要的是，<code>st_crs()</code>和<code>crs()</code>函数不会改变坐标的值或几何图形。它们的作用仅仅是设置关于对象CRS的元数据信息。</p>
 <p>在某些情况下，地理对象的CRS是未知的，就像下面的代码块中创建的<code>london</code>数据集一样，引入的伦敦示例中就有这样的情况：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">london <span class="operator">=</span> data.frame<span class="punctuation">(</span>lon <span class="operator">=</span> <span class="operator">-</span><span class="number">0.1</span><span class="punctuation">,</span> lat <span class="operator">=</span> <span class="number">51.5</span><span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  st_as_sf<span class="punctuation">(</span>coords <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;lon&quot;</span><span class="punctuation">,</span> <span class="string">&quot;lat&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">st_is_longlat<span class="punctuation">(</span>london<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] NA</span></span><br></pre></td></tr></table></figure>
-<p>输出的<code>NA</code>显示<strong>sf</strong>不知道CRS是什么，并且不愿意猜测（<code>NA</code>字面意思是'不可用'）。除非人为指定了CRS或者从具有CRS元数据的源中加载，否则<strong>sf</strong>不会对坐标系统做出任何明确的假设，除了说“我不知道”。鉴于可用CRS的多样性，这种行为是有道理的，但与一些方法不同，例如GeoJSON文件格式规范，它简化地假设所有坐标都具有经纬度坐标系：<code>EPSG:4326</code>。没有指定CRS的数据集可能会引起问题：所有地理坐标都有坐标系统，只有知道它正在处理的CRS类型，软件才能在绘图和几何操作方面做出正确的决策。因此，再次强调，始终检查数据集的CRS并设置它（如果它丢失）是非常重要的。</p>
+<p>输出的<code>NA</code>显示<strong>sf</strong>不知道CRS是什么，并且不愿意猜测（<code>NA</code>字面意思是’不可用’）。除非人为指定了CRS或者从具有CRS元数据的源中加载，否则<strong>sf</strong>不会对坐标系统做出任何明确的假设，除了说“我不知道”。鉴于可用CRS的多样性，这种行为是有道理的，但与一些方法不同，例如GeoJSON文件格式规范，它简化地假设所有坐标都具有经纬度坐标系：<code>EPSG:4326</code>。没有指定CRS的数据集可能会引起问题：所有地理坐标都有坐标系统，只有知道它正在处理的CRS类型，软件才能在绘图和几何操作方面做出正确的决策。因此，再次强调，始终检查数据集的CRS并设置它（如果它丢失）是非常重要的。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">london_geo <span class="operator">=</span> st_set_crs<span class="punctuation">(</span>london<span class="punctuation">,</span> <span class="string">&quot;EPSG:4326&quot;</span><span class="punctuation">)</span></span><br><span class="line">st_is_longlat<span class="punctuation">(</span>london_geo<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] TRUE</span></span><br></pre></td></tr></table></figure>
-<h1 id="投影和未投影数据上的几何操作">投影和未投影数据上的几何操作</h1>
-<p>自 <strong>sf</strong> 版本 1.0.0 以来，得益于引入的S2
-<em>球面几何引擎</em>，R处理具有经纬度CRS的地理矢量数据集的能力有了很大的提高。如图所示，<strong>sf</strong>根据CRS的类型和S2是否被禁用（默认启用）来选择使用
-GEOS 或 S2。对于投影数据和没有 CRS
-的数据，总是使用GEOS；对于地理数据，S2 默认启用，但可以通过
-<code>sf::sf_use_s2(FALSE)</code> 禁用。</p>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031515946.png">
-The behavior of the geometry operations in the sf package depending on
-the input data's CRS.</p>
-<p>为了展示 CRS
-的重要性，我们将在前一节中的<code>london</code>对象周围创建 100
-公里的缓冲区。我们还将故意创建一个“距离”为1度的有错误的缓冲区，这大约相当于100公里（赤道上1度大约为111公里）。在深入代码之前，值得简短地跳到下图来直观了解您应该能够通过下面的代码块重现的输出。</p>
-<p>第一阶段是围绕上面创建的 <code>london</code> 和
-<code>london_geo</code> 对象创建三个缓冲区，边界距离分别为 1 度和 100
-公里（或 100,000 米，可以用科学记数法表示为
-<code>1e5</code>）距离伦敦市中心。</p>
+<h1>投影和未投影数据上的几何操作</h1>
+<p>自 <strong>sf</strong> 版本 1.0.0 以来，得益于引入的S2 <em>球面几何引擎</em>，R处理具有经纬度CRS的地理矢量数据集的能力有了很大的提高。如图所示，<strong>sf</strong>根据CRS的类型和S2是否被禁用（默认启用）来选择使用 GEOS 或 S2。对于投影数据和没有 CRS 的数据，总是使用GEOS；对于地理数据，S2 默认启用，但可以通过 <code>sf::sf_use_s2(FALSE)</code> 禁用。</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031515946.png" alt><br>
+The behavior of the geometry operations in the sf package depending on the input data’s CRS.</p>
+<p>为了展示 CRS 的重要性，我们将在前一节中的<code>london</code>对象周围创建 100 公里的缓冲区。我们还将故意创建一个“距离”为1度的有错误的缓冲区，这大约相当于100公里（赤道上1度大约为111公里）。在深入代码之前，值得简短地跳到下图来直观了解您应该能够通过下面的代码块重现的输出。</p>
+<p>第一阶段是围绕上面创建的 <code>london</code> 和 <code>london_geo</code> 对象创建三个缓冲区，边界距离分别为 1 度和 100 公里（或 100,000 米，可以用科学记数法表示为 <code>1e5</code>）距离伦敦市中心。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">london_buff_no_crs <span class="operator">=</span> st_buffer<span class="punctuation">(</span>london<span class="punctuation">,</span> dist <span class="operator">=</span> <span class="number">1</span><span class="punctuation">)</span>   <span class="comment"># incorrect: no CRS</span></span><br><span class="line">london_buff_s2 <span class="operator">=</span> st_buffer<span class="punctuation">(</span>london_geo<span class="punctuation">,</span> dist <span class="operator">=</span> <span class="number">100000</span><span class="punctuation">)</span> <span class="comment"># silent use of s2</span></span><br><span class="line">london_buff_s2_100_cells <span class="operator">=</span> st_buffer<span class="punctuation">(</span>london_geo<span class="punctuation">,</span> dist <span class="operator">=</span> <span class="number">100000</span><span class="punctuation">,</span> max_cells <span class="operator">=</span> <span class="number">100</span><span class="punctuation">)</span> </span><br></pre></td></tr></table></figure>
-<p>在上述的第一行中，<strong>sf</strong>假设输入是投影的，并生成了以度为单位的缓冲区的结果，这是有问题的，我们将看到。在第二行中，<strong>sf</strong>使用球面几何引擎S2（在章节@ref(spatial-class)
-中引入）默默地计算缓冲区的范围，使用 <code>max_cells = 1000</code>
-的默认值——在第三行中设置为 <code>100</code>——这些后果将很快显现（详见
-<code>?s2::s2_buffer_cells</code>）。为了强调 <strong>sf</strong>
-对未投影（地理）坐标系统的S2几何引擎的影响，我们将在下面的代码块中暂时禁用它，使用命令<code>sf_use_s2()</code>（默认为
-<code>TRUE</code>）。与
-<code>london_buff_no_crs</code>一样，新的<code>london_geo</code>对象是一个地理怪物：它的单位是度，这在绝大多数情况下都没有意义：</p>
+<p>在上述的第一行中，<strong>sf</strong>假设输入是投影的，并生成了以度为单位的缓冲区的结果，这是有问题的，我们将看到。在第二行中，<strong>sf</strong>使用球面几何引擎S2（在章节@ref(spatial-class) 中引入）默默地计算缓冲区的范围，使用 <code>max_cells = 1000</code> 的默认值——在第三行中设置为 <code>100</code>——这些后果将很快显现（详见 <code>?s2::s2_buffer_cells</code>）。为了强调 <strong>sf</strong> 对未投影（地理）坐标系统的S2几何引擎的影响，我们将在下面的代码块中暂时禁用它，使用命令<code>sf_use_s2()</code>（默认为 <code>TRUE</code>）。与 <code>london_buff_no_crs</code>一样，新的<code>london_geo</code>对象是一个地理怪物：它的单位是度，这在绝大多数情况下都没有意义：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sf<span class="operator">::</span>sf_use_s2<span class="punctuation">(</span><span class="literal">FALSE</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Spherical geometry (s2) switched off</span></span><br><span class="line">london_buff_lonlat <span class="operator">=</span> st_buffer<span class="punctuation">(</span>london_geo<span class="punctuation">,</span> dist <span class="operator">=</span> <span class="number">1</span><span class="punctuation">)</span> <span class="comment"># incorrect result</span></span><br><span class="line"><span class="comment">#&gt; Warning in st_buffer.sfc(st_geometry(x), dist, nQuadSegs, endCapStyle =</span></span><br><span class="line"><span class="comment">#&gt; endCapStyle, : st_buffer does not correctly buffer longitude/latitude data</span></span><br><span class="line"><span class="comment">#&gt; dist is assumed to be in decimal degrees (arc_degrees).</span></span><br><span class="line">sf<span class="operator">::</span>sf_use_s2<span class="punctuation">(</span><span class="literal">TRUE</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Spherical geometry (s2) switched on</span></span><br></pre></td></tr></table></figure>
-<p>上述的警告信息暗示了在经纬度数据上执行平面几何操作的问题。当通过命令
-<code>sf::sf_use_s2(FALSE)</code>关闭球面几何操作时，缓冲区（以及其他几何操作）可能会产生无价值的输出，因为它们使用的是纬度和经度的单位，这与以米为单位的适当距离单位相比是一个糟糕的替代品。</p>
+<p>上述的警告信息暗示了在经纬度数据上执行平面几何操作的问题。当通过命令 <code>sf::sf_use_s2(FALSE)</code>关闭球面几何操作时，缓冲区（以及其他几何操作）可能会产生无价值的输出，因为它们使用的是纬度和经度的单位，这与以米为单位的适当距离单位相比是一个糟糕的替代品。</p>
 <blockquote>
-<p>📌两条经线（称为子午线）之间的距离在赤道处约为111公里（执行<code>geosphere::distGeo(c(0,0),c(1,0))</code>找到精确距离）。这在极地缩小为零。例如，在伦敦的纬度上，子午线之间的距离不到70公里（挑战：执行验证此事的代码）。
-<!-- `geosphere::distGeo(c(0, 51.5), c(1, 51.5))` -->
-相比之下，纬线彼此之间的距离不受纬度的影响：它们总是相距约111公里，包括在赤道和靠近极地的地方。</p>
+<p>📌两条经线（称为子午线）之间的距离在赤道处约为111公里（执行<code>geosphere::distGeo(c(0,0),c(1,0))</code>找到精确距离）。这在极地缩小为零。例如，在伦敦的纬度上，子午线之间的距离不到70公里（挑战：执行验证此事的代码）。</p>
 </blockquote>
+<!-- `geosphere::distGeo(c(0, 51.5), c(1, 51.5))` -->
+<p>相比之下，纬线彼此之间的距离不受纬度的影响：它们总是相距约111公里，包括在赤道和靠近极地的地方。</p>
 <p>不要将关于地理（<code>经度/纬度</code>）坐标参照系的警告解释为“坐标参照系不应该被设置”：它几乎总是应该被设置的！更好的理解是建议将数据<em>重新投影</em>到投影坐标参照系上。此建议并不总是需要遵循：在某些情况下，执行空间和几何操作几乎没有差别（例如，空间子集）。但是对于涉及距离的操作，例如缓冲区，确保良好结果的唯一方法（不使用球形几何引擎）是创建数据的投影副本，并在其上运行操作。在下面的代码块中完成了这一操作：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">london_proj <span class="operator">=</span> data.frame<span class="punctuation">(</span>x <span class="operator">=</span> <span class="number">530000</span><span class="punctuation">,</span> y <span class="operator">=</span> <span class="number">180000</span><span class="punctuation">)</span> <span class="operator">|&gt;</span> </span><br><span class="line">  st_as_sf<span class="punctuation">(</span>coords <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;x&quot;</span><span class="punctuation">,</span> <span class="string">&quot;y&quot;</span><span class="punctuation">)</span><span class="punctuation">,</span> crs <span class="operator">=</span> <span class="string">&quot;EPSG:27700&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <p>结果是一个与<code>london</code>相同但重新投影到合适坐标参照系（在这种情况下为英国国家网格，其EPSG代码为27700）的新对象，该坐标参照系的单位为米。我们可以使用<code>st_crs()</code>来验证CRS已更改，如下所示（部分输出已被替换为<code>...</code>）：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">st_crs<span class="punctuation">(</span>london_proj<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Coordinate Reference System:</span></span><br><span class="line"><span class="comment">#&gt;   User input: EPSG:27700 </span></span><br><span class="line"><span class="comment">#&gt;   wkt:</span></span><br><span class="line"><span class="comment">#&gt; PROJCRS[&quot;OSGB36 / British National Grid&quot;,</span></span><br><span class="line"><span class="comment">#&gt;     BASEGEOGCRS[&quot;OSGB36&quot;,</span></span><br><span class="line"><span class="comment">#&gt;         DATUM[&quot;Ordnance Survey of Great Britain 1936&quot;,</span></span><br><span class="line"><span class="comment">#&gt;             ELLIPSOID[&quot;Airy 1830&quot;,6377563.396,299.3249646,</span></span><br><span class="line"><span class="comment">#&gt;                 LENGTHUNIT[&quot;metre&quot;,1]]],</span></span><br><span class="line"><span class="comment">#&gt; ...</span></span><br></pre></td></tr></table></figure>
-<p>此CRS描述的显著组成部分包括EPSG代码（<code>EPSG:27700</code>）和详细的<code>wkt</code>字符串（仅显示前5行）。<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>CRS的单位描述在LENGTHUNIT字段中，单位是米（而不是度），这告诉我们这是一个投影的CRS：<code>st_is_longlat(london_proj)</code>现在返回<code>FALSE</code>，并且对<code>london_proj</code>的几何操作将无需警告即可工作。对<code>london_proj</code>的缓冲区操作将使用GEOS，结果将以适当的距离单位返回。以下代码行在<em>投影</em>数据周围创建了恰好100公里的缓冲区：</p>
+<p>此CRS描述的显著组成部分包括EPSG代码（<code>EPSG:27700</code>）和详细的<code>wkt</code>字符串（仅显示前5行）。^[有关最相关投影参数和相关概念的简短描述，请参阅Jochen Albrecht在<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.geography.hunter.cuny.edu/~jochen/GTECH361/lectures/">http://www.geography.hunter.cuny.edu/~jochen/GTECH361/lectures/</a> 主持的第四讲，并在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://proj.org/usage/projections.html">https://proj.org/usage/projections.html</a> 查看信息。<a target="_blank" rel="external nofollow noopener noreferrer" href="http://xn--spatialreference-tk1zb1b39arz3a3b7330cldpmmue21cmh4b3is228j.xn--orgprogonos-904s.com/furuti/MapProj%E3%80%82">关于投影的其他优秀资源是spatialreference.org和progonos.com/furuti/MapProj。</a>]CRS的单位描述在LENGTHUNIT字段中，单位是米（而不是度），这告诉我们这是一个投影的CRS：<code>st_is_longlat(london_proj)</code>现在返回<code>FALSE</code>，并且对<code>london_proj</code>的几何操作将无需警告即可工作。对<code>london_proj</code>的缓冲区操作将使用GEOS，结果将以适当的距离单位返回。以下代码行在<em>投影</em>数据周围创建了恰好100公里的缓冲区：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">london_buff_projected <span class="operator">=</span> st_buffer<span class="punctuation">(</span>london_proj<span class="punctuation">,</span> <span class="number">100000</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <p>上述三个<em>具有</em>指定CRS的<code>london_buff*</code>对象（<code>london_buff_s2</code>，<code>london_buff_lonlat</code>和<code>london_buff_projected</code>）在前面的代码块中创建的几何图形在下图中有所展示。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#&gt; Warning: The `returnclass` argument of `ne_download()` sp as of rnaturalearth 1.0.0.</span><br><span class="line">#&gt; ℹ Please use `sf` objects with &#123;rnaturalearth&#125;, support for Spatial objects</span><br><span class="line">#&gt;   (sp) will be removed in a future release of the package.</span><br><span class="line">#&gt; This warning is displayed once every 8 hours.</span><br><span class="line">#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span><br><span class="line">#&gt; generated.</span><br></pre></td></tr></table></figure>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031548552.png">
-Buffers around London showing results created with the S2 spherical
-geometry engine on lon/lat data (left), projected data (middle) and
-lon/lat data without using spherical geometry (right). The left plot
-illustrates the result of buffering unprojected data with sf, which
-calls Google's S2 spherical geometry engine by default with max cells
-set to 1000 (thin line). The thick 'blocky' line illustrates the result
-of the same operation with max cells set to 100.</p>
-<p>从上图中可以清楚地看到，基于<code>s2</code>和适当投影的CRS的缓冲区并没有被“压扁”，意味着缓冲区边界的每一部分都与伦敦等距离。当<code>s2</code>未被使用时，从经纬度CRS生成的结果，无论是因为输入缺少CRS还是因为<code>sf_use_s2()</code>被关闭，都会严重失真，结果在南北轴向延伸，突出了在经纬度输入上使用假设投影数据的算法（如GEOS所做）的危险性。然而，使用S2生成的结果也同样失真，尽管不太显著。图中（左）的两个缓冲区边界都是锯齿状的，尽管这可能只在用<code>s2</code>参数<code>max_cells</code>设置为100创建的粗边界表示的缓冲区时才显现或相关。
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031548552.png" alt><br>
+Buffers around London showing results created with the S2 spherical geometry engine on lon/lat data (left), projected data (middle) and lon/lat data without using spherical geometry (right). The left plot illustrates the result of buffering unprojected data with sf, which calls Google’s S2 spherical geometry engine by default with max cells set to 1000 (thin line). The thick ‘blocky’ line illustrates the result of the same operation with max cells set to 100.</p>
+<p>从上图中可以清楚地看到，基于<code>s2</code>和适当投影的CRS的缓冲区并没有被“压扁”，意味着缓冲区边界的每一部分都与伦敦等距离。当<code>s2</code>未被使用时，从经纬度CRS生成的结果，无论是因为输入缺少CRS还是因为<code>sf_use_s2()</code>被关闭，都会严重失真，结果在南北轴向延伸，突出了在经纬度输入上使用假设投影数据的算法（如GEOS所做）的危险性。然而，使用S2生成的结果也同样失真，尽管不太显著。图中（左）的两个缓冲区边界都是锯齿状的，尽管这可能只在用<code>s2</code>参数<code>max_cells</code>设置为100创建的粗边界表示的缓冲区时才显现或相关。</p>
 <!--toDo:rl-->
 <!--jn: maybe it is worth to emphasize that the differences are due to the use of S2 vs GEOS-->
 <!--jn: you mention S2 a lot in this section, but not GEOS...-->
-教训是，通过S2从经纬度数据获得的结果将与使用投影数据获得的结果不同。随着<code>max_cells</code>值的增加，S2派生的缓冲区和GEOS派生的投影数据上的缓冲区之间的差异减小，此参数的“正确”值可能取决于许多因素，缺省值1000是合理的。在选择<code>max_cells</code>值时，应在计算速度和结果分辨率之间取得平衡。在曲线边界有优势的情况下，在缓冲（或执行其他几何操作）之前转换到投影CRS可能是合适的。</p>
+<p>教训是，通过S2从经纬度数据获得的结果将与使用投影数据获得的结果不同。随着<code>max_cells</code>值的增加，S2派生的缓冲区和GEOS派生的投影数据上的缓冲区之间的差异减小，此参数的“正确”值可能取决于许多因素，缺省值1000是合理的。在选择<code>max_cells</code>值时，应在计算速度和结果分辨率之间取得平衡。在曲线边界有优势的情况下，在缓冲（或执行其他几何操作）之前转换到投影CRS可能是合适的。</p>
 <p>从上述示例中可以清楚地看到CRS的重要性（主要是它们是投影的还是地理的）以及<strong>sf</strong>默认使用S2在经纬度数据上进行缓冲的影响。后续章节将更深入地探讨何时需要投影CRS以及重投影矢量和栅格对象的细节。</p>
-<h1 id="何时重投影">何时重投影？</h1>
-<p>上一节展示了如何手动设置坐标参考系统（CRS），通过<code>st_set_crs(london, "EPSG:4326")</code>。然而，在现实世界的应用中，CRS通常在数据读入时自动设置。在许多项目中，主要与CRS有关的任务是将对象从一个CRS<em>转换</em>为另一个CRS。但是，何时应该转换数据？转换为哪个CRS？这些问题没有明确的答案，CRS的选择总是涉及权衡。然而，本节提供了一些一般性原则，可以帮助您做决策。</p>
+<h1>何时重投影？</h1>
+<p>上一节展示了如何手动设置坐标参考系统（CRS），通过<code>st_set_crs(london, &quot;EPSG:4326&quot;)</code>。然而，在现实世界的应用中，CRS通常在数据读入时自动设置。在许多项目中，主要与CRS有关的任务是将对象从一个CRS<em>转换</em>为另一个CRS。但是，何时应该转换数据？转换为哪个CRS？这些问题没有明确的答案，CRS的选择总是涉及权衡。然而，本节提供了一些一般性原则，可以帮助您做决策。</p>
 <p>首先值得考虑的是<em>何时进行转换</em>。在某些情况下，转换为地理CRS是至关重要的，例如使用<strong>leaflet</strong>包在线发布数据时。另一个情况是当必须比较或组合两个具有不同CRS的对象时，例如当我们试图找到具有不同CRS的两个对象之间的距离时：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">st_distance<span class="punctuation">(</span>london_geo<span class="punctuation">,</span> london_proj<span class="punctuation">)</span></span><br><span class="line"><span class="comment"># &gt; Error: st_crs(x) == st_crs(y) is not TRUE</span></span><br></pre></td></tr></table></figure>
 <p>要使<code>london</code>和<code>london_proj</code>对象在地理上可比较，必须将其中一个转换为另一个的CRS。但是应该使用哪个CRS呢？答案取决于具体情况：许多项目，特别是涉及网络映射的项目，需要以EPSG:4326的输出，此时最好转换投影对象。然而，如果项目需要平面几何操作而不是球面几何操作引擎（例如，为了创建具有平滑边缘的缓冲区），那么将具有地理CRS的数据转换为具有投影CRS的等效对象可能是值得的，例如英国国家网格（EPSG:27700）。</p>
-<h1 id="选择哪个crs使用">选择哪个CRS使用?</h1>
-<p><em>选择哪个CRS</em>的问题很棘手，很少有“正确”的答案：“不存在全能的投影，当远离指定框架的中心时，所有投影都会发生失真”。此外，你不应该只依附于一个投影来完成每项任务。有可能在分析的某些部分使用一种投影，在另一部分使用另一种投影，甚至在可视化中使用其他投影。始终尝试选择最能实现你目标的CRS！在选择<strong>地理坐标参照系（CRS）</strong>时，答案通常是<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/World_Geodetic_System#A_new_World_Geodetic_System:_WGS_84">WGS84</a>。它不仅用于网络地图绘制，而且由于GPS数据集以及数以千计的栅格和矢量数据集默认都提供在这个CRS下。WGS84是世界上最常用的CRS，因此值得记住其EPSG代码：4326。这个“神奇的数字”可以用来将具有不寻常的投影CRS的对象转换成广泛理解的形式。</p>
-<p>那么在需要<strong>投影坐标参照系（CRS）</strong>时怎么办呢？在某些情况下，这不是我们可以自由决定的问题：“通常投影的选择是由公共测绘机构做出的”这意味着当使用本地数据源时，最好使用数据提供的CRS来工作，以确保兼容性，即使官方的CRS不是最精确的。伦敦的例子很容易回答，因为（a）英国国家网格（及其相关的EPSG代码27700）众所周知，（b）原始数据集（<code>london</code>）已经有了该CRS。</p>
-<p>常用的默认值是通用横轴墨卡托（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system">UTM</a>），一组将地球划分为60个经度楔形和20个纬度段的CRS。UTM
-CRS所使用的横轴墨卡托投影是共形的，但随着距离UTM区域中心的距离增加，面积和距离的失真程度逐渐加剧。因此，GIS软件Manifold的文档建议将使用UTM区域的项目的经度范围限制在中央子午线的6度之内（来源：<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.manifold.net/doc/mfd9/universal_transverse_mercator_projection.htm">manifold.net</a>）。所以，我们建议仅在您关注保持相对较小区域的角度时使用UTM！</p>
+<h1>选择哪个CRS使用?</h1>
+<p><em>选择哪个CRS</em>的问题很棘手，很少有“正确”的答案：“不存在全能的投影，当远离指定框架的中心时，所有投影都会发生失真”。此外，你不应该只依附于一个投影来完成每项任务。有可能在分析的某些部分使用一种投影，在另一部分使用另一种投影，甚至在可视化中使用其他投影。始终尝试选择最能实现你目标的CRS！在选择**地理坐标参照系（CRS）**时，答案通常是<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/World_Geodetic_System#A_new_World_Geodetic_System:_WGS_84">WGS84</a>。它不仅用于网络地图绘制，而且由于GPS数据集以及数以千计的栅格和矢量数据集默认都提供在这个CRS下。WGS84是世界上最常用的CRS，因此值得记住其EPSG代码：4326。这个“神奇的数字”可以用来将具有不寻常的投影CRS的对象转换成广泛理解的形式。</p>
+<p>那么在需要**投影坐标参照系（CRS）**时怎么办呢？在某些情况下，这不是我们可以自由决定的问题：“通常投影的选择是由公共测绘机构做出的”这意味着当使用本地数据源时，最好使用数据提供的CRS来工作，以确保兼容性，即使官方的CRS不是最精确的。伦敦的例子很容易回答，因为（a）英国国家网格（及其相关的EPSG代码27700）众所周知，（b）原始数据集（<code>london</code>）已经有了该CRS。</p>
+<p>常用的默认值是通用横轴墨卡托（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system">UTM</a>），一组将地球划分为60个经度楔形和20个纬度段的CRS。UTM CRS所使用的横轴墨卡托投影是共形的，但随着距离UTM区域中心的距离增加，面积和距离的失真程度逐渐加剧。因此，GIS软件Manifold的文档建议将使用UTM区域的项目的经度范围限制在中央子午线的6度之内（来源：<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.manifold.net/doc/mfd9/universal_transverse_mercator_projection.htm">manifold.net</a>）。所以，我们建议仅在您关注保持相对较小区域的角度时使用UTM！</p>
 <p>地球上几乎每个地方都有一个UTM代码，例如“60H”，指的是新西兰北部R语言发明的地方。UTM的EPSG代码对于北半球的位置依次从32601到32660，对于南半球的位置则从32701到32760。</p>
 <p>要展示该系统是如何工作的，让我们创建一个函数<code>lonlat2UTM()</code>，用来计算地球上任何点所对应的EPSG代码，如下所示<a target="_blank" rel="external nofollow noopener noreferrer" href="https://stackoverflow.com/a/9188972/"></a>：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">lonlat2UTM <span class="operator">=</span> <span class="keyword">function</span><span class="punctuation">(</span>lonlat<span class="punctuation">)</span> <span class="punctuation">&#123;</span></span><br><span class="line">  utm <span class="operator">=</span> <span class="punctuation">(</span><span class="built_in">floor</span><span class="punctuation">(</span><span class="punctuation">(</span>lonlat<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span> <span class="operator">+</span> <span class="number">180</span><span class="punctuation">)</span> <span class="operator">/</span> <span class="number">6</span><span class="punctuation">)</span> <span class="operator">%%</span> <span class="number">60</span><span class="punctuation">)</span> <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">  <span class="keyword">if</span> <span class="punctuation">(</span>lonlat<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span> <span class="operator">&gt;</span> <span class="number">0</span><span class="punctuation">)</span> <span class="punctuation">&#123;</span></span><br><span class="line">    utm <span class="operator">+</span> <span class="number">32600</span></span><br><span class="line">  <span class="punctuation">&#125;</span> <span class="keyword">else</span><span class="punctuation">&#123;</span></span><br><span class="line">    utm <span class="operator">+</span> <span class="number">32700</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>以下命令使用这个函数来识别奥克兰和伦敦的UTM区域和相应的EPSG代码。这些代码对于进一步的地理空间数据分析和操作非常重要。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lonlat2UTM<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">174.7</span><span class="punctuation">,</span> <span class="operator">-</span><span class="number">36.9</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] 32760</span></span><br><span class="line">lonlat2UTM<span class="punctuation">(</span>st_coordinates<span class="punctuation">(</span>london<span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] 32630</span></span><br></pre></td></tr></table></figure>
-<p>目前，我们也有一些工具可以帮助我们选择合适的CRS（坐标参考系统），其中包括<strong>crssuggest</strong>包。<!--add ref or docs-->该包的主要函数
-<code>suggest_crs()</code>接受一个带有地理CRS的空间对象，并返回可能用于给定区域的投影CRS列表。<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>另一个有用的工具是一个网页https://jjimenezshaw.github.io/crs-explorer/，它根据所选的位置和类型列出CRS。</p>
+<p>目前，我们也有一些工具可以帮助我们选择合适的CRS（坐标参考系统），其中包括<strong>crssuggest</strong>包。<!--add ref or docs-->该包的主要函数 <code>suggest_crs()</code>接受一个带有地理CRS的空间对象，并返回可能用于给定区域的投影CRS列表。^[该包还允许在没有任何CRS信息附加的情况下找出数据的真实CRS。]另一个有用的工具是一个网页<a target="_blank" rel="external nofollow noopener noreferrer" href="https://jjimenezshaw.github.io/crs-explorer/%EF%BC%8C%E5%AE%83%E6%A0%B9%E6%8D%AE%E6%89%80%E9%80%89%E7%9A%84%E4%BD%8D%E7%BD%AE%E5%92%8C%E7%B1%BB%E5%9E%8B%E5%88%97%E5%87%BACRS%E3%80%82">https://jjimenezshaw.github.io/crs-explorer/，它根据所选的位置和类型列出CRS。</a></p>
 <p>重要提示：虽然这些工具在许多情况下都很有帮助，但在应用推荐的CRS之前，你需要了解其属性。</p>
-<p>当不立即清楚合适的CRS时，CRS的选择应取决于后续地图和分析中最重要的要保留的属性。所有的CRS要么是等面积的，要么是等距的，要么是保形的（形状保持不变），要么是这些特性的某种折中组合。可以为感兴趣的区域创建带有本地参数的自定义CRS，并且当单个CRS不适用于所有任务时，项目中可以使用多个CRS。如果没有合适的CRS，'测地计算'可以提供一个备选方案（参见<a target="_blank" rel="external nofollow noopener noreferrer" href="https://proj.org/geodesic.html">proj.org/geodesic.html</a>）。无论使用哪个投影CRS，对于覆盖数百公里的几何体，结果可能不准确。</p>
-<p>在决定定制CRS时，我们建议如下：<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p>当不立即清楚合适的CRS时，CRS的选择应取决于后续地图和分析中最重要的要保留的属性。所有的CRS要么是等面积的，要么是等距的，要么是保形的（形状保持不变），要么是这些特性的某种折中组合。可以为感兴趣的区域创建带有本地参数的自定义CRS，并且当单个CRS不适用于所有任务时，项目中可以使用多个CRS。如果没有合适的CRS，'测地计算’可以提供一个备选方案（参见<a target="_blank" rel="external nofollow noopener noreferrer" href="https://proj.org/geodesic.html">proj.org/geodesic.html</a>）。无论使用哪个投影CRS，对于覆盖数百公里的几何体，结果可能不准确。</p>
+<p>在决定定制CRS时，我们建议如下：^[非常感谢一位匿名审稿人的评论，他们构成了这些建议的基础。]</p>
 <ul>
 <li>对于定制的本地投影（将原点的纬度和经度设置为研究区域的中心），可以使用Lambert方位等面积（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Lambert_azimuthal_equal-area_projection">LAEA</a>）投影，这是一种在所有位置的等面积投影，但在数千公里以外会扭曲形状。</li>
 <li>对于特定准确的直线距离，可以使用方位等距（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Azimuthal_equidistant_projection">AEQD</a>）投影，该投影的起点与本地投影的中心点之间的距离。</li>
@@ -472,189 +428,148 @@ CRS所使用的横轴墨卡托投影是共形的，但随着距离UTM区域中�
 </ul>
 <p>一种可能的方法是为研究区域的中心点创建方位等距（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Azimuthal_equidistant_projection">AEQD</a>）投影，以自动选择特定于本地数据集的投影坐标参考系统（CRS）。这涉及基于数据集的中心点，使用米为单位创建自定义CRS（没有EPSG代码）。请注意，应谨慎使用此方法：没有其他数据集与创建的自定义CRS兼容，当用于覆盖数百公里的广泛数据集时，结果可能不准确。</p>
 <p>本节概述的原则同样适用于矢量和栅格数据集。然而，CRS转换的某些特点是每个地理数据模型所独有的。我们将介绍矢量数据转换的特殊性和栅格转换的特殊性。接下来，最后一节将展示如何创建自定义地图投影。</p>
-<h1 id="矢量几何重投影">矢量几何重投影</h1>
+<h1>矢量几何重投影</h1>
 <!--jn: idea adding info about custom piplines?-->
 <p><em>空间类</em>章演示了矢量几何是如何由点组成的，以及点如何形成更复杂的对象，如线和多边形。因此，重新投影矢量包括转换这些点的坐标，它们构成了线和多边形的顶点。</p>
 <p><em>何时重投影</em>节包含了一个示例，其中至少一个<code>sf</code>对象必须转换为具有不同CRS的等效对象，以计算两个对象之间的距离。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">london2 <span class="operator">=</span> st_transform<span class="punctuation">(</span>london_geo<span class="punctuation">,</span> <span class="string">&quot;EPSG:27700&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>现在已经使用 <strong>sf</strong> 函数 <code>st_transform()</code>
-创建了 <code>london</code>
-的转换版本，就可以找到两个伦敦表示之间的距离了。<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>令人惊讶的是，<code>london</code> 和
-<code>london2</code> 相距超过2公里！<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p>现在已经使用 <strong>sf</strong> 函数 <code>st_transform()</code> 创建了 <code>london</code> 的转换版本，就可以找到两个伦敦表示之间的距离了。^[替代 <code>st_transform()</code>的是<strong>lwgeom</strong>中的<code>st_transform_proj()</code>，它可以进行绕过GDAL的转换，并可以支持GDAL不支持的投影。在撰写本文时（2022年），我们没有找到任何仅由<code>st_transform_proj()</code> 支持而不由 <code>st_transform()</code> 支持的投影。]令人惊讶的是，<code>london</code> 和 <code>london2</code> 相距超过2公里！^[两点之间的位置差异并不是由于转换操作的不完美（实际上非常精确），而是由于手动创建的<code>london</code>和<code>london_proj</code>的坐标精度低所造成的。同样令人惊讶的是，结果以米为单位的矩阵形式提供。这是因为 <code>st_distance()</code>可以提供许多特征之间的距离，而且CRS的单位是米。使用 <code>as.numeric()</code> 将结果强制转换为常规数字。]</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">st_distance<span class="punctuation">(</span>london2<span class="punctuation">,</span> london_proj<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Units: [m]</span></span><br><span class="line"><span class="comment">#&gt;      [,1]</span></span><br><span class="line"><span class="comment">#&gt; [1,] 2018</span></span><br></pre></td></tr></table></figure>
-<p>下面展示了使用 <code>cycle_hire_osm</code>（来自
-<strong>spData</strong> 的一个 <code>sf</code>
-对象，代表伦敦可以租借自行车的“停靠站”）查询和重新投影CRS的函数。可以用函数
-<code>st_crs()</code>
-查询<code>sf</code>对象的CRS。输出以包含坐标系统信息的多行文本打印：</p>
+<p>下面展示了使用 <code>cycle_hire_osm</code>（来自 <strong>spData</strong> 的一个 <code>sf</code> 对象，代表伦敦可以租借自行车的“停靠站”）查询和重新投影CRS的函数。可以用函数 <code>st_crs()</code> 查询<code>sf</code>对象的CRS。输出以包含坐标系统信息的多行文本打印：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">st_crs<span class="punctuation">(</span>cycle_hire_osm<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Coordinate Reference System:</span></span><br><span class="line"><span class="comment">#&gt;   User input: EPSG:4326 </span></span><br><span class="line"><span class="comment">#&gt;   wkt:</span></span><br><span class="line"><span class="comment">#&gt; GEOGCS[&quot;WGS 84&quot;,</span></span><br><span class="line"><span class="comment">#&gt;     DATUM[&quot;WGS_1984&quot;,</span></span><br><span class="line"><span class="comment">#&gt;         SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,</span></span><br><span class="line"><span class="comment">#&gt;             AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],</span></span><br><span class="line"><span class="comment">#&gt;         AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],</span></span><br><span class="line"><span class="comment">#&gt;     PRIMEM[&quot;Greenwich&quot;,0,</span></span><br><span class="line"><span class="comment">#&gt;         AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],</span></span><br><span class="line"><span class="comment">#&gt;     UNIT[&quot;degree&quot;,0.0174532925199433,</span></span><br><span class="line"><span class="comment">#&gt;         AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],</span></span><br><span class="line"><span class="comment">#&gt;     AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</span></span><br></pre></td></tr></table></figure>
-<p>主要的CRS组件 <code>User input</code> 和
-<code>wkt</code>被打印为单一实体，<code>st_crs()</code>的输出实际上是一个名为<code>crs</code>的类的命名列表，具有两个元素，分别命名为
-<code>input</code> 和 <code>wkt</code>，如以下代码块的输出所示：</p>
+<p>主要的CRS组件 <code>User input</code> 和 <code>wkt</code>被打印为单一实体，<code>st_crs()</code>的输出实际上是一个名为<code>crs</code>的类的命名列表，具有两个元素，分别命名为 <code>input</code> 和 <code>wkt</code>，如以下代码块的输出所示：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">crs_lnd <span class="operator">=</span> st_crs<span class="punctuation">(</span>london_geo<span class="punctuation">)</span></span><br><span class="line"><span class="built_in">class</span><span class="punctuation">(</span>crs_lnd<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;crs&quot;</span></span><br><span class="line"><span class="built_in">names</span><span class="punctuation">(</span>crs_lnd<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;input&quot; &quot;wkt&quot;</span></span><br></pre></td></tr></table></figure>
-<p>可以使用 <code>$</code> 运算符检索附加元素，包括
-<code>Name</code>、<code>proj4string</code> 和
-<code>epsg</code>（有关详细信息，请参阅<a target="_blank" rel="external nofollow noopener noreferrer" href="https://r-spatial.github.io/sf/reference/st_crs.html"><code>?st_crs</code></a>和GDAL<a target="_blank" rel="external nofollow noopener noreferrer" href="https://gdal.org/tutorials/osr_api_tut.html#querying-coordinate-reference-system">网站</a>
-上的 CRS 和转换教程）：</p>
+<p>可以使用 <code>$</code> 运算符检索附加元素，包括 <code>Name</code>、<code>proj4string</code> 和 <code>epsg</code>（有关详细信息，请参阅<a target="_blank" rel="external nofollow noopener noreferrer" href="https://r-spatial.github.io/sf/reference/st_crs.html"><code>?st_crs</code></a>和GDAL<a target="_blank" rel="external nofollow noopener noreferrer" href="https://gdal.org/tutorials/osr_api_tut.html#querying-coordinate-reference-system">网站</a> 上的 CRS 和转换教程）：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">crs_lnd<span class="operator">$</span>Name</span><br><span class="line"><span class="comment">#&gt; [1] &quot;WGS 84&quot;</span></span><br><span class="line">crs_lnd<span class="operator">$</span>proj4string</span><br><span class="line"><span class="comment">#&gt; [1] &quot;+proj=longlat +datum=WGS84 +no_defs&quot;</span></span><br><span class="line">crs_lnd<span class="operator">$</span>epsg</span><br><span class="line"><span class="comment">#&gt; [1] 4326</span></span><br></pre></td></tr></table></figure>
-<p>WKT 表示形式存储在 <code>crs_lnd</code> 对象的 <code>$wkt</code>
-元素中，是最终的真实来源。这意味着前面代码块的输出是来自 PROJ 提供的
-<code>wkt</code> 表示的查询，而不是对象及其 CRS 的固有属性。</p>
-<p>当对象的CRS被转换时，CRS的<code>wkt</code>和<code>User Input</code>元素都会发生改变。在下面的代码块中，我们用投影
-CRS 创建了一个新版本的 <code>cycle_hire_osm</code>（为了简洁，仅显示 CRS
-输出的前4行）：</p>
+<p>WKT 表示形式存储在 <code>crs_lnd</code> 对象的 <code>$wkt</code> 元素中，是最终的真实来源。这意味着前面代码块的输出是来自 PROJ 提供的 <code>wkt</code> 表示的查询，而不是对象及其 CRS 的固有属性。</p>
+<p>当对象的CRS被转换时，CRS的<code>wkt</code>和<code>User Input</code>元素都会发生改变。在下面的代码块中，我们用投影 CRS 创建了一个新版本的 <code>cycle_hire_osm</code>（为了简洁，仅显示 CRS 输出的前4行）：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cycle_hire_osm_projected <span class="operator">=</span> st_transform<span class="punctuation">(</span>cycle_hire_osm<span class="punctuation">,</span> <span class="string">&quot;EPSG:27700&quot;</span><span class="punctuation">)</span></span><br><span class="line">st_crs<span class="punctuation">(</span>cycle_hire_osm_projected<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; Coordinate Reference System:</span></span><br><span class="line"><span class="comment">#&gt;   User input: EPSG:27700 </span></span><br><span class="line"><span class="comment">#&gt;   wkt:</span></span><br><span class="line"><span class="comment">#&gt; PROJCRS[&quot;OSGB36 / British National Grid&quot;,</span></span><br><span class="line"><span class="comment">#&gt; ...</span></span><br></pre></td></tr></table></figure>
 <p>生成的对象具有新的CRS，其EPSG代码为27700。但是如何了解有关此EPSG代码或任何代码的更多详细信息呢？一个选项是在线搜索，</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">crs_lnd_new <span class="operator">=</span> st_crs<span class="punctuation">(</span><span class="string">&quot;EPSG:27700&quot;</span><span class="punctuation">)</span></span><br><span class="line">crs_lnd_new<span class="operator">$</span>Name</span><br><span class="line"><span class="comment">#&gt; [1] &quot;OSGB36 / British National Grid&quot;</span></span><br><span class="line">crs_lnd_new<span class="operator">$</span>proj4string</span><br><span class="line"><span class="comment">#&gt; [1] &quot;+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +units=m +no_defs&quot;</span></span><br><span class="line">crs_lnd_new<span class="operator">$</span>epsg</span><br><span class="line"><span class="comment">#&gt; [1] 27700</span></span><br></pre></td></tr></table></figure>
-<p>结果显示，EPSG代码27700代表了英国国家网格，这个结果可以通过在线搜索“<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.google.com/search?q=CRS+27700">EPSG
-27700</a>”找到。</p>
+<p>结果显示，EPSG代码27700代表了英国国家网格，这个结果可以通过在线搜索“<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.google.com/search?q=CRS+27700">EPSG 27700</a>”找到。</p>
 <blockquote>
 <p>📌在控制台中打印一个空间对象会自动返回其坐标参考系统。要显式地访问和修改它，可以使用<code>st_crs</code>函数，例如<code>st_crs(cycle_hire_osm)</code>。</p>
 </blockquote>
-<h1 id="栅格几何重投影">栅格几何重投影</h1>
+<h1>栅格几何重投影</h1>
 <p>在前一部分描述的投影概念同样适用于栅格数据。然而，矢量和栅格的重新投影之间存在重要差异：转换矢量对象涉及更改每个顶点的坐标，但这不适用于栅格数据。栅格由相同大小的矩形单元格组成（以地图单位表示，如度或米），因此单独转换像素的坐标通常是不切实际的。栅格重新投影涉及创建一个新的栅格对象，与原始对象相比，通常具有不同数量的列和行。随后必须重新估计属性，从而允许用适当的值“填充”新的像素。换句话说，栅格重新投影可以看作是两个单独的空间操作：栅格范围到另一个CRS的矢量重新投影，以及通过重新采样计算新的像素值。因此，在大多数情况下，当使用栅格和矢量数据时，最好避免重新投影栅格，而是重新投影向量。</p>
 <blockquote>
-<p>📌常规栅格的重新投影也被称为扭曲。
+<p>📌常规栅格的重新投影也被称为扭曲。<br>
 此外，还有一种称为“变换”的类似操作。与重新采样所有值不同，它保留所有值不变，但重新计算每个栅格单元格的新坐标，改变网格几何形状。例如，它可以将输入栅格（一个常规网格）转换为曲线网格。在R中，可以使用<a target="_blank" rel="external nofollow noopener noreferrer" href="https://r-spatial.github.io/stars/articles/stars5.html"><strong>stars</strong>包</a>执行变换操作。</p>
 </blockquote>
-<p>栅格重新投影过程是使用<strong>terra</strong>包中的<code>project()</code>函数完成的。与前一节中演示的<code>st_transform()</code>函数类似，<code>project()</code>采用地理对象（在本例中为栅格数据集）和第二个参数中的某些CRS表示。顺便说一下--第二个参数也可以是具有不同CRS的现有栅格对象。</p>
-<p>让我们看两个光栅转换的例子：使用分类和连续数据。土地覆盖数据通常由分类地图表示。<code>nlcd.tif</code>文件为美国犹他州的一个小区域提供了信息，该信息来自<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.mrlc.gov/data/nlcd-2011-land-cover-conus">National
-Land Cover Database 2011</a>，在NAD83/UTM zone 12 N
-CRS中，如下面的代码块输出所示（仅显示输出的第一行）：</p>
+<p>栅格重新投影过程是使用<strong>terra</strong>包中的<code>project()</code>函数完成的。与前一节中演示的<code>st_transform()</code>函数类似，<code>project()</code>采用地理对象（在本例中为栅格数据集）和第二个参数中的某些CRS表示。顺便说一下–第二个参数也可以是具有不同CRS的现有栅格对象。</p>
+<p>让我们看两个光栅转换的例子：使用分类和连续数据。土地覆盖数据通常由分类地图表示。<code>nlcd.tif</code>文件为美国犹他州的一个小区域提供了信息，该信息来自<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.mrlc.gov/data/nlcd-2011-land-cover-conus">National Land Cover Database 2011</a>，在NAD83/UTM zone 12 N CRS中，如下面的代码块输出所示（仅显示输出的第一行）：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat_raster <span class="operator">=</span> rast<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;raster/nlcd.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">crs<span class="punctuation">(</span>cat_raster<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; PROJCRS[&quot;NAD83 / UTM zone 12N&quot;,</span></span><br><span class="line"><span class="comment">#&gt; ...</span></span><br></pre></td></tr></table></figure>
 <p>在这个区域内，区分了8个土地覆盖类型（NLCD2011土地覆盖类型的完整列表可以在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.mrlc.gov/data/legends/national-land-cover-database-2011-nlcd2011-legend">mrlc.gov</a>上找到）：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">unique<span class="punctuation">(</span>cat_raster<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt;       levels</span></span><br><span class="line"><span class="comment">#&gt; 1      Water</span></span><br><span class="line"><span class="comment">#&gt; 2  Developed</span></span><br><span class="line"><span class="comment">#&gt; 3     Barren</span></span><br><span class="line"><span class="comment">#&gt; 4     Forest</span></span><br><span class="line"><span class="comment">#&gt; 5  Shrubland</span></span><br><span class="line"><span class="comment">#&gt; 6 Herbaceous</span></span><br><span class="line"><span class="comment">#&gt; 7 Cultivated</span></span><br><span class="line"><span class="comment">#&gt; 8   Wetlands</span></span><br></pre></td></tr></table></figure>
 <p>在重新投影分类光栅时，估计值必须与原始值相同。这可以使用最近邻方法（<code>near</code>）完成，该方法将每个新单元格的值设置为输入光栅的最近单元格（中心）的值。一个例子是将<code>cat_raster</code>重新投影到WGS84，这是一种非常适合网络映射的地理坐标参照系。第一步是获得该CRS的PROJ定义，例如可以使用<a target="_blank" rel="external nofollow noopener noreferrer" href="http://spatialreference.org/ref/epsg/wgs-84/">http://spatialreference.org</a>网页来完成。最后一步是使用<code>project()</code>函数重新投影光栅，在分类数据的情况下，它使用最近邻方法（<code>near</code>）。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat_raster_wgs84 <span class="operator">=</span> project<span class="punctuation">(</span>cat_raster<span class="punctuation">,</span> <span class="string">&quot;EPSG:4326&quot;</span><span class="punctuation">,</span> method <span class="operator">=</span> <span class="string">&quot;near&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>重新投影后的光栅与原始光栅在许多属性上有所不同，包括列数和行数（因此单元格数）、分辨率（从米转换为度）和范围，如表@ref(tab:catraster)所示（请注意，类别数量从8增加到9，这是由于增加了<code>NA</code>值，而不是因为创建了新类别
-—— 土地覆盖类别得以保留）。</p>
+<p>重新投影后的光栅与原始光栅在许多属性上有所不同，包括列数和行数（因此单元格数）、分辨率（从米转换为度）和范围，如表@ref(tab:catraster)所示（请注意，类别数量从8增加到9，这是由于增加了<code>NA</code>值，而不是因为创建了新类别 —— 土地覆盖类别得以保留）。</p>
+<p>Table: Key attributes in the original (‘cat_raster’) and projected (‘cat_raster_wgs84’) categorical raster datasets.</p>
 <table>
-<caption>Key attributes in the original ('cat_raster') and projected
-('cat_raster_wgs84') categorical raster datasets.</caption>
 <thead>
-<tr class="header">
-<th style="text-align: left;">CRS</th>
-<th style="text-align: right;">nrow</th>
-<th style="text-align: right;">ncol</th>
-<th style="text-align: right;">ncell</th>
-<th style="text-align: right;">resolution</th>
-<th style="text-align: right;">unique_categories</th>
+<tr>
+<th style="text-align:left">CRS</th>
+<th style="text-align:right">nrow</th>
+<th style="text-align:right">ncol</th>
+<th style="text-align:right">ncell</th>
+<th style="text-align:right">resolution</th>
+<th style="text-align:right">unique_categories</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">NAD83</td>
-<td style="text-align: right;">1359</td>
-<td style="text-align: right;">1073</td>
-<td style="text-align: right;">1458207</td>
-<td style="text-align: right;">31.5275</td>
-<td style="text-align: right;">8</td>
+<tr>
+<td style="text-align:left">NAD83</td>
+<td style="text-align:right">1359</td>
+<td style="text-align:right">1073</td>
+<td style="text-align:right">1458207</td>
+<td style="text-align:right">31.5275</td>
+<td style="text-align:right">8</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">WGS84</td>
-<td style="text-align: right;">1246</td>
-<td style="text-align: right;">1244</td>
-<td style="text-align: right;">1550024</td>
-<td style="text-align: right;">0.0003</td>
-<td style="text-align: right;">9</td>
+<tr>
+<td style="text-align:left">WGS84</td>
+<td style="text-align:right">1246</td>
+<td style="text-align:right">1244</td>
+<td style="text-align:right">1550024</td>
+<td style="text-align:right">0.0003</td>
+<td style="text-align:right">9</td>
 </tr>
 </tbody>
 </table>
-<p>对数值光栅（具有 <code>numeric</code> 或在此例中的
-<code>integer</code> 值）的重新投影过程几乎相同。下面使用
-<strong>spDataLarge</strong> 中的 <code>srtm.tif</code>
-文件展示这一过程，该文件来自 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www2.jpl.nasa.gov/srtm/">Shuttle Radar Topography
-Mission（SRTM）</a>，以WGS84坐标参考系表示海平面以上的米高（海拔）：</p>
+<p>对数值光栅（具有 <code>numeric</code> 或在此例中的 <code>integer</code> 值）的重新投影过程几乎相同。下面使用 <strong>spDataLarge</strong> 中的 <code>srtm.tif</code> 文件展示这一过程，该文件来自 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www2.jpl.nasa.gov/srtm/">Shuttle Radar Topography Mission（SRTM）</a>，以WGS84坐标参考系表示海平面以上的米高（海拔）：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">con_raster <span class="operator">=</span> rast<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;raster/srtm.tif&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">crs<span class="punctuation">(</span>con_raster<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;GEOGCRS[\&quot;WGS 84\&quot;,\n    ENSEMBLE[\&quot;World Geodetic System 1984 ensemble\&quot;,\n        MEMBER[\&quot;World Geodetic System 1984 (Transit)\&quot;],\n        MEMBER[\&quot;World Geodetic System 1984 (G730)\&quot;],\n        MEMBER[\&quot;World Geodetic System 1984 (G873)\&quot;],\n        MEMBER[\&quot;World Geodetic System 1984 (G1150)\&quot;],\n        MEMBER[\&quot;World Geodetic System 1984 (G1674)\&quot;],\n        MEMBER[\&quot;World Geodetic System 1984 (G1762)\&quot;],\n        MEMBER[\&quot;World Geodetic System 1984 (G2139)\&quot;],\n        ELLIPSOID[\&quot;WGS 84\&quot;,6378137,298.257223563,\n            LENGTHUNIT[\&quot;metre\&quot;,1]],\n        ENSEMBLEACCURACY[2.0]],\n    PRIMEM[\&quot;Greenwich\&quot;,0,\n        ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n    CS[ellipsoidal,2],\n        AXIS[\&quot;geodetic latitude (Lat)\&quot;,north,\n            ORDER[1],\n            ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n        AXIS[\&quot;geodetic longitude (Lon)\&quot;,east,\n            ORDER[2],\n            ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n    USAGE[\n        SCOPE[\&quot;Horizontal component of 3D system.\&quot;],\n        AREA[\&quot;World.\&quot;],\n        BBOX[-90,-180,90,180]],\n    ID[\&quot;EPSG\&quot;,4326]]&quot;</span></span><br></pre></td></tr></table></figure>
-<p>我们将重新投影这个数据集到一个投影的坐标参考系中，但不是用适用于分类数据的最近邻方法。相反，我们将使用双线性方法，该方法基于原始栅格中的四个最近单元格计算输出单元格的值。<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>投影数据集中的值是这四个单元格的值的距离加权平均值：输入单元格距离输出单元格的中心越近，其权重就越大。以下命令创建代表WGS
-84 / UTM zone
-12N的文本字符串，并使用<code>bilinear</code>方法将栅格重新投影到此CRS中。</p>
+<p>我们将重新投影这个数据集到一个投影的坐标参考系中，但不是用适用于分类数据的最近邻方法。相反，我们将使用双线性方法，该方法基于原始栅格中的四个最近单元格计算输出单元格的值。^[<br>
+还可以在<em>重采样</em>节中提到的其他方法。]投影数据集中的值是这四个单元格的值的距离加权平均值：输入单元格距离输出单元格的中心越近，其权重就越大。以下命令创建代表WGS 84 / UTM zone 12N的文本字符串，并使用<code>bilinear</code>方法将栅格重新投影到此CRS中。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">con_raster_ea <span class="operator">=</span> project<span class="punctuation">(</span>con_raster<span class="punctuation">,</span> <span class="string">&quot;EPSG:32612&quot;</span><span class="punctuation">,</span> method <span class="operator">=</span> <span class="string">&quot;bilinear&quot;</span><span class="punctuation">)</span></span><br><span class="line">crs<span class="punctuation">(</span>con_raster_ea<span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;PROJCRS[\&quot;WGS 84 / UTM zone 12N\&quot;,\n    BASEGEOGCRS[\&quot;WGS 84\&quot;,\n        ENSEMBLE[\&quot;World Geodetic System 1984 ensemble\&quot;,\n            MEMBER[\&quot;World Geodetic System 1984 (Transit)\&quot;],\n            MEMBER[\&quot;World Geodetic System 1984 (G730)\&quot;],\n            MEMBER[\&quot;World Geodetic System 1984 (G873)\&quot;],\n            MEMBER[\&quot;World Geodetic System 1984 (G1150)\&quot;],\n            MEMBER[\&quot;World Geodetic System 1984 (G1674)\&quot;],\n            MEMBER[\&quot;World Geodetic System 1984 (G1762)\&quot;],\n            MEMBER[\&quot;World Geodetic System 1984 (G2139)\&quot;],\n            ELLIPSOID[\&quot;WGS 84\&quot;,6378137,298.257223563,\n                LENGTHUNIT[\&quot;metre\&quot;,1]],\n            ENSEMBLEACCURACY[2.0]],\n        PRIMEM[\&quot;Greenwich\&quot;,0,\n            ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n        ID[\&quot;EPSG\&quot;,4326]],\n    CONVERSION[\&quot;UTM zone 12N\&quot;,\n        METHOD[\&quot;Transverse Mercator\&quot;,\n            ID[\&quot;EPSG\&quot;,9807]],\n        PARAMETER[\&quot;Latitude of natural origin\&quot;,0,\n            ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433],\n            ID[\&quot;EPSG\&quot;,8801]],\n        PARAMETER[\&quot;Longitude of natural origin\&quot;,-111,\n            ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433],\n            ID[\&quot;EPSG\&quot;,8802]],\n        PARAMETER[\&quot;Scale factor at natural origin\&quot;,0.9996,\n            SCALEUNIT[\&quot;unity\&quot;,1],\n            ID[\&quot;EPSG\&quot;,8805]],\n        PARAMETER[\&quot;False easting\&quot;,500000,\n            LENGTHUNIT[\&quot;metre\&quot;,1],\n            ID[\&quot;EPSG\&quot;,8806]],\n        PARAMETER[\&quot;False northing\&quot;,0,\n            LENGTHUNIT[\&quot;metre\&quot;,1],\n            ID[\&quot;EPSG\&quot;,8807]]],\n    CS[Cartesian,2],\n        AXIS[\&quot;(E)\&quot;,east,\n            ORDER[1],\n            LENGTHUNIT[\&quot;metre\&quot;,1]],\n        AXIS[\&quot;(N)\&quot;,north,\n            ORDER[2],\n            LENGTHUNIT[\&quot;metre\&quot;,1]],\n    USAGE[\n        SCOPE[\&quot;Engineering survey, topographic mapping.\&quot;],\n        AREA[\&quot;Between 114°W and 108°W, northern hemisphere between equator and 84°N, onshore and offshore. Canada - Alberta; Northwest Territories (NWT); Nunavut; Saskatchewan. Mexico. United States (USA).\&quot;],\n        BBOX[0,-114,84,-108]],\n    ID[\&quot;EPSG\&quot;,32612]]&quot;</span></span><br></pre></td></tr></table></figure>
-<p>数值变量的栅格重新投影也会导致数值和空间属性的微小变化，例如单元格数量、分辨率和范围。这些变化在表
-@ref(tab:rastercrs) 中得到展示。<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<p>数值变量的栅格重新投影也会导致数值和空间属性的微小变化，例如单元格数量、分辨率和范围。这些变化在表 @ref(tab:rastercrs) 中得到展示。^[另一个未在表中表示的细微变化是新投影栅格数据集中值的类别是 <code>numeric</code>。这是因为<code>bilinear</code>方法适用于连续数据，结果很少强制转换为整数值。这可能会在保存栅格数据集时影响文件大小。]</p>
+<p>Table: (#tab:rastercrs)Key attributes in the original (‘con_raster’) and projected (‘con_raster_ea’) continuous raster datasets.</p>
 <table>
-<caption>(#tab:rastercrs)Key attributes in the original ('con_raster')
-and projected ('con_raster_ea') continuous raster datasets.</caption>
 <thead>
-<tr class="header">
-<th style="text-align: left;">CRS</th>
-<th style="text-align: right;">nrow</th>
-<th style="text-align: right;">ncol</th>
-<th style="text-align: right;">ncell</th>
-<th style="text-align: right;">resolution</th>
-<th style="text-align: right;">mean</th>
+<tr>
+<th style="text-align:left">CRS</th>
+<th style="text-align:right">nrow</th>
+<th style="text-align:right">ncol</th>
+<th style="text-align:right">ncell</th>
+<th style="text-align:right">resolution</th>
+<th style="text-align:right">mean</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">WGS84</td>
-<td style="text-align: right;">457</td>
-<td style="text-align: right;">465</td>
-<td style="text-align: right;">212505</td>
-<td style="text-align: right;">0.0008</td>
-<td style="text-align: right;">1843</td>
+<tr>
+<td style="text-align:left">WGS84</td>
+<td style="text-align:right">457</td>
+<td style="text-align:right">465</td>
+<td style="text-align:right">212505</td>
+<td style="text-align:right">0.0008</td>
+<td style="text-align:right">1843</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">UTM zone 12N</td>
-<td style="text-align: right;">515</td>
-<td style="text-align: right;">422</td>
-<td style="text-align: right;">217330</td>
-<td style="text-align: right;">83.5334</td>
-<td style="text-align: right;">1842</td>
+<tr>
+<td style="text-align:left">UTM zone 12N</td>
+<td style="text-align:right">515</td>
+<td style="text-align:right">422</td>
+<td style="text-align:right">217330</td>
+<td style="text-align:right">83.5334</td>
+<td style="text-align:right">1842</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
 <p>📌当然，2D地球投影的局限性同样适用于矢量数据和栅格数据。我们最多只能遵循三个空间属性（距离、面积、方向）中的两个。因此，手头的任务决定了选择哪个投影。例如，如果我们对密度感兴趣（每个网格单元的点数或每个网格单元的居民数），我们应该使用等面积投影。</p>
 </blockquote>
-<h1 id="自定义坐标系">自定义坐标系</h1>
-<p>使用<code>AUTHORITY:CODE</code>标识符（例如<code>EPSG:4326</code>）捕获的现有CRS非常适合许多应用。然而，在某些情况下，可能希望使用替代投影或创建自定义CRS。<em>选择哪个CRS使用?</em>节提到了使用自定义CRS的原因，并提供了几种可能的方法。在这里，我们展示如何在R中应用这些想法。</p>
+<h1>自定义坐标系</h1>
+<p>使用<code>AUTHORITY:CODE</code>标识符（例如<code>EPSG:4326</code>）捕获的现有CRS非常适合许多应用。然而，在某些情况下，可能希望使用替代投影或创建自定义CRS。*选择哪个CRS使用?*节提到了使用自定义CRS的原因，并提供了几种可能的方法。在这里，我们展示如何在R中应用这些想法。</p>
 <p>其中一种方法是采用现有的CRS的WKT定义，修改其中的一些元素，然后使用新定义进行重新投影。对于空间向量，可以使用<code>st_crs()$wkt</code>和<code>st_transform()</code>，对于空间栅格，可以使用<code>crs()</code>和<code>project()</code>，如下面的示例所示，该示例将<code>zion</code>对象转换为自定义的方位等距（AEQD）CRS。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zion <span class="operator">=</span> read_sf<span class="punctuation">(</span>system.file<span class="punctuation">(</span><span class="string">&quot;vector/zion.gpkg&quot;</span><span class="punctuation">,</span> package <span class="operator">=</span> <span class="string">&quot;spDataLarge&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>使用自定义AEQD
-CRS需要知道数据集中心点的坐标（以度为单位，地理CRS）。在我们的情况下，可以通过计算<code>zion</code>区域的质心并将其转换为WGS84来提取这些信息。</p>
+<p>使用自定义AEQD CRS需要知道数据集中心点的坐标（以度为单位，地理CRS）。在我们的情况下，可以通过计算<code>zion</code>区域的质心并将其转换为WGS84来提取这些信息。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">zion_centr <span class="operator">=</span> st_centroid<span class="punctuation">(</span>zion<span class="punctuation">)</span></span><br><span class="line">zion_centr_wgs84 <span class="operator">=</span> st_transform<span class="punctuation">(</span>zion_centr<span class="punctuation">,</span> <span class="string">&quot;EPSG:4326&quot;</span><span class="punctuation">)</span></span><br><span class="line">st_as_text<span class="punctuation">(</span>st_geometry<span class="punctuation">(</span>zion_centr_wgs84<span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;POINT (-113 37.3)&quot;</span></span><br></pre></td></tr></table></figure>
-<p>接下来，我们可以使用新获得的值来更新下面所示的方位等距（AEQD）CRS的WKT定义。注意，我们只修改了下面的两个值
-——
-将“Central_Meridian”改为我们的质心的经度，并将“Latitude_Of_Origin”改为质心的纬度。</p>
+<p>接下来，我们可以使用新获得的值来更新下面所示的方位等距（AEQD）CRS的WKT定义。注意，我们只修改了下面的两个值 —— 将“Central_Meridian”改为我们的质心的经度，并将“Latitude_Of_Origin”改为质心的纬度。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">my_wkt <span class="operator">=</span> <span class="string">&#x27;PROJCS[&quot;Custom_AEQD&quot;,</span></span><br><span class="line"><span class="string"> GEOGCS[&quot;GCS_WGS_1984&quot;,</span></span><br><span class="line"><span class="string">  DATUM[&quot;WGS_1984&quot;,</span></span><br><span class="line"><span class="string">   SPHEROID[&quot;WGS_1984&quot;,6378137.0,298.257223563]],</span></span><br><span class="line"><span class="string">  PRIMEM[&quot;Greenwich&quot;,0.0],</span></span><br><span class="line"><span class="string">  UNIT[&quot;Degree&quot;,0.0174532925199433]],</span></span><br><span class="line"><span class="string"> PROJECTION[&quot;Azimuthal_Equidistant&quot;],</span></span><br><span class="line"><span class="string"> PARAMETER[&quot;Central_Meridian&quot;,-113.0263],</span></span><br><span class="line"><span class="string"> PARAMETER[&quot;Latitude_Of_Origin&quot;,37.29818],</span></span><br><span class="line"><span class="string"> UNIT[&quot;Meter&quot;,1.0]]&#x27;</span></span><br></pre></td></tr></table></figure>
 <p>这种方法的最后一步是将我们的原始对象（<code>zion</code>）转换为我们的新自定义CRS（<code>zion_aeqd</code>）。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zion_aeqd <span class="operator">=</span> st_transform<span class="punctuation">(</span>zion<span class="punctuation">,</span> my_wkt<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>自定义投影也可以交互式地制作，例如，使用<a target="_blank" rel="external nofollow noopener noreferrer" href="https://projectionwizard.org/#">Projection
-Wizard</a>网页应用程序。这个网站允许您选择数据的空间范围和失真属性，并返回可能的投影列表。该列表还包含您可以复制和用于重新投影的投影的WKT定义。有关使用WKT字符串创建自定义CRS定义的详细信息，请参阅@opengeospatialconsortium_wellknown_2019。</p>
+<p>自定义投影也可以交互式地制作，例如，使用<a target="_blank" rel="external nofollow noopener noreferrer" href="https://projectionwizard.org/#">Projection Wizard</a>网页应用程序。这个网站允许您选择数据的空间范围和失真属性，并返回可能的投影列表。该列表还包含您可以复制和用于重新投影的投影的WKT定义。有关使用WKT字符串创建自定义CRS定义的详细信息，请参阅@opengeospatialconsortium_wellknown_2019。</p>
 <p>PROJ字符串也可以用来创建自定义投影，接受投影本身固有的限制，特别是在涵盖大地理区域的几何体上。已经开发了许多投影，并可以通过PROJ字符串的<code>+proj=</code>元素进行设置，仅在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://proj.org/operations/projections/index.html">PROJ网站</a>上就详细描述了几十个项目。</p>
-<p>当绘制世界地图并保持面积关系时，Mollweide投影是一种流行且通常合理的选择，如下图所示。要使用此投影，我们需要在<code>st_transform</code>函数中使用proj-string元素<code>"+proj=moll"</code>来指定它。</p>
+<p>当绘制世界地图并保持面积关系时，Mollweide投影是一种流行且通常合理的选择，如下图所示。要使用此投影，我们需要在<code>st_transform</code>函数中使用proj-string元素<code>&quot;+proj=moll&quot;</code>来指定它。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">world_mollweide <span class="operator">=</span> st_transform<span class="punctuation">(</span>world<span class="punctuation">,</span> crs <span class="operator">=</span> <span class="string">&quot;+proj=moll&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p>&lt;<img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031641668.png">
+<p>&lt;<img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031641668.png" alt><br>
 Mollweide projection of the world.</p>
-<p>当绘制世界地图时，人们通常希望最小化所有空间属性（面积、方向、距离）的失真。实现这一目标的最受欢迎的投影之一是<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.winkel.org/other/Winkel%20Tripel%20Projections.htm">Winkel
-tripel</a>，如下图所示。<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>这个结果是通过以下命令创建的：</p>
+<p>当绘制世界地图时，人们通常希望最小化所有空间属性（面积、方向、距离）的失真。实现这一目标的最受欢迎的投影之一是<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.winkel.org/other/Winkel%20Tripel%20Projections.htm">Winkel tripel</a>，如下图所示。^[该投影被国家地理学会等机构使用。]这个结果是通过以下命令创建的：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">world_wintri <span class="operator">=</span> st_transform<span class="punctuation">(</span>world<span class="punctuation">,</span> crs <span class="operator">=</span> <span class="string">&quot;+proj=wintri&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031643063.png">
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031643063.png" alt><br>
 Winkel tripel projection of the world.</p>
 <p>此外，在大多数CRS定义中可以修改proj-string参数，例如可以使用<code>+lon_0</code>和<code>+lat_0</code>参数调整投影的中心点。下面的代码将坐标转换为以纽约市的经度和纬度为中心的兰伯特等面积投影。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">world_laea2 <span class="operator">=</span> st_transform<span class="punctuation">(</span>world<span class="punctuation">,</span></span><br><span class="line">                           crs <span class="operator">=</span> <span class="string">&quot;+proj=laea +x_0=0 +y_0=0 +lon_0=-74 +lat_0=40&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031648355.png">
-Lambert azimuthal equal-area projection of the world centered on New
-York City.</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309031648355.png" alt><br>
+Lambert azimuthal equal-area projection of the world centered on New York City.</p>
 <p>关于CRS修改的更多信息可以在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://proj.org/usage/index.html">使用PROJ</a>文档中找到。</p>
-<h1 id="练习">练习</h1>
-<p>E1. 通过将 <code>nz</code> 对象转换为 WGS84
-坐标参考系统（CRS）来创建一个名为 <code>nz_wgs</code> 的新对象。</p>
+<h1>练习</h1>
+<p>E1. 通过将 <code>nz</code> 对象转换为 WGS84 坐标参考系统（CRS）来创建一个名为 <code>nz_wgs</code> 的新对象。</p>
 <ul>
-<li>为两者创建一个 <code>crs</code>
-类的对象，并用它来查询它们的CRS。</li>
+<li>为两者创建一个 <code>crs</code> 类的对象，并用它来查询它们的CRS。</li>
 <li>根据每个对象的边界框，每个CRS使用什么单位？</li>
-<li>从 <code>nz_wgs</code>
-中移除CRS并绘制结果：这张新西兰的地图有什么问题，为什么？</li>
+<li>从 <code>nz_wgs</code> 中移除CRS并绘制结果：这张新西兰的地图有什么问题，为什么？</li>
 </ul>
-<p>E2. 将 <code>world</code>
-数据集转换为横向墨卡托投影（<code>"+proj=tmerc"</code>）并绘制结果。发生了什么变化，为什么？尝试将其转换回
-WGS 84 并绘制新对象。为什么新对象与原对象不同？</p>
-<p>E3. 使用最近邻插值方法将连续栅格（<code>con_raster</code>）转换为
-NAD83 / UTM区域12N。发生了什么变化？它如何影响结果？</p>
-<p>E4. 使用双线性插值方法将分类栅格（<code>cat_raster</code>）转换为 WGS
-84。发生了什么变化？它如何影响结果？</p>
+<p>E2. 将 <code>world</code> 数据集转换为横向墨卡托投影（<code>&quot;+proj=tmerc&quot;</code>）并绘制结果。发生了什么变化，为什么？尝试将其转换回 WGS 84 并绘制新对象。为什么新对象与原对象不同？</p>
+<p>E3. 使用最近邻插值方法将连续栅格（<code>con_raster</code>）转换为 NAD83 / UTM区域12N。发生了什么变化？它如何影响结果？</p>
+<p>E4. 使用双线性插值方法将分类栅格（<code>cat_raster</code>）转换为 WGS 84。发生了什么变化？它如何影响结果？</p>
 <!--toDo:jn-->
 <!--improve/replace/modify the following q-->
 <!-- E5. Create your own proj-string.  -->
@@ -669,30 +584,6 @@ NAD83 / UTM区域12N。发生了什么变化？它如何影响结果？</p>
 <!-- plot(st_geometry(canada), graticule = TRUE, axes = TRUE) -->
 <!-- plot(st_geometry(new_canada), graticule = TRUE, axes = TRUE) -->
 <!-- ``` -->
-<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>可以使用几种其他方法来引用唯一的CRS，<a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.qgis.org/3.16/en/docs/pyqgis_developer_cookbook/crs.html?highlight=srid">QGIS</a>和其他标识符类型（例如<code>EPSG:4326</code>标识符的更详细变体，<code>urn:ogc:def:crs:EPSG::4326</code>）接受五种标识符类型（EPSG代码，PostGIS
-SRID，INTERNAL SRID，proj-string和WKT字符串）。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>在WKTCRS定义出现之前，proj-string是指定坐标操作和存储CRS的标准方式。这些基于键=值形式（例如，<code>+proj=longlat +datum=WGS84+no_defs</code>）构建的字符串表示，在大多数情况下已经被或者将来应该被WKT表示所取代。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>有关最相关投影参数和相关概念的简短描述，请参阅Jochen
-Albrecht在http://www.geography.hunter.cuny.edu/~jochen/GTECH361/lectures/
-主持的第四讲，并在https://proj.org/usage/projections.html
-查看信息。关于投影的其他优秀资源是spatialreference.org和progonos.com/furuti/MapProj。<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>该包还允许在没有任何CRS信息附加的情况下找出数据的真实CRS。<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>非常感谢一位匿名审稿人的评论，他们构成了这些建议的基础。<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>替代
-<code>st_transform()</code>的是<strong>lwgeom</strong>中的<code>st_transform_proj()</code>，它可以进行绕过GDAL的转换，并可以支持GDAL不支持的投影。在撰写本文时（2022年），我们没有找到任何仅由<code>st_transform_proj()</code>
-支持而不由 <code>st_transform()</code> 支持的投影。<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>两点之间的位置差异并不是由于转换操作的不完美（实际上非常精确），而是由于手动创建的<code>london</code>和<code>london_proj</code>的坐标精度低所造成的。同样令人惊讶的是，结果以米为单位的矩阵形式提供。这是因为
-<code>st_distance()</code>可以提供许多特征之间的距离，而且CRS的单位是米。使用
-<code>as.numeric()</code> 将结果强制转换为常规数字。<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8"><p> 还可以在<em>重采样</em>节中提到的其他方法。<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn9"><p>另一个未在表中表示的细微变化是新投影栅格数据集中值的类别是
-<code>numeric</code>。这是因为<code>bilinear</code>方法适用于连续数据，结果很少强制转换为整数值。这可能会在保存栅格数据集时影响文件大小。<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn10"><p>该投影被国家地理学会等机构使用。<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</aside>
 
         </div>
 
