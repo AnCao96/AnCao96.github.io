@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">数据导入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">对SpatRaster的每个单元格应用函数</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text"> 数据导入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9spatraster%E7%9A%84%E6%AF%8F%E4%B8%AA%E5%8D%95%E5%85%83%E6%A0%BC%E5%BA%94%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text"> 对SpatRaster的每个单元格应用函数</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -310,9 +310,9 @@
 </blockquote>
 <p>本文主要讲解<code>R</code>的<code>terra</code>包的使用技巧，包括数据导入，批量处理，绘图，导出等内容</p>
 <span id="more"></span>
-<h1>数据导入</h1>
+<h1 id="数据导入"><a class="markdownIt-Anchor" href="#数据导入"></a> 数据导入</h1>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>terra<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
-<h1>对SpatRaster的每个单元格应用函数</h1>
+<h1 id="对spatraster的每个单元格应用函数"><a class="markdownIt-Anchor" href="#对spatraster的每个单元格应用函数"></a> 对SpatRaster的每个单元格应用函数</h1>
 <p>描述：对<code>SpatRaster</code>的每个<strong>单元格</strong>的值应用<strong>函数</strong>。类似于<code>apply</code>函数，可以将<code>SpatRaster</code>中的每个图层看作是矩阵中的列（或行）。</p>
 <p>通常用于将多个图层的值汇总到一个图层中，但也不必。</p>
 <p><code>app</code>调用函数<code>fun</code>，并将栅格数据作为第一个参数。根据提供的函数，栅格数据表示为矩阵，其中每个图层都是一列，或表示单元格的向量。函数应返回可被<code>ncell(x)</code>整除的向量或矩阵。因此，可以使用<code>sum</code>和<code>rowSums</code>，但不能使用<code>colSums</code>。</p>
