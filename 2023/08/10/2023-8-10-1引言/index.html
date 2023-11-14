@@ -21,12 +21,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ancao96.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"BFJCK79VF9","apiKey":"613fe5e83863193288c6ef2ab02cefad","indexName":"hexo","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="本文由SCY翻译自《Geocomputation with R》第一章  这本书是关于使用计算机的力量来处理地理数据的。它教授一系列的空间技能，包括：读、写和操作地理数据；制作静态和交互式地图；应用地理计算解决现实问题；并对地理现象进行建模。通过展示各种地理操作是如何联系在一起的，在穿插的可复制&quot;代码块&quot;中，本书还教授了一个透明而科学的工作流程。学习如何使用R命令行提供的丰富的">
+    <meta name="description" content="本文由SCY翻译自《Geocomputation with R》第一章  这本书是关于使用计算机的力量来处理地理数据的。它教授一系列的空间技能，包括：读、写和操作地理数据；制作静态和交互式地图；应用地理计算解决现实问题；并对地理现象进行建模。通过展示各种地理操作是如何联系在一起的，在穿插的可复制&quot;代码块&quot;中，本书还教授了一个透明而科学的工作流程。学习如何使用R命令行提供的丰富的地理空间工具令人兴奋">
 <meta property="og:type" content="article">
 <meta property="og:title" content="(1)引言">
 <meta property="og:url" content="https://ancao96.github.io/2023/08/10/2023-8-10-1%E5%BC%95%E8%A8%80/index.html">
 <meta property="og:site_name" content="SCY SPACE">
-<meta property="og:description" content="本文由SCY翻译自《Geocomputation with R》第一章  这本书是关于使用计算机的力量来处理地理数据的。它教授一系列的空间技能，包括：读、写和操作地理数据；制作静态和交互式地图；应用地理计算解决现实问题；并对地理现象进行建模。通过展示各种地理操作是如何联系在一起的，在穿插的可复制&quot;代码块&quot;中，本书还教授了一个透明而科学的工作流程。学习如何使用R命令行提供的丰富的">
+<meta property="og:description" content="本文由SCY翻译自《Geocomputation with R》第一章  这本书是关于使用计算机的力量来处理地理数据的。它教授一系列的空间技能，包括：读、写和操作地理数据；制作静态和交互式地图；应用地理计算解决现实问题；并对地理现象进行建模。通过展示各种地理操作是如何联系在一起的，在穿插的可复制&quot;代码块&quot;中，本书还教授了一个透明而科学的工作流程。学习如何使用R命令行提供的丰富的地理空间工具令人兴奋">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309061131739.png">
 <meta property="article:published_time" content="2023-08-10T10:29:20.000Z">
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text"> 引言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%9C%B0%E7%90%86%E8%AE%A1%E7%AE%97"><span class="nav-number">1.1.</span> <span class="nav-text"> 什么是地理计算？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9r%E8%BF%9B%E8%A1%8C%E5%9C%B0%E7%90%86%E8%AE%A1%E7%AE%97"><span class="nav-number">1.2.</span> <span class="nav-text"> 为什么选择R进行地理计算?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%B0%E7%90%86%E8%AE%A1%E7%AE%97%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text"> 地理计算软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#r-%E7%A9%BA%E9%97%B4%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.4.</span> <span class="nav-text"> R 空间生态系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#r-spatial-%E5%8E%86%E5%8F%B2"><span class="nav-number">1.5.</span> <span class="nav-text"> R-spatial 历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">1.6.</span> <span class="nav-text"> 练习</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%9C%B0%E7%90%86%E8%AE%A1%E7%AE%97"><span class="nav-number">1.1.</span> <span class="nav-text">什么是地理计算？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9r%E8%BF%9B%E8%A1%8C%E5%9C%B0%E7%90%86%E8%AE%A1%E7%AE%97"><span class="nav-number">1.2.</span> <span class="nav-text">为什么选择R进行地理计算?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%B0%E7%90%86%E8%AE%A1%E7%AE%97%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">地理计算软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#r-%E7%A9%BA%E9%97%B4%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.4.</span> <span class="nav-text">R 空间生态系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#r-spatial-%E5%8E%86%E5%8F%B2"><span class="nav-number">1.5.</span> <span class="nav-text">R-spatial 历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">1.6.</span> <span class="nav-text">练习</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -305,140 +305,211 @@
         
         <div class="post-body" itemprop="articleBody"><blockquote><p>本文由SCY翻译自《Geocomputation with R》<a target="_blank" rel="external nofollow noopener noreferrer" href="https://r.geocompx.org/intro#intro">第一章</a></p>
 </blockquote>
-<p>这本书是关于使用计算机的力量来处理地理数据的。它教授一系列的空间技能，包括：读、写和操作地理数据；制作静态和交互式地图；应用地理计算解决现实问题；并对地理现象进行建模。通过展示各种地理操作是如何联系在一起的，在穿插的可复制&quot;代码块&quot;中，本书还教授了一个透明而科学的工作流程。学习如何使用R命令行提供的丰富的地理空间工具令人兴奋，但创建新的工具可以真正解放。使用贯穿始终的命令行驱动方法，以及章节所涵盖的编程技术，可以帮助消除软件对您的创造力施加的限制。在读完这本书和完成练习后，你应该对R令人印象深刻的地理能力所开辟的可能性有很强的理解，用地理数据解决现实世界问题的新技能，以及用地图和可复制的代码来交流你的工作的能力。</p>
-<span id="more"></span>
-<h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
-<p>这本书是关于使用计算机的力量来处理地理数据的。它教授一系列的空间技能，包括：读、写和操作地理数据；制作静态和交互式地图；应用地理计算解决现实问题；并对地理现象进行建模。通过展示各种地理操作是如何联系在一起的，在穿插的可复制&quot;代码块&quot;中，本书还教授了一个透明而科学的工作流程。学习如何使用R命令行提供的丰富的地理空间工具令人兴奋，但创建新的工具可以真正解放。使用贯穿始终的命令行驱动方法，以及<a href="/2023/08/20/2023-8-20-11%E8%84%9A%E6%9C%AC%E3%80%81%E7%AE%97%E6%B3%95%E5%92%8C%E5%87%BD%E6%95%B0/" title="(11)脚本、算法和函数">11</a>章节所涵盖的编程技术，可以帮助消除软件对您的创造力施加的限制。在读完这本书和完成练习后，你应该对R令人印象深刻的地理能力所开辟的可能性有很强的理解，用地理数据解决现实世界问题的新技能，以及用地图和可复制的代码来交流你的工作的能力。</p>
-<p>在过去的几十年中，自由和开源的地理空间软件（FOSS4G）以惊人的速度发展。得益于OSGeo等组织，地理数据分析不再是拥有昂贵硬件和软件的人的专利，现在任何人都可以下载和运行高性能的空间库。开源地理信息系统(GIS)，如 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://qgis.org/en/site/">QGIS</a>，使地理分析在全球范围内变得可访问。GIS程序倾向于强调图形用户界面(GUIs)，但是阻碍可重复性(尽管许多可以从命令行中使用，正如我们在第<a href="/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/" title="(10)连接到GIS的桥梁">10</a>章中看到的那样)。而R则强调命令行界面(CLI)。不同方法之间的简单比较见表1.1。</p>
-<p>表1.1: 不同软件包（地理信息系统（GIS）的图形用户界面（GUI）和R语言）之间的重点差异。</p>
+<p>这本书是关于使用计算机的力量来处理地理数据的。它教授一系列的空间技能，包括：读、写和操作地理数据；制作静态和交互式地图；应用地理计算解决现实问题；并对地理现象进行建模。通过展示各种地理操作是如何联系在一起的，在穿插的可复制"代码块"中，本书还教授了一个透明而科学的工作流程。学习如何使用R命令行提供的丰富的地理空间工具令人兴奋，但创建新的工具可以真正解放。使用贯穿始终的命令行驱动方法，以及章节所涵盖的编程技术，可以帮助消除软件对您的创造力施加的限制。在读完这本书和完成练习后，你应该对R令人印象深刻的地理能力所开辟的可能性有很强的理解，用地理数据解决现实世界问题的新技能，以及用地图和可复制的代码来交流你的工作的能力。
+<span id="more"></span></p>
+<h1 id="引言">引言</h1>
+<p>这本书是关于使用计算机的力量来处理地理数据的。它教授一系列的空间技能，包括：读、写和操作地理数据；制作静态和交互式地图；应用地理计算解决现实问题；并对地理现象进行建模。通过展示各种地理操作是如何联系在一起的，在穿插的可复制"代码块"中，本书还教授了一个透明而科学的工作流程。学习如何使用R命令行提供的丰富的地理空间工具令人兴奋，但创建新的工具可以真正解放。使用贯穿始终的命令行驱动方法，以及<a href="/2023/08/20/2023-8-20-11%E8%84%9A%E6%9C%AC%E3%80%81%E7%AE%97%E6%B3%95%E5%92%8C%E5%87%BD%E6%95%B0/" title="(11)脚本、算法和函数">11</a>章节所涵盖的编程技术，可以帮助消除软件对您的创造力施加的限制。在读完这本书和完成练习后，你应该对R令人印象深刻的地理能力所开辟的可能性有很强的理解，用地理数据解决现实世界问题的新技能，以及用地图和可复制的代码来交流你的工作的能力。</p>
+<p>在过去的几十年中，自由和开源的地理空间软件（FOSS4G）以惊人的速度发展。得益于OSGeo等组织，地理数据分析不再是拥有昂贵硬件和软件的人的专利，现在任何人都可以下载和运行高性能的空间库。开源地理信息系统(GIS)，如
+<a target="_blank" rel="external nofollow noopener noreferrer" href="http://qgis.org/en/site/">QGIS</a>，使地理分析在全球范围内变得可访问。GIS程序倾向于强调图形用户界面(GUIs)，但是阻碍可重复性(尽管许多可以从命令行中使用，正如我们在第<a href="/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/" title="(10)连接到GIS的桥梁">10</a>章中看到的那样)。而R则强调命令行界面(CLI)。不同方法之间的简单比较见表1.1。</p>
+<p>表1.1:
+不同软件包（地理信息系统（GIS）的图形用户界面（GUI）和R语言）之间的重点差异。</p>
 <table>
 <thead>
-<tr>
-<th style="text-align:left">Attribute</th>
-<th style="text-align:left">Desktop GIS (GUI)</th>
-<th style="text-align:left">R</th>
+<tr class="header">
+<th style="text-align: left;">Attribute</th>
+<th style="text-align: left;">Desktop GIS (GUI)</th>
+<th style="text-align: left;">R</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">Home disciplines</td>
-<td style="text-align:left">Geography</td>
-<td style="text-align:left">Computing, Statistics</td>
+<tr class="odd">
+<td style="text-align: left;">Home disciplines</td>
+<td style="text-align: left;">Geography</td>
+<td style="text-align: left;">Computing, Statistics</td>
 </tr>
-<tr>
-<td style="text-align:left">Software focus</td>
-<td style="text-align:left">Graphical User Interface</td>
-<td style="text-align:left">Command line</td>
+<tr class="even">
+<td style="text-align: left;">Software focus</td>
+<td style="text-align: left;">Graphical User Interface</td>
+<td style="text-align: left;">Command line</td>
 </tr>
-<tr>
-<td style="text-align:left">Reproducibility</td>
-<td style="text-align:left">Minimal</td>
-<td style="text-align:left">Maximal</td>
+<tr class="odd">
+<td style="text-align: left;">Reproducibility</td>
+<td style="text-align: left;">Minimal</td>
+<td style="text-align: left;">Maximal</td>
 </tr>
 </tbody>
 </table>
-<p>编撰本书的动力源于科学研究的可重复的重要性（见下面的注释）。它旨在使可重复的地理数据分析工作流更易于访问，并展示从命令行可用的开源地理空间软件的力量。“其他软件的接口是R的一部分”。这意味着除了出色的“内部”功能外，R还允许访问其他许多空间软件库，这在第<a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9r%E8%BF%9B%E8%A1%8C%E5%9C%B0%E7%90%86%E8%AE%A1%E7%AE%97">1.2</a>节中有解释，在第<a href="/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/" title="(10)连接到GIS的桥梁">10</a>章中有示例。然而，在深入软件的细节之前，值得先退一步思考我们所说的地理计算是什么意思。</p>
+<p>编撰本书的动力源于科学研究的可重复的重要性（见下面的注释）。它旨在使可重复的地理数据分析工作流更易于访问，并展示从命令行可用的开源地理空间软件的力量。"其他软件的接口是R的一部分"。这意味着除了出色的“内部”功能外，R还允许访问其他许多空间软件库，这在第<a href="#为什么选择r进行地理计算">1.2</a>节中有解释，在第<a href="/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/" title="(10)连接到GIS的桥梁">10</a>章中有示例。然而，在深入软件的细节之前，值得先退一步思考我们所说的地理计算是什么意思。</p>
 <blockquote>
-<p>📌可重复性是命令行界面的一大优势，但实际上它意味着什么？<br>
-我们将其定义为：“一个通过使用公开可访问的代码，能够由其他人生成相同结果的过程。”<br>
+<p>📌可重复性是命令行界面的一大优势，但实际上它意味着什么？
+我们将其定义为：“一个通过使用公开可访问的代码，能够由其他人生成相同结果的过程。”
 这听起来可能很简单，也容易实现（如果你仔细地维护你的R代码脚本文件的话），但对于教学和科学过程有着深远的影响。</p>
 </blockquote>
-<h2 id="什么是地理计算"><a class="markdownIt-Anchor" href="#什么是地理计算"></a> 什么是地理计算？</h2>
+<h2 id="什么是地理计算">什么是地理计算？</h2>
 <!--rl-->
-<p>地理计算是一个年轻的术语，可以追溯到1996年该主题的第一次会议<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>。与当时常用术语’量化地理学’不同，其早期倡导者提出，地理计算强调的是&quot;富有创意和实验性&quot;的应用和新工具和方法的开发。 “地理计算是关于使用各种不同类型的地理数据，并在’科学’方法的总体背景下开发相关的地理工具。” 本书的目标不仅是教授方法和代码；在本书结束时，你应该能够使用你的地理计算技能，做出&quot;有益或有用的实际工作&quot;。</p>
-<p>我们的方法与早期采用者如Stan Openshaw的强调点不同，它强调可重复性和合作。在21世纪初，由于无法获得必要的硬件、软件和数据，期望读者能够重复代码示例是不现实的。快进两个世纪，情况发展迅速。任何有足够RAM（至少推荐8GB）的笔记本电脑都可以安装和运行地理计算软件，并重现本书的内容。1990年代和21世纪初，高性能计算机对大多数人来说过于昂贵，因此地理计算的财务和硬件障碍已经消除。<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>地理计算也更容易访问，因为公开可访问的数据集比以往任何时候都更广泛地可用，我们将在第<a href="/2023/08/17/2023-8-17-8%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AEIO/" title="(8)地理数据 I&#x2F;O">8</a>章中看到。与该领域的早期作品不同，本书中所有的工作都可以使用代码和与书籍一起提供的示例数据进行重现，例如在R包如<strong>spData</strong>中，其安装将在第<a href="/2023/08/11/2023-8-11-2%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE/" title="(2)R中的地理数据">2</a>章中介绍。</p>
-<p>每个术语都强调了受GIS影响的’科学’（即可重复和可证伪）方法，尽管它们的起源和主要应用领域不同。例如，GDS强调’数据科学’技能和大型数据集，而地理信息学则更侧重于数据结构。但是，这些术语之间的重叠比它们之间的差异更大，我们将地理计算用作涵盖所有这些术语的粗略同义词，它们都寻求用地理数据进行应用科学工作。然而，与早期使用这个术语的人不同，我们并不寻求暗示存在任何名为’地理计算’（或’Stan Openshaw称之为’GeoComputation’）的连贯的学术领域。相反，我们将这个术语定义如下：以计算方式处理地理数据，专注于代码、可重复性和模块化。</p>
+<p>地理计算是一个年轻的术语，可以追溯到1996年该主题的第一次会议<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。与当时常用术语'量化地理学'不同，其早期倡导者提出，地理计算强调的是"富有创意和实验性"的应用和新工具和方法的开发。
+"地理计算是关于使用各种不同类型的地理数据，并在'科学'方法的总体背景下开发相关的地理工具。"
+本书的目标不仅是教授方法和代码；在本书结束时，你应该能够使用你的地理计算技能，做出"有益或有用的实际工作"。</p>
+<p>我们的方法与早期采用者如Stan
+Openshaw的强调点不同，它强调可重复性和合作。在21世纪初，由于无法获得必要的硬件、软件和数据，期望读者能够重复代码示例是不现实的。快进两个世纪，情况发展迅速。任何有足够RAM（至少推荐8GB）的笔记本电脑都可以安装和运行地理计算软件，并重现本书的内容。1990年代和21世纪初，高性能计算机对大多数人来说过于昂贵，因此地理计算的财务和硬件障碍已经消除。<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>地理计算也更容易访问，因为公开可访问的数据集比以往任何时候都更广泛地可用，我们将在第<a href="/2023/08/17/2023-8-17-8%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AEIO/" title="(8)地理数据 I&#x2F;O">8</a>章中看到。与该领域的早期作品不同，本书中所有的工作都可以使用代码和与书籍一起提供的示例数据进行重现，例如在R包如<strong>spData</strong>中，其安装将在第<a href="/2023/08/11/2023-8-11-2%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE/" title="(2)R中的地理数据">2</a>章中介绍。</p>
+<p>每个术语都强调了受GIS影响的'科学'（即可重复和可证伪）方法，尽管它们的起源和主要应用领域不同。例如，GDS强调'数据科学'技能和大型数据集，而地理信息学则更侧重于数据结构。但是，这些术语之间的重叠比它们之间的差异更大，我们将地理计算用作涵盖所有这些术语的粗略同义词，它们都寻求用地理数据进行应用科学工作。然而，与早期使用这个术语的人不同，我们并不寻求暗示存在任何名为'地理计算'（或'Stan
+Openshaw称之为'GeoComputation'）的连贯的学术领域。相反，我们将这个术语定义如下：以计算方式处理地理数据，专注于代码、可重复性和模块化。</p>
 <p>地理计算是一个新近的术语，但受到了古老观念的影响。它可以看作是地理学的一部分，地理学有2000多年的历史；以及<em>地理信息系统</em>（GIS）的延伸，该系统诞生于1960年代。</p>
-<p>地理学在计算机发明之前就在解释和影响人类与自然世界的关系方面发挥了重要作用。例如，亚历山大·冯·洪堡在19世纪初对南美洲的旅行说明了这一点：不仅观察结果为物理和植物地理学的传统奠定了基础，而且还为保护自然世界的政策铺平了道路。本书旨在通过利用现代计算机和开源软件的力量，为’地理传统’做出贡献。</p>
+<p>地理学在计算机发明之前就在解释和影响人类与自然世界的关系方面发挥了重要作用。例如，亚历山大·冯·洪堡在19世纪初对南美洲的旅行说明了这一点：不仅观察结果为物理和植物地理学的传统奠定了基础，而且还为保护自然世界的政策铺平了道路。本书旨在通过利用现代计算机和开源软件的力量，为'地理传统'做出贡献。</p>
 <p>本书与较早的学科之间的联系反映在本书的建议标题中：<em>用R学地理学</em>和<em>R用于GIS</em>。每个标题都有优点。前者传达了这样一个信息，即它包含的内容远不止空间数据。非空间属性数据与几何数据不可避免地交织在一起，地理学不仅仅是关于地图上某个东西的位置。后者则传达了这是一本关于使用R作为GI来执行<em>地理数据</em>上的空间操作的书。</p>
 <p>然而，GIS这个术语传达了一些含义（见表1.1），这些含义简单地无法传达R最大的优点之一：其基于控制台的能力可以无缝地在地理和非地理数据处理、可视化和建模之间转换。因此，我们选择了一个更中性和包容性的标题。相对而言，地理计算意味着可复制和富有创造性的编程。当然，（地理计算的）算法是强大的工具，可能会变得非常复杂。然而，所有算法都由更小的部分组成。通过教授您其基础和底层结构，我们的目标是赋予您创造自己的地理数据问题创新解决方案的能力。</p>
-<h2 id="为什么选择r进行地理计算"><a class="markdownIt-Anchor" href="#为什么选择r进行地理计算"></a> 为什么选择R进行地理计算?</h2>
+<h2 id="为什么选择r进行地理计算">为什么选择R进行地理计算?</h2>
 <!--rl-->
 <p>早期地理学家使用各种工具，包括气压计、指南针和<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Sextant">六分仪</a>，以增进对世界的了解。直到1761年海洋<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Marine_chronometer">天文钟</a>的发明，人们才能在海上计算经度，从而使船只能够采取更直接的航线。</p>
-<p>如今，很难想象会缺乏地理数据。每部智能手机都有全球定位（GPS）接收器，从卫星和半自动车辆到公民科学家的多种传感器不断测量世界的每一个部分。数据生成的速度是惊人的。<br>
-例如，一个自动驾驶车辆每天可以生成 100 GB的数据。卫星的遥感数据已经太大，无法用单台计算机分析相应的数据，因此出现了例如<a target="_blank" rel="external nofollow noopener noreferrer" href="http://r-spatial.org/2016/11/29/openeo.html">OpenEO</a>之类的计划。</p>
+<p>如今，很难想象会缺乏地理数据。每部智能手机都有全球定位（GPS）接收器，从卫星和半自动车辆到公民科学家的多种传感器不断测量世界的每一个部分。数据生成的速度是惊人的。
+例如，一个自动驾驶车辆每天可以生成 100
+GB的数据。卫星的遥感数据已经太大，无法用单台计算机分析相应的数据，因此出现了例如<a target="_blank" rel="external nofollow noopener noreferrer" href="http://r-spatial.org/2016/11/29/openeo.html">OpenEO</a>之类的计划。</p>
 <p>这场“地理数据革命”推动了对高性能计算硬件和高效、可扩展软件的需求，以从噪音中提取信号，了解甚至可能改变世界。空间数据库能够存储和生成大量地理数据集的可管理子集，使得从其中获取知识的界面成为未来的重要工具。R就是这样一种工具，具有先进的分析、建模和可视化能力。在这个背景下，本书的重点不在于语言本身。相反，我们使用R作为理解世界的“行业工具”，类似于洪堡使用工具深入了解自然界所有的复杂性和相互联系。尽管编程看似是一种还原主义活动，目标是教授地理计算与R，不仅仅是为了乐趣，还是为了理解世界。</p>
 <p>R是一个多平台的开源语言和环境，用于统计计算和图形（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.r-project.org/">r-project.org/</a>）。通过广泛的包，R还支持先进的地理空间统计、建模和可视化。新的集成开发环境（IDEs}）如RStudio已使R对许多人更加用户友好，通过专门用于交互式可视化的面板简化了制图工作。</p>
-<p>在其核心，R是一个面向对象的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://adv-r.hadley.nz/fp.html">函数式编程语言</a>，特别设计为其他软件的交互式接口。后者还包括许多到GIS软件、“地理库&quot;和功能（见第<a href="/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/" title="(10)连接到GIS的桥梁">10</a>章）的&quot;桥梁”。因此，它是快速创建&quot;地理工具&quot;的理想选择，无需掌握低级语言（相对于R）如C、FORTRAN或Java（见<a href="#%E5%9C%B0%E7%90%86%E8%AE%A1%E7%AE%97%E8%BD%AF%E4%BB%B6">1.3</a>节）。这可能感觉像是从基于GUI或专有地理信息系统，以查看GUI的定义，施加的比喻性&quot;玻璃天花板&quot;中挣脱出来(见表1.1GUI定义)。此外，R便于访问其他语言：例如，<strong>Rcpp</strong>和<strong>reticulate</strong>包允许访问C++和Python代码。这意味着R可以用作通往各种地理空间程序的&quot;桥梁&quot;（见<a href="#%E5%9C%B0%E7%90%86%E8%AE%A1%E7%AE%97%E8%BD%AF%E4%BB%B6">1.3</a>节）。</p>
+<p>在其核心，R是一个面向对象的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://adv-r.hadley.nz/fp.html">函数式编程语言</a>，特别设计为其他软件的交互式接口。后者还包括许多到GIS软件、"地理库"和功能（见第<a href="/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/" title="(10)连接到GIS的桥梁">10</a>章）的"桥梁"。因此，它是快速创建"地理工具"的理想选择，无需掌握低级语言（相对于R）如C、FORTRAN或Java（见<a href="#地理计算软件">1.3</a>节）。这可能感觉像是从基于GUI或专有地理信息系统，以查看GUI的定义，施加的比喻性"玻璃天花板"中挣脱出来(见表1.1GUI定义)。此外，R便于访问其他语言：例如，<strong>Rcpp</strong>和<strong>reticulate</strong>包允许访问C++和Python代码。这意味着R可以用作通往各种地理空间程序的"桥梁"（见<a href="#地理计算软件">1.3</a>节）。</p>
 <p>另一个显示R灵活性和不断发展的地理能力的例子是交互式地图制作。如我们将在第<a href="/2023/08/18/2023-8-18-9%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%B6%E5%9B%BE/" title="(9)地理数据制图">9</a>章中看到，R具有“有限的交互式[绘图]功能”的说法已经不再成立。这通过以下的代码块得到证明，该代码块创建了图1.1（生成该图的函数将在第9.4节中介绍）。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>leaflet<span class="punctuation">)</span></span><br><span class="line">popup <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;Robin&quot;</span><span class="punctuation">,</span> <span class="string">&quot;Jakub&quot;</span><span class="punctuation">,</span> <span class="string">&quot;Jannes&quot;</span><span class="punctuation">)</span></span><br><span class="line">leaflet<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  addProviderTiles<span class="punctuation">(</span><span class="string">&quot;NASAGIBS.ViirsEarthAtNight2012&quot;</span><span class="punctuation">)</span> <span class="operator">|&gt;</span></span><br><span class="line">  addMarkers<span class="punctuation">(</span>lng <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="operator">-</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">23</span><span class="punctuation">,</span> <span class="number">11</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">             lat <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">52</span><span class="punctuation">,</span> <span class="number">53</span><span class="punctuation">,</span> <span class="number">49</span><span class="punctuation">)</span><span class="punctuation">,</span> </span><br><span class="line">             popup <span class="operator">=</span> popup<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <div class="figure" style="text-align: center">
-<iframe src="https://geocompr.github.io/img/interactive.html" width="100%" height="400px" data-external="1"></iframe>
-<p class="caption">图1.1：蓝色标记指示了作者来自哪里。底图是由NASA提供的夜晚地球的平铺图像。通过在r.geocompx.org上与在线版本进行交互，例如通过放大和点击弹出窗口。</p>
+<iframe src="https://geocompr.github.io/img/interactive.html" width="100%" height="400px" data-external="1">
+</iframe>
+<p class="caption">
+图1.1：蓝色标记指示了作者来自哪里。底图是由NASA提供的夜晚地球的平铺图像。通过在r.geocompx.org上与在线版本进行交互，例如通过放大和点击弹出窗口。
+</p>
 </div>
 <p>几年前，使用R制作图本身就会很困难，更不用说作为一个交互式地图1.1了。这展示了R的灵活性，以及多亏了如<strong>knitr</strong>和<strong>leaflet</strong>等发展，它可以用作与其他软件的接口，这是贯穿本书始终的一个主题。因此，R代码的使用使得可以通过参考代表现实世界现象的可复现示例来教授地理计算，而不仅仅是抽象概念。</p>
-<h2 id="地理计算软件"><a class="markdownIt-Anchor" href="#地理计算软件"></a> 地理计算软件</h2>
+<h2 id="地理计算软件">地理计算软件</h2>
 <!--rl-->
 <p>R是一个用于地理计算的强大语言，但也有许多其他用于地理数据分析的选项，提供了数千个地理函数。了解其他用于地理计算的语言将有助于决定何时使用其他工具可能更适合特定任务，并将R置于更广泛的地理空间生态系统中。本节简要介绍了用于地理计算的语言<a target="_blank" rel="external nofollow noopener noreferrer" href="https://isocpp.org/">C++</a>，<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.oracle.com/java/index.html">Java</a>和<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.python.org/">Python</a>，为第<a href="/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/" title="(10)连接到GIS的桥梁">10</a>章做准备。</p>
 <p>R（和Python）的一个重要特性是它是一种解释型语言。这是有利的，因为它允许在读取——求值——打印循环（REPL）中进行交互式编程。输入到控制台的代码立即执行并打印结果，而不是等待编译的中间阶段。另一方面，编译型语言如C++和Java倾向于运行更快（一旦它们已经被编译）。</p>
-<p>C<ins>为许多GIS软件包（如<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.qgis.org/">QGIS</a>，<a target="_blank" rel="external nofollow noopener noreferrer" href="https://grass.osgeo.org/">GRASS</a>和<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.saga-gis.org/">SAGA</a>）提供了基础，因此它是一个明智的起点。精心编写的C</ins>速度非常快，使其成为处理大型地理数据集等性能关键应用的好选择，但比Python或R更难学。通过<strong>Rcpp</strong>包，C++已经变得更容易接近，为R用户提供了一个很好的C编程的’切入点’。熟练掌握这种低级语言增加了创建新的高性能’地理算法’以及更好地理解GIS软件如何工作的可能性（见第<a href="/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/" title="(10)连接到GIS的桥梁">11</a>章）。</p>
-<p>Java是用于地理计算的另一种重要和多功能的语言。GIS软件包gvSig、OpenJump和uDig都是用Java编写的。Java有许多GIS库，包括GeoTools和JTSJava拓扑套件，（GEOS是JTS的C++的部分）。此外，许多地图服务器应用程序使用Java，包括Geoserver/Geonode、deegree和52°North WPS。</p>
+<p>C++为许多GIS软件包（如<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.qgis.org/">QGIS</a>，<a target="_blank" rel="external nofollow noopener noreferrer" href="https://grass.osgeo.org/">GRASS</a>和<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.saga-gis.org/">SAGA</a>）提供了基础，因此它是一个明智的起点。精心编写的C++速度非常快，使其成为处理大型地理数据集等性能关键应用的好选择，但比Python或R更难学。通过<strong>Rcpp</strong>包，C++已经变得更容易接近，为R用户提供了一个很好的C编程的'切入点'。熟练掌握这种低级语言增加了创建新的高性能'地理算法'以及更好地理解GIS软件如何工作的可能性（见第<a href="/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/" title="(10)连接到GIS的桥梁">11</a>章）。</p>
+<p>Java是用于地理计算的另一种重要和多功能的语言。GIS软件包gvSig、OpenJump和uDig都是用Java编写的。Java有许多GIS库，包括GeoTools和JTSJava拓扑套件，（GEOS是JTS的C++的部分）。此外，许多地图服务器应用程序使用Java，包括Geoserver/Geonode、deegree和52°North
+WPS。</p>
 <p>Java的面向对象语法与C++相似。Java的一个主要优点是它是平台独立的（这对于编译语言来说是不寻常的）并且具有很高的可扩展性，使其成为像RStudio这样的IDE的适当语言，用它写了这本书。与Python或R相比，Java在统计建模和可视化方面的工具较少，尽管它可用于数据科学。</p>
-<p>Python是用于地理计算的重要语言，特别是因为许多桌面GIS，如GRASS、SAGA和QGIS，提供了Python API（见第<a href="/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/" title="(10)连接到GIS的桥梁">10</a>章）。与R一样，它是一个流行的数据科学工具。这两种语言都是面向对象的，并且有许多重叠区域，导致了诸如reticulate这样的项目，促进了从R访问Python，以及Ursa Labs计划，以支持便携式库，使整个开源数据科学生态系统受益。</p>
+<p>Python是用于地理计算的重要语言，特别是因为许多桌面GIS，如GRASS、SAGA和QGIS，提供了Python
+API（见第<a href="/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/" title="(10)连接到GIS的桥梁">10</a>章）。与R一样，它是一个流行的数据科学工具。这两种语言都是面向对象的，并且有许多重叠区域，导致了诸如reticulate这样的项目，促进了从R访问Python，以及Ursa
+Labs计划，以支持便携式库，使整个开源数据科学生态系统受益。</p>
 <p>实际上，R和Python各有优点，某种程度上你使用哪个不如应用领域和结果传播重要。学习其中一个将为学习另一个提供先行优势。然而，R相对于Python在地理计算方面有主要优势。这包括其对语言本身中地理数据模型矢量和栅格的更好支持以及相应的可视化可能性（见第<a href="/2023/08/19/2023-8-19-10%E8%BF%9E%E6%8E%A5%E5%88%B0GIS%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%A1%A5%E6%A2%81/" title="(10)连接到GIS的桥梁">2</a>和<a href="/2023/08/18/2023-8-18-9%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%B6%E5%9B%BE/" title="(9)地理数据制图">9</a>章）。同样重要的是，R具有无与伦比的统计支持，包括空间统计，有数百个包支持数千种统计方法。</p>
-<p>Python的主要优点是它是一种<em>通用</em>编程语言。它用于许多领域，包括桌面软件、电脑游戏、网站和数据科学。Python通常是不同（地理计算）社群之间唯一共享的语言，并可视为许多GIS程序的“粘合剂”。许多地理算法，包括QGIS和ArcMap中的那些，都可以从Python命令行访问，使其非常适合作为命令行GIS的入门语言。<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup></p>
+<p>Python的主要优点是它是一种<em>通用</em>编程语言。它用于许多领域，包括桌面软件、电脑游戏、网站和数据科学。Python通常是不同（地理计算）社群之间唯一共享的语言，并可视为许多GIS程序的“粘合剂”。许多地理算法，包括QGIS和ArcMap中的那些，都可以从Python命令行访问，使其非常适合作为命令行GIS的入门语言。<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 <p>然而，在空间统计和预测建模方面，R是无与伦比的。这并不意味着你必须选择R或Python：Python支持大多数常见的统计技术（尽管R倾向于更早地支持空间统计的新发展），许多从Python学到的概念可以应用到R世界。</p>
-<!--rl:toDo--> <!--to update! -->
+<!--rl:toDo-->
+<!--to update! -->
 <p>与R一样，Python还支持地理数据分析和处理，使用诸如<strong>shapely</strong>、<strong>geopandas</strong>、<strong>rasterio</strong>和<strong>xarray</strong>等包。</p>
-<h2 id="r-空间生态系统"><a class="markdownIt-Anchor" href="#r-空间生态系统"></a> R 空间生态系统</h2>
+<h2 id="r-空间生态系统">R 空间生态系统</h2>
 <!--rl-->
-<p>在R中处理地理数据有很多方法，该领域有几十个软件包。<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup>在本书中，我们努力教授该领域的最新技术，同时确保这些方法是面向未来的。与软件开发的许多其他领域一样，R的空间生态系统正在迅速发展。由于R是开源的，这些发展可以轻易地建立在之前的工作上，正如艾萨克·牛顿在<a target="_blank" rel="external nofollow noopener noreferrer" href="http://digitallibrary.hsp.org/index.php/Detail/Object/Show/object_id/9285">1675年</a>所说的“站在巨人的肩膀上”。这种方法有优势，因为它鼓励合作并避免“重复发明轮子”。例如，<strong>sf</strong>软件包（在<em>空间数据</em>章中介绍）建立在其前身<strong>sp</strong>上。</p>
-<p>在R协会为支持Simple Features（一种存储和访问矢量几何的开源标准和模型）的开发授予了一笔资金后，“R-spatial”的开发时间（和兴趣）有了激增。这导致了<strong>sf</strong>软件包的出现。多个场合反映了对<strong>sf</strong>的巨大兴趣。这一点在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://stat.ethz.ch/pipermail/r-sig-geo/">R-sig-Geo Archives</a>中尤为明显，这是一个长期开放访问的电子邮件列表，其中包含了多年来积累的大量R-spatial智慧成果。</p>
-<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309061131739.png" alt><br>
-图1.2: 从2013年初至今，选定的用于处理地理数据的R软件包的下载情况。<a target="_blank" rel="external nofollow noopener noreferrer" href="http://xn--ycloud-3e8i923n5fcu6wgzy3nheq4aw0t7qy.r-project.org">y轴显示了来自流行的cloud.r-project.org</a> CRAN镜像站的每日平均下载量，采用91天的滚动窗口（对数尺度）。</p>
-<p>值得注意的是，更广泛的R社群中的变化，如由数据处理包<strong>dplyr</strong>（在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://cran.r-project.org/src/contrib/Archive/dplyr/">2014</a>年发布）所示，影响了R的空间生态系统的变化。与其他具有共同风格和强调“整洁数据”的包（包括例如<strong>ggplot2</strong>）一同，<strong>dplyr</strong>在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://cran.r-project.org/src/contrib/Archive/tidyverse/">2016</a>年底被置于 <strong>tidyverse</strong> '元包’中。<!--rl:toDo--> <!-- 添加参考 --><strong>tidyverse</strong>方法，其关注长格式数据和快速直观命名的函数，已变得非常受欢迎。这导致了对“整洁地理数据”的需求，这部分需求已经由<strong>sf</strong>得到满足。<strong>tidyverse</strong>的一个明显特点是包之间有和谐地工作的趋势。<!--rl:toDo--> <!--下一句还有效吗？-->尚无等同于<strong>geoverse</strong>的东西，但在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/r-spatial/discuss/issues/11">r-spatial</a> 组织托管的包之间有着协调的尝试，并且越来越多的包使用 <strong>sf</strong>（见表1.2）。</p>
-<p>表1.2: 截至2022-04-22，有332个软件包导入sf。根据前一个月每天的平均下载量，依赖于sf的前5个最多下载的软件包。</p>
+<p>在R中处理地理数据有很多方法，该领域有几十个软件包。<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>在本书中，我们努力教授该领域的最新技术，同时确保这些方法是面向未来的。与软件开发的许多其他领域一样，R的空间生态系统正在迅速发展。由于R是开源的，这些发展可以轻易地建立在之前的工作上，正如艾萨克·牛顿在<a target="_blank" rel="external nofollow noopener noreferrer" href="http://digitallibrary.hsp.org/index.php/Detail/Object/Show/object_id/9285">1675年</a>所说的“站在巨人的肩膀上”。这种方法有优势，因为它鼓励合作并避免“重复发明轮子”。例如，<strong>sf</strong>软件包（在<em>空间数据</em>章中介绍）建立在其前身<strong>sp</strong>上。</p>
+<p>在R协会为支持Simple
+Features（一种存储和访问矢量几何的开源标准和模型）的开发授予了一笔资金后，“R-spatial”的开发时间（和兴趣）有了激增。这导致了<strong>sf</strong>软件包的出现。多个场合反映了对<strong>sf</strong>的巨大兴趣。这一点在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://stat.ethz.ch/pipermail/r-sig-geo/">R-sig-Geo
+Archives</a>中尤为明显，这是一个长期开放访问的电子邮件列表，其中包含了多年来积累的大量R-spatial智慧成果。</p>
+<p><img data-src="https://scy11.oss-cn-beijing.aliyuncs.com/img/202309061131739.png">
+图1.2:
+从2013年初至今，选定的用于处理地理数据的R软件包的下载情况。y轴显示了来自流行的cloud.r-project.org
+CRAN镜像站的每日平均下载量，采用91天的滚动窗口（对数尺度）。</p>
+<p>值得注意的是，更广泛的R社群中的变化，如由数据处理包<strong>dplyr</strong>（在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://cran.r-project.org/src/contrib/Archive/dplyr/">2014</a>年发布）所示，影响了R的空间生态系统的变化。与其他具有共同风格和强调“整洁数据”的包（包括例如<strong>ggplot2</strong>）一同，<strong>dplyr</strong>在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://cran.r-project.org/src/contrib/Archive/tidyverse/">2016</a>年底被置于
+<strong>tidyverse</strong> '元包'中。<!--rl:toDo-->
+<!-- 添加参考 --><strong>tidyverse</strong>方法，其关注长格式数据和快速直观命名的函数，已变得非常受欢迎。这导致了对“整洁地理数据”的需求，这部分需求已经由<strong>sf</strong>得到满足。<strong>tidyverse</strong>的一个明显特点是包之间有和谐地工作的趋势。<!--rl:toDo-->
+<!--下一句还有效吗？-->尚无等同于<strong>geoverse</strong>的东西，但在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/r-spatial/discuss/issues/11">r-spatial</a>
+组织托管的包之间有着协调的尝试，并且越来越多的包使用
+<strong>sf</strong>（见表1.2）。</p>
+<p>表1.2:
+截至2022-04-22，有332个软件包导入sf。根据前一个月每天的平均下载量，依赖于sf的前5个最多下载的软件包。</p>
 <table>
 <thead>
-<tr>
-<th style="text-align:left">Package</th>
-<th style="text-align:right">Downloads</th>
+<tr class="header">
+<th style="text-align: left;">Package</th>
+<th style="text-align: right;">Downloads</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">spdep</td>
-<td style="text-align:right">1419</td>
+<tr class="odd">
+<td style="text-align: left;">spdep</td>
+<td style="text-align: right;">1419</td>
 </tr>
-<tr>
-<td style="text-align:left">lwgeom</td>
-<td style="text-align:right">1000</td>
+<tr class="even">
+<td style="text-align: left;">lwgeom</td>
+<td style="text-align: right;">1000</td>
 </tr>
-<tr>
-<td style="text-align:left">stars</td>
-<td style="text-align:right">940</td>
+<tr class="odd">
+<td style="text-align: left;">stars</td>
+<td style="text-align: right;">940</td>
 </tr>
-<tr>
-<td style="text-align:left">leafem</td>
-<td style="text-align:right">863</td>
+<tr class="even">
+<td style="text-align: left;">leafem</td>
+<td style="text-align: right;">863</td>
 </tr>
-<tr>
-<td style="text-align:left">mapview</td>
-<td style="text-align:right">760</td>
+<tr class="odd">
+<td style="text-align: left;">mapview</td>
+<td style="text-align: right;">760</td>
 </tr>
 </tbody>
 </table>
-<p>与此相关的是一组并行的发展，涉及到 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/rspatial">rspatial</a> 的一系列包。<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup>其主要成员是用于空间栅格处理的 <strong>terra</strong> 包。</p>
-<h2 id="r-spatial-历史"><a class="markdownIt-Anchor" href="#r-spatial-历史"></a> R-spatial 历史</h2>
+<p>与此相关的是一组并行的发展，涉及到 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/rspatial">rspatial</a> 的一系列包。<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>其主要成员是用于空间栅格处理的
+<strong>terra</strong> 包。</p>
+<h2 id="r-spatial-历史">R-spatial 历史</h2>
 <!-- jn -->
 <p>使用如<strong>sf</strong>这样的最新空间包有很多好处，但也很重要的是要了解R在空间能力方面的历史：许多函数、用例和教学材料都包含在较旧的包中。只要你知道在哪里查找，这些依然是今天有用的。</p>
-<p>在1990年代，出现了大量的S脚本和少数几个用于空间统计的包。R包从这些发展而来，到2000年，已经有多个用于各种空间方法的R包，如&quot;点模式分析、地统计学、探索性空间数据分析和空间计量经济学&quot;，根据 GeoComputation 2000 上呈现的一篇<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.geocomputation.org/2000/GC009/Gc009.htm">文章</a>。其中一些，尤其<strong>spatial</strong>，<strong>sgeostat</strong>和<strong>splancs</strong>仍然可以在CRAN上找到。</p>
-<p>一个后续的 R News 文章（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://journal.r-project.org/">The R Journal</a>的前身）包含了当时R中空间统计软件的概览，其中很多都是基于之前为 S/S-PLUS 编写的代码。这个概览描述了用于空间平滑和插值的包，包括<strong>akima</strong>和<strong>geoR</strong>，以及用于点模式分析的包，包括<strong>splancs</strong> 和<strong>spatstat</strong>[。</p>
-<p>接下来的 R News 期刊（第1卷/第3期）再次将空间包置于聚光灯下，对<strong>splancs</strong>进行了更详细的介绍，并对空间统计的未来前景发表了评论。此外，该期还介绍了最终成为<strong>spdep</strong>一部分的两个用于测试空间自相关的包。值得注意的是，评论提到了对空间接口的标准化、与GIS交换数据的高效机制和处理空间元数据（如坐标参考系统（CRS）的需求。</p>
-<p><strong>maptools</strong>（由 Nicholas Lewin-Koh 编写）是这个时期的另一个重要包。最初，<strong>maptools</strong> 只包含了一个围绕 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://shapelib.maptools.org/">shapelib</a> 的包装器，并允许将ESRI Shapefiles读入到嵌套的几何列表中。相应的，现在已经过时的 S3 类名为 “Map”，它将这个列表与一个属性数据框存储在一起。“Map” 类表示法尽管如此重要，因为它直接为<strong>sp</strong>提供了营养，这是在其发布到 CRAN 之前的事。</p>
-<p>2003年，Roger Bivand 发表了一个关于空间包的扩展评论。它提出了一个类系统，以支持 “GDAL 提供的数据对象”，包括 ‘基础的’ 点、线、多边形和栅格类型。此外，它建议与外部库的接口应构成模块化 R 包的基础。在很大程度上，这些想法在 <strong>rgdal</strong> 和 <strong>sp</strong> 包中得到了实现。这些为 R 的空间数据分析提供了基础，正如在 <em>Applied Spatial Data Analysis with R</em> (ASDAR)中描述的，该书于2008年首次出版。十年后，R 的空间能力已经大大发展，但它们仍然建立在Bivand (2003)提出的想法之上：例如，GDAL和PROJ的接口仍然是R高性能地理数据 I/O 和 CRS变换能力的动力。</p>
-<p><strong>rgdal</strong> 包于2003年发布，为R提供了与GDAL（地理空间数据抽象库）的绑定，极大地增强了R从以前无法使用的地理数据格式中导入数据的能力。最初的发布仅支持栅格驱动，但后续的增强功能通过PROJ库提供了对坐标参考系统的支持，重新投影以及导入矢量文件格式。这些额外的功能大部分由Barry Rowlingson开发，并在2006年发布在<strong>rgdal</strong>的代码库中[参见 B. Rowlingson 等 2003以及<a target="_blank" rel="external nofollow noopener noreferrer" href="https://stat.ethz.ch/pipermail/r-help/2003-January/028413.html">R-help</a> 邮件列表以获取上下文信息]。</p>
+<p>在1990年代，出现了大量的S脚本和少数几个用于空间统计的包。R包从这些发展而来，到2000年，已经有多个用于各种空间方法的R包，如"点模式分析、地统计学、探索性空间数据分析和空间计量经济学"，根据
+GeoComputation 2000 上呈现的一篇<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.geocomputation.org/2000/GC009/Gc009.htm">文章</a>。其中一些，尤其<strong>spatial</strong>，<strong>sgeostat</strong>和<strong>splancs</strong>仍然可以在CRAN上找到。</p>
+<p>一个后续的 R News 文章（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://journal.r-project.org/">The
+R
+Journal</a>的前身）包含了当时R中空间统计软件的概览，其中很多都是基于之前为
+S/S-PLUS
+编写的代码。这个概览描述了用于空间平滑和插值的包，包括<strong>akima</strong>和<strong>geoR</strong>，以及用于点模式分析的包，包括<strong>splancs</strong>
+和<strong>spatstat</strong>[。</p>
+<p>接下来的 R News
+期刊（第1卷/第3期）再次将空间包置于聚光灯下，对<strong>splancs</strong>进行了更详细的介绍，并对空间统计的未来前景发表了评论。此外，该期还介绍了最终成为<strong>spdep</strong>一部分的两个用于测试空间自相关的包。值得注意的是，评论提到了对空间接口的标准化、与GIS交换数据的高效机制和处理空间元数据（如坐标参考系统（CRS）的需求。</p>
+<p><strong>maptools</strong>（由 Nicholas Lewin-Koh
+编写）是这个时期的另一个重要包。最初，<strong>maptools</strong>
+只包含了一个围绕 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://shapelib.maptools.org/">shapelib</a>
+的包装器，并允许将ESRI
+Shapefiles读入到嵌套的几何列表中。相应的，现在已经过时的 S3 类名为
+"Map"，它将这个列表与一个属性数据框存储在一起。"Map"
+类表示法尽管如此重要，因为它直接为<strong>sp</strong>提供了营养，这是在其发布到
+CRAN 之前的事。</p>
+<p>2003年，Roger Bivand
+发表了一个关于空间包的扩展评论。它提出了一个类系统，以支持 "GDAL
+提供的数据对象"，包括 '基础的'
+点、线、多边形和栅格类型。此外，它建议与外部库的接口应构成模块化 R
+包的基础。在很大程度上，这些想法在 <strong>rgdal</strong> 和
+<strong>sp</strong> 包中得到了实现。这些为 R
+的空间数据分析提供了基础，正如在 <em>Applied Spatial Data Analysis with
+R</em> (ASDAR)中描述的，该书于2008年首次出版。十年后，R
+的空间能力已经大大发展，但它们仍然建立在Bivand
+(2003)提出的想法之上：例如，GDAL和PROJ的接口仍然是R高性能地理数据 I/O 和
+CRS变换能力的动力。</p>
+<p><strong>rgdal</strong>
+包于2003年发布，为R提供了与GDAL（地理空间数据抽象库）的绑定，极大地增强了R从以前无法使用的地理数据格式中导入数据的能力。最初的发布仅支持栅格驱动，但后续的增强功能通过PROJ库提供了对坐标参考系统的支持，重新投影以及导入矢量文件格式。这些额外的功能大部分由Barry
+Rowlingson开发，并在2006年发布在<strong>rgdal</strong>的代码库中[参见 B.
+Rowlingson 等 2003以及<a target="_blank" rel="external nofollow noopener noreferrer" href="https://stat.ethz.ch/pipermail/r-help/2003-January/028413.html">R-help</a>
+邮件列表以获取上下文信息]。</p>
 <p><strong>sp</strong>包于2005年发布，解决了R无法区分空间和非空间对象的问题。<strong>sp</strong>起源于2003年在维也纳举行的一个<a target="_blank" rel="external nofollow noopener noreferrer" href="http://spatial.nhh.no/meetings/vienna/index.html">研讨会</a>，最初托管在sourceforge，后来迁移到<a target="_blank" rel="external nofollow noopener noreferrer" href="https://r-forge.r-project.org">R-Forge</a>。在2005年之前，地理坐标通常被视为普通的数字。</p>
-<p><strong>sp</strong>使用S4类系统在<code>Spatial</code>对象的槽中存储诸如边界框、坐标参考系统和属性等信息，使得数据操作能够应用于地理数据（见第<a href="/2023/08/11/2023-8-11-2%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE/" title="(2)R中的地理数据">2</a>章)。 此外，<strong>sp</strong> 为地理数据提供了一些通用方法，如<code>summary()</code> 和 <code>plot()</code>。在接下来的十年里，<strong>sp</strong>类迅速成为R中地理数据的流行选择，依赖它的包数量从2008年的大约20个增加到2013年的超过100个。现在，依赖<strong>sp</strong>的包数量已经超过500个（与正在更快增长的 <strong>sf</strong> 包的数量相似），使其成为R生态系统的重要组成部分。使用<strong>sp</strong>的著名R包包括：<strong>gstat</strong>，用于空间和时空地理统计；<strong>geosphere</strong>，用于球面三角学；以及 <strong>adehabitat</strong>，用于分析动物对栖息地的选择。</p>
-<p>尽管<strong>rgdal</strong>和<strong>sp</strong>解决了许多空间问题，但直到2010年在Google Summer of Code项目中开发了<strong>rgeos</strong>，才能在<strong>sp</strong>对象上进行几何操作。诸如<code>gIntersection()</code>这样的函数使用户能够找到地理对象之间的空间关系，并修改其几何形状（有关使用<strong>sf</strong>进行几何操作的详细信息，请参见第<a href="/2023/08/14/2023-8-14-5%E5%87%A0%E4%BD%95%E6%93%8D%E4%BD%9C/" title="(5)几何操作">5</a>章）。</p>
+<p><strong>sp</strong>使用S4类系统在<code>Spatial</code>对象的槽中存储诸如边界框、坐标参考系统和属性等信息，使得数据操作能够应用于地理数据（见第<a href="/2023/08/11/2023-8-11-2%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE/" title="(2)R中的地理数据">2</a>章)。
+此外，<strong>sp</strong>
+为地理数据提供了一些通用方法，如<code>summary()</code> 和
+<code>plot()</code>。在接下来的十年里，<strong>sp</strong>类迅速成为R中地理数据的流行选择，依赖它的包数量从2008年的大约20个增加到2013年的超过100个。现在，依赖<strong>sp</strong>的包数量已经超过500个（与正在更快增长的
+<strong>sf</strong>
+包的数量相似），使其成为R生态系统的重要组成部分。使用<strong>sp</strong>的著名R包包括：<strong>gstat</strong>，用于空间和时空地理统计；<strong>geosphere</strong>，用于球面三角学；以及
+<strong>adehabitat</strong>，用于分析动物对栖息地的选择。</p>
+<p>尽管<strong>rgdal</strong>和<strong>sp</strong>解决了许多空间问题，但直到2010年在Google
+Summer of
+Code项目中开发了<strong>rgeos</strong>，才能在<strong>sp</strong>对象上进行几何操作。诸如<code>gIntersection()</code>这样的函数使用户能够找到地理对象之间的空间关系，并修改其几何形状（有关使用<strong>sf</strong>进行几何操作的详细信息，请参见第<a href="/2023/08/14/2023-8-14-5%E5%87%A0%E4%BD%95%E6%93%8D%E4%BD%9C/" title="(5)几何操作">5</a>章）。</p>
 <p><strong>sp</strong>生态系统的一个局限性是其对栅格数据的有限支持。这一问题由2010年首次发布的<strong>raster</strong>得到了解决。<strong>raster</strong>的类系统和函数使一系列栅格操作成为可能，这些功能现已在<strong>terra</strong>包中实现，该包取代了<strong>raster</strong>，如第<a href="/2023/08/11/2023-8-11-2%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE/" title="(2)R中的地理数据">2</a>章所示。<strong>raster</strong>和<strong>terra</strong>的一个重要功能是能够处理过大以至于无法装入RAM的数据集（R对PostGIS的接口也支持对地理矢量数据集的磁盘外操作）。<strong>raster</strong>和<strong>terra</strong>还支持地图代数。</p>
-<p>与这些类系统和方法的开发并行，是R作为专用GIS软件接口的支持。<strong>GRASS</strong>和后续的<strong>spgrass6</strong>和<strong>rgrass7</strong>包（分别用于GRASS GIS 6和7）是这个方向的突出例子。R和GIS之间的其他桥梁例子包括<strong>RSAGA</strong>，<strong>RPyGeo</strong>，<strong>RQGIS</strong>，以及<strong>rqgisprocess</strong>。</p>
-<!--toDo--> <!-- rqgisprocess ref! -->
-<p>最初，可视化并不是重点，大部分R空间开发都集中在分析和地理操作上。<strong>sp</strong>提供了使用基础和格子绘图系统进行地图制作的方法，但对高级地图制作能力的需求正在增加。2009年首次发布的<strong>RgoogleMaps</strong>允许将R的空间数据覆盖在来自诸如Google Maps或OpenStreetMap等在线服务的’底图’瓦片上 。随后发布的<strong>ggmap</strong>包为<strong>ggplot2</strong>添加了类似的’底图’瓦片功能。尽管<strong>ggmap</strong>便于使用<strong>ggplot2</strong>进行地图制作，但其实用性受到需要<code>fortify</code>空间对象的限制，这意味着将它们转换成长数据框。这种方法对点来说效果很好，但对于线和多边形来说计算效率不高，因为每个坐标（顶点）都转换成一行，导致用于表示复杂几何形状的数据框非常庞大。尽管地理可视化倾向于专注于矢量数据，但栅格可视化在<strong>raster</strong>中得到了支持，并在<strong>rasterVis</strong>的发布后得到了提升，该包在一本关于空间和时间数据可视化主题的书中有描述。从那时起，R中的地图制作成为了一个热门话题，专用的包如<strong>tmap</strong>、<strong>leaflet</strong>、<strong>rayshader</strong>和<strong>mapview</strong>越来越受欢迎。</p>
-<p>自2018年Geocomputation with R的第一版发布以来，地理R包的开发已经加速。<strong>terra</strong>，<strong>raster</strong>包的继任者，首次在2020年发布，为使用栅格数据集的R用户带来了多个好处：它比前身更快，用户界面也更直接，如第2.3节所示。</p>
+<p>与这些类系统和方法的开发并行，是R作为专用GIS软件接口的支持。<strong>GRASS</strong>和后续的<strong>spgrass6</strong>和<strong>rgrass7</strong>包（分别用于GRASS
+GIS
+6和7）是这个方向的突出例子。R和GIS之间的其他桥梁例子包括<strong>RSAGA</strong>，<strong>RPyGeo</strong>，<strong>RQGIS</strong>，以及<strong>rqgisprocess</strong>。</p>
+<!--toDo-->
+<!-- rqgisprocess ref! -->
+<p>最初，可视化并不是重点，大部分R空间开发都集中在分析和地理操作上。<strong>sp</strong>提供了使用基础和格子绘图系统进行地图制作的方法，但对高级地图制作能力的需求正在增加。2009年首次发布的<strong>RgoogleMaps</strong>允许将R的空间数据覆盖在来自诸如Google
+Maps或OpenStreetMap等在线服务的'底图'瓦片上
+。随后发布的<strong>ggmap</strong>包为<strong>ggplot2</strong>添加了类似的'底图'瓦片功能。尽管<strong>ggmap</strong>便于使用<strong>ggplot2</strong>进行地图制作，但其实用性受到需要<code>fortify</code>空间对象的限制，这意味着将它们转换成长数据框。这种方法对点来说效果很好，但对于线和多边形来说计算效率不高，因为每个坐标（顶点）都转换成一行，导致用于表示复杂几何形状的数据框非常庞大。尽管地理可视化倾向于专注于矢量数据，但栅格可视化在<strong>raster</strong>中得到了支持，并在<strong>rasterVis</strong>的发布后得到了提升，该包在一本关于空间和时间数据可视化主题的书中有描述。从那时起，R中的地图制作成为了一个热门话题，专用的包如<strong>tmap</strong>、<strong>leaflet</strong>、<strong>rayshader</strong>和<strong>mapview</strong>越来越受欢迎。</p>
+<p>自2018年Geocomputation with
+R的第一版发布以来，地理R包的开发已经加速。<strong>terra</strong>，<strong>raster</strong>包的继任者，首次在2020年发布，为使用栅格数据集的R用户带来了多个好处：它比前身更快，用户界面也更直接，如第2.3节所示。</p>
 <p>在2021年中期，<strong>sf</strong>包通过整合球面几何计算进行了实质性（在某些情况下是破坏性）的更改。从那时起，默认情况下，许多具有地理CRS的数据上的空间操作使用S2球面几何引擎作为后端，见第2.2.9节。自2018年以来，用R表示和处理地理数据的其他方式还包括<strong>stars</strong>和<strong>lidR</strong>包。<strong>stars</strong>与<strong>sf</strong>紧密集成，处理栅格和矢量数据立方体。<strong>lidR</strong>处理基于飞机的LiDAR（光探测与测距）点云。</p>
-<p>此次现代化有多个动机，包括新技术和标准的出现，以及R环境之外的空间软件开发的影响。最重要的外部因素影响了大多数空间软件，包括R空间包，这些因素是始于2018年的PROJ库的重大更新，其中包括许多破坏性的变化。最重要的是，这些变化迫使用’Well Known Text’替换坐标参考系统的’proj-string’表示，如第2.4节和第<a href="/2023/08/16/2023-8-16-7%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E9%87%8D%E6%8A%95%E5%BD%B1/" title="(7)地理数据重投影">7</a>章所示。</p>
-<p>自2018年以来，R中空间可视化工具的进展与几个因素有关。首先，开发了新类型的空间图，包括<strong>rayshader</strong>包，它提供了光线追踪和多种山体阴影方法的组合，以生成2D和3D数据可视化 。其次，<strong>ggplot2</strong>获得了新的空间功能，主要归功于<strong>ggspatial</strong>包，该包添加了一些空间可视化元素，包括比例尺和北箭头，以及<strong>gganimate</strong>，该包允许平滑和可定制的空间动画 。第三，提高了可视化大型空间数据集的性能。这尤其与<strong>tmap</strong>中自动绘制缩小比例的栅格以及在<strong>mapview</strong>包中使用高性能交互式渲染平台的可能性有关，例如<code>&quot;leafgl&quot;</code>和<code>&quot;mapdeck&quot;</code>。最后，一些现有的映射工具已被重写，以最小化依赖性，改进用户界面或允许更容易地创建扩展。这包括<strong>mapsf</strong>包（<strong>cartography</strong>的继任者）以及<strong>tmap</strong>包的第4版，在该版本中大多数内部代码都经过了修订。</p>
+<p>此次现代化有多个动机，包括新技术和标准的出现，以及R环境之外的空间软件开发的影响。最重要的外部因素影响了大多数空间软件，包括R空间包，这些因素是始于2018年的PROJ库的重大更新，其中包括许多破坏性的变化。最重要的是，这些变化迫使用'Well
+Known
+Text'替换坐标参考系统的'proj-string'表示，如第2.4节和第<a href="/2023/08/16/2023-8-16-7%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E9%87%8D%E6%8A%95%E5%BD%B1/" title="(7)地理数据重投影">7</a>章所示。</p>
+<p>自2018年以来，R中空间可视化工具的进展与几个因素有关。首先，开发了新类型的空间图，包括<strong>rayshader</strong>包，它提供了光线追踪和多种山体阴影方法的组合，以生成2D和3D数据可视化
+。其次，<strong>ggplot2</strong>获得了新的空间功能，主要归功于<strong>ggspatial</strong>包，该包添加了一些空间可视化元素，包括比例尺和北箭头，以及<strong>gganimate</strong>，该包允许平滑和可定制的空间动画
+。第三，提高了可视化大型空间数据集的性能。这尤其与<strong>tmap</strong>中自动绘制缩小比例的栅格以及在<strong>mapview</strong>包中使用高性能交互式渲染平台的可能性有关，例如<code>"leafgl"</code>和<code>"mapdeck"</code>。最后，一些现有的映射工具已被重写，以最小化依赖性，改进用户界面或允许更容易地创建扩展。这包括<strong>mapsf</strong>包（<strong>cartography</strong>的继任者）以及<strong>tmap</strong>包的第4版，在该版本中大多数内部代码都经过了修订。</p>
 <!-- toDo: rl-->
 <!-- question: should we add a paragraph about the following stuff here?-->
 <!-- add info about specialized packages - sfnetworks, landscapemetrics, gdalcubes, rgee, etc. -->
@@ -447,29 +518,37 @@
 <!-- @hesselbarth_opensource_2021 -->
 <!-- @lovelace_open_2021a -->
 <!-- spatstat?? -->
-<p>在2021年底，Roger Bivand 在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://stat.ethz.ch/pipermail/r-sig-geo/2021-September/028760.html">R-sig-Geo 邮件列表</a>上宣布了 <strong>rgdal</strong>、<strong>rgeos</strong> 和 <strong>maptools</strong> 将于2023年底退役的计划。这不仅会对现有使用这些包的工作流程产生重大影响，也将影响依赖于 <strong>rgdal</strong>、<strong>rgeos</strong> 或 <strong>maptools</strong> 的包。因此，Bivand 的建议是转向更现代的工具，包括 <strong>sf</strong> 和 <strong>terra</strong>，正如本书接下来的章节中所解释的。</p>
-<h2 id="练习"><a class="markdownIt-Anchor" href="#练习"></a> 练习</h2>
-<p>E1. 考虑上面描述的’GIS’（地理信息系统）、‘GDS’（地理数据科学）和’地理计算’这几个术语。哪个（如果有的话）最能描述你想通过使用地理*方法和软件来做的工作？为什么？</p>
-<p>E2. 提供使用可编程语言（如R）进行地理计算而不是使用基于图形用户界面（GUI）的GIS（如QGIS）的三个理由。</p>
-<p>E3. 在2000年，Stan Openshaw写道，地理计算涉及对其他人有&quot;实际益处或用处&quot;的工作。考虑一个实际问题和可能的解决方案，这些解决方案可以通过分析、可视化或模拟地理数据获得新证据来指导。用纸和笔（或其他用于计算的东西）勾画输入和可能的输出，说明地理计算如何有助于解决问题。</p>
+<p>在2021年底，Roger Bivand 在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://stat.ethz.ch/pipermail/r-sig-geo/2021-September/028760.html">R-sig-Geo
+邮件列表</a>上宣布了 <strong>rgdal</strong>、<strong>rgeos</strong> 和
+<strong>maptools</strong>
+将于2023年底退役的计划。这不仅会对现有使用这些包的工作流程产生重大影响，也将影响依赖于
+<strong>rgdal</strong>、<strong>rgeos</strong> 或
+<strong>maptools</strong> 的包。因此，Bivand
+的建议是转向更现代的工具，包括 <strong>sf</strong> 和
+<strong>terra</strong>，正如本书接下来的章节中所解释的。</p>
+<h2 id="练习">练习</h2>
+<p>E1.
+考虑上面描述的'GIS'（地理信息系统）、'GDS'（地理数据科学）和'地理计算'这几个术语。哪个（如果有的话）最能描述你想通过使用地理*方法和软件来做的工作？为什么？</p>
+<p>E2.
+提供使用可编程语言（如R）进行地理计算而不是使用基于图形用户界面（GUI）的GIS（如QGIS）的三个理由。</p>
+<p>E3. 在2000年，Stan
+Openshaw写道，地理计算涉及对其他人有"实际益处或用处"的工作。考虑一个实际问题和可能的解决方案，这些解决方案可以通过分析、可视化或模拟地理数据获得新证据来指导。用纸和笔（或其他用于计算的东西）勾画输入和可能的输出，说明地理计算如何有助于解决问题。</p>
 <!--toDo: rl -->
 <!--add solutions!-->
-<hr class="footnotes-sep">
-<section class="footnotes">
-<ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p>该会议在利兹大学举行，其中一位作者（Robin）目前就职于此。<br>
-第21届地理计算会议也在利兹大学举行，期间Robin和Jakub进行了演讲，主持了一个关于’tidy’空间数据分析的研讨会，并在书中进行了合作（更多关于会议系列和跨越两个世纪的论文/演示，<a target="_blank" rel="external nofollow noopener noreferrer" href="http://xn--www-7n0j5iy14c.geocomputation.org">请访问www.geocomputation.org</a>）。 <a href="#fnref1" class="footnote-backref">↩︎</a></p>
-</li>
-<li id="fn2" class="footnote-item"><p>在大多数国家，今天可以从如<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.ebay.com/sch/i.html?_from=R40&amp;_nkw=laptop&amp;_sacat=0&amp;_oaa=1&amp;_udhi=100&amp;rt=nc&amp;RAM%2520Size=4%2520GB%7C16%2520GB%7C8%2520GB&amp;_dcat=177">Ebay</a>这类似的网站上以100美元或更低的价格购买合适的二手笔记本电脑。有关在现代操作系统如<a target="_blank" rel="external nofollow noopener noreferrer" href="https://rtask.thinkr.fr/installation-of-r-4-2-on-ubuntu-22-04-lts-and-tips-for-spatial-packages/">Ubuntu 22.04</a>上安装R的更多信息，请参见章节<em>空间类</em>。 <a href="#fnref2" class="footnote-backref">↩︎</a></p>
-</li>
-<li id="fn3" class="footnote-item"><p>Python模块提供访问地理算法的Python模块包括grass.script用于GRASS，saga-python用于SAGA-GIS，processing用于QGIS和arcpy用于ArcGIS。 <a href="#fnref3" class="footnote-backref">↩︎</a></p>
-</li>
-<li id="fn4" class="footnote-item"><p>R的空间生态系统概览可以在CRAN任务视图中找到，关于空间数据分析（见<a target="_blank" rel="external nofollow noopener noreferrer" href="https://cran.r-project.org/web/views/Spatial.html">https://cran.r-project.org/web/views/Spatial.html</a>）。 <a href="#fnref4" class="footnote-backref">↩︎</a></p>
-</li>
-<li id="fn5" class="footnote-item"><p>注意 “r-spatial” 和 “rspatial” 之间的区别，前者是包含如 <strong>sf</strong> 等包的组织，后者是负责 <strong>terra</strong> 的组织。 <a href="#fnref5" class="footnote-backref">↩︎</a></p>
-</li>
+<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>该会议在利兹大学举行，其中一位作者（Robin）目前就职于此。
+第21届地理计算会议也在利兹大学举行，期间Robin和Jakub进行了演讲，主持了一个关于'tidy'空间数据分析的研讨会，并在书中进行了合作（更多关于会议系列和跨越两个世纪的论文/演示，请访问www.geocomputation.org）。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>在大多数国家，今天可以从如<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.ebay.com/sch/i.html?_from=R40&amp;_nkw=laptop&amp;_sacat=0&amp;_oaa=1&amp;_udhi=100&amp;rt=nc&amp;RAM%2520Size=4%2520GB%7C16%2520GB%7C8%2520GB&amp;_dcat=177">Ebay</a>这类似的网站上以100美元或更低的价格购买合适的二手笔记本电脑。有关在现代操作系统如<a target="_blank" rel="external nofollow noopener noreferrer" href="https://rtask.thinkr.fr/installation-of-r-4-2-on-ubuntu-22-04-lts-and-tips-for-spatial-packages/">Ubuntu
+22.04</a>上安装R的更多信息，请参见章节<em>空间类</em>。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Python模块提供访问地理算法的Python模块包括grass.script用于GRASS，saga-python用于SAGA-GIS，processing用于QGIS和arcpy用于ArcGIS。<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>R的空间生态系统概览可以在CRAN任务视图中找到，关于空间数据分析（见<a target="_blank" rel="external nofollow noopener noreferrer" href="https://cran.r-project.org/web/views/Spatial.html" class="uri">https://cran.r-project.org/web/views/Spatial.html</a>）。<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>注意 "r-spatial" 和 "rspatial" 之间的区别，前者是包含如
+<strong>sf</strong> 等包的组织，后者是负责 <strong>terra</strong>
+的组织。<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section>
+</aside>
 
         </div>
 
